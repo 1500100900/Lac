@@ -3720,7 +3720,7 @@ extern	unsigned const char keepalive_str[ ];
 
 /* handler.c */
 extern	TIMER_DATA	*timer_list;
-extern	int		wzmocnienie_affect_join;
+extern	bool		wzmocnienie_affect_join;
 extern	struct bitvector_field_data extra_bit_values[ ];
 extern	struct bitvector_field_data affect_bit_values[ ];
 extern	struct bit_field_data exit_info_flags[ ];
@@ -4695,7 +4695,7 @@ void	death_cry	args( ( CHAR_DATA *ch, int dt, int pozycja ) );
 void    pp_get          args( ( CHAR_DATA *ch, char *victim_name ) ); /* Qwert */
 void	strata_dosw_za_smierc	args( ( CHAR_DATA *victim ) );
 void    dodaj_zabojce   args( ( CHAR_DATA *ofiara, CHAR_DATA *zabojca ) );
-bool    ocen_przedmiot  args( ( int v1, int v2, int v3 ) );
+unsigned char ocen_przedmiot args( ( int v1, int v2, int v3 ) );
 CHAR_DATA *fighting_func args( ( CHAR_DATA *ch ) );
 
 

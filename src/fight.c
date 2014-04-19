@@ -57,7 +57,7 @@ void	zdejmij_niewidki_przy_ataku args( ( CHAR_DATA *ch ) );
 void	stop_fighting_all	args( ( CHAR_DATA *ch ) );
 void	make_no_corpse		args( ( CHAR_DATA *ch ) );
 bool	registered		args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-static int ocen_czar		args( ( int v ) );
+static unsigned char ocen_czar	args( ( int v ) );
 bool	czy_w_grze		args( ( CHAR_DATA *ch, const char *imie ) );
 
 
@@ -5318,7 +5318,7 @@ bool registered( CHAR_DATA *ch, CHAR_DATA *victim )
 #define PRZEDMIOT_OCHRONNY b02
 #define PRZEDMIOT_BEZ_SENSU b03
 /* Lam 3.5.2003 */
-static int ocen_czar( int v )
+static unsigned char ocen_czar( int v )
 {
     if ( v < 0 || v >= MAX_SKILL )
 	return PRZEDMIOT_BEZ_SENSU;
@@ -5337,7 +5337,7 @@ static int ocen_czar( int v )
 }
 
 
-int ocen_przedmiot( int v1, int v2, int v3 )
+unsigned char ocen_przedmiot( int v1, int v2, int v3 )
 {
     int oceny = ocen_czar( v1 ) | ocen_czar( v2 ) | ocen_czar( v3 );
 
