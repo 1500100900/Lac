@@ -33,6 +33,20 @@
 
 #include "merc.h"
 
+
+DECLARE_HTML_FUN( html_index );
+DECLARE_HTML_FUN( html_who   );
+DECLARE_HTML_FUN( html_help  );
+DECLARE_HTML_FUN( html_areas );
+DECLARE_HTML_FUN( html_news  );
+DECLARE_HTML_FUN( html_maps  );
+DECLARE_HTML_FUN( html_slist );
+DECLARE_HTML_FUN( html_commands );
+#if defined( KLANY )
+DECLARE_HTML_FUN( html_clans );
+#endif
+DECLARE_HTML_FUN( html_404 );
+
 char	*http2lac	args( ( char *arg ) );
 void	get_help_topic	args( ( char *arg, char *topic ) );
 int	zrob_odnosnik	args( ( char *arg, char *link ) );
@@ -40,7 +54,6 @@ bool	html_header	args( ( WHO_DESCRIPTOR_DATA *d, const char *tytul ) );
 bool	html_foot	args( ( WHO_DESCRIPTOR_DATA *d ) );
 bool	html_time	args( ( WHO_DESCRIPTOR_DATA *d ) );
 bool	html_weather	args( ( WHO_DESCRIPTOR_DATA *d ) );
-HTML( html_clans );
 
 
 const   struct    html_page_type       html_page_table      [ ] =

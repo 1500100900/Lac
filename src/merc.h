@@ -4888,18 +4888,6 @@ HTML_FUN *szukaj_strony		args( ( char *arg ) );
 void	http_log		args( ( WHO_DESCRIPTOR_DATA *d ) );
 bool	get_who_data		args( ( char *arg, WHO_DESCRIPTOR_DATA *d ) );
 char	*lac2html		args( ( char *buf, bool mysql ) );
-DECLARE_HTML_FUN( html_index );
-DECLARE_HTML_FUN( html_who   );
-DECLARE_HTML_FUN( html_help  );
-DECLARE_HTML_FUN( html_areas );
-DECLARE_HTML_FUN( html_news  );
-DECLARE_HTML_FUN( html_maps  );
-DECLARE_HTML_FUN( html_slist );
-DECLARE_HTML_FUN( html_commands );
-#if defined( KLANY )
-DECLARE_HTML_FUN( html_clans );
-#endif
-DECLARE_HTML_FUN( html_404 );
 
 /* hunt.c */
 int	find_path	args( ( ROOM_INDEX_DATA *from, ROOM_INDEX_DATA *to,
