@@ -31,6 +31,7 @@
 
 
 #include "merc.h"
+#include "palad.h"
 
 
 void	do_many			args( ( CHAR_DATA *ch, char *argument ) );

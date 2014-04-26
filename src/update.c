@@ -31,6 +31,7 @@
 
 
 #include "merc.h"
+#include "palad.h"
 #include <math.h>
 
 /*
