@@ -4357,20 +4357,6 @@ DECLARE_SPEC_FUN(       spec_parrot             ); /* Ulryk 26.02.2003 */
 DECLARE_SPEC_FUN(       spec_vampire_elder      ); /* Ulryk 20.11.2003 */
 
 
-DECLARE_GAME_FUN(	gra_czarna_czerwona	);
-DECLARE_GAME_FUN(	gra_kolo_fortuny	);
-DECLARE_GAME_FUN(	gra_marynarz		);
-DECLARE_GAME_FUN(	gra_nwt			);
-DECLARE_GAME_FUN(	gra_pewna_reka		);
-DECLARE_GAME_FUN(	gra_pkn			);
-DECLARE_GAME_FUN(	gra_siodemka		);
-DECLARE_GAME_FUN(	gra_szczurek		);
-DECLARE_GAME_FUN(	gra_trzy_kubki		);
-DECLARE_GAME_FUN(	gra_wojna_kart		);
-DECLARE_GAME_FUN(	gra_wojna_kosci		);
-DECLARE_GAME_FUN(	gra_zgadnij_karte	);
-
-
 /*
  * Malven: klany
  */
