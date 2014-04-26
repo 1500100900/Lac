@@ -32,6 +32,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include "merc.h"
+#include "special.h"
 
 
 void	usun_zm_zwod		args( ( TYP_ZMIENNEJ **lista, TYP_ZMIENNEJ *zm,

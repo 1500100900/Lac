@@ -31,6 +31,8 @@
 
 
 #include "merc.h"
+#include "special.h"
+
 
 extern bool murder_char; /* Lam, update.c */
 

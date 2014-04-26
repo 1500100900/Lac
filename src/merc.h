@@ -3735,10 +3735,6 @@ extern char *target_name;
 extern bool descr_prog_in_progress;
 extern char descr_prog_buffer[ 2 * MSL ];
 
-/* special.c */
-extern char spec_list[ MSL ];
-extern struct spec_type spec_table[ ];
-
 /* ssm.c */
 extern unsigned int MAX_STRING;
 
@@ -4326,37 +4322,6 @@ DECLARE_SPELL_FUN(      spell_jednosc_bojowa      );
 DECLARE_SPELL_FUN(      spell_duchowa_zbroja      );
 
 
-
-/*
- * The following special functions are available for mobiles.
- */
-DECLARE_SPEC_FUN(	spec_breath_any		);
-DECLARE_SPEC_FUN(	spec_breath_acid	);
-DECLARE_SPEC_FUN(	spec_breath_fire	);
-DECLARE_SPEC_FUN(	spec_breath_frost	);
-DECLARE_SPEC_FUN(	spec_breath_gas		);
-DECLARE_SPEC_FUN(	spec_breath_lightning	);
-DECLARE_SPEC_FUN(	spec_cast_adept		);
-DECLARE_SPEC_FUN(	spec_cast_cleric	);
-DECLARE_SPEC_FUN(       spec_cast_ghost         );
-DECLARE_SPEC_FUN(	spec_cast_mage		);
-DECLARE_SPEC_FUN(       spec_cast_psionicist    );
-DECLARE_SPEC_FUN(	spec_cast_undead	);
-DECLARE_SPEC_FUN(	spec_executioner	);
-DECLARE_SPEC_FUN(	spec_fido		);
-DECLARE_SPEC_FUN(	spec_guard		);
-DECLARE_SPEC_FUN(	spec_janitor		);
-DECLARE_SPEC_FUN(	spec_mayor		);
-DECLARE_SPEC_FUN(	spec_poison		);
-DECLARE_SPEC_FUN(	spec_repairman		);
-DECLARE_SPEC_FUN(	spec_thief		);
-DECLARE_SPEC_FUN(	spec_healer		); /* Lam 1997 */
-DECLARE_SPEC_FUN(	spec_waker		); /* Qwert 12.11.2000 */
-DECLARE_SPEC_FUN(	spec_unicorn		); /* Ulryk 03.03.2002 */
-DECLARE_SPEC_FUN(       spec_parrot             ); /* Ulryk 26.02.2003 */
-DECLARE_SPEC_FUN(       spec_vampire_elder      ); /* Ulryk 20.11.2003 */
-
-
 /*
  * Malven: klany
  */
@@ -4374,7 +4339,6 @@ DECLARE_SPEC_FUN(       spec_vampire_elder      ); /* Ulryk 20.11.2003 */
 #define ED      EXTRA_DESCR_DATA
 #define OID     OBJ_INDEX_DATA
 #define RID     ROOM_INDEX_DATA
-#define SF      SPEC_FUN
 #define TID	TIMER_DATA
 #define AOD	AIROBJ_DATA
 #define ACD	AIRCHAR_DATA
@@ -5107,13 +5071,6 @@ void	fwrite_obj	args( ( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp,
 /* socjalne.c */
 bool	check_social	args( ( CHAR_DATA *ch, char *command,
 				char *argument ) );
-
-/* special.c */
-SF *    spec_lookup     args( ( const char *name ) );
-char *  spec_name	args( ( SPEC_FUN *fun ) );
-void	build_spec_list args( ( void ) );
-bool    papuguj         args( ( CHAR_DATA *ch, char *argument ) );
-
 /* update.c */
 void    advance_level   args( ( CHAR_DATA *ch ) );
 void    demote_level    args( ( CHAR_DATA *ch ) );
@@ -5153,7 +5110,6 @@ void    zabij_wszystkie_slugi   args( ( CHAR_DATA *ch ) );
 #undef	OD
 #undef	OID
 #undef	RID
-#undef	SF
 #undef	ED
 #undef	AD
 #ifdef __cplusplus

@@ -31,15 +31,16 @@
 
 
 #include "merc.h"
+#include "special.h"
 
-bool	dragon		args( ( CHAR_DATA *ch, int sn ) );
-char	*last_word	args( ( char *argument ) );
-char	*przeciagaj	args( ( char *argument ) );
+static bool	dragon		args( ( CHAR_DATA *ch, int sn ) );
+static char	*last_word	args( ( char *argument ) );
+static char	*przeciagaj	args( ( char *argument ) );
 
 /*
  * Lam 4.2.2004: tablica zamiast stosu ifow w funkcjach ponizej
  */
-struct spec_type spec_table[ ] =
+static struct spec_type spec_table[ ] =
 {
     { spec_breath_any,		"spec_breath_any" },
     { spec_breath_acid,		"spec_breath_acid" },

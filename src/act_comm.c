@@ -31,6 +31,7 @@
 
 
 #include "merc.h"
+#include "special.h"
 #if defined( BLEDOMAT )
 # include <mysql.h>
 #endif

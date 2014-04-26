@@ -31,6 +31,8 @@
 
 
 #include "merc.h"
+#include "special.h"
+
 
 #if !defined( ultrix ) && !defined( apollo ) && !defined( __minix ) && !defined( PLAN9 )
 # include <memory.h>
