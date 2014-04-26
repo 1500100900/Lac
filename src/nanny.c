@@ -31,6 +31,7 @@
 
 
 #include "merc.h"
+#include "necro.h"
 #include <limits.h>
 
 #include <errno.h>

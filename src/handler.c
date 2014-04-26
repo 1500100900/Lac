@@ -33,6 +33,7 @@
 
 
 #include "merc.h"
+#include "necro.h"
 #include <errno.h> /* errno jest uzywany przez czytaj_ciala( ) */
 
 

@@ -32,6 +32,7 @@
 
 #include "merc.h"
 #include "palad.h"
+#include "necro.h"
 
 
 /*

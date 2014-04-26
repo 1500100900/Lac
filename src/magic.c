@@ -32,6 +32,7 @@
 
 #include "merc.h"
 #include "palad.h"
+#include "necro.h"
 
 
 void	stworz_jedzenie		args( ( CHAR_DATA *ch, int level, int vnum ) );
