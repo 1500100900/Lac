@@ -34,6 +34,7 @@
 #include "palad.h"
 #include "necro.h"
 #include "qmagic.h"
+#include "magic.h"
 
 
 /*

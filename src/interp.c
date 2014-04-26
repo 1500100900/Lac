@@ -33,6 +33,7 @@
 #include "merc.h"
 #include "palad.h"
 #include "necro.h"
+#include "magic.h"
 
 
 void	do_many			args( ( CHAR_DATA *ch, char *argument ) );

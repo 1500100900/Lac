@@ -33,10 +33,11 @@
 #include "merc.h"
 #include "palad.h"
 #include "necro.h"
+#include "magic.h"
 
 
-void	stworz_jedzenie		args( ( CHAR_DATA *ch, int level, int vnum ) );
-void	wlasciwa_teleportacja	args( ( CHAR_DATA *caster, CHAR_DATA *victim,
+static void stworz_jedzenie		args( ( CHAR_DATA *ch, int level, int vnum ) );
+static void wlasciwa_teleportacja	args( ( CHAR_DATA *caster, CHAR_DATA *victim,
 					ROOM_INDEX_DATA *pRoomIndex ) );
 
 

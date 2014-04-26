@@ -33,6 +33,7 @@
 
 #include "merc.h"
 #include "necro.h"
+#include "magic.h"
 
 
 /*

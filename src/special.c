@@ -32,6 +32,8 @@
 
 #include "merc.h"
 #include "special.h"
+#include "magic.h"
+
 
 static bool	dragon		args( ( CHAR_DATA *ch, int sn ) );
 static char	*last_word	args( ( char *argument ) );

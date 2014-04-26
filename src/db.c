@@ -32,6 +32,7 @@
 
 #include "merc.h"
 #include "special.h"
+#include "magic.h"
 
 
 #if !defined( ultrix ) && !defined( apollo ) && !defined( __minix ) && !defined( PLAN9 )
