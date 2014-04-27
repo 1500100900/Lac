@@ -34,6 +34,7 @@
 #include "magic.h"
 #include "act_wiz.h"
 #include "act_info.h"
+#include "act_comm.h"
 
 
 CHAR_DATA	*find_przechowalnia	args( ( CHAR_DATA *ch, bool komunikat ) );

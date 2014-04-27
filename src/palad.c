@@ -34,6 +34,7 @@
 #include "merc.h"
 #include "palad.h"
 #include "magic.h"
+#include "act_comm.h"
 
 
 KOMENDA( do_rozblysk )

@@ -35,6 +35,7 @@
 #include "necro.h"
 #include "act_wiz.h"
 #include "act_info.h"
+#include "act_comm.h"
 #if defined( BLEDOMAT )
 # include <mysql.h>
 #endif
@@ -53,30 +54,32 @@ struct stos
 /*
  * Local functions.
  */
-const char *char_note_to	args( ( CHAR_DATA *ch, NOTE_DATA *pnote ) );
-void	sekretarka_ook_ost	args( ( CHAR_DATA *ch, CHAR_DATA *victim, char *argument ) );
-void	sprawdz_zdatnosc	args( ( CHAR_DATA *ch, char *skl, bool *blad ) );
-char	*licz_nastepny_skladnik	args( ( char *wyrazenie, char *skladnik ) );
-void    note_attach     args( ( CHAR_DATA *ch ) );
-void    note_remove     args( ( CHAR_DATA *ch, NOTE_DATA *pnote ) );
-void    talk_channel    args( ( CHAR_DATA *ch, char *argument,
-			    int channel, const char *verb, const char *verb2,
-			    int poziom ) );
-void	zglos_blad	args( ( CHAR_DATA *ch, char *opis, char *dopeln, char *plik,
-			    int kategoria, char *argument ) );
-void	real_tell	args( ( CHAR_DATA *ch, CHAR_DATA *victim, char *argument,
-			    bool can_be_ignored, int tell_type ) );
-bool	zglos_do_bazy	args( ( CHAR_DATA *ch, int kategoria, char *argument ) );
-void	wywal_monitory	args( ( CHAR_DATA *ch ) );
-bool	pusty_stos	args( ( STOS *s ) );
-void	na_stos		args( ( STOS **s, char c ) );
-void	na_stos_w	args( ( STOS **s, float w ) );
-char	glowa		args( ( STOS *s ) );
-char	ze_stosu	args( ( STOS **s ) );
-float	ze_stosu_w	args( ( STOS **s ) );
-bool	licz_czy_liczba	args( ( char *w ) );
-int	priorytet	args( ( CHAR_DATA *ch, char c, bool *blad ) );
-float	wynik		args( ( CHAR_DATA *ch, STOS **s, bool *blad ) );
+static const char *char_note_to	args( ( CHAR_DATA *ch, NOTE_DATA *pnote ) );
+static void	sekretarka_ook_ost args( ( CHAR_DATA *ch, CHAR_DATA *victim, char *argument ) );
+static void	sprawdz_zdatnosc args( ( CHAR_DATA *ch, char *skl, bool *blad ) );
+static char	*licz_nastepny_skladnik args( ( char *wyrazenie, char *skladnik ) );
+static void	note_attach     args( ( CHAR_DATA *ch ) );
+static void	note_remove     args( ( CHAR_DATA *ch, NOTE_DATA *pnote ) );
+static void	talk_channel    args( ( CHAR_DATA *ch, char *argument,
+					int channel, const char *verb, const char *verb2,
+					int poziom ) );
+static void	zglos_blad	args( ( CHAR_DATA *ch, char *opis, char *dopeln, char *plik,
+					int kategoria, char *argument ) );
+static void	real_tell	args( ( CHAR_DATA *ch, CHAR_DATA *victim, char *argument,
+					bool can_be_ignored, int tell_type ) );
+static void	wywal_monitory	args( ( CHAR_DATA *ch ) );
+static bool	pusty_stos	args( ( STOS *s ) );
+static void	na_stos		args( ( STOS **s, char c ) );
+static void	na_stos_w	args( ( STOS **s, float w ) );
+static char	glowa		args( ( STOS *s ) );
+static char	ze_stosu	args( ( STOS **s ) );
+static bool	licz_czy_liczba	args( ( char *w ) );
+static int	priorytet	args( ( CHAR_DATA *ch, char c, bool *blad ) );
+static float	wynik		args( ( CHAR_DATA *ch, STOS **s, bool *blad ) );
+static char	*makedrunk	args( ( char *string, CHAR_DATA *ch ) );
+#if defined( BLEDOMAT )
+static bool	zglos_do_bazy	args( ( CHAR_DATA *ch, int kategoria, char *argument ) );
+#endif
 
 #define ILOSC_KATEGORII 4
 const char kategorie_not[ ILOSC_KATEGORII ][ 40 ] =
@@ -122,7 +125,7 @@ bool is_note_to( CHAR_DATA *ch, NOTE_DATA *pnote )
 }
 
 
-const char *char_note_to( CHAR_DATA *ch, NOTE_DATA *pnote )
+static const char *char_note_to( CHAR_DATA *ch, NOTE_DATA *pnote )
 {
     if ( !str_cmp( ch->name, pnote->sender ) )
 	return "{R->";
@@ -160,7 +163,7 @@ const char *char_note_to( CHAR_DATA *ch, NOTE_DATA *pnote )
 }
 
 
-void note_attach( CHAR_DATA *ch )
+static void note_attach( CHAR_DATA *ch )
 {
     NOTE_DATA *pnote;
 
@@ -234,7 +237,7 @@ void rewrite_all_notes( void )
 }
 
 
-void note_remove( CHAR_DATA *ch, NOTE_DATA *pnote )
+static void note_remove( CHAR_DATA *ch, NOTE_DATA *pnote )
 {
     NOTE_DATA *prev;
     char      *to_list;
@@ -854,7 +857,7 @@ KOMENDA( do_email )
  * Lam 27.3.2005: wiele buforow na wypadek zapetlenia mowy speech_progami,
  * skrocenie wyniku na sile do MIL.
  */
-char *makedrunk( char *string, CHAR_DATA *ch )
+static char *makedrunk( char *string, CHAR_DATA *ch )
 {
     static char buf[ 12 ][ MIL ];
     static int ktory;
@@ -929,7 +932,7 @@ char *makedrunk( char *string, CHAR_DATA *ch )
 /*
  * Generic channel function.
  */
-void talk_channel( CHAR_DATA *ch, char *argument, int channel,
+static void talk_channel( CHAR_DATA *ch, char *argument, int channel,
 		  const char *verb, const char *verb2, int poziom )
 {
     DESCRIPTOR_DATA *d;
@@ -1256,6 +1259,7 @@ KOMENDA( do_chat )
  * kanaly Lama
  */
 
+#if defined( IMUD )
 /* Lam 25.4.98: InterMud */
 KOMENDA( do_imud )
 {
@@ -1269,6 +1273,7 @@ KOMENDA( do_imud )
 
     return;
 }
+#endif
 
 
 KOMENDA( do_flame )
@@ -1667,7 +1672,7 @@ KOMENDA( do_say )
 }
 
 
-void sekretarka_ook_ost( CHAR_DATA *ch, CHAR_DATA *victim, char *argument )
+static void sekretarka_ook_ost( CHAR_DATA *ch, CHAR_DATA *victim, char *argument )
 {
     if ( IS_NPC( victim ) )
 	return;
@@ -1711,7 +1716,7 @@ void sekretarka_ook_ost( CHAR_DATA *ch, CHAR_DATA *victim, char *argument )
 #define SZEPT		1
 #define MOWA		2
 
-void real_tell( CHAR_DATA *ch, CHAR_DATA *victim, char *argument,
+static void real_tell( CHAR_DATA *ch, CHAR_DATA *victim, char *argument,
 		bool can_be_ignored, int tell_type )
 {
     CHAR_DATA *ucho;
@@ -2213,7 +2218,7 @@ void wczytaj_bledomat( void )
 
 
 /* Lam 22.1.2005 */
-bool zglos_do_bazy( CHAR_DATA *ch, int kategoria, char *argument )
+static bool zglos_do_bazy( CHAR_DATA *ch, int kategoria, char *argument )
 {
     MYSQL *baza = mysql_init( NULL );
     char buf[ MSL ];
@@ -2259,7 +2264,7 @@ bool zglos_do_bazy( CHAR_DATA *ch, int kategoria, char *argument )
 #endif /* defined( BLEDOMAT ) */
 
 
-void zglos_blad( CHAR_DATA *ch, char *opis, char *dopeln, char *plik,
+static void zglos_blad( CHAR_DATA *ch, char *opis, char *dopeln, char *plik,
 		int kategoria, char *argument )
 {
     char buf[ MSL ];
@@ -2767,7 +2772,7 @@ KOMENDA( do_follow )
 }
 
 
-void wywal_monitory( CHAR_DATA *ch )
+static void wywal_monitory( CHAR_DATA *ch )
 {
     ZWOD_DATA *zwod;
 
@@ -3787,14 +3792,14 @@ KOMENDA( do_quest )
 
 
 /* czy stos jest pusty? */
-bool pusty_stos( STOS *s )
+static bool pusty_stos( STOS *s )
 {
     return s ? FALSE : TRUE;
 }
 
 
 /* odloz operacje na stos */
-void na_stos( STOS **s, char c )
+static void na_stos( STOS **s, char c )
 {
     STOS *t;
 
@@ -3808,7 +3813,7 @@ void na_stos( STOS **s, char c )
 
 
 /* odloz wartosc na stos */
-void na_stos_w( STOS **s, float w )
+static void na_stos_w( STOS **s, float w )
 {
     STOS *t;
 
@@ -3822,14 +3827,14 @@ void na_stos_w( STOS **s, float w )
 
 
 /* jaka operacja jest na szczycie stosu? */
-char glowa( STOS *s )
+static char glowa( STOS *s )
 {
     return s->op;
 }
 
 
 /* zwroc operacje ze szczytu stosu, zdejmujac ja z niego */
-char ze_stosu( STOS **s )
+static char ze_stosu( STOS **s )
 {
     char c = 0;
     STOS *t;
@@ -3846,27 +3851,9 @@ char ze_stosu( STOS **s )
 }
 
 
-/* zdejmij i zwroc wartosc ze szczytu stosu */
-float ze_stosu_w( STOS **s )
-{
-    float w = 0;
-    STOS *t;
-
-    t = *s;
-    if ( *s )
-    {
-	w = (*s)->wart;
-	*s = (*s)->nast;
-	free( t );
-    }
-
-    return w;
-}
-
-
 /* zwraca nastepny skladnik wyrazenia (liczbe, dzialanie). */
 #define POMIN while ( *c && strchr( sep2, *c ) ) c++;
-char *licz_nastepny_skladnik( char *wyrazenie, char *skladnik )
+static char *licz_nastepny_skladnik( char *wyrazenie, char *skladnik )
 {
     const char *sep1 = "+-*/^k"; /* dzialania */
     const char *sep2 = " \t"; /* separatory */
@@ -3945,7 +3932,7 @@ char *licz_nastepny_skladnik( char *wyrazenie, char *skladnik )
 
 
 /* sprawdza, czy skladnik jest "zdatny", czyli czy go obslugujemy */
-void sprawdz_zdatnosc( CHAR_DATA *ch, char *skl, bool *blad )
+static void sprawdz_zdatnosc( CHAR_DATA *ch, char *skl, bool *blad )
 {
     if ( strcmp( skl, "+" )
       && strcmp( skl, "-" )
@@ -3966,7 +3953,7 @@ void sprawdz_zdatnosc( CHAR_DATA *ch, char *skl, bool *blad )
 
 /* czy skladnik jest liczba? liczba moze zawierac najwyzej jedna kropke,
    poza tym musi sie skladac z cyfr. Przecinek zamieniamy na kropke */
-bool licz_czy_liczba( char *w )
+static bool licz_czy_liczba( char *w )
 {
     bool kropka = FALSE;
 
@@ -3986,7 +3973,7 @@ bool licz_czy_liczba( char *w )
 
 
 /* jaki jest priorytet dzialania? */
-int priorytet( CHAR_DATA *ch, char c, bool *blad )
+static int priorytet( CHAR_DATA *ch, char c, bool *blad )
 {
     switch ( c )
     {
@@ -4011,7 +3998,7 @@ int dice_level;
 
 /* rekurencyjna funkcja obliczajaca wynik zapisanego na stosie przez funkcje
    onp wyrazenia */
-float wynik( CHAR_DATA *ch, STOS **s, bool *blad )
+static float wynik( CHAR_DATA *ch, STOS **s, bool *blad )
 {
     float pzl, toc;
     char op;

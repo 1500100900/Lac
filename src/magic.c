@@ -36,6 +36,7 @@
 #include "magic.h"
 #include "act_wiz.h"
 #include "act_info.h"
+#include "act_comm.h"
 
 
 static void stworz_jedzenie		args( ( CHAR_DATA *ch, int level, int vnum ) );

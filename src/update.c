@@ -35,6 +35,7 @@
 #include "act_wiz.h"
 #include <math.h>
 #include "act_info.h"
+#include "act_comm.h"
 
 
 /*

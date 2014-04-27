@@ -37,6 +37,7 @@
 #include "magic.h"
 #include "act_wiz.h"
 #include "act_info.h"
+#include "act_comm.h"
 
 
 extern bool murder_char; /* Lam, update.c */

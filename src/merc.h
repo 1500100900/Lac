@@ -3742,22 +3742,17 @@ DECLARE_DO_FUN( do_awareness	);		/* Fuyara */
 DECLARE_DO_FUN( do_backstab     );
 DECLARE_DO_FUN( do_barwy	);		/* Lam */
 DECLARE_DO_FUN( do_bash         );
-DECLARE_DO_FUN( do_licz		);		/* Lam */
-DECLARE_DO_FUN( do_beep         );
 DECLARE_DO_FUN( do_berserk      );              /* by Thelonius */
 DECLARE_DO_FUN( do_blank        );
 DECLARE_DO_FUN( do_brandish     );
 DECLARE_DO_FUN( do_brief        );
-DECLARE_DO_FUN( do_bug          );
 DECLARE_DO_FUN( do_burry	);		/* Lam */
 DECLARE_DO_FUN( do_buy          );
 DECLARE_DO_FUN( do_chameleon    );              /* by Thelonius */
 DECLARE_DO_FUN( do_change       );		/* Lam */
-DECLARE_DO_FUN( do_chat         );
 DECLARE_DO_FUN( do_chrust       );              /* Ulryk */
 DECLARE_DO_FUN( do_circle_skill );              /* by Thelonius * do_circle() istnieje w bibliotece Allegro, wiec zmienilem tu */
 DECLARE_DO_FUN( do_clan         );		/* Lam */
-DECLARE_DO_FUN( do_clan_chat	);		/* Lam */
 DECLARE_DO_FUN( do_clear	);		/* Lam */
 DECLARE_DO_FUN( do_close        );
 DECLARE_DO_FUN( do_colour       );      /* Colour Command By Lope */
@@ -3767,7 +3762,6 @@ DECLARE_DO_FUN( do_czytaj	);		/* Lam */
 DECLARE_DO_FUN( do_death_tech	);		/* Fuyara */
 DECLARE_DO_FUN( do_delet	);		/* Lam */
 DECLARE_DO_FUN( do_delete	);		/* Lam */
-DECLARE_DO_FUN( do_delete_disabled );		/* Lam */
 DECLARE_DO_FUN( do_dig		);		/* Lam */
 DECLARE_DO_FUN( do_disarm       );
 DECLARE_DO_FUN( do_disguise	);		/* Fuyara */
@@ -3779,32 +3773,21 @@ DECLARE_DO_FUN( do_drink        );
 DECLARE_DO_FUN( do_drop         );
 DECLARE_DO_FUN( do_east         );
 DECLARE_DO_FUN( do_eat          );
-DECLARE_DO_FUN( do_email        );              /* Lam */
-DECLARE_DO_FUN( do_emote        );
 DECLARE_DO_FUN( do_enter        );              /* Lam */
 DECLARE_DO_FUN( do_fee          );
 DECLARE_DO_FUN( do_feed         );
 DECLARE_DO_FUN( do_fill         );
-DECLARE_DO_FUN( do_flame        );              /* Lam */
 DECLARE_DO_FUN( do_flash	);		/* Fuyara */
 DECLARE_DO_FUN( do_flee         );
-DECLARE_DO_FUN( do_follow       );
 DECLARE_DO_FUN( do_fury		);		/* Qwert */
 DECLARE_DO_FUN( do_get          );
 DECLARE_DO_FUN( do_give         );
-DECLARE_DO_FUN( do_godtalk	);		/* Lam */
 DECLARE_DO_FUN( do_graj		);		/* Lam */
-DECLARE_DO_FUN( do_grats        );              /* Lam */
-DECLARE_DO_FUN( do_group        );
-DECLARE_DO_FUN( do_gtell        );
 DECLARE_DO_FUN( do_heighten     );              /* Thelonius */
 DECLARE_DO_FUN( do_hide         );
 DECLARE_DO_FUN( do_hold		);		/* Lam */
 DECLARE_DO_FUN( do_hunt		);		/* z Wurma */
-DECLARE_DO_FUN( do_idea         );
-DECLARE_DO_FUN( do_ignore	);		/* Lam */
 DECLARE_DO_FUN( do_immcmd	);		/* Lam */
-DECLARE_DO_FUN( do_immtalk      );
 DECLARE_DO_FUN( do_imud		);		/* Lam */
 DECLARE_DO_FUN( do_kick         );
 DECLARE_DO_FUN( do_kill         );
@@ -3813,10 +3796,7 @@ DECLARE_DO_FUN( do_lock         );
 DECLARE_DO_FUN( do_love         );              /* Qwert */
 DECLARE_DO_FUN( do_memory       );
 DECLARE_DO_FUN( do_miw		);		/* Lam */
-DECLARE_DO_FUN( do_monitor      );              /* Lam */
-DECLARE_DO_FUN( do_mowdo	);		/* Lam */
 DECLARE_DO_FUN( do_murder       );
-DECLARE_DO_FUN( do_music        );
 DECLARE_DO_FUN( do_nakarm	);		/* Alandar */
 DECLARE_DO_FUN( do_napoj	);		/* Alandar */
 DECLARE_DO_FUN( do_nchat        );              /* Lam */
@@ -3824,17 +3804,14 @@ DECLARE_DO_FUN( do_nietoperz	);		/* Lam */
 DECLARE_DO_FUN( do_north	);
 DECLARE_DO_FUN( do_northeast	);		/* Lam */
 DECLARE_DO_FUN( do_northwest	);		/* Lam */
-DECLARE_DO_FUN( do_note         );
 DECLARE_DO_FUN( do_odbierz	);		/* Lam */
 DECLARE_DO_FUN( do_ognisko      );
 DECLARE_DO_FUN( do_open         );
-DECLARE_DO_FUN( do_order        );
 DECLARE_DO_FUN( do_outfit	);		/* Lam */
 DECLARE_DO_FUN( do_pick         );
 DECLARE_DO_FUN( do_podswietlaj	);		/* Vigud */
 DECLARE_DO_FUN( do_poison_weapon);		/* by Thelonius */
 DECLARE_DO_FUN( do_pojedynek	);		/* Lam */
-DECLARE_DO_FUN( do_pose         );
 DECLARE_DO_FUN( do_postaw	);		/* Thelonius, nowa: Lam */
 DECLARE_DO_FUN( do_power_tech	);		/* Fuyara */
 DECLARE_DO_FUN( do_przechowaj   );		/* Lam */
@@ -3842,31 +3819,19 @@ DECLARE_DO_FUN( do_przeladuj	);		/* Lam */
 DECLARE_DO_FUN( do_pull		);		/* Fuyara */
 DECLARE_DO_FUN( do_push		);		/* Lam */
 DECLARE_DO_FUN( do_put          );
-DECLARE_DO_FUN( do_quest	);		/* Lam/Aldar/Quad/Winchester */
-DECLARE_DO_FUN( do_qui          );
-DECLARE_DO_FUN( do_quit         );
-DECLARE_DO_FUN( do_wciel	);		/* Lam */
-DECLARE_DO_FUN( do_qwertalk	);		/* Lam */
 DECLARE_DO_FUN( do_realias	);		/* Lam */
 DECLARE_DO_FUN( do_recall	);	DECLARE_DO_FUN( real_recall	);
 DECLARE_DO_FUN( do_recite       );
 DECLARE_DO_FUN( do_register     );
 DECLARE_DO_FUN( do_reinforce_blade);		/* Fuyara */
 DECLARE_DO_FUN( do_remove       );
-DECLARE_DO_FUN( do_rent         );
-DECLARE_DO_FUN( do_reply        );
 DECLARE_DO_FUN( do_rescue       );
 DECLARE_DO_FUN( do_rest         );
-DECLARE_DO_FUN( do_retell	);		/* Lam */
 DECLARE_DO_FUN( do_runes	);		/* Fuyara */
 DECLARE_DO_FUN( do_sacrifice    );
-DECLARE_DO_FUN( do_save         );
-DECLARE_DO_FUN( do_say          );
 DECLARE_DO_FUN( do_search	);		/* Fuyara */
 DECLARE_DO_FUN( do_sell         );
-DECLARE_DO_FUN( do_separator    );              /* Lam i Albi */
 DECLARE_DO_FUN( do_shadow       );              /* by Thelonius */
-DECLARE_DO_FUN( do_shout        );
 DECLARE_DO_FUN( do_sklep	);		/* Lam */
 DECLARE_DO_FUN( do_sla          );
 DECLARE_DO_FUN( do_slay         );
@@ -3878,16 +3843,13 @@ DECLARE_DO_FUN( do_south	);
 DECLARE_DO_FUN( do_southeast	);		/* Lam */
 DECLARE_DO_FUN( do_southwest	);		/* Lam */
 DECLARE_DO_FUN( do_speed_tech	);		/* Fuyara */
-DECLARE_DO_FUN( do_split        );
 DECLARE_DO_FUN( do_stake        );
 DECLARE_DO_FUN( do_stand        );
 DECLARE_DO_FUN( do_steal        );
 DECLARE_DO_FUN( do_strike	);		/* Fuyara */
 DECLARE_DO_FUN( do_stun		);		/* Fuyara */
 DECLARE_DO_FUN( do_taranuj	);		/* Lam */
-DECLARE_DO_FUN( do_tell         );
 DECLARE_DO_FUN( do_train        );
-DECLARE_DO_FUN( do_typo         );
 DECLARE_DO_FUN( do_unalias	);		/* Lam */
 DECLARE_DO_FUN( do_unlock       );
 DECLARE_DO_FUN( do_untangle     );              /* by Thelonius */
@@ -3900,12 +3862,10 @@ DECLARE_DO_FUN( do_wake         );
 DECLARE_DO_FUN( do_wear         );
 DECLARE_DO_FUN( do_west         );
 DECLARE_DO_FUN( do_whirl	);		/* Fuyara */
-DECLARE_DO_FUN( do_whisper	);		/* Lam */
 DECLARE_DO_FUN( do_wraith_morph	);		/* Fuyara */
 DECLARE_DO_FUN( do_wsiadz	);		/* Lam */
 DECLARE_DO_FUN( do_wylej	);		/* Lam */
 DECLARE_DO_FUN( do_wysiadz	);		/* Lam */
-DECLARE_DO_FUN( do_yell         );
 DECLARE_DO_FUN( do_zap          );
 
 
@@ -3930,18 +3890,6 @@ DECLARE_DO_FUN( do_zap          );
 #define AOD	AIROBJ_DATA
 #define ACD	AIRCHAR_DATA
 #define TLD	TELL_DATA
-
-/* act_comm.c */
-void    add_follower    args( ( CHAR_DATA *ch, CHAR_DATA *master ) );
-void    stop_follower   args( ( CHAR_DATA *ch ) );
-void    die_follower    args( ( CHAR_DATA *ch ) );
-bool    is_same_group   args( ( CHAR_DATA *ach, CHAR_DATA *bch ) );
-bool    is_note_to      args( ( CHAR_DATA *ch, NOTE_DATA *pnote ) );
-void	talk_auction	args( ( char *argument ) );
-bool	can_quit_now	args( ( CD *ch, bool fCicho ) );
-char	*makedrunk	args( ( char *string, CHAR_DATA *ch ) );
-void	rewrite_all_notes args( ( void ) );
-void	wczytaj_bledomat args( ( void ) );
 
 
 /* act_move.c */

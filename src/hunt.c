@@ -32,6 +32,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include "merc.h"
+#include "act_comm.h"
 #if !defined( NO_WMEMSET )
 # include <wchar.h>
 #endif

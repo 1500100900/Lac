@@ -38,6 +38,7 @@
 #include "qmagic.h"
 #include "magic.h"
 #include "act_info.h"
+#include "act_comm.h"
 
 
 CZAR( spell_aura_pokoju )

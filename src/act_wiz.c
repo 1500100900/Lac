@@ -44,6 +44,7 @@
 #include "merc.h"
 #include "special.h"
 #include "act_info.h"
+#include "act_comm.h"
 
 
 #if !defined( WIN32 )

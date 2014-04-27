@@ -34,6 +34,7 @@
 #include "special.h"
 #include "magic.h"
 #include "act_wiz.h"
+#include "act_comm.h"
 
 
 #if !defined( ultrix ) && !defined( apollo ) && !defined( __minix ) && !defined( PLAN9 )
