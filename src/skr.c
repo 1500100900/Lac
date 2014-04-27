@@ -41,6 +41,7 @@
 #include "act_wiz.h"
 #include "act_info.h"
 #include "act_comm.h"
+#include "act_obj.h"
 
 
 #define BAD_DOOR		  -1
@@ -53,8 +54,6 @@ void	rune_poison		args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
 int	calculate_damage	args( ( CHAR_DATA *ch, CHAR_DATA *victim,
 					int gsn ) );
 
-/* act_obj.c */
-bool	pijane_przedmioty	args( ( CHAR_DATA *ch ) );
 
 /* POCZATEK: zmodyfikowany fragment z one_hit dotyczacy modyfikacji obrazen */
 int calculate_damage( CHAR_DATA *ch, CHAR_DATA *victim, int gsn )

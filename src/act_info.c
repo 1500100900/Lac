@@ -35,6 +35,7 @@
 #include "act_wiz.h"
 #include "act_info.h"
 #include "act_comm.h"
+#include "act_obj.h"
 
 
 static int	format_list_to_char	args( ( char *buf1, int wielkosc_buf1,
@@ -230,10 +231,6 @@ const char *urojone_moby[ 16 ] =
 	"(oczarowanie) Stoi przed tob`a tw`oj wyznawca prosz`acy o pokut`e.\n\r"
 };
 
-/*
- * act_obj.c
- */
-bool pijane_przedmioty( CHAR_DATA *ch );
 
 /*
  * Local functions.

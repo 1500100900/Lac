@@ -35,6 +35,7 @@
 #include "magic.h"
 #include "act_wiz.h"
 #include "act_info.h"
+#include "act_obj.h"
 
 
 CHAR_DATA	*get_char_prog		args( ( CHAR_DATA *ch, char *argument,

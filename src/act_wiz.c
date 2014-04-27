@@ -45,6 +45,7 @@
 #include "special.h"
 #include "act_info.h"
 #include "act_comm.h"
+#include "act_obj.h"
 
 
 #if !defined( WIN32 )

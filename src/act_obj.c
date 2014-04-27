@@ -35,34 +35,35 @@
 #include "act_wiz.h"
 #include "act_info.h"
 #include "act_comm.h"
+#include "act_obj.h"
 
 
-CHAR_DATA	*find_przechowalnia	args( ( CHAR_DATA *ch, bool komunikat ) );
-void		zmien_poziom_przedmiotu	args( ( OBJ_DATA *przedmiot, int poziom ) );
-bool		pijane_przedmioty	args( ( CHAR_DATA *ch ) );
-void		get_obj			args( ( CHAR_DATA *ch, OBJ_DATA *obj,
+static CHAR_DATA	*find_przechowalnia	args( ( CHAR_DATA *ch, bool komunikat ) );
+static void		zmien_poziom_przedmiotu	args( ( OBJ_DATA *przedmiot, int poziom ) );
+static void		get_obj			args( ( CHAR_DATA *ch, OBJ_DATA *obj,
 						OBJ_DATA *container, bool give ) );
-OBJ_DATA	*znajdz_cialo		args( ( CHAR_DATA *ch, char *argument ) );
-void		wear_obj		args( ( CHAR_DATA *ch, OBJ_DATA *obj,
+static OBJ_DATA		*znajdz_cialo		args( ( CHAR_DATA *ch, char *argument ) );
+static void		wear_obj		args( ( CHAR_DATA *ch, OBJ_DATA *obj,
 						bool fReplace, bool hold ) );
-void		wear_hold		args( ( CHAR_DATA *ch, char *argument, bool hold ) );
-CHAR_DATA	*find_keeper		args( ( CHAR_DATA *ch, char *argument ) );
-CHAR_DATA	*find_healer		args( ( CHAR_DATA *ch, char *argument ) );
-CHAR_DATA	*find_koles		args( ( CHAR_DATA *ch, char *argument ) );
-int		get_cost		args( ( CHAR_DATA *keeper,
+static void		wear_hold		args( ( CHAR_DATA *ch, char *argument, bool hold ) );
+static CHAR_DATA	*find_keeper		args( ( CHAR_DATA *ch, char *argument ) );
+static CHAR_DATA	*find_healer		args( ( CHAR_DATA *ch, char *argument ) );
+static CHAR_DATA	*find_koles		args( ( CHAR_DATA *ch, char *argument ) );
+static int		get_cost		args( ( CHAR_DATA *keeper,
 						OBJ_DATA *obj, bool fBuy ) );
-OBJ_DATA	*get_obj_shop		args( ( CHAR_DATA *ch, char *argument ) );
-void		potencjalnie_zamknij_sklep	args( ( CHAR_DATA *ch ) );
-void		list_przechowalnia	args( ( CHAR_DATA *ch ) );
-int		parsebet		args( ( const int currentbet, char *s ) );
-void		list_osobiste		args( ( CHAR_DATA *keeper, CHAR_DATA *ch ) );
-CHAR_DATA	*find_warsztat		args( ( CHAR_DATA *ch ) );
+static OBJ_DATA		*get_obj_shop		args( ( CHAR_DATA *ch, char *argument ) );
+static void		potencjalnie_zamknij_sklep	args( ( CHAR_DATA *ch ) );
+static void		list_przechowalnia	args( ( CHAR_DATA *ch ) );
+static int		parsebet		args( ( const int currentbet, char *s ) );
+static void		list_osobiste		args( ( CHAR_DATA *keeper, CHAR_DATA *ch ) );
+static CHAR_DATA	*find_warsztat		args( ( CHAR_DATA *ch ) );
+static int		advatoi			args( ( char *s ) );
 
 /*
  * Ulryk 25.06.2002: zmienia poziom przedmiotu (a takze jego zawartosci
  * w przypadku pojemnikow) na podany
  */
-void zmien_poziom_przedmiotu( OBJ_DATA *przedmiot, int poziom )
+static void zmien_poziom_przedmiotu( OBJ_DATA *przedmiot, int poziom )
 {
     OBJ_DATA *obj;
 
@@ -149,7 +150,7 @@ bool pijane_przedmioty( CHAR_DATA *ch )
 }
 
 
-void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container, bool give )
+static void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container, bool give )
 {
     if ( !CAN_WEAR( obj, ITEM_TAKE ) )
     {
@@ -269,7 +270,7 @@ void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container, bool give )
 /*
  * Lam 4.3.98: szuka w pomieszczeniu z ch ciala, ktore jest jego.
  */
-OBJ_DATA *znajdz_cialo( CHAR_DATA *ch, char *argument )
+static OBJ_DATA *znajdz_cialo( CHAR_DATA *ch, char *argument )
 {
     OBJ_DATA  *obj;
     char      *pd;
@@ -2153,7 +2154,7 @@ bool remove_obj( CHAR_DATA *ch, int iWear, bool fReplace )
  * Lam 22.7.98: wear_prog i remove_prog. Sprawdzane jest, czy remove_prog nie
  * zabil przypadkiem gracza.
  */
-void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace, bool hold )
+static void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace, bool hold )
 {
     char buf [ MAX_STRING_LENGTH ];
     ROOM_INDEX_DATA *room = ch->in_room;
@@ -2762,7 +2763,7 @@ void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace, bool hold )
 /*
  * Lam: powinna byc mozliwosc zrobienia ubierz wsz.pierscien, a nie tylko wsz
  */
-void wear_hold( CHAR_DATA *ch, char *argument, bool hold )
+static void wear_hold( CHAR_DATA *ch, char *argument, bool hold )
 {
     OBJ_DATA *obj;
     char      arg[ MAX_INPUT_LENGTH ];
@@ -4004,7 +4005,7 @@ KOMENDA( do_steal )
 /*
  * Shopping commands.
  */
-CHAR_DATA *find_keeper( CHAR_DATA *ch, char *argument )
+static CHAR_DATA *find_keeper( CHAR_DATA *ch, char *argument )
 {
     CHAR_DATA *keeper, *vch;
     SHOP_DATA *pShop;
@@ -4103,7 +4104,7 @@ CHAR_DATA *find_keeper( CHAR_DATA *ch, char *argument )
 }
 
 
-CHAR_DATA *find_healer( CHAR_DATA *ch, char *argument )
+static CHAR_DATA *find_healer( CHAR_DATA *ch, char *argument )
 {
     CHAR_DATA *healer;
     HEALER_DATA *pHealer;
@@ -4158,7 +4159,7 @@ CHAR_DATA *find_healer( CHAR_DATA *ch, char *argument )
 
 
 /* Koles (sprzedawca drog do krain) */
-CHAR_DATA *find_koles( CHAR_DATA *ch, char *argument )
+static CHAR_DATA *find_koles( CHAR_DATA *ch, char *argument )
 {
     CHAR_DATA *keeper;
     char       buf[ MAX_STRING_LENGTH ];
@@ -4211,7 +4212,7 @@ CHAR_DATA *find_koles( CHAR_DATA *ch, char *argument )
 }
 
 
-int get_cost( CHAR_DATA *keeper, OBJ_DATA *obj, bool fBuy )
+static int get_cost( CHAR_DATA *keeper, OBJ_DATA *obj, bool fBuy )
 {
     SHOP_DATA *pShop;
     int        cost;
@@ -4271,7 +4272,7 @@ int get_cost( CHAR_DATA *keeper, OBJ_DATA *obj, bool fBuy )
 
 
 /* Lam 18.6.2005, modyfikacja get_obj_carry */
-OBJ_DATA *get_obj_shop( CHAR_DATA *ch, char *argument )
+static OBJ_DATA *get_obj_shop( CHAR_DATA *ch, char *argument )
 {
     OBJ_DATA *obj;
     char      arg[ MAX_INPUT_LENGTH ];
@@ -4314,7 +4315,7 @@ OBJ_DATA *get_obj_shop( CHAR_DATA *ch, char *argument )
 }
 
 
-void potencjalnie_zamknij_sklep( CHAR_DATA *ch )
+static void potencjalnie_zamknij_sklep( CHAR_DATA *ch )
 {
     OBJ_DATA *obj;
 
@@ -5543,7 +5544,7 @@ KOMENDA( do_register )
 /*
  * sciagniete z find_koles( ), a wczesniej z find_keeper( )
  */
-CHAR_DATA *find_przechowalnia( CHAR_DATA *ch, bool komunikat )
+static CHAR_DATA *find_przechowalnia( CHAR_DATA *ch, bool komunikat )
 {
     CHAR_DATA *keeper;
     char       buf[ MAX_STRING_LENGTH ];
@@ -5593,7 +5594,7 @@ CHAR_DATA *find_przechowalnia( CHAR_DATA *ch, bool komunikat )
 }
 
 
-void list_przechowalnia( CHAR_DATA *ch )
+static void list_przechowalnia( CHAR_DATA *ch )
 {
     OBJ_DATA *obj;
     char buf[ MAX_STRING_LENGTH * 4 ];
@@ -5801,7 +5802,7 @@ KOMENDA( do_odbierz )
   once.
 */
 
-int advatoi( char *s )
+static int advatoi( char *s )
 {
     int number = 0;	/* number to be returned */
     int multiplier = 0;	/* multiplier used to get the extra digits right */
@@ -5861,7 +5862,7 @@ int advatoi( char *s )
 
   Lam 1.7.2000: zmiana dzialania + (stary + to %, obecny + dodaje do stawki)
 */
-int parsebet( const int currentbet, char *s )
+static int parsebet( const int currentbet, char *s )
 {
     /* check to make sure it's not blank */
     if ( s[ 0 ] != '\0' )
@@ -6512,7 +6513,7 @@ KOMENDA( do_chrust )
 }
 
 
-void list_osobiste( CHAR_DATA *keeper, CHAR_DATA *ch )
+static void list_osobiste( CHAR_DATA *keeper, CHAR_DATA *ch )
 {
     OBJ_DATA *obj;
     char      buf1[ MAX_INPUT_LENGTH ];
@@ -6548,7 +6549,7 @@ void list_osobiste( CHAR_DATA *keeper, CHAR_DATA *ch )
 }
 
 
-CHAR_DATA *find_warsztat( CHAR_DATA *ch )
+static CHAR_DATA *find_warsztat( CHAR_DATA *ch )
 {
     CHAR_DATA *keeper;
     char       buf[ MAX_STRING_LENGTH ];

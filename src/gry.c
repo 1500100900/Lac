@@ -33,6 +33,7 @@
 
 
 #include "merc.h"
+#include "act_obj.h"
 
 
 DECLARE_GAME_FUN(	gra_czarna_czerwona	);

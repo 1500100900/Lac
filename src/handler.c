@@ -37,6 +37,7 @@
 #include "act_wiz.h"
 #include "act_info.h"
 #include "act_comm.h"
+#include "act_obj.h"
 #include <errno.h> /* errno jest uzywany przez czytaj_ciala( ) */
 
 

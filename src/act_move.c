@@ -33,6 +33,7 @@
 #include "merc.h"
 #include "act_wiz.h"
 #include "act_info.h"
+#include "act_obj.h"
 
 
 const   int     movement_loss   [ SECT_MAX ]    =
