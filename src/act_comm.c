@@ -34,6 +34,7 @@
 #include "special.h"
 #include "necro.h"
 #include "act_wiz.h"
+#include "act_info.h"
 #if defined( BLEDOMAT )
 # include <mysql.h>
 #endif

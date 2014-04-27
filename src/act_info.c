@@ -33,21 +33,26 @@
 #include "merc.h"
 #include "magic.h"
 #include "act_wiz.h"
+#include "act_info.h"
 
 
-int	format_list_to_char	args( ( char *buf1, int wielkosc_buf1,
-					OBJ_DATA *list,	CHAR_DATA *ch,
-					bool fShort, bool fShowNothing,
-					bool krocej, bool inwentarz,
-					bool fDontCombine, int ilosc,
-					char *argument ) );
-void	show_char_to_char_scan	args( ( CHAR_DATA *list, CHAR_DATA *ch ) );
-bool	przypadek_do_przyjecia	args( ( CHAR_DATA *ch, char *arg ) );
-void	pokaz_wyjscia	args( ( CHAR_DATA *ch, ROOM_INDEX_DATA *room, bool fAuto ) );
-void	patrz_w		args( ( CHAR_DATA *ch, OBJ_DATA *obj, char *argument ) );
-char	*zmien_nawiasy	args( ( char *arg ) );
-void	przytnij_linie	args( ( char *linia, int szer ) );
-void	zapisz_odmiane	args( ( CHAR_DATA *ch ) );
+static int	format_list_to_char	args( ( char *buf1, int wielkosc_buf1,
+						OBJ_DATA *list, CHAR_DATA *ch,
+						bool fShort, bool fShowNothing,
+						bool krocej, bool inwentarz,
+						bool fDontCombine, int ilosc,
+						char *argument ) );
+static void	show_char_to_char_scan	args( ( CHAR_DATA *list, CHAR_DATA *ch ) );
+static bool	przypadek_do_przyjecia	args( ( CHAR_DATA *ch, char *arg ) );
+static void	pokaz_wyjscia		args( ( CHAR_DATA *ch, ROOM_INDEX_DATA *room,
+						bool fAuto ) );
+static void	patrz_w			args( ( CHAR_DATA *ch, OBJ_DATA *obj,
+						char *argument ) );
+static char	*zmien_nawiasy		args( ( char *arg ) );
+static void	przytnij_linie		args( ( char *linia, int szer ) );
+static void	zapisz_odmiane		args( ( CHAR_DATA *ch ) );
+static char	*asctime_pl_krotko	args( ( const struct tm *timeptr ) );
+
 
 /*
  * Lam 14.11.1999
@@ -331,7 +336,7 @@ char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch,
  * Show a list to a character.
  * Can coalesce duplicated items.
  */
-int format_list_to_char( char *buf1, int wielkosc_buf1, OBJ_DATA *list,
+static int format_list_to_char( char *buf1, int wielkosc_buf1, OBJ_DATA *list,
 			CHAR_DATA *ch, bool fShort, bool fShowNothing,
 			bool krocej, bool inwentarz, bool fDontCombine,
 			int ilosc, char *argument )
@@ -974,7 +979,7 @@ void show_char_to_char( CHAR_DATA *list, CHAR_DATA *ch, bool skrot )
 }
 
 
-void show_char_to_char_scan( CHAR_DATA *list, CHAR_DATA *ch )
+static void show_char_to_char_scan( CHAR_DATA *list, CHAR_DATA *ch )
 {
     CHAR_DATA *rch;
 
@@ -1024,7 +1029,7 @@ bool check_blind( CHAR_DATA *ch )
 }
 
 
-void pokaz_wyjscia( CHAR_DATA *ch, ROOM_INDEX_DATA *room, bool fAuto )
+static void pokaz_wyjscia( CHAR_DATA *ch, ROOM_INDEX_DATA *room, bool fAuto )
 {
     EXIT_DATA *pexit;
     char buf[ MAX_STRING_LENGTH ];
@@ -2282,17 +2287,8 @@ char *asctime_pl( const struct tm *timeptr )
 }
 
 
-char *asctime_pl_nonl( const struct tm *timeptr )
-{
-    char *tym = asctime_pl( timeptr );
-    if ( *tym )
-	tym[ strlen( tym ) - 1 ] = 0;
 
-    return tym;
-}
-
-
-char *asctime_pl_krotko( const struct tm *timeptr )
+static char *asctime_pl_krotko( const struct tm *timeptr )
 {
     static char result[ 128 ]; /* powinno wystarczyc */
 
@@ -2687,7 +2683,7 @@ KOMENDA( do_who )
 }
 
 
-char *zmien_nawiasy( char *arg )
+static char *zmien_nawiasy( char *arg )
 {
     char *p = arg;
     char *b;
@@ -2731,7 +2727,7 @@ char *zmien_nawiasy( char *arg )
 }
 
 
-void przytnij_linie( char *linia, int szer )
+static void przytnij_linie( char *linia, int szer )
 {
     while ( *linia && szer )
 	if ( *linia == '{' )
@@ -5698,7 +5694,7 @@ KOMENDA( do_odmiana )
 }
 
 
-void zapisz_odmiane( CHAR_DATA *ch )
+static void zapisz_odmiane( CHAR_DATA *ch )
 {
     FILE *fp;
 
@@ -5727,7 +5723,7 @@ void zapisz_odmiane( CHAR_DATA *ch )
 }
 
 
-bool przypadek_do_przyjecia( CHAR_DATA *ch, char *arg )
+static bool przypadek_do_przyjecia( CHAR_DATA *ch, char *arg )
 {
     if ( strlen( arg ) > 20 )
     {

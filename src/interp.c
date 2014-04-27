@@ -35,6 +35,8 @@
 #include "necro.h"
 #include "magic.h"
 #include "act_wiz.h"
+#include "act_info.h"
+
 
 void	do_many			args( ( CHAR_DATA *ch, char *argument ) );
 void	zastepstwo		args( ( CHAR_DATA *ch, int numer ) );

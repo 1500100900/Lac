@@ -34,6 +34,8 @@
 #include "palad.h"
 #include "act_wiz.h"
 #include <math.h>
+#include "act_info.h"
+
 
 /*
  * Externals

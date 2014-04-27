@@ -35,6 +35,8 @@
 #include "necro.h"
 #include "magic.h"
 #include "act_wiz.h"
+#include "act_info.h"
+
 
 static void stworz_jedzenie		args( ( CHAR_DATA *ch, int level, int vnum ) );
 static void wlasciwa_teleportacja	args( ( CHAR_DATA *caster, CHAR_DATA *victim,

@@ -34,6 +34,7 @@
 #include "merc.h"
 #include "necro.h"
 #include "magic.h"
+#include "act_info.h"
 
 
 /*

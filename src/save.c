@@ -32,6 +32,7 @@
 
 #include "merc.h"
 #include "act_wiz.h"
+#include "act_info.h"
 #include <sys/stat.h>
 #include <errno.h>
 
