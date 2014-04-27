@@ -40,6 +40,7 @@
 #include "act_obj.h"
 #include "act_move.h"
 #include "skr.h"
+#include "fight.h"
 
 
 void	do_many			args( ( CHAR_DATA *ch, char *argument ) );

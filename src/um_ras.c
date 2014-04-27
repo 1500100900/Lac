@@ -35,6 +35,7 @@
 #include "merc.h"
 #include "act_info.h"
 #include "act_move.h"
+#include "fight.h"
 
 
 void	pc_breathe		args( ( CHAR_DATA *ch ) );
@@ -42,7 +43,7 @@ void	pc_screech		args( ( CHAR_DATA *ch ) );
 void	pc_spit			args( ( CHAR_DATA *ch ) );
 void	pc_lightning		args( ( CHAR_DATA *ch ) );
 void	pc_blindness		args( ( CHAR_DATA *ch ) );
-bool	check_race_special	args( ( CHAR_DATA *ch ) );
+bool    check_race_special	args( ( CHAR_DATA *ch ) );
 
 /* This code is for PC's who polymorph into dragons.
  * Yeah I know this is specialized code, but this is fun.  :)

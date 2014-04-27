@@ -37,6 +37,7 @@
 #include "act_comm.h"
 #include "act_obj.h"
 #include "act_move.h"
+#include "fight.h"
 
 
 static CHAR_DATA	*find_przechowalnia	args( ( CHAR_DATA *ch, bool komunikat ) );

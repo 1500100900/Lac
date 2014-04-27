@@ -31,6 +31,7 @@
 
 
 #include "merc.h"
+#include "fight.h"
 
 
 typedef void SOC_FUN	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );

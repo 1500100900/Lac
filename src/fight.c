@@ -40,6 +40,7 @@
 #include "act_comm.h"
 #include "act_obj.h"
 #include "act_move.h"
+#include "fight.h"
 
 
 extern bool murder_char; /* Lam, update.c */
@@ -47,30 +48,29 @@ extern bool murder_char; /* Lam, update.c */
 /*
  * Local functions.
  */
-bool    check_dodge		args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-bool    check_parry		args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
+static bool	check_dodge		args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
+static bool	check_parry		args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
 /* Gimza: check_doom dotyczy gsn_zaglada */
-bool    check_doom		args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-bool	sprawdz_blok_tarcza	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-void    dam_message		args( ( CHAR_DATA *ch, CHAR_DATA *victim,
+static bool	check_doom		args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
+static bool	sprawdz_blok_tarcza	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
+static void	dam_message		args( ( CHAR_DATA *ch, CHAR_DATA *victim,
 					int dam, int dt, int wpn ) );
-bool    is_wielding_specweapon	args( ( CHAR_DATA *ch, int wpn, int flag ) );
-void    make_corpse		args( ( CHAR_DATA *ch ) );
-void    set_fighting_main	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-bool    disarm			args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-void    trip			args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
+static bool	is_wielding_specweapon	args( ( CHAR_DATA *ch, int wpn, int flag ) );
+static void	make_corpse		args( ( CHAR_DATA *ch ) );
+static void	set_fighting_main	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
+static bool	disarm			args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
+static void	trip			args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
+static void	use_magical_item 	args( ( CHAR_DATA *ch ) );
+static void	split2			args( ( CHAR_DATA *ch, int argument ) );
+static void	zdejmij_niewidki_przy_ataku args( ( CHAR_DATA *ch ) );
+static void	stop_fighting_all	args( ( CHAR_DATA *ch ) );
+static void	make_no_corpse		args( ( CHAR_DATA *ch ) );
+static unsigned char ocen_czar		args( ( int v ) );
+static bool	czy_w_grze		args( ( CHAR_DATA *ch, const char *imie ) );
+
+static FUNKCJA_CZASOWA( finish_doom );
 
 bool    check_race_special	args( ( CHAR_DATA *ch ) );
-void    use_magical_item 	args( ( CHAR_DATA *ch ) );
-void	split2			args( ( CHAR_DATA *ch, int argument ) );
-void	zdejmij_niewidki_przy_ataku args( ( CHAR_DATA *ch ) );
-void	stop_fighting_all	args( ( CHAR_DATA *ch ) );
-void	make_no_corpse		args( ( CHAR_DATA *ch ) );
-bool	registered		args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-static unsigned char ocen_czar	args( ( int v ) );
-bool	czy_w_grze		args( ( CHAR_DATA *ch, const char *imie ) );
-
-FUNKCJA_CZASOWA( finish_doom );
 
 /*
  * Do zapisywania przebiegu zabojstw/morderstw w kronice, zapamietuje ostatnio
@@ -808,7 +808,7 @@ void one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt, int wpn )
  * Lam: to wersja do_split, ktora jako parametr dostaje inta, a nie wskaznik na
  * CHAR_DATA. Oprocz tego rozni sie nieznacznie
  */
-void split2( CHAR_DATA *ch, int argument )
+static void split2( CHAR_DATA *ch, int argument )
 {
     CHAR_DATA *gch;
     char       buf [ MAX_STRING_LENGTH ];
@@ -891,7 +891,7 @@ void split2( CHAR_DATA *ch, int argument )
 /*
  * Wydzielone z damage( ), zeby powtorzyc po ewentualnym use_magical_item
  */
-void zdejmij_niewidki_przy_ataku( CHAR_DATA *ch )
+static void zdejmij_niewidki_przy_ataku( CHAR_DATA *ch )
 {
     /*
      * Inviso attacks ... not.
@@ -2355,7 +2355,7 @@ void check_killer( CHAR_DATA *ch, CHAR_DATA *victim )
 /*
  * Qwert: zmienilem na sprawdzanie flagi w ogole
  */
-bool is_wielding_specweapon( CHAR_DATA *ch, int wpn, int flag )
+static bool is_wielding_specweapon( CHAR_DATA *ch, int wpn, int flag )
 {
     OBJ_DATA *obj;
 
@@ -2370,7 +2370,7 @@ bool is_wielding_specweapon( CHAR_DATA *ch, int wpn, int flag )
 /*
  * Check for parry.
  */
-bool check_parry( CHAR_DATA *ch, CHAR_DATA *victim )
+static bool check_parry( CHAR_DATA *ch, CHAR_DATA *victim )
 {
     int chance = 0;
 
@@ -2433,7 +2433,7 @@ bool check_parry( CHAR_DATA *ch, CHAR_DATA *victim )
 /*
  * Lam 6.5.2007
  */
-bool sprawdz_blok_tarcza( CHAR_DATA *ch, CHAR_DATA *victim )
+static bool sprawdz_blok_tarcza( CHAR_DATA *ch, CHAR_DATA *victim )
 {
     int chance = 0;
 
@@ -2478,7 +2478,7 @@ bool sprawdz_blok_tarcza( CHAR_DATA *ch, CHAR_DATA *victim )
  * Wysoka efektywnosc do 20% zmniejsza/zwieksza szanse na unikniecie ciosu
  * (wymagane wycwiczenie unikow)
  */
-bool check_dodge( CHAR_DATA *ch, CHAR_DATA *victim )
+static bool check_dodge( CHAR_DATA *ch, CHAR_DATA *victim )
 {
     int chance;
     int effective = 0;
@@ -2543,7 +2543,7 @@ bool check_dodge( CHAR_DATA *ch, CHAR_DATA *victim )
 /*
  * Gimza: sprawdzanie czy przeciwnik wpada w chwilowe odretwienie
  */
-bool check_doom( CHAR_DATA *ch, CHAR_DATA *victim )
+static bool check_doom( CHAR_DATA *ch, CHAR_DATA *victim )
 {
     TIMER_DATA *timer;
     AFFECT_DATA af;
@@ -2655,7 +2655,7 @@ bool check_doom( CHAR_DATA *ch, CHAR_DATA *victim )
 }
 
 
-FUNKCJA_CZASOWA( finish_doom )
+static FUNKCJA_CZASOWA( finish_doom )
 {
     CHAR_DATA *ch = timer->ch;
 
@@ -2864,7 +2864,7 @@ void set_fighting( CHAR_DATA *ch, CHAR_DATA *victim )
 }
 
 
-void set_fighting_main( CHAR_DATA *ch, CHAR_DATA *victim )
+static void set_fighting_main( CHAR_DATA *ch, CHAR_DATA *victim )
 {
     FIGHT_DATA *fight;
 
@@ -2951,7 +2951,7 @@ void stop_fighting_char( CHAR_DATA *ch, CHAR_DATA *victim )
 }
 
 
-void stop_fighting_all( CHAR_DATA *ch )
+static void stop_fighting_all( CHAR_DATA *ch )
 {
     FIGHT_DATA *fight;
     FIGHT_DATA *fight_next;
@@ -2998,7 +2998,7 @@ void strata_dosw_za_smierc( CHAR_DATA *victim )
 /*
  * Make a corpse out of a character.
  */
-void make_corpse( CHAR_DATA *ch )
+static void make_corpse( CHAR_DATA *ch )
 {
     OBJ_DATA        *corpse;
     OBJ_DATA        *obj;
@@ -3137,7 +3137,7 @@ void make_corpse( CHAR_DATA *ch )
  * Funkcja podobna do poprzedniej, ale nie robi ciala. Dziala dla duchow i
  * innych eterycznych widziadel. --Ulryk
  */
-void make_no_corpse( CHAR_DATA *ch )
+static void make_no_corpse( CHAR_DATA *ch )
 {
     OBJ_DATA        *obj;
     OBJ_DATA        *obj_next;
@@ -3933,7 +3933,7 @@ int xp_compute( CHAR_DATA *gch, CHAR_DATA *victim )
 }
 
 
-void dam_message( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt,
+static void dam_message( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt,
 		 int wpn )
 {
     /* oryginal:
@@ -4195,7 +4195,7 @@ void dam_message( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt,
  * Disarm a creature.
  * Caller must check for successful attack.
  */
-bool disarm( CHAR_DATA *ch, CHAR_DATA *victim )
+static bool disarm( CHAR_DATA *ch, CHAR_DATA *victim )
 {
     OBJ_DATA *obj;
 
@@ -4258,7 +4258,7 @@ bool disarm( CHAR_DATA *ch, CHAR_DATA *victim )
  * Podciecie postaci.
  * Lam 28.8.98: stworzenia bez nog nie podcinaja ani nie moga zostac podciete
  */
-void trip( CHAR_DATA *ch, CHAR_DATA *victim )
+static void trip( CHAR_DATA *ch, CHAR_DATA *victim )
 {
     if ( ch->wait || victim->wait )
 	return;
@@ -5278,53 +5278,6 @@ KOMENDA( do_fury )
 }
 
 
-bool licensed( CHAR_DATA *ch )
-{
-    /* teraz bicie graczy jest dozwolone */
-    return TRUE;
-/*  oryginalna wersja:
-    OBJ_DATA *obj;
-
-    if ( ch->race == zr_wampir )
-	return TRUE;
-
-    if ( !IS_SET( ch->act, PLR_REGISTER ) )
-	return FALSE;
-*/
-    /*
-     * If already fighting then we just jump out.
-     */
-/*
-    if ( ch->fighting )
-	return TRUE;
-
-    for ( obj = ch->carrying; obj; obj = obj->next_content )
-    {
-	if ( obj->pIndexData->vnum == OBJ_VNUM_LICENSE )
-	    return TRUE;
-    }
-
-    return FALSE;
-*/
-}
-
-
-bool registered( CHAR_DATA *ch, CHAR_DATA *victim )
-{
-    /* teraz mamy mordowanie */
-    return TRUE;
-/*  oryginalna wersja:
-    if ( IS_SET( victim->act, PLR_REGISTER ) )
-	return TRUE;
-
-    if ( ch->race == zr_wampir )
-	return TRUE;
-
-    return FALSE;
-*/
-}
-
-
 #define PRZEDMIOT_OFENSYWNY b01
 #define PRZEDMIOT_OCHRONNY b02
 #define PRZEDMIOT_BEZ_SENSU b03
@@ -5372,7 +5325,7 @@ unsigned char ocen_przedmiot( int v1, int v2, int v3 )
  * Lam 3.5.2003: zmienione, by ocenialo przydatnosc przedmiotu i uzywalo go
  * zgodnie z przeznaczeniem, lub nie uzywalo. Przy okazji dopisalem dokladne
  * wybieranie przedmiotow (recytuj 2.zwoj) */
-void use_magical_item( CHAR_DATA *ch )
+static void use_magical_item( CHAR_DATA *ch )
 {
     OBJ_DATA *obj;
     OBJ_DATA *cobj     = NULL;
@@ -5471,7 +5424,7 @@ void use_magical_item( CHAR_DATA *ch )
 }
 
 
-bool czy_w_grze( CHAR_DATA *ch, const char *imie )
+static bool czy_w_grze( CHAR_DATA *ch, const char *imie )
 {
     DESCRIPTOR_DATA *d;
     CHAR_DATA *gracz;

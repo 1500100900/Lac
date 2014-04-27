@@ -37,6 +37,7 @@
 #include "act_comm.h"
 #include "act_obj.h"
 #include "act_move.h"
+#include "fight.h"
 
 
 static int	format_list_to_char	args( ( char *buf1, int wielkosc_buf1,

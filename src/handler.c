@@ -38,6 +38,7 @@
 #include "act_info.h"
 #include "act_comm.h"
 #include "act_obj.h"
+#include "fight.h"
 #include <errno.h> /* errno jest uzywany przez czytaj_ciala( ) */
 
 

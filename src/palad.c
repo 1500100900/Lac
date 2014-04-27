@@ -36,6 +36,7 @@
 #include "magic.h"
 #include "act_comm.h"
 #include "act_move.h"
+#include "fight.h"
 
 
 KOMENDA( do_rozblysk )

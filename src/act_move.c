@@ -35,6 +35,7 @@
 #include "act_info.h"
 #include "act_obj.h"
 #include "act_move.h"
+#include "fight.h"
 
 
 const   int     movement_loss   [ SECT_MAX ]    =

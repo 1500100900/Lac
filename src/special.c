@@ -36,6 +36,7 @@
 #include "act_wiz.h"
 #include "act_comm.h"
 #include "act_move.h"
+#include "fight.h"
 
 
 static bool	dragon		args( ( CHAR_DATA *ch, int sn ) );

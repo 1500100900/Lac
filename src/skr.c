@@ -43,6 +43,7 @@
 #include "act_comm.h"
 #include "act_obj.h"
 #include "act_move.h"
+#include "fight.h"
 
 
 #define BAD_DOOR		  -1

@@ -3733,45 +3733,30 @@ DECLARE_DO_FUN( do_alias	);		/* Lam */
 DECLARE_DO_FUN( do_answer       );
 DECLARE_DO_FUN( do_areas        );
 DECLARE_DO_FUN( do_astat        );		/* Lam */
-DECLARE_DO_FUN( do_backstab     );
 DECLARE_DO_FUN( do_barwy	);		/* Lam */
-DECLARE_DO_FUN( do_berserk      );              /* by Thelonius */
 DECLARE_DO_FUN( do_blank        );
 DECLARE_DO_FUN( do_brief        );
 DECLARE_DO_FUN( do_burry	);		/* Lam */
-DECLARE_DO_FUN( do_change       );		/* Lam */
-DECLARE_DO_FUN( do_circle_skill );              /* by Thelonius * do_circle() istnieje w bibliotece Allegro, wiec zmienilem tu */
 DECLARE_DO_FUN( do_clan         );		/* Lam */
 DECLARE_DO_FUN( do_clear	);		/* Lam */
 DECLARE_DO_FUN( do_colour       );      /* Colour Command By Lope */
 DECLARE_DO_FUN( do_delet	);		/* Lam */
 DECLARE_DO_FUN( do_delete	);		/* Lam */
-DECLARE_DO_FUN( do_disarm       );
 DECLARE_DO_FUN( do_fee          );
 DECLARE_DO_FUN( do_feed         );
-DECLARE_DO_FUN( do_flee         );
-DECLARE_DO_FUN( do_fury		);		/* Qwert */
 DECLARE_DO_FUN( do_graj		);		/* Lam */
 DECLARE_DO_FUN( do_hunt		);		/* z Wurma */
 DECLARE_DO_FUN( do_immcmd	);		/* Lam */
 DECLARE_DO_FUN( do_imud		);		/* Lam */
-DECLARE_DO_FUN( do_kick         );
-DECLARE_DO_FUN( do_kill         );
 DECLARE_DO_FUN( do_love         );              /* Qwert */
 DECLARE_DO_FUN( do_memory       );
 DECLARE_DO_FUN( do_miw		);		/* Lam */
-DECLARE_DO_FUN( do_murder       );
 DECLARE_DO_FUN( do_nchat        );              /* Lam */
 DECLARE_DO_FUN( do_nietoperz	);		/* Lam */
 DECLARE_DO_FUN( do_podswietlaj	);		/* Vigud */
-DECLARE_DO_FUN( do_pojedynek	);		/* Lam */
 DECLARE_DO_FUN( do_postaw	);		/* Thelonius, nowa: Lam */
 DECLARE_DO_FUN( do_przeladuj	);		/* Lam */
 DECLARE_DO_FUN( do_realias	);		/* Lam */
-DECLARE_DO_FUN( do_rescue       );
-DECLARE_DO_FUN( do_sla          );
-DECLARE_DO_FUN( do_slay         );
-DECLARE_DO_FUN( do_socials      );
 DECLARE_DO_FUN( do_stake        );
 DECLARE_DO_FUN( do_taranuj	);		/* Lam */
 DECLARE_DO_FUN( do_unalias	);		/* Lam */
@@ -4003,37 +3988,6 @@ IMIONA_DATA *nowe_imie		args( ( void ) );
 void	dodaj_imie		args( ( IMIONA_DATA *im ) );
 void	zwolnij_imie		args( ( IMIONA_DATA *im ) );
 void	zapisz_imiona		args( ( void ) );
-
-/* fight.c */
-int     xp_compute           args( ( CHAR_DATA *gch, CHAR_DATA *victim ) );
-bool	czy_grupa_wrogow args( ( CHAR_DATA *ch, CHAR_DATA *gch ) );
-bool    group_gain      args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-void    violence_update args( ( void ) );
-void    multi_hit       args( ( CHAR_DATA *ch, CHAR_DATA *victim, int dt ) );
-void    set_fighting    args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-bool    is_fighting     args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-void	one_hit		args( ( CHAR_DATA *ch, CHAR_DATA *victim, int dt,
-				int wpn ) );
-void    damage          args( ( CHAR_DATA *ch, CHAR_DATA *victim, int dam,
-			       int dt, int wpn, bool czy_bez_walki ) );
-void    raw_kill        args( ( CHAR_DATA *ch, CHAR_DATA *victim,
-				bool czy_bez_walki, bool czy_dodac_zgon,
-				int typ_zgonu ) );
-void    stop_fighting   args( ( CHAR_DATA *ch, bool fBoth ) );
-void    stop_fighting_char
-			args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-void    update_pos      args( ( CHAR_DATA *victim ) );
-void    check_killer    args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-bool    is_safe         args( ( CHAR_DATA *ch, CHAR_DATA *victim, bool czy ) );
-bool	czy_morderstwo	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-bool    licensed        args( ( CHAR_DATA *ch ) );
-/*bool  registered      args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );*/
-void	death_cry	args( ( CHAR_DATA *ch, int dt, int pozycja ) );
-void    pp_get          args( ( CHAR_DATA *ch, char *victim_name ) ); /* Qwert */
-void	strata_dosw_za_smierc	args( ( CHAR_DATA *victim ) );
-void    dodaj_zabojce   args( ( CHAR_DATA *ofiara, CHAR_DATA *zabojca ) );
-unsigned char ocen_przedmiot args( ( int v1, int v2, int v3 ) );
-CHAR_DATA *fighting_func args( ( CHAR_DATA *ch ) );
 
 
 /* gry.c */
