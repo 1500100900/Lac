@@ -38,6 +38,8 @@
  */
 
 #include "merc.h"
+#include "act_wiz.h"
+
 
 #define BAD_DOOR		  -1
 

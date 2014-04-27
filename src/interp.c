@@ -34,7 +34,7 @@
 #include "palad.h"
 #include "necro.h"
 #include "magic.h"
-
+#include "act_wiz.h"
 
 void	do_many			args( ( CHAR_DATA *ch, char *argument ) );
 void	zastepstwo		args( ( CHAR_DATA *ch, int numer ) );

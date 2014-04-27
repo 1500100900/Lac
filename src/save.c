@@ -31,6 +31,7 @@
 
 
 #include "merc.h"
+#include "act_wiz.h"
 #include <sys/stat.h>
 #include <errno.h>
 

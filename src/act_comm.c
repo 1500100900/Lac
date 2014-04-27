@@ -33,6 +33,7 @@
 #include "merc.h"
 #include "special.h"
 #include "necro.h"
+#include "act_wiz.h"
 #if defined( BLEDOMAT )
 # include <mysql.h>
 #endif

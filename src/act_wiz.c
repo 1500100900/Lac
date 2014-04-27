@@ -51,17 +51,16 @@
 int	gettimeofday	args( ( struct timeval *tp, void *tzp ) );
 #endif
 
-int	co_ma_zmieniac		args( ( char *gdzie, bool pszuk ) ); /* dla do_oaff */
-void	ustaw_wartosc		args( ( OBJ_DATA *obj, int ktora, char *arg,
+static int	co_ma_zmieniac		args( ( char *gdzie, bool pszuk ) ); /* dla do_oaff */
+static void	ustaw_wartosc		args( ( OBJ_DATA *obj, int ktora, char *arg,
 					CHAR_DATA *ch ) ); /* dla do_oset */
-void	real_goto		args( ( CHAR_DATA *ch,
+static void	real_goto		args( ( CHAR_DATA *ch,
 					ROOM_INDEX_DATA *location ) );
-char	*conn_str		args( ( int conn ) );
-char	*opisz_przedmiot	args( ( CHAR_DATA *ch, OBJ_DATA *obj,
+static char	*conn_str		args( ( int conn ) );
+static char	*opisz_przedmiot	args( ( CHAR_DATA *ch, OBJ_DATA *obj,
 					int obj_counter ) );
-OBJ_DATA *obj_clon		args( ( OBJ_DATA* tmp_obj, bool all ) );
-int	znajdz_powod		args( ( char *arg ) );
-void	rng_test		args( ( CHAR_DATA *ch ) );
+static OBJ_DATA *obj_clon		args( ( OBJ_DATA* tmp_obj, bool all ) );
+static int	znajdz_powod		args( ( char *arg ) );
 
 /* Lam 17.6.2003 dla fstata */
 /* Lam 21.8.2003: tu nie mialo byc \n na koncu */
@@ -1465,7 +1464,7 @@ KOMENDA( do_at )
 }
 
 
-void real_goto( CHAR_DATA *ch, ROOM_INDEX_DATA *location )
+static void real_goto( CHAR_DATA *ch, ROOM_INDEX_DATA *location )
 {
     /* zaufanie 108 warte tyle, co poziom 106 */
     if ( get_trust( get_char( ch ) ) < L_DIR && !can_enter_room( ch, location, TRUE ) )
@@ -5805,7 +5804,7 @@ KOMENDA( do_mset )
  * powtarzania tego samego kodu. Obsluga ciagow przy ustawianiu wartosci
  * opisowych oraz konwersja nazw czarow i materialow na numery.
  */
-void ustaw_wartosc( OBJ_DATA *obj, int ktora, char *arg, CHAR_DATA *ch )
+static void ustaw_wartosc( OBJ_DATA *obj, int ktora, char *arg, CHAR_DATA *ch )
 {
     int wartosc;
 
@@ -6241,7 +6240,7 @@ KOMENDA( do_rset )
 }
 
 
-char *conn_str( int conn )
+static char *conn_str( int conn )
 {
    switch ( conn )
    {
@@ -6656,7 +6655,7 @@ KOMENDA( do_holylight )
 }
 
 
-char *opisz_przedmiot( CHAR_DATA *ch, OBJ_DATA *obj, int obj_counter )
+static char *opisz_przedmiot( CHAR_DATA *ch, OBJ_DATA *obj, int obj_counter )
 {
     OBJ_DATA   *in_obj;
     static char buf[ MAX_STRING_LENGTH ];
@@ -7812,7 +7811,7 @@ KOMENDA( do_restart )
  */
 
 /* zamienia lancuch na liczbe APPLY_* */
-int co_ma_zmieniac( char *gdzie, bool pszuk )
+static int co_ma_zmieniac( char *gdzie, bool pszuk )
 {
     if ( !gdzie || !*gdzie			) return APPLY_NONE;
 
@@ -8314,7 +8313,7 @@ KOMENDA( do_stopien )
    to mamy problem (trzeba wszystko robic dwa razy). */
 /* Winchester */
 
-OBJ_DATA *obj_clon( OBJ_DATA* tmp_obj, bool all )
+static OBJ_DATA *obj_clon( OBJ_DATA* tmp_obj, bool all )
 {
     OBJ_DATA *obj, *t_obj;
     int i;
@@ -10518,7 +10517,7 @@ KOMENDA( do_refuse )
 
 
 /* lokalna, nigdzie indziej nieuzywana */
-int znajdz_powod( char *arg )
+static int znajdz_powod( char *arg )
 {
     int i;
 
@@ -10731,8 +10730,10 @@ KOMENDA( do_kogobic )
     return;
 }
 
+
+#if 0
 /* to udowadnia, ze number_percent() daje rowne szanse kazdej liczbie */
-void rng_test( CHAR_DATA *ch )
+static void rng_test( CHAR_DATA *ch )
 {
     unsigned int wyniki[ 101 ];
     unsigned int long i, min, max;
@@ -10761,7 +10762,7 @@ void rng_test( CHAR_DATA *ch )
 
     return;    
 }
-
+#endif
 
 /*
  * Lam 21.5.98: lubie testowac rozne rzeczy, a nie chce mi sie za kazdym razem
@@ -10847,11 +10848,6 @@ KOMENDA( do_test )
 		table[ i ].obj->short_descr, table[ i ].value );
 	}
 #endif
-
-/*
-    STC( "rng_test.\n\r", ch );
-    rng_test( ch );
- */
 
 /*
     int i;

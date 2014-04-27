@@ -32,6 +32,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include "merc.h"
+#include "act_wiz.h"
 #include <stdarg.h> /* va_list */
 
 /* to konieczne niestety, zabezpieczenie podpatrzone w Smaugu */

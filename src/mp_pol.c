@@ -33,6 +33,7 @@
 
 #include "merc.h"
 #include "magic.h"
+#include "act_wiz.h"
 
 
 CHAR_DATA	*get_char_prog		args( ( CHAR_DATA *ch, char *argument,

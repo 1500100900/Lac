@@ -32,6 +32,7 @@
 
 #include "merc.h"
 #include "necro.h"
+#include "act_wiz.h"
 #include <limits.h>
 
 #include <errno.h>

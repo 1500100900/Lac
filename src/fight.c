@@ -35,6 +35,7 @@
 #include "palad.h"
 #include "necro.h"
 #include "magic.h"
+#include "act_wiz.h"
 
 
 extern bool murder_char; /* Lam, update.c */

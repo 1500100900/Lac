@@ -3604,7 +3604,6 @@ extern          SHOP_DATA         *     shop_first;
 extern		HEALER_DATA	  *	healer_first;
 
 extern		SCHEMAT_DATA	  *	schemat_list;
-extern          BAN_DATA          *     ban_list;
 extern          CHAR_DATA         *     char_list;
 extern          DESCRIPTOR_DATA   *     descriptor_list;
 extern          NOTE_DATA         *     note_list;
@@ -3617,7 +3616,6 @@ extern		RRAND_DATA	  *	rrand_list;
 extern		SORTED_SKILL_DATA *	sorted_skill_list;
 
 extern          AFFECT_DATA       *     affect_free;
-extern          BAN_DATA          *     ban_free;
 extern          CHAR_DATA         *     first_free_char;
 extern		CHAR_DATA	  *	last_free_char;
 extern          DESCRIPTOR_DATA   *     descriptor_free;
@@ -3736,39 +3734,28 @@ extern int pulse_point_max;
  * Command functions.
  * Defined in act_*.c (mostly).
  */
-DECLARE_DO_FUN( do_advance      );
-DECLARE_DO_FUN( do_aexits	);		/* Lam */
 DECLARE_DO_FUN( do_affects	);		/* Lam */
 DECLARE_DO_FUN( do_afk          );
 DECLARE_DO_FUN( do_alias	);		/* Lam */
-DECLARE_DO_FUN( do_allow        );
 DECLARE_DO_FUN( do_answer       );
 DECLARE_DO_FUN( do_appraise	);		/* Fuyara */
 DECLARE_DO_FUN( do_areas        );
-DECLARE_DO_FUN( do_asave	);		/* Lam */
 DECLARE_DO_FUN( do_assemble	);		/* Fuyara */
 DECLARE_DO_FUN( do_astat        );		/* Lam */
-DECLARE_DO_FUN( do_at           );
 DECLARE_DO_FUN( do_auction      );
 DECLARE_DO_FUN( do_awareness	);		/* Fuyara */
 DECLARE_DO_FUN( do_backstab     );
-DECLARE_DO_FUN( do_bamfin       );
-DECLARE_DO_FUN( do_bamfout      );
-DECLARE_DO_FUN( do_ban		);		/* Lam */
 DECLARE_DO_FUN( do_barwy	);		/* Lam */
 DECLARE_DO_FUN( do_bash         );
 DECLARE_DO_FUN( do_licz		);		/* Lam */
 DECLARE_DO_FUN( do_beep         );
 DECLARE_DO_FUN( do_berserk      );              /* by Thelonius */
-DECLARE_DO_FUN( do_bezkoloru	);		/* Lam */
-DECLARE_DO_FUN( do_bkukla	);		/* Vigud */
 DECLARE_DO_FUN( do_blank        );
 DECLARE_DO_FUN( do_brandish     );
 DECLARE_DO_FUN( do_brief        );
 DECLARE_DO_FUN( do_bug          );
 DECLARE_DO_FUN( do_burry	);		/* Lam */
 DECLARE_DO_FUN( do_buy          );
-DECLARE_DO_FUN( do_cecho	);		/* Lam */
 DECLARE_DO_FUN( do_chameleon    );              /* by Thelonius */
 DECLARE_DO_FUN( do_change       );		/* Lam */
 DECLARE_DO_FUN( do_channels     );
@@ -3785,7 +3772,6 @@ DECLARE_DO_FUN( do_compare      );
 DECLARE_DO_FUN( do_concentrate	);		/* Fuyara */
 DECLARE_DO_FUN( do_config       );
 DECLARE_DO_FUN( do_consider     );
-DECLARE_DO_FUN( do_count	);		/* Lam */
 DECLARE_DO_FUN( do_credits      );
 DECLARE_DO_FUN( do_cumulate_strength );		/* Fuyara */
 DECLARE_DO_FUN( do_czytaj	);		/* Lam */
@@ -3793,11 +3779,9 @@ DECLARE_DO_FUN( do_death_tech	);		/* Fuyara */
 DECLARE_DO_FUN( do_delet	);		/* Lam */
 DECLARE_DO_FUN( do_delete	);		/* Lam */
 DECLARE_DO_FUN( do_delete_disabled );		/* Lam */
-DECLARE_DO_FUN( do_deny         );
 DECLARE_DO_FUN( do_description  );
 DECLARE_DO_FUN( do_dig		);		/* Lam */
 DECLARE_DO_FUN( do_disarm       );
-DECLARE_DO_FUN( do_disconnect   );
 DECLARE_DO_FUN( do_disguise	);		/* Fuyara */
 DECLARE_DO_FUN( do_donate       );
 DECLARE_DO_FUN( do_dostosuj     );
@@ -3807,15 +3791,12 @@ DECLARE_DO_FUN( do_drink        );
 DECLARE_DO_FUN( do_drop         );
 DECLARE_DO_FUN( do_east         );
 DECLARE_DO_FUN( do_eat          );
-DECLARE_DO_FUN( do_echo         );
 DECLARE_DO_FUN( do_email        );              /* Lam */
 DECLARE_DO_FUN( do_emote        );
 DECLARE_DO_FUN( do_enter        );              /* Lam */
-DECLARE_DO_FUN( do_epstat	);		/* Lam */
 DECLARE_DO_FUN( do_equipment    );
 DECLARE_DO_FUN( do_examine      );
 DECLARE_DO_FUN( do_exits        );
-DECLARE_DO_FUN( do_exp		);		/* Lam */
 DECLARE_DO_FUN( do_fee          );
 DECLARE_DO_FUN( do_feed         );
 DECLARE_DO_FUN( do_fill         );
@@ -3823,17 +3804,12 @@ DECLARE_DO_FUN( do_flame        );              /* Lam */
 DECLARE_DO_FUN( do_flash	);		/* Fuyara */
 DECLARE_DO_FUN( do_flee         );
 DECLARE_DO_FUN( do_follow       );
-DECLARE_DO_FUN( do_force        );
 DECLARE_DO_FUN( do_fprompt	);		/* Lam */
-DECLARE_DO_FUN( do_freeze       );
 DECLARE_DO_FUN( do_frombank     );		/* Lam */
-DECLARE_DO_FUN( do_fstat	);		/* Lam */
 DECLARE_DO_FUN( do_fury		);		/* Qwert */
 DECLARE_DO_FUN( do_get          );
 DECLARE_DO_FUN( do_give         );
-DECLARE_DO_FUN( do_gladuj	);		/* Lam */
 DECLARE_DO_FUN( do_godtalk	);		/* Lam */
-DECLARE_DO_FUN( do_goto         );
 DECLARE_DO_FUN( do_graj		);		/* Lam */
 DECLARE_DO_FUN( do_grats        );              /* Lam */
 DECLARE_DO_FUN( do_group        );
@@ -3844,86 +3820,49 @@ DECLARE_DO_FUN( do_heighten     );              /* Thelonius */
 DECLARE_DO_FUN( do_help         );
 DECLARE_DO_FUN( do_hide         );
 DECLARE_DO_FUN( do_hold		);		/* Lam */
-DECLARE_DO_FUN( do_holylight    );
 DECLARE_DO_FUN( do_hunt		);		/* z Wurma */
 DECLARE_DO_FUN( do_idea         );
 DECLARE_DO_FUN( do_ignore	);		/* Lam */
-DECLARE_DO_FUN( do_imctl	);		/* Lam */
 DECLARE_DO_FUN( do_immcmd	);		/* Lam */
 DECLARE_DO_FUN( do_immtalk      );
-DECLARE_DO_FUN( do_imtlset      );
 DECLARE_DO_FUN( do_imud		);		/* Lam */
-DECLARE_DO_FUN( do_info		);		/* Lam */
 DECLARE_DO_FUN( do_inventory    );
-DECLARE_DO_FUN( do_invis        );
 DECLARE_DO_FUN( do_kick         );
 DECLARE_DO_FUN( do_kill         );
-DECLARE_DO_FUN( do_laguj	);		/* Qwert */
-DECLARE_DO_FUN( do_lecnowy	);		/* Lam */
 DECLARE_DO_FUN( do_list         );
 DECLARE_DO_FUN( do_lock         );
-DECLARE_DO_FUN( do_log          );
 DECLARE_DO_FUN( do_look         );
 DECLARE_DO_FUN( do_love         );              /* Qwert */
 DECLARE_DO_FUN( do_memory       );
-DECLARE_DO_FUN( do_mistat	);		/* Alucard */
-DECLARE_DO_FUN( do_mfind        );
 DECLARE_DO_FUN( do_miw		);		/* Lam */
-DECLARE_DO_FUN( do_mklon	);		/* Winchester */
-DECLARE_DO_FUN( do_mlista	);		/* Lam */
-DECLARE_DO_FUN( do_mload        );
 DECLARE_DO_FUN( do_monitor      );              /* Lam */
 DECLARE_DO_FUN( do_mowdo	);		/* Lam */
-DECLARE_DO_FUN( do_mpodpluskw	);		/* Lam */
-DECLARE_DO_FUN( do_mpstat       );
-DECLARE_DO_FUN( do_mset         );
-DECLARE_DO_FUN( do_mstat        );
 DECLARE_DO_FUN( do_murder       );
 DECLARE_DO_FUN( do_music        );
-DECLARE_DO_FUN( do_mwhere       );
 DECLARE_DO_FUN( do_nakarm	);		/* Alandar */
 DECLARE_DO_FUN( do_napoj	);		/* Alandar */
 DECLARE_DO_FUN( do_nchat        );              /* Lam */
-DECLARE_DO_FUN( do_newlock      );
 DECLARE_DO_FUN( do_nietoperz	);		/* Lam */
-DECLARE_DO_FUN( do_noemote      );
 DECLARE_DO_FUN( do_north	);
 DECLARE_DO_FUN( do_northeast	);		/* Lam */
 DECLARE_DO_FUN( do_northwest	);		/* Lam */
 DECLARE_DO_FUN( do_note         );
-DECLARE_DO_FUN( do_notell       );
 DECLARE_DO_FUN( do_nowosci	);		/* Lam */
-DECLARE_DO_FUN( do_numlock      );
-DECLARE_DO_FUN( do_oaff		);		/* Lam */
 DECLARE_DO_FUN( do_odbierz	);		/* Lam */
 DECLARE_DO_FUN( do_odmiana	);
 DECLARE_DO_FUN( odmiana_postaci	);		/* Lam */
-DECLARE_DO_FUN( do_odwampirz    );
-DECLARE_DO_FUN( do_ofind        );
-DECLARE_DO_FUN( do_oglos        );
 DECLARE_DO_FUN( do_ognisko      );
-DECLARE_DO_FUN( do_oklon	);		/* Winchester */
-DECLARE_DO_FUN( do_oload        );
 DECLARE_DO_FUN( do_open         );
-DECLARE_DO_FUN( do_opstat	);		/* Lam */
 DECLARE_DO_FUN( do_order        );
-DECLARE_DO_FUN( do_oset         );
-DECLARE_DO_FUN( do_ostat        );
 DECLARE_DO_FUN( do_ostatnie     );		/* Tissarius */
 DECLARE_DO_FUN( do_outfit	);		/* Lam */
-DECLARE_DO_FUN( do_owhere       );
 DECLARE_DO_FUN( do_pagelen      );
-DECLARE_DO_FUN( do_pardon       );
-DECLARE_DO_FUN( do_peace        );
 DECLARE_DO_FUN( do_pick         );
-DECLARE_DO_FUN( do_plista	);
 DECLARE_DO_FUN( do_podgladaj	);		/* Lam */
 DECLARE_DO_FUN( do_podswietlaj	);		/* Vigud */
 DECLARE_DO_FUN( do_poison_weapon);		/* by Thelonius */
 DECLARE_DO_FUN( do_pojedynek	);		/* Lam */
 DECLARE_DO_FUN( do_polskie	);		/* Lam */
-DECLARE_DO_FUN( do_pomlista	);
-DECLARE_DO_FUN( do_pomszukaj	);		/* Lam */
 DECLARE_DO_FUN( do_pose         );
 DECLARE_DO_FUN( do_postaw	);		/* Thelonius, nowa: Lam */
 DECLARE_DO_FUN( do_power_tech	);		/* Fuyara */
@@ -3934,42 +3873,25 @@ DECLARE_DO_FUN( do_przechowaj   );		/* Lam */
 DECLARE_DO_FUN( do_przeladuj	);		/* Lam */
 DECLARE_DO_FUN( do_pull		);		/* Fuyara */
 DECLARE_DO_FUN( do_punktacja	);		/* Lam */
-DECLARE_DO_FUN( do_purge        );
 DECLARE_DO_FUN( do_push		);		/* Lam */
 DECLARE_DO_FUN( do_put          );
 DECLARE_DO_FUN( do_quest	);		/* Lam/Aldar/Quad/Winchester */
 DECLARE_DO_FUN( do_qui          );
 DECLARE_DO_FUN( do_quit         );
 DECLARE_DO_FUN( do_wciel	);		/* Lam */
-DECLARE_DO_FUN( do_wymus	);		/* Lam */
 DECLARE_DO_FUN( do_qwertalk	);		/* Lam */
-DECLARE_DO_FUN( do_racestat	);		/* Lam */
 DECLARE_DO_FUN( do_realias	);		/* Lam */
-DECLARE_DO_FUN( do_reboo        );
-DECLARE_DO_FUN( do_reboot       );
 DECLARE_DO_FUN( do_recall	);	DECLARE_DO_FUN( real_recall	);
-DECLARE_DO_FUN( do_recho        );
 DECLARE_DO_FUN( do_recite       );
-DECLARE_DO_FUN( do_refuse       );		/* Gimza */
 DECLARE_DO_FUN( do_register     );
 DECLARE_DO_FUN( do_reinforce_blade);		/* Fuyara */
-DECLARE_DO_FUN( do_rekord	);		/* Lam */
 DECLARE_DO_FUN( do_remove       );
-DECLARE_DO_FUN( do_rename	);		/* EA, sciagnal Lam */
 DECLARE_DO_FUN( do_rent         );
 DECLARE_DO_FUN( do_reply        );
 DECLARE_DO_FUN( do_report       );
 DECLARE_DO_FUN( do_rescue       );
 DECLARE_DO_FUN( do_rest         );
-DECLARE_DO_FUN( do_restar	);		/* Lam */
-DECLARE_DO_FUN( do_restart	);		/* Lam */
-DECLARE_DO_FUN( do_restore      );
 DECLARE_DO_FUN( do_retell	);		/* Lam */
-DECLARE_DO_FUN( do_return       );
-DECLARE_DO_FUN( do_rhist	);		/* Lam */
-DECLARE_DO_FUN( do_rpstat	);		/* Lam */
-DECLARE_DO_FUN( do_rset         );
-DECLARE_DO_FUN( do_rstat        );
 DECLARE_DO_FUN( do_runes	);		/* Fuyara */
 DECLARE_DO_FUN( do_sacrifice    );
 DECLARE_DO_FUN( do_save         );
@@ -3980,18 +3902,13 @@ DECLARE_DO_FUN( do_sell         );
 DECLARE_DO_FUN( do_separator    );              /* Lam i Albi */
 DECLARE_DO_FUN( do_shadow       );              /* by Thelonius */
 DECLARE_DO_FUN( do_shout        );
-DECLARE_DO_FUN( do_shutdow      );
-DECLARE_DO_FUN( do_shutdown     );
-DECLARE_DO_FUN( do_silence      );
 DECLARE_DO_FUN( do_sklep	);		/* Lam */
 DECLARE_DO_FUN( do_sla          );
 DECLARE_DO_FUN( do_slay         );
 DECLARE_DO_FUN( do_sleep        );
 DECLARE_DO_FUN( do_slist        );
-DECLARE_DO_FUN( do_slookup      );
 DECLARE_DO_FUN( do_snare        );              /* by Binky / Thelonius */
 DECLARE_DO_FUN( do_sneak        );
-DECLARE_DO_FUN( do_snoop        );
 DECLARE_DO_FUN( do_socials      );
 DECLARE_DO_FUN( do_south	);
 DECLARE_DO_FUN( do_southeast	);		/* Lam */
@@ -3999,40 +3916,27 @@ DECLARE_DO_FUN( do_southwest	);		/* Lam */
 DECLARE_DO_FUN( do_speed_tech	);		/* Fuyara */
 DECLARE_DO_FUN( do_spells       );
 DECLARE_DO_FUN( do_split        );
-DECLARE_DO_FUN( do_sset         );
-DECLARE_DO_FUN( do_sstime       );
 DECLARE_DO_FUN( do_stake        );
 DECLARE_DO_FUN( do_stand        );
 DECLARE_DO_FUN( do_steal        );
-DECLARE_DO_FUN( do_stopien	);		/* Lam */
 DECLARE_DO_FUN( do_strike	);		/* Fuyara */
 DECLARE_DO_FUN( do_stun		);		/* Fuyara */
-DECLARE_DO_FUN( do_switch       );
 DECLARE_DO_FUN( do_taranuj	);		/* Lam */
 DECLARE_DO_FUN( do_tell         );
-DECLARE_DO_FUN( do_kogobic	);		/* Vigud */
-DECLARE_DO_FUN( do_test		);		/* Lam */
 DECLARE_DO_FUN( do_time         );
 DECLARE_DO_FUN( do_kalendarz	);		/* Lam */
-DECLARE_DO_FUN( do_teleciap	);		/* Lam */
-DECLARE_DO_FUN( do_teleecho	);		/* Lam */
 DECLARE_DO_FUN( do_title        );
 DECLARE_DO_FUN( do_tobank       );		/* Lam */
 DECLARE_DO_FUN( do_train        );
-DECLARE_DO_FUN( do_transfer     );
-DECLARE_DO_FUN( do_trust        );
 DECLARE_DO_FUN( do_typo         );
-DECLARE_DO_FUN( do_ulista	);		/* Lam */
 DECLARE_DO_FUN( do_unalias	);		/* Lam */
 DECLARE_DO_FUN( do_unlock       );
 DECLARE_DO_FUN( do_untangle     );              /* by Thelonius */
 DECLARE_DO_FUN( do_up           );
-DECLARE_DO_FUN( do_users        );
 DECLARE_DO_FUN( do_uzyj		);		/* Lam */
 DECLARE_DO_FUN( do_value        );
 DECLARE_DO_FUN( do_version	);		/* Lam */
 DECLARE_DO_FUN( do_visible      );
-DECLARE_DO_FUN( do_vnumy	);		/* Lam */
 DECLARE_DO_FUN( do_vomit	);		/* Lam */
 DECLARE_DO_FUN( do_wake         );
 DECLARE_DO_FUN( do_wear         );
@@ -4044,16 +3948,11 @@ DECLARE_DO_FUN( do_whisper	);		/* Lam */
 DECLARE_DO_FUN( do_who          );
 DECLARE_DO_FUN( do_whois        );
 DECLARE_DO_FUN( do_wimpy        );
-DECLARE_DO_FUN( do_wizhelp      );
-DECLARE_DO_FUN( do_wizlock      );
-DECLARE_DO_FUN( do_wiznet	); 		/* Lam */
 DECLARE_DO_FUN( do_wraith_morph	);		/* Fuyara */
 DECLARE_DO_FUN( do_wsiadz	);		/* Lam */
 DECLARE_DO_FUN( do_wylej	);		/* Lam */
 DECLARE_DO_FUN( do_wysiadz	);		/* Lam */
 DECLARE_DO_FUN( do_yell         );
-DECLARE_DO_FUN( do_zadstat      );              /* Ulryk */
-DECLARE_DO_FUN( do_zadustaw     );              /* Ulryk */
 DECLARE_DO_FUN( do_zap          );
 
 
@@ -4088,7 +3987,6 @@ bool    is_note_to      args( ( CHAR_DATA *ch, NOTE_DATA *pnote ) );
 void	talk_auction	args( ( char *argument ) );
 bool	can_quit_now	args( ( CD *ch, bool fCicho ) );
 char	*makedrunk	args( ( char *string, CHAR_DATA *ch ) );
-REFUSE_DATA *refuse_lookup args( ( CHAR_DATA *ch, char *arg ) );
 void	rewrite_all_notes args( ( void ) );
 
 
@@ -4139,14 +4037,6 @@ void    zmien_brzeczenie args( ( CHAR_DATA *ch, bool fOn, bool fCiche ) );
 FUNKCJA_CZASOWA( przestan_karmic );
 FUNKCJA_CZASOWA( przestan_poic );
 
-/* act_wiz.c */
-RID   * find_location args( ( CHAR_DATA *ch, char *arg ) );
-void	wiznet		args( ( const char *string, CHAR_DATA *ch, OBJ_DATA *obj,
-				void *arg, int flag, int no_flag,
-				int min_level ) );
-void	konwersja_bumi	args( ( CHAR_DATA *ch ) );
-char  * ascdata		args( ( const struct tm *timeptr ) );
-const char *krotko_bezczynnosc args( ( int idle ) );
 
 /* comm.c */
 int	comm_main	args( ( bool edytor, int argc, char **argv ) );
@@ -4519,7 +4409,6 @@ bool	can_see_who	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
 bool	can_see_obj	args( ( CHAR_DATA *ch, OBJ_DATA *obj ) );
 bool	can_see_room	args( ( CHAR_DATA *ch, ROOM_INDEX_DATA *room ) );
 bool	can_drop_obj	args( ( CHAR_DATA *ch, OBJ_DATA *obj ) );
-char *  item_type_name_pl args( ( OBJ_DATA *obj ) );
 char *  extra_bit_name_pl args( ( int *extra_flags, CHAR_DATA *ch ) );
 char *  extra_bit_name_pl_dla_ludzi args( ( int *extra_flags, CHAR_DATA *ch ) );
 bool	extra_bit_avail	args( ( int *extra_flags ) );

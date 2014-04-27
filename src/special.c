@@ -33,6 +33,7 @@
 #include "merc.h"
 #include "special.h"
 #include "magic.h"
+#include "act_wiz.h"
 
 
 static bool	dragon		args( ( CHAR_DATA *ch, int sn ) );

@@ -32,6 +32,7 @@
 
 #include "merc.h"
 #include "palad.h"
+#include "act_wiz.h"
 #include <math.h>
 
 /*
