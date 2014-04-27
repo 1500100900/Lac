@@ -719,8 +719,6 @@ wersji Envy (dla zgodnosci krain) */
 #define SECT_DESERT                  10
 #define SECT_MAX                     11
 
-extern const   int     movement_loss   [ SECT_MAX ];
-
 #define CZY_ZIEMIA( room )	 ( room->sector_type != SECT_WATER_SHALLOW \
 				&& room->sector_type != SECT_WATER_DEEP \
 				&& room->sector_type != SECT_UNDERWATER \
@@ -3740,98 +3738,62 @@ DECLARE_DO_FUN( do_astat        );		/* Lam */
 DECLARE_DO_FUN( do_awareness	);		/* Fuyara */
 DECLARE_DO_FUN( do_backstab     );
 DECLARE_DO_FUN( do_barwy	);		/* Lam */
-DECLARE_DO_FUN( do_bash         );
 DECLARE_DO_FUN( do_berserk      );              /* by Thelonius */
 DECLARE_DO_FUN( do_blank        );
 DECLARE_DO_FUN( do_brief        );
 DECLARE_DO_FUN( do_burry	);		/* Lam */
-DECLARE_DO_FUN( do_chameleon    );              /* by Thelonius */
 DECLARE_DO_FUN( do_change       );		/* Lam */
 DECLARE_DO_FUN( do_circle_skill );              /* by Thelonius * do_circle() istnieje w bibliotece Allegro, wiec zmienilem tu */
 DECLARE_DO_FUN( do_clan         );		/* Lam */
 DECLARE_DO_FUN( do_clear	);		/* Lam */
-DECLARE_DO_FUN( do_close        );
 DECLARE_DO_FUN( do_colour       );      /* Colour Command By Lope */
 DECLARE_DO_FUN( do_concentrate	);		/* Fuyara */
 DECLARE_DO_FUN( do_cumulate_strength );		/* Fuyara */
 DECLARE_DO_FUN( do_death_tech	);		/* Fuyara */
 DECLARE_DO_FUN( do_delet	);		/* Lam */
 DECLARE_DO_FUN( do_delete	);		/* Lam */
-DECLARE_DO_FUN( do_dig		);		/* Lam */
 DECLARE_DO_FUN( do_disarm       );
 DECLARE_DO_FUN( do_disguise	);		/* Fuyara */
-DECLARE_DO_FUN( do_down         );
 DECLARE_DO_FUN( do_dragon_tech	);		/* Fuyara */
-DECLARE_DO_FUN( do_east         );
-DECLARE_DO_FUN( do_enter        );              /* Lam */
 DECLARE_DO_FUN( do_fee          );
 DECLARE_DO_FUN( do_feed         );
 DECLARE_DO_FUN( do_flash	);		/* Fuyara */
 DECLARE_DO_FUN( do_flee         );
 DECLARE_DO_FUN( do_fury		);		/* Qwert */
 DECLARE_DO_FUN( do_graj		);		/* Lam */
-DECLARE_DO_FUN( do_heighten     );              /* Thelonius */
-DECLARE_DO_FUN( do_hide         );
 DECLARE_DO_FUN( do_hunt		);		/* z Wurma */
 DECLARE_DO_FUN( do_immcmd	);		/* Lam */
 DECLARE_DO_FUN( do_imud		);		/* Lam */
 DECLARE_DO_FUN( do_kick         );
 DECLARE_DO_FUN( do_kill         );
-DECLARE_DO_FUN( do_lock         );
 DECLARE_DO_FUN( do_love         );              /* Qwert */
 DECLARE_DO_FUN( do_memory       );
 DECLARE_DO_FUN( do_miw		);		/* Lam */
 DECLARE_DO_FUN( do_murder       );
 DECLARE_DO_FUN( do_nchat        );              /* Lam */
 DECLARE_DO_FUN( do_nietoperz	);		/* Lam */
-DECLARE_DO_FUN( do_north	);
-DECLARE_DO_FUN( do_northeast	);		/* Lam */
-DECLARE_DO_FUN( do_northwest	);		/* Lam */
-DECLARE_DO_FUN( do_open         );
-DECLARE_DO_FUN( do_pick         );
 DECLARE_DO_FUN( do_podswietlaj	);		/* Vigud */
 DECLARE_DO_FUN( do_pojedynek	);		/* Lam */
 DECLARE_DO_FUN( do_postaw	);		/* Thelonius, nowa: Lam */
 DECLARE_DO_FUN( do_power_tech	);		/* Fuyara */
 DECLARE_DO_FUN( do_przeladuj	);		/* Lam */
 DECLARE_DO_FUN( do_pull		);		/* Fuyara */
-DECLARE_DO_FUN( do_push		);		/* Lam */
 DECLARE_DO_FUN( do_realias	);		/* Lam */
-DECLARE_DO_FUN( do_recall	);	DECLARE_DO_FUN( real_recall	);
 DECLARE_DO_FUN( do_reinforce_blade);		/* Fuyara */
 DECLARE_DO_FUN( do_rescue       );
-DECLARE_DO_FUN( do_rest         );
 DECLARE_DO_FUN( do_runes	);		/* Fuyara */
 DECLARE_DO_FUN( do_search	);		/* Fuyara */
-DECLARE_DO_FUN( do_shadow       );              /* by Thelonius */
 DECLARE_DO_FUN( do_sla          );
 DECLARE_DO_FUN( do_slay         );
-DECLARE_DO_FUN( do_sleep        );
-DECLARE_DO_FUN( do_snare        );              /* by Binky / Thelonius */
-DECLARE_DO_FUN( do_sneak        );
 DECLARE_DO_FUN( do_socials      );
-DECLARE_DO_FUN( do_south	);
-DECLARE_DO_FUN( do_southeast	);		/* Lam */
-DECLARE_DO_FUN( do_southwest	);		/* Lam */
 DECLARE_DO_FUN( do_speed_tech	);		/* Fuyara */
 DECLARE_DO_FUN( do_stake        );
-DECLARE_DO_FUN( do_stand        );
 DECLARE_DO_FUN( do_strike	);		/* Fuyara */
 DECLARE_DO_FUN( do_stun		);		/* Fuyara */
 DECLARE_DO_FUN( do_taranuj	);		/* Lam */
-DECLARE_DO_FUN( do_train        );
 DECLARE_DO_FUN( do_unalias	);		/* Lam */
-DECLARE_DO_FUN( do_unlock       );
-DECLARE_DO_FUN( do_untangle     );              /* by Thelonius */
-DECLARE_DO_FUN( do_up           );
-DECLARE_DO_FUN( do_visible      );
-DECLARE_DO_FUN( do_vomit	);		/* Lam */
-DECLARE_DO_FUN( do_wake         );
-DECLARE_DO_FUN( do_west         );
 DECLARE_DO_FUN( do_whirl	);		/* Fuyara */
 DECLARE_DO_FUN( do_wraith_morph	);		/* Fuyara */
-DECLARE_DO_FUN( do_wsiadz	);		/* Lam */
-DECLARE_DO_FUN( do_wysiadz	);		/* Lam */
 
 
 /*
@@ -3855,20 +3817,6 @@ DECLARE_DO_FUN( do_wysiadz	);		/* Lam */
 #define AOD	AIROBJ_DATA
 #define ACD	AIRCHAR_DATA
 #define TLD	TELL_DATA
-
-
-/* act_move.c */
-int     find_door       args( ( CHAR_DATA *ch, char *arg, bool drzwi ) );
-void    move_char       args( ( CHAR_DATA *ch, int door, bool wyciaganie ) );
-void	po_wejsciu	args( ( CHAR_DATA *ch, bool ostroznosc ) );
-FUNKCJA_CZASOWA( finish_digging );
-FUNKCJA_CZASOWA( finish_doom );
-bool	can_push_pull	args( ( CHAR_DATA *ch, CHAR_DATA *victim,
-				ROOM_INDEX_DATA *from, ROOM_INDEX_DATA *to,
-				int door ) );
-void	wchodzenie_do_pomieszczenia args( ( CHAR_DATA *ch,
-		ROOM_INDEX_DATA *in_room, ROOM_INDEX_DATA *to_room, int door,
-		bool pokaz_kierunek ) );
 
 
 /* comm.c */

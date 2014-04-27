@@ -33,6 +33,7 @@
 
 
 #include "merc.h"
+#include "act_move.h"
 
 
 unsigned int number_well	args( ( void ) );

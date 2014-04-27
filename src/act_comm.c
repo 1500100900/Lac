@@ -37,6 +37,8 @@
 #include "act_info.h"
 #include "act_comm.h"
 #include "act_obj.h"
+#include "act_move.h"
+
 
 #if defined( BLEDOMAT )
 # include <mysql.h>

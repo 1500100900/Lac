@@ -35,6 +35,7 @@
 #include "palad.h"
 #include "magic.h"
 #include "act_comm.h"
+#include "act_move.h"
 
 
 KOMENDA( do_rozblysk )

@@ -36,6 +36,7 @@
 #include "act_wiz.h"
 #include "act_info.h"
 #include "act_obj.h"
+#include "act_move.h"
 
 
 CHAR_DATA	*get_char_prog		args( ( CHAR_DATA *ch, char *argument,

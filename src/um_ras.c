@@ -34,6 +34,7 @@
 
 #include "merc.h"
 #include "act_info.h"
+#include "act_move.h"
 
 
 void	pc_breathe		args( ( CHAR_DATA *ch ) );

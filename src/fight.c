@@ -39,6 +39,7 @@
 #include "act_info.h"
 #include "act_comm.h"
 #include "act_obj.h"
+#include "act_move.h"
 
 
 extern bool murder_char; /* Lam, update.c */
@@ -69,6 +70,7 @@ bool	registered		args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
 static unsigned char ocen_czar	args( ( int v ) );
 bool	czy_w_grze		args( ( CHAR_DATA *ch, const char *imie ) );
 
+FUNKCJA_CZASOWA( finish_doom );
 
 /*
  * Do zapisywania przebiegu zabojstw/morderstw w kronice, zapamietuje ostatnio

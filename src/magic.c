@@ -38,6 +38,7 @@
 #include "act_info.h"
 #include "act_comm.h"
 #include "act_obj.h"
+#include "act_move.h"
 
 
 static void stworz_jedzenie		args( ( CHAR_DATA *ch, int level, int vnum ) );

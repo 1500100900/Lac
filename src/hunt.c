@@ -33,6 +33,7 @@
 
 #include "merc.h"
 #include "act_comm.h"
+#include "act_move.h"
 #if !defined( NO_WMEMSET )
 # include <wchar.h>
 #endif
