@@ -3731,11 +3731,8 @@ extern int pulse_point_max;
  */
 DECLARE_DO_FUN( do_alias	);		/* Lam */
 DECLARE_DO_FUN( do_answer       );
-DECLARE_DO_FUN( do_appraise	);		/* Fuyara */
 DECLARE_DO_FUN( do_areas        );
-DECLARE_DO_FUN( do_assemble	);		/* Fuyara */
 DECLARE_DO_FUN( do_astat        );		/* Lam */
-DECLARE_DO_FUN( do_awareness	);		/* Fuyara */
 DECLARE_DO_FUN( do_backstab     );
 DECLARE_DO_FUN( do_barwy	);		/* Lam */
 DECLARE_DO_FUN( do_berserk      );              /* by Thelonius */
@@ -3747,17 +3744,11 @@ DECLARE_DO_FUN( do_circle_skill );              /* by Thelonius * do_circle() is
 DECLARE_DO_FUN( do_clan         );		/* Lam */
 DECLARE_DO_FUN( do_clear	);		/* Lam */
 DECLARE_DO_FUN( do_colour       );      /* Colour Command By Lope */
-DECLARE_DO_FUN( do_concentrate	);		/* Fuyara */
-DECLARE_DO_FUN( do_cumulate_strength );		/* Fuyara */
-DECLARE_DO_FUN( do_death_tech	);		/* Fuyara */
 DECLARE_DO_FUN( do_delet	);		/* Lam */
 DECLARE_DO_FUN( do_delete	);		/* Lam */
 DECLARE_DO_FUN( do_disarm       );
-DECLARE_DO_FUN( do_disguise	);		/* Fuyara */
-DECLARE_DO_FUN( do_dragon_tech	);		/* Fuyara */
 DECLARE_DO_FUN( do_fee          );
 DECLARE_DO_FUN( do_feed         );
-DECLARE_DO_FUN( do_flash	);		/* Fuyara */
 DECLARE_DO_FUN( do_flee         );
 DECLARE_DO_FUN( do_fury		);		/* Qwert */
 DECLARE_DO_FUN( do_graj		);		/* Lam */
@@ -3775,25 +3766,15 @@ DECLARE_DO_FUN( do_nietoperz	);		/* Lam */
 DECLARE_DO_FUN( do_podswietlaj	);		/* Vigud */
 DECLARE_DO_FUN( do_pojedynek	);		/* Lam */
 DECLARE_DO_FUN( do_postaw	);		/* Thelonius, nowa: Lam */
-DECLARE_DO_FUN( do_power_tech	);		/* Fuyara */
 DECLARE_DO_FUN( do_przeladuj	);		/* Lam */
-DECLARE_DO_FUN( do_pull		);		/* Fuyara */
 DECLARE_DO_FUN( do_realias	);		/* Lam */
-DECLARE_DO_FUN( do_reinforce_blade);		/* Fuyara */
 DECLARE_DO_FUN( do_rescue       );
-DECLARE_DO_FUN( do_runes	);		/* Fuyara */
-DECLARE_DO_FUN( do_search	);		/* Fuyara */
 DECLARE_DO_FUN( do_sla          );
 DECLARE_DO_FUN( do_slay         );
 DECLARE_DO_FUN( do_socials      );
-DECLARE_DO_FUN( do_speed_tech	);		/* Fuyara */
 DECLARE_DO_FUN( do_stake        );
-DECLARE_DO_FUN( do_strike	);		/* Fuyara */
-DECLARE_DO_FUN( do_stun		);		/* Fuyara */
 DECLARE_DO_FUN( do_taranuj	);		/* Lam */
 DECLARE_DO_FUN( do_unalias	);		/* Lam */
-DECLARE_DO_FUN( do_whirl	);		/* Fuyara */
-DECLARE_DO_FUN( do_wraith_morph	);		/* Fuyara */
 
 
 /*
