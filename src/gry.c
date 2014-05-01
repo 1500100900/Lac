@@ -36,6 +36,7 @@
 #include "act_obj.h"
 #include "db.h"
 #include "gry.h"
+#include "comm.h"
 
 
 DECLARE_GAME_FUN(	gra_czarna_czerwona	);

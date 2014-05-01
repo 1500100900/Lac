@@ -47,6 +47,8 @@
 #include "merc.h"
 #include "act_wiz.h"
 #include "db.h"
+#include "comm.h"
+
 
 #if !defined( ultrix ) && !defined( apollo ) && !defined( __minix ) && !defined( PLAN9 )
 # include <memory.h>

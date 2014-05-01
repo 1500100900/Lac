@@ -39,6 +39,7 @@
 #include "act_move.h"
 #include "fight.h"
 #include "db.h"
+#include "comm.h"
 
 
 static int	format_list_to_char	args( ( char *buf1, int wielkosc_buf1,
@@ -2313,7 +2314,6 @@ char *asctime_pl_krotko_nonl( const struct tm *timeptr )
 }
 
 
-extern char str_boot_time[ ];
 KOMENDA( do_time )
 {
     char buf[ MAX_STRING_LENGTH ];

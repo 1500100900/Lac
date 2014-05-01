@@ -51,6 +51,7 @@
 #include "screen.h"
 #include "db.h"
 #include "gry.h"
+#include "comm.h"
 
 
 #if !defined( WIN32 )

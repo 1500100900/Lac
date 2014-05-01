@@ -38,7 +38,7 @@
 #include <limits.h>
 #include "screen.h"
 #include "db.h"
-
+#include "comm.h"
 #include <errno.h>
 #if defined( MAM_CRYPT_H ) && !defined( NOCRYPT )
 # include <crypt.h>
@@ -48,9 +48,6 @@
 char *	crypt		args( ( const char *key, const char *salt ) );
 #endif
 
-bool	check_reconnect		args( ( DESCRIPTOR_DATA *d, bool fConn ) );
-bool	check_playing		args( ( DESCRIPTOR_DATA *d, char *name,
-					bool nowa ) );
 bool	poprawne_haslo		args( ( CHAR_DATA *ch, char *arg ) );
 void	bledne_haslo		args( ( DESCRIPTOR_DATA *d ) );
 void	komunikat_blokady_imienia args( ( CHAR_DATA *ch, int powod ) );

@@ -40,6 +40,7 @@
 #include "act_move.h"
 #include "screen.h"
 #include "db.h"
+#include "comm.h"
 
 
 #if defined( BLEDOMAT )

@@ -49,6 +49,7 @@
 #include "act_info.h"
 #include "screen.h"
 #include "db.h"
+#include "comm.h"
 
 
 #if defined( WIN32 )
@@ -295,25 +296,24 @@ bool    read_from_descriptor    args( ( DESCRIPTOR_DATA *d ) );
 /*
  * Other local functions (OS-independent).
  */
-int	licz_linie		args( ( const char *arg ) );
-bool	poprawne_haslo		args( ( CHAR_DATA *ch, char *arg ) );
-bool    check_reconnect         args( ( DESCRIPTOR_DATA *d, bool fConn ) );
-bool    check_playing           args( ( DESCRIPTOR_DATA *d, char *name,
-					bool nowa ) );
-int     main                    args( ( int argc, char **argv ) );
-void    nanny                   args( ( DESCRIPTOR_DATA *d, char *argument ) );
-bool    process_output          args( ( DESCRIPTOR_DATA *d, bool fPrompt ) );
-bool	process_who_output	args( ( WHO_DESCRIPTOR_DATA *d ) );
-void    stop_idling             args( ( CHAR_DATA *ch ) );
-void    bust_a_prompt           args( ( DESCRIPTOR_DATA *d ) );
-char   *imud_one_command	args( ( const char *txt, char *cmd ) );
-void	imud_interp		args( ( const char *txt ) );
-void	zawin			args( ( const char *in, char *out, int szer,
+static int	licz_linie		args( ( const char *arg ) );
+static bool    process_output          args( ( DESCRIPTOR_DATA *d, bool fPrompt ) );
+static bool	process_who_output	args( ( WHO_DESCRIPTOR_DATA *d ) );
+static void    stop_idling             args( ( CHAR_DATA *ch ) );
+static void    bust_a_prompt           args( ( DESCRIPTOR_DATA *d ) );
+#if defined( IMUD )
+static char   *imud_one_command	args( ( const char *txt, char *cmd ) );
+static void	imud_interp		args( ( const char *txt ) );
+#endif
+static void	zawin			args( ( const char *in, char *out, int szer,
 					bool uni ) );
-void	*welcome		args( ( void *vo ) );
-void	interp_telnet_seq	args( ( DESCRIPTOR_DATA *d, int gdzie ) );
-const char *odwroc_wyrazy	args( ( const char *zrodlo ) );
-char	*prompt_wyjscia		args( ( ROOM_INDEX_DATA *room ) );
+static void	*welcome		args( ( void *vo ) );
+static void	interp_telnet_seq	args( ( DESCRIPTOR_DATA *d, int gdzie ) );
+static const char *odwroc_wyrazy	args( ( const char *zrodlo ) );
+static char	*prompt_wyjscia		args( ( ROOM_INDEX_DATA *room ) );
+static void    show_string     args( ( DESCRIPTOR_DATA *d, char *input ) );
+static int     colour          args( ( char type, CHAR_DATA *ch, char *string ) );
+static int     spolszcz        args( ( char type, int polskie, char *string ) );
 
 /* Lac uruchamiajacy sie tylko w celu zapisania wszystkich krain (lac -k) */
 bool TylkoKonwersja;
@@ -2268,7 +2268,7 @@ void close_socket( DESCRIPTOR_DATA *dclose, bool lost )
 /*
  * Lam 17.6.2004 wraz ze zmianami w read_from_descriptor( ) i welcome( )
  */
-void interp_telnet_seq( DESCRIPTOR_DATA *d, int gdzie )
+static void interp_telnet_seq( DESCRIPTOR_DATA *d, int gdzie )
 {
 	unsigned int kod = (unsigned char) d->inbuf[ gdzie ];
 
@@ -2769,7 +2769,7 @@ void read_from_buffer( DESCRIPTOR_DATA *d, bool msg )
 /*
  * Low level output function.
  */
-bool process_output( DESCRIPTOR_DATA *d, bool fPrompt )
+static bool process_output( DESCRIPTOR_DATA *d, bool fPrompt )
 {
     int a, b;
     int zwrot;
@@ -2868,7 +2868,7 @@ bool process_output( DESCRIPTOR_DATA *d, bool fPrompt )
 }
 
 
-bool process_who_output( WHO_DESCRIPTOR_DATA *d )
+static bool process_who_output( WHO_DESCRIPTOR_DATA *d )
 {
     int		zwrot;
 
@@ -2917,7 +2917,7 @@ bool process_who_output( WHO_DESCRIPTOR_DATA *d )
  * przydac do podstwietlania. Glownym problemem jest zapamietywanie biezacego
  * koloru, do ktorego nalezy wrocic po podswietleniu wyrazu.
  */
-const char *odwroc_wyrazy( const char *zrodlo )
+static const char *odwroc_wyrazy( const char *zrodlo )
 {
     return zrodlo;
 /*
@@ -2969,7 +2969,7 @@ const char *odwroc_wyrazy( const char *zrodlo )
 }
 
 
-char *prompt_wyjscia( ROOM_INDEX_DATA *room )
+static char *prompt_wyjscia( ROOM_INDEX_DATA *room )
 {
     static char zwrot[ MIL ];
     int pzl, dir;
@@ -3008,7 +3008,7 @@ char *prompt_wyjscia( ROOM_INDEX_DATA *room )
  * zabezpieczyc mseta, ale sa przedmioty, ktore moga zrobic 0 mimo to.
  * (Odkryte przez Grzecha i mnie).
  */
-void bust_a_prompt( DESCRIPTOR_DATA *d )
+static void bust_a_prompt( DESCRIPTOR_DATA *d )
 {
 	 CHAR_DATA *ch;
 	 CHAR_DATA *och;
@@ -3705,7 +3705,7 @@ bool check_playing( DESCRIPTOR_DATA *d, char *name, bool nowa )
 }
 
 
-void stop_idling( CHAR_DATA *ch )
+static void stop_idling( CHAR_DATA *ch )
 {
     if (   !ch
 	|| !ch->desc
@@ -3774,7 +3774,7 @@ void send_to_all_char( const char *text )
  * wiec zliczanie wylacznie \n nie dzialalo w przypadku PuTTY psujac %W dla
  * wiekszosci graczy.
  */
-int licz_linie( const char *tekst )
+static int licz_linie( const char *tekst )
 {
     int licznik = 0;
 
@@ -4145,7 +4145,7 @@ void send_to_char( const char *txt, CHAR_DATA *ch )
 /* 12/1/94 Fixed bounds and overflow bugs in pager thanks to BoneCrusher
    of EnvyMud Staff - Kahn */
 
-void show_string( struct descriptor_data *d, char *input )
+static void show_string( struct descriptor_data *d, char *input )
 {
     register char *scan;
     static   char  buffer[ MAX_STRING_LENGTH * 6 ];
@@ -4291,7 +4291,7 @@ void show_string( struct descriptor_data *d, char *input )
  * Lam 6.4.98 i 15.4.98
  * Lam 23.3.99: szerokosc brana z terminala, zamiast na sztywno 80
  */
-void zawin( const char *in, char *out, int szer, bool uni )
+static void zawin( const char *in, char *out, int szer, bool uni )
 {
     bool ansi = FALSE;
     int count = 0;
@@ -4802,7 +4802,7 @@ void super_act( unsigned int opcja, int zmysly, const char *format,
 /*
  * przepisane od nowa przez Lama, 22.1.2004
  */
-int colour( char type, CHAR_DATA *ch, char *string )
+static int colour( char type, CHAR_DATA *ch, char *string )
 {
     char code[ 40 ];
     char *p = NULL;
@@ -4855,7 +4855,7 @@ int colour( char type, CHAR_DATA *ch, char *string )
 
 
 /* Lam 22.9.2002: napisane od nowa */
-int spolszcz( char type, int polskie, char *string )
+static int spolszcz( char type, int polskie, char *string )
 {
     char code[ 20 ];
     char *p = code;
@@ -5479,7 +5479,7 @@ KOMENDA( do_imctl )
 /*
  * Dzielenie tego, co przysyla IM na linie (pojedyncze komendy)
  */
-char *imud_one_command( const char *txt, char *cmd )
+static char *imud_one_command( const char *txt, char *cmd )
 {
     char *tmp;
     char *pok;
@@ -5530,9 +5530,7 @@ char *imud_one_command( const char *txt, char *cmd )
  * do zastosowania tego mechanizmu (pisze to 9.2.99), trzeba bedzie o tym
  * pomyslec.
  */
-void upper_window( CHAR_DATA *ch );
-void lower_window( CHAR_DATA *ch );
-void imud_interp( const char *txt )
+static void imud_interp( const char *txt )
 {
     char buf1 [ MAX_STRING_LENGTH ];
     char mud  [ MAX_INPUT_LENGTH ];

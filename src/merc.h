@@ -3594,25 +3594,6 @@ struct progi_type
 };
 extern struct progi_type progi[ 4 ][ 26 ];
 
-/* comm.c */
-extern	bool	merc_down;
-extern	int	numlock;
-extern	bool	TylkoKonwersja;
-extern	bool	wizlock;
-extern	unsigned const char echo_on_str[ ];
-extern	unsigned const char echo_off_str[ ];
-extern	unsigned const char keepalive_str[ ];
-extern	time_t			current_time;
-extern	FILE			*fpReserve;
-extern	FILE			*fpBugReserve;
-extern	DESCRIPTOR_DATA		*descriptor_list;
-extern	struct stats_type	max_play;
-extern	struct stats_type	max_desc;
-extern	int			max_play_all_time;
-extern	char			max_play_all_time_time [ 200 ];
-extern	int			max_desc_all_time;
-extern	char			max_desc_all_time_time [ 200 ];
-
 /* handler.c */
 extern	TIMER_DATA	*timer_list;
 extern	bool		wzmocnienie_affect_join;
@@ -3683,25 +3664,6 @@ DECLARE_DO_FUN( do_unalias	);		/* Lam */
 #define TLD	TELL_DATA
 
 
-/* comm.c */
-int	comm_main	args( ( bool edytor, int argc, char **argv ) );
-bool	check_ban	args( ( char *host, char *ip, char *user, int type ) );
-void    close_socket    args( ( DESCRIPTOR_DATA *dclose, bool lost ) );
-void    read_from_buffer        args( ( DESCRIPTOR_DATA *d, bool msg ) );
-void    write_to_buffer args( ( DESCRIPTOR_DATA *d, const char *txt,
-				int length ) );
-int     write_to_descriptor     args( ( int desc, const void *txt, int length ) );
-void	write_to_who_buffer args( ( WHO_DESCRIPTOR_DATA *d, const char *txt,
-				int length ) );
-void	write_to_imud_buffer args( ( const char *txt ) );
-void	ch_printf	args( ( CD *ch, const char *fmt, ... ) ) __attribute__( ( format( printf, 2, 3 ) ) );
-void    send_to_all_char args( ( const char *text ) );
-void    send_to_char    args( ( const char *txt, CHAR_DATA *ch ) );
-void    show_string     args( ( DESCRIPTOR_DATA *d, char *input ) );
-void    super_act	args( ( unsigned int opcja, int zmysly,
-				const char *format, CHAR_DATA *ch,
-				const void *arg1, const void *arg2, int type,
-				bool ooc ) );
 /* Lam: uzywac ponizszych, dzieki czemu bedzie mozna zmieniac super_act
 	do woli, nie zmieniajac niczego innego w kodzie, a jedynie makra */
 #define act( z, f, ch, a1, a2, t )    super_act( 0, z, f, ch, a1, a2, t, FALSE )
@@ -3737,20 +3699,6 @@ void    super_act	args( ( unsigned int opcja, int zmysly,
 #define ZM_W_WID_OBJ2	b16
 #define ZM_DYLEMAT	0
 
-/*
- * Kolory i polskie znaki
- */
-int     colour          args( ( char type, CHAR_DATA *ch, char *string ) );
-int     spolszcz        args( ( char type, int polskie, char *string ) );
-void    colourconv      args( ( char *buffer, const char *txt,
-				CHAR_DATA *ch, unsigned int size ) );
-void    send_to_char_bw args( ( const char *txt, CHAR_DATA *ch ) );
-#if defined ( MSDOS ) && !defined( NO_SOUND )
-void	damage_sound	args( ( void ) );
-void	death_sound	args( ( void ) );
-#endif
-
-
 /* alias.c - Lam */
 ALIAS_DATA * alias_lookup args( ( CHAR_DATA * ch, char *arg ) );
 
@@ -3777,7 +3725,6 @@ void    clan_log        args( ( CLAN_DATA *clan, char *str ) );
 void	write_clan      args( ( CLAN_DATA *clan, int flagi ) );
 void	write_clans     ( void );
 void	zapisz_urny     ( void );
-
 
 /* ssm.c */
 bool	load_area_file	args( ( FILE *fp, CHAR_DATA *ch ) );
@@ -4226,13 +4173,12 @@ void mv_aobj( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
 TYP_ZMIENNEJ *znajdz_zmienna_moba( CHAR_DATA *mob, char *nazwa );
 int interpretuj_zmysly args( ( CHAR_DATA *ch, const char *argument ) );
 
-
-
 /* nanny.c */
 int	check_parse_name args( ( char *name, bool newname ) );
 bool	czy_zdatny_plik	args( ( char *name ) );
 char *	lac_sha1_crypt	args( ( const char *haslo, const char *salt ) );
-
+bool	poprawne_haslo	args( ( CHAR_DATA *ch, char *arg ) );
+void	nanny		args( ( DESCRIPTOR_DATA *d, char *argument ) );
 
 /* save.c */
 #define FREAD_OBJ_DB	0

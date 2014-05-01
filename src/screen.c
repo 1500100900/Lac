@@ -34,6 +34,8 @@
 #include "merc.h"
 #include "screen.h"
 #include "db.h"
+#include "comm.h"
+
 
 static char		*kolor_literki	args( ( char literka ) );
 static char		literka_koloru	args( ( char *kolor ) );

@@ -35,6 +35,7 @@
 #include "special.h"
 #include "fight.h"
 #include "db.h"
+#include "comm.h"
 
 
 void	usun_zm_zwod		args( ( TYP_ZMIENNEJ **lista, TYP_ZMIENNEJ *zm,

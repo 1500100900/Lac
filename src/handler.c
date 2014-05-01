@@ -41,6 +41,7 @@
 #include "fight.h"
 #include <errno.h> /* errno jest uzywany przez czytaj_ciala( ) */
 #include "db.h"
+#include "comm.h"
 
 
 /*

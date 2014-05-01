@@ -37,6 +37,7 @@
 
 
 #include "merc.h"
+#include "comm.h"
 
 
 int main( int argc, char **argv )

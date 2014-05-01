@@ -45,6 +45,7 @@
 #include "um_ras.h"
 #include "db.h"
 #include "gry.h"
+#include "comm.h"
 
 
 void	do_many			args( ( CHAR_DATA *ch, char *argument ) );

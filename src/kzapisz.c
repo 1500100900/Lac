@@ -39,6 +39,7 @@
 #include "special.h"
 #include "db.h"
 #include "gry.h"
+#include "comm.h"
 
 
 char	*rozpisz_flagi	args( ( int flagi, bool czy_bez_b00 ) );

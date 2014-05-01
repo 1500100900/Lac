@@ -21,7 +21,6 @@ DECLARE_DO_FUN(	do_fstat	);	/* Lam */
 DECLARE_DO_FUN(	do_gladuj	);	/* Lam */
 DECLARE_DO_FUN(	do_goto		);
 DECLARE_DO_FUN(	do_holylight	);
-DECLARE_DO_FUN(	do_imctl	);	/* Lam */
 DECLARE_DO_FUN(	do_immcmd	);	/* Lam */
 DECLARE_DO_FUN(	do_imtlset	);
 DECLARE_DO_FUN(	do_info		);	/* Lam */

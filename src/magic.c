@@ -41,6 +41,7 @@
 #include "act_move.h"
 #include "fight.h"
 #include "db.h"
+#include "comm.h"
 
 
 static void stworz_jedzenie		args( ( CHAR_DATA *ch, int level, int vnum ) );

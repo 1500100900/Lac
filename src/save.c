@@ -36,7 +36,7 @@
 #include <sys/stat.h>
 #include <errno.h>
 #include "db.h"
-
+#include "comm.h"
 #if defined( sun )
 #include <memory.h>
 #endif

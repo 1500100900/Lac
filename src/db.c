@@ -38,6 +38,7 @@
 #include "act_move.h"
 #include "db.h"
 #include "gry.h"
+#include "comm.h"
 
 
 #if !defined( ultrix ) && !defined( apollo ) && !defined( __minix ) && !defined( PLAN9 )

@@ -35,6 +35,7 @@
 #include "merc.h"
 #include "act_move.h"
 #include "db.h"
+#include "comm.h"
 
 
 unsigned int number_well	args( ( void ) );
