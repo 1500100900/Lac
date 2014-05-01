@@ -3651,13 +3651,11 @@ DECLARE_DO_FUN( do_burry	);		/* Lam */
 DECLARE_DO_FUN( do_clan         );		/* Lam */
 DECLARE_DO_FUN( do_delet	);		/* Lam */
 DECLARE_DO_FUN( do_delete	);		/* Lam */
-DECLARE_DO_FUN( do_graj		);		/* Lam */
 DECLARE_DO_FUN( do_hunt		);		/* z Wurma */
 DECLARE_DO_FUN( do_immcmd	);		/* Lam */
 DECLARE_DO_FUN( do_imud		);		/* Lam */
 DECLARE_DO_FUN( do_love         );              /* Qwert */
 DECLARE_DO_FUN( do_nchat        );              /* Lam */
-DECLARE_DO_FUN( do_postaw	);		/* Thelonius, nowa: Lam */
 DECLARE_DO_FUN( do_realias	);		/* Lam */
 DECLARE_DO_FUN( do_unalias	);		/* Lam */
 
@@ -3837,12 +3835,6 @@ void	boot_done		args( ( void ) );
 void	zrzut_kwasow_lancuchow	args( ( void ) );
 void	oznacz_wszystko		args( ( void ) );
 #endif
-
-
-/* gry.c */
-GAME_FUN *game_lookup	args( ( const char *name ) );
-char *	game_name	args( ( GAME_FUN *fun ) );
-extern struct game_type game_table[ ];
 
 
 /* handler.c, niektore przeniesione do lanclicz.c */

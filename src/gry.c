@@ -35,6 +35,7 @@
 #include "merc.h"
 #include "act_obj.h"
 #include "db.h"
+#include "gry.h"
 
 
 DECLARE_GAME_FUN(	gra_czarna_czerwona	);
@@ -50,8 +51,7 @@ DECLARE_GAME_FUN(	gra_wojna_kart		);
 DECLARE_GAME_FUN(	gra_wojna_kosci		);
 DECLARE_GAME_FUN(	gra_zgadnij_karte	);
 
-
-struct game_type game_table[ ] =
+static struct game_type game_table[ ] =
 {
     { gra_czarna_czerwona,	"gra_czarna_czerwona",	0, 0	},
     { gra_kolo_fortuny,		"gra_ko`lo_fortuny",	0, 0	},

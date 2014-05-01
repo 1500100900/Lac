@@ -50,6 +50,7 @@
 #include "fight.h"
 #include "screen.h"
 #include "db.h"
+#include "gry.h"
 
 
 #if !defined( WIN32 )

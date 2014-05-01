@@ -44,6 +44,7 @@
 #include "screen.h"
 #include "um_ras.h"
 #include "db.h"
+#include "gry.h"
 
 
 void	do_many			args( ( CHAR_DATA *ch, char *argument ) );
