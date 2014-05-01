@@ -40,6 +40,7 @@
 #include "fight.h"
 #include "db.h"
 #include "comm.h"
+#include "clan.h"
 
 
 static int	format_list_to_char	args( ( char *buf1, int wielkosc_buf1,

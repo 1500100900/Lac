@@ -44,6 +44,7 @@
 #include "um_ras.h"
 #include "db.h"
 #include "comm.h"
+#include "clan.h"
 
 
 extern bool murder_char; /* Lam, update.c */

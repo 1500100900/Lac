@@ -46,6 +46,7 @@
 #include "db.h"
 #include "gry.h"
 #include "comm.h"
+#include "clan.h"
 
 
 void	do_many			args( ( CHAR_DATA *ch, char *argument ) );

@@ -3629,7 +3629,6 @@ DECLARE_DO_FUN( do_answer       );
 DECLARE_DO_FUN( do_blank        );
 DECLARE_DO_FUN( do_brief        );
 DECLARE_DO_FUN( do_burry	);		/* Lam */
-DECLARE_DO_FUN( do_clan         );		/* Lam */
 DECLARE_DO_FUN( do_delet	);		/* Lam */
 DECLARE_DO_FUN( do_delete	);		/* Lam */
 DECLARE_DO_FUN( do_hunt		);		/* z Wurma */
@@ -3701,30 +3700,6 @@ DECLARE_DO_FUN( do_unalias	);		/* Lam */
 
 /* alias.c - Lam */
 ALIAS_DATA * alias_lookup args( ( CHAR_DATA * ch, char *arg ) );
-
-/* clan.c */
-CLAN_DATA *clan_lookup2	args( ( char *arg ) );
-bool	can_see_clan	args( ( CD *ch, CLAN_DATA *clan ) );
-void	real_clan_lista	args( ( CD *ch, char *argument, WHO_DESCRIPTOR_DATA *d ) );
-void    real_clan_info	args( ( CD *ch, CLAN_DATA *cl, WHO_DESCRIPTOR_DATA *d ) );
-void    check_clan_rel	args( ( void ) );
-CLAN_REL_DATA * clan_rel_new args( ( void ) ) __attribute__( ( warn_unused_result ) );
-CLAN_MEMBER_DATA * clan_member_new args( ( void ) ) __attribute__( ( warn_unused_result ) );
-CLAN_DATA * clan_new	args( ( void ) ) __attribute__( ( warn_unused_result ) );
-void    clan_remove     args( ( CLAN_DATA *clan ) );
-void	usun_z_klanu	args( ( CHAR_DATA *ch ) );
-CLAN_REL_DATA * clan_rel_lookup args( ( CLAN_DATA *clana, CLAN_DATA *clanb ) );
-CLAN_DATA * clan_lookup args( ( char *arg ) );
-bool    is_clan_member  args( ( CD *ch, CLAN_DATA *clan ) );
-bool    is_any_clan_member   args( ( CD *ch ) );
-bool    is_any_clan_member2  args( ( CD *ch ) );
-bool    is_same_clan    args( ( CD *ch, CD *victim ) );
-void    check_new_clan  args( ( CD *ch ) );
-bool    load_clan_statut args( ( CLAN_DATA *clan ) );
-void    clan_log        args( ( CLAN_DATA *clan, char *str ) );
-void	write_clan      args( ( CLAN_DATA *clan, int flagi ) );
-void	write_clans     ( void );
-void	zapisz_urny     ( void );
 
 /* ssm.c */
 bool	load_area_file	args( ( FILE *fp, CHAR_DATA *ch ) );

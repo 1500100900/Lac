@@ -41,6 +41,7 @@
 #include "screen.h"
 #include "db.h"
 #include "comm.h"
+#include "clan.h"
 
 
 #if defined( BLEDOMAT )

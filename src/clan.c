@@ -42,16 +42,21 @@
 #include <errno.h>
 #include "db.h"
 #include "comm.h"
+#include "clan.h"
 
 
-bool	check_clan_name		args( ( CHAR_DATA *ch, char *arg ) );
-int	zmien_stopien_klanowy	args( ( CHAR_DATA *ch, int stopien ) );
-void	real_write_clan		args( ( CLAN_DATA *clan, int flagi ) );
-void	write_clan_list		args( ( void ) );
-void	czytaj_urny		args( ( void ) );
-void	pokaz_karte_klanu	args( ( CHAR_DATA *ch, CLAN_DATA *clan ) );
-bool	clan_authorized		args( ( CHAR_DATA *ch,
+static bool	check_clan_name		args( ( CHAR_DATA *ch, char *arg ) );
+static int	zmien_stopien_klanowy	args( ( CHAR_DATA *ch, int stopien ) );
+static void	real_write_clan		args( ( CLAN_DATA *clan, int flagi ) );
+static void	write_clan_list		args( ( void ) );
+#if defined( KLANY )
+static void	czytaj_urny		args( ( void ) );
+#endif
+static void	pokaz_karte_klanu	args( ( CHAR_DATA *ch, CLAN_DATA *clan ) );
+static bool	clan_authorized		args( ( CHAR_DATA *ch,
 					const struct clan_cmd_type *cmd ) );
+static void	usun_z_klanu	args( ( CHAR_DATA *ch ) );
+static bool    is_any_clan_member2  args( ( CHAR_DATA *ch ) );
 
 /*
  * Nowa struktura klanowa
@@ -184,7 +189,7 @@ bool is_any_clan_member( CHAR_DATA *ch )
 }
 
 
-bool is_any_clan_member2( CHAR_DATA *ch )
+static bool is_any_clan_member2( CHAR_DATA *ch )
 {
     return !IS_NPC( ch ) && ch->pcdata->clan;
 }
@@ -230,7 +235,7 @@ bool can_see_clan( CHAR_DATA *ch, CLAN_DATA *clan )
 }
 
 
-bool check_clan_name( CHAR_DATA *ch, char *arg )
+static bool check_clan_name( CHAR_DATA *ch, char *arg )
 {
     CLAN_DATA *cl;
     int        i, dlugosc;
@@ -530,7 +535,7 @@ void clan_remove( CLAN_DATA *clan )
 }
 
 
-void usun_z_klanu( CHAR_DATA *ch )
+static void usun_z_klanu( CHAR_DATA *ch )
 {
     CLAN_MEMBER_DATA *czlonek;
     CLAN_MEMBER_DATA *prev = NULL;
@@ -591,7 +596,7 @@ void usun_z_klanu( CHAR_DATA *ch )
 #define BRAK_KLANU	1
 #define BRAK_MIEJSCA	2
 
-int zmien_stopien_klanowy( CHAR_DATA *ch, int stopien )
+static int zmien_stopien_klanowy( CHAR_DATA *ch, int stopien )
 {
     CLAN_MEMBER_DATA *member, *prev, *next, *src, *dst;
     int               i;
@@ -740,7 +745,7 @@ void clan_log( CLAN_DATA *clan, char *str )
  * Jesli chcesz zapisac klany to uzyj funkcji write_clan lub write_clans,
  * ktore dodatkowo aktualizuja plik z lista zapisanych klanow.
  */
-void real_write_clan( CLAN_DATA *clan, int flagi )
+static void real_write_clan( CLAN_DATA *clan, int flagi )
 {
     FILE        *fp;
     char         nazwa[ MAX_INPUT_LENGTH ];
@@ -995,7 +1000,7 @@ void real_write_clan( CLAN_DATA *clan, int flagi )
 /*
  * Zapisanie pliku z polozeniami plikow klanowych
  */
-void write_clan_list( void )
+static void write_clan_list( void )
 {
     FILE *fp;
     CLAN_DATA *clan;
@@ -1075,12 +1080,13 @@ void zapisz_urny( void )
 }
 
 
+#if defined( KLANY )
 /*
  * Lam 16.3.98: czytanie urn.
  * Jesli ktos z pliku usunal klan albo zabral mu urne, rzeczy beda leciec do
  * ogolnej urny na oltarzu.
  */
-void czytaj_urny( void )
+static void czytaj_urny( void )
 {
     FILE *fp;
     CLAN_DATA *clan = NULL;
@@ -1164,6 +1170,7 @@ void czytaj_urny( void )
 
     return;
 }
+#endif
 
 
 void real_clan_lista( CHAR_DATA *ch, char *argument, WHO_DESCRIPTOR_DATA *d )
@@ -2376,7 +2383,7 @@ KOMENDA_KLANOWA( clan_fun_odswiez )
 }
 
 
-void pokaz_karte_klanu( CHAR_DATA *ch, CLAN_DATA *clan )
+static void pokaz_karte_klanu( CHAR_DATA *ch, CLAN_DATA *clan )
 {
     char buf[ 4 * MAX_STRING_LENGTH ];
     char bufek[ MAX_STRING_LENGTH ];
@@ -2596,7 +2603,7 @@ KOMENDA_KLANOWA( clan_fun_ustawienia )
 /*
  * Malven: Nowe centrum sterowania klanami
  */
-bool clan_authorized( CHAR_DATA *ch, const struct clan_cmd_type *cmd )
+static bool clan_authorized( CHAR_DATA *ch, const struct clan_cmd_type *cmd )
 {
     /* sprawdzenie czy polecenie to nie jest tylko dla SPK i bogow */
     if ( IS_SET( cmd->flags, CLAN_CMD_SPKONLY )

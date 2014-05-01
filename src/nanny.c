@@ -38,6 +38,7 @@
 #include <limits.h>
 #include "screen.h"
 #include "db.h"
+#include "clan.h"
 #include "comm.h"
 #include <errno.h>
 #if defined( MAM_CRYPT_H ) && !defined( NOCRYPT )
