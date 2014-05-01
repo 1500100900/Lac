@@ -40,6 +40,7 @@
 #include "act_obj.h"
 #include "act_move.h"
 #include "fight.h"
+#include "db.h"
 
 
 static void stworz_jedzenie		args( ( CHAR_DATA *ch, int level, int vnum ) );

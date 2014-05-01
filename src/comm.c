@@ -48,6 +48,7 @@
 #include "act_wiz.h"
 #include "act_info.h"
 #include "screen.h"
+#include "db.h"
 
 
 #if defined( WIN32 )

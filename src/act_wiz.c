@@ -49,6 +49,7 @@
 #include "act_move.h"
 #include "fight.h"
 #include "screen.h"
+#include "db.h"
 
 
 #if !defined( WIN32 )
@@ -2307,7 +2308,6 @@ KOMENDA( do_mstat )
    (-fla, -aff, -spec) oraz wyswietlanie vnuma pokoju, w ktorym mob aktualnie
    sie znajduje.
 */
-extern int top_mob_index;
 KOMENDA( do_mfind )
 {
     CHAR_DATA      *rch, *victim;
@@ -2644,7 +2644,6 @@ char* lac_getopt( char* argument, char* optname )
  * Lam 5.2.2006: swiatlo idzie do -gdz 16, 15 to twarz
  * Lam 2006: pszuk -prof -rasa -mat
  */
-extern int top_obj_index;
 KOMENDA( do_ofind )
 {
     CHAR_DATA      *rch = NULL;

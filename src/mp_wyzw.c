@@ -34,6 +34,7 @@
 #include "merc.h"
 #include "act_wiz.h"
 #include <stdarg.h> /* va_list */
+#include "db.h"
 
 /* to konieczne niestety, zabezpieczenie podpatrzone w Smaugu */
 #define MAX_PROG_NEST 10

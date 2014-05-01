@@ -35,6 +35,7 @@
 #include "act_info.h"
 #include <sys/stat.h>
 #include <errno.h>
+#include "db.h"
 
 #if defined( sun )
 #include <memory.h>

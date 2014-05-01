@@ -35,6 +35,7 @@
 #include "act_comm.h"
 #include "act_move.h"
 #include "fight.h"
+#include "db.h"
 #if !defined( NO_WMEMSET )
 # include <wchar.h>
 #endif

@@ -32,6 +32,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include "merc.h"
+#include "db.h"
 
 /*
  * Uzywane wylacznie lokalnie.

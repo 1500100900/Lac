@@ -39,6 +39,7 @@
 #include "act_obj.h"
 #include "act_move.h"
 #include "screen.h"
+#include "db.h"
 
 
 #if defined( BLEDOMAT )

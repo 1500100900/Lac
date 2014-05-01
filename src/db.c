@@ -36,6 +36,7 @@
 #include "act_wiz.h"
 #include "act_comm.h"
 #include "act_move.h"
+#include "db.h"
 
 
 #if !defined( ultrix ) && !defined( apollo ) && !defined( __minix ) && !defined( PLAN9 )
@@ -111,9 +112,6 @@ AUCTION_DATA		*auction;
 HELP_DATA		*help_first;
 HELP_DATA		*help_last;
 
-CHAR_DATA		*first_free_char;
-CHAR_DATA		*last_free_char;
-EXTRA_DESCR_DATA	*extra_descr_free;
 MPROG_DATA		*mprog_free;
 AFFECT_DATA		*affect_free;
 ALIAS_DATA		*alias_free;		/* Lam */
@@ -125,7 +123,6 @@ CLAN_DATA		*clan_free;		/* Lam */
 CLAN_MEMBER_DATA	*clan_member_free;	/* Malven */
 CLAN_REL_DATA		*clan_rel_free;		/* Malven */
 OBJ_DATA		*obj_free;
-PC_DATA			*pcdata_free;
 FIGHT_DATA		*fight_free;		/* Ulryk */
 EXIT_DATA		*exit_free;		/* Lam */
 RESET_DATA		*reset_free;		/* Vigud */
@@ -138,7 +135,6 @@ char			*help_namehelp; /* pomoc przy wybieraniu imion */
 char			bug_buf			[ MAX_INPUT_LENGTH * 2 ];
 char			log_buf			[ MAX_INPUT_LENGTH * 2 ];
 char			posdead_buf		[ MAX_STRING_LENGTH ];
-KILL_DATA               kill_table              [ MAX_LEVEL ];
 NOTE_DATA		*note_list;
 SCHEMAT_DATA		*schemat_list;
 CLAN_DATA		*clan_list;
@@ -171,6 +167,10 @@ struct	powody_data	powody[ MAX_POWODY ];
 IMIONA_DATA *		imiona[ MAX_DLUG_IMIENIA + 1 ][ 64 ];
 IMIONA_DATA *		imiona_ost[ MAX_DLUG_IMIENIA + 1 ][ 64 ];
 FILE *			httpdlog;
+
+MOB_INDEX_DATA		*mob_index_hash[ MAX_KEY_HASH ];
+ROOM_INDEX_DATA		*room_index_hash[ MAX_KEY_HASH ];
+KILL_DATA		kill_table[ MAX_LEVEL ];
 
 int                     gsn_backstab;
 int                     gsn_berserk;            /* by Thelonius */
@@ -474,9 +474,14 @@ bool   		mprog_read_programs     args ( ( FILE* fp, void *param,
 /*
  * Locals.
  */
-MOB_INDEX_DATA		*mob_index_hash          [ MAX_KEY_HASH       ];
-OBJ_INDEX_DATA		*obj_index_hash          [ MAX_KEY_HASH       ];
-ROOM_INDEX_DATA		*room_index_hash         [ MAX_KEY_HASH       ];
+static	CHAR_DATA		*first_free_char;
+static	CHAR_DATA		*last_free_char;
+static	EXTRA_DESCR_DATA	*extra_descr_free;
+static	PC_DATA			*pcdata_free;
+static	int			top_mprog;
+static	int			top_imiona;
+
+static	OBJ_INDEX_DATA		*obj_index_hash[ MAX_KEY_HASH ];
 
 AREA_DATA		*area_first;
 AREA_DATA		*area_last;
@@ -484,8 +489,6 @@ AREA_DATA		*area_dla_helpow;
 AREA_DATA		*area_czysciec; /* Lam */
 
 ZONE_DATA		*zone_first; /* Lam */
-
-extern char             str_empty                [ 1                  ];
 
 int			top_alias; /* Lam */
 int                     top_affect;
@@ -498,11 +501,9 @@ int                     top_exit;
 int			top_fight; /* Lam dla struktur Ulryka */
 int			top_healer; /* Lam */
 int                     top_help;
-int			top_imiona; /* Lam */
 int			top_mob; /* Lam */
 int                     top_mob_index;
 int			top_mpquest; /* Lam */
-int			top_mprog; /* Lam */
 int                     top_obj_index;
 int			top_obj; /* Lam */
 int			top_pcdata; /* Lam */
@@ -526,6 +527,7 @@ const int               rgSizeList              [ MAX_MEM_LIST       ] =
     65536, 131072-64
 };
 
+extern char             str_empty[ 1 ];
 extern int              nAllocString;
 extern int              sAllocString;
 extern int              nOverFlowString;
@@ -556,45 +558,42 @@ unsigned int		lsc_init_str_len;
 /*
  * Local booting procedures.
  */
-bool    load_area		args( ( FILE *fp ) );
-void    load_class		args( ( FILE *fp, int cla ) );	/* Lam */
-bool    load_helps		args( ( FILE *fp ) );
-bool    load_mobiles		args( ( FILE *fp ) );
-bool    load_objects		args( ( FILE *fp ) );
-bool    load_resets		args( ( FILE *fp ) );
-bool    load_rooms		args( ( FILE *fp ) );
-bool    load_shops		args( ( FILE *fp ) );
-bool    load_healers		args( ( FILE *fp ) );
-bool    load_specials		args( ( FILE *fp ) );
-void    load_schematy		args( ( void ) );
-void    load_notes		args( ( void ) );
-void	load_clans		args( ( void ) );
-void    load_ban        	args( ( void ) );
-void    load_down_time  	args( ( void ) );
-void    fix_exits       	args( ( void ) );
-void	czytaj_ciala		args( ( void ) );	/* Lam - handler.c */
-void	load_hints		args( ( void ) );	/* Lam */
-void	load_offensive		args( ( void ) );	/* Lam */
-void	load_miodek		args( ( void ) );	/* Lam */
-void	load_powody		args( ( void ) );	/* Lam */
-void	load_imiona		args( ( void ) );	/* Lam */
+static bool    load_area		args( ( FILE *fp ) );
+static void    load_class		args( ( FILE *fp, int cla ) );	/* Lam */
+static bool    load_helps		args( ( FILE *fp ) );
+static bool    load_mobiles		args( ( FILE *fp ) );
+static bool    load_objects		args( ( FILE *fp ) );
+static bool    load_resets		args( ( FILE *fp ) );
+static bool    load_rooms		args( ( FILE *fp ) );
+static bool    load_shops		args( ( FILE *fp ) );
+static bool    load_healers		args( ( FILE *fp ) );
+static bool    load_specials		args( ( FILE *fp ) );
+static void    load_schematy		args( ( void ) );
+static void    load_notes		args( ( void ) );
+static void	load_clans		args( ( void ) );
+static void    load_ban        	args( ( void ) );
+static void    load_down_time  	args( ( void ) );
+static void    fix_exits       	args( ( void ) );
+static void	load_hints		args( ( void ) );	/* Lam */
+static void	load_offensive		args( ( void ) );	/* Lam */
+static void	load_miodek		args( ( void ) );	/* Lam */
+static void	load_powody		args( ( void ) );	/* Lam */
+static void	load_imiona		args( ( void ) );	/* Lam */
 /* Qwert: to sie jeszcze przyda */
 /*void	load_maskowanie		args( ( void ) );*/     /* Ulryk */
-void	load_quits		args( ( void ) );	/* Lam */
-void	load_vnums		args( ( void ) );	/* Lam */
-void	load_tracks		args( ( void ) );	/* Lam */
-void	load_zones		args( ( void ) );	/* Lam */
-void	load_lsc		args( ( void ) );	/* Lam */
-void	sprawdz_strefy		args( ( void ) );	/* Lam */
-void	sprawdz_ociemniale_moby	args( ( void ) );
-void    reset_area      	args( ( AREA_DATA *pArea ) );
-int	szukaj_wersji_krainy	args( ( char *arg ) );
-bool	fread_time		args( ( FILE *fp, int *godz, int *min ) );
-char	*nazwa_krainy		args( ( char *nazwa ) );
-void	znajdz_kraine		args( ( char *arg,
-					struct zapamietana_kraina *zk ) );
-void	zapamietaj_kraine	args( ( struct zapamietana_kraina *zk ) );
-void	przywroc_kraine		args( ( struct zapamietana_kraina *zk ) );
+static void	load_quits		args( ( void ) );	/* Lam */
+static void	load_vnums		args( ( void ) );	/* Lam */
+static void	load_tracks		args( ( void ) );	/* Lam */
+static void	load_zones		args( ( void ) );	/* Lam */
+static void	load_lsc		args( ( void ) );	/* Lam */
+static void	sprawdz_strefy		args( ( void ) );	/* Lam */
+static void	sprawdz_ociemniale_moby	args( ( void ) );
+static void    reset_area      	args( ( AREA_DATA *pArea ) );
+static int	szukaj_wersji_krainy	args( ( char *arg ) );
+static bool	fread_time		args( ( FILE *fp, int *godz, int *min ) );
+static char	*nazwa_krainy		args( ( char *nazwa ) );
+
+void	czytaj_ciala		args( ( void ) );	/* Lam - handler.c */
 
 
 /*
@@ -903,7 +902,7 @@ void boot_db( bool edytor )
 /*
  * Lam 27.11.2000: Czytanie listy stref.
  */
-void load_zones( void )
+static void load_zones( void )
 {
     FILE *fp;
     char literka;
@@ -1109,7 +1108,7 @@ bool strefa_nalezy( ZONE_DATA *strefa, ZONE_LIST *lista )
 }
 
 
-void sprawdz_strefy( void )
+static void sprawdz_strefy( void )
 {
     ZONE_DATA *strefa;
     ROOM_INDEX_DATA *pom;
@@ -1171,7 +1170,7 @@ void sprawdz_strefy( void )
  * Lam 19.12.1997: wczytanie pliku zawierajacego umiejetnosci klasy.
  * Lam 6.11.2000: czytanie poz z pliku
  */
-void load_class( FILE *fp, int cla )
+static void load_class( FILE *fp, int cla )
 {
     char *klucz;
     int   stat;
@@ -1259,7 +1258,7 @@ void load_class( FILE *fp, int cla )
 }
 
 
-int szukaj_wersji_krainy( char *arg )
+static int szukaj_wersji_krainy( char *arg )
 {
     int pzl;
     int wiel = sizeof( wersje_krain ) / sizeof( wersje_krain[ 0 ] );
@@ -1356,7 +1355,7 @@ bool load_area_file( FILE *fp, CHAR_DATA *ch )
 /*
  * Snarf an 'area' header line.
  */
-bool load_area( FILE *fp )
+static bool load_area( FILE *fp )
 {
     AREA_DATA *pArea;
     ZONE_DATA *strefa;
@@ -1491,7 +1490,7 @@ bool load_area( FILE *fp )
 /*
  * Snarf a help section.
  */
-bool load_helps( FILE *fp )
+static bool load_helps( FILE *fp )
 {
     HELP_DATA *pHelp;
     char      *keyword;
@@ -1541,7 +1540,7 @@ bool load_helps( FILE *fp )
 /*
  * Snarf a mob section.
  */
-bool load_mobiles( FILE *fp )
+static bool load_mobiles( FILE *fp )
 {
     MOB_INDEX_DATA *pMobIndex;
 
@@ -1910,7 +1909,7 @@ bool load_mobiles( FILE *fp )
 /*
  * Snarf an obj section.
  */
-bool load_objects( FILE *fp )
+static bool load_objects( FILE *fp )
 {
     OBJ_INDEX_DATA *pObjIndex;
 
@@ -2518,7 +2517,7 @@ bool load_objects( FILE *fp )
 /*
  * Snarf a reset section.
  */
-bool load_resets( FILE *fp )
+static bool load_resets( FILE *fp )
 {
     RESET_DATA *pReset;
     OBJ_INDEX_DATA *oid = NULL;
@@ -3100,7 +3099,7 @@ void del_reset( RESET_DATA *reset )
 /*
  * Lam 21.5.2000: teraz uzywa new_room( ) do robienia nowych pomieszczen
  */
-bool load_rooms( FILE *fp )
+static bool load_rooms( FILE *fp )
 {
     ROOM_INDEX_DATA *pRoomIndex;
 
@@ -3449,7 +3448,7 @@ bool load_rooms( FILE *fp )
 }
 
 
-bool load_healers( FILE *fp )
+static bool load_healers( FILE *fp )
 {
     HEALER_DATA *pHealer;
     int        keeper = 0;
@@ -3497,7 +3496,7 @@ bool load_healers( FILE *fp )
 /*
  * Snarf a shop section.
  */
-bool load_shops( FILE *fp )
+static bool load_shops( FILE *fp )
 {
     SHOP_DATA *pShop;
     int        keeper = 0;
@@ -3539,7 +3538,7 @@ bool load_shops( FILE *fp )
 /*
  * Snarf spec proc declarations.
  */
-bool load_specials( FILE *fp )
+static bool load_specials( FILE *fp )
 {
     for ( ; ; )
     {
@@ -3585,7 +3584,7 @@ bool load_specials( FILE *fp )
  * gdzie zawsze sa pod reka (wczesniej wszelkie pomysly roznych graczy znikaly
  * po dwoch tygodniach, a nikt nie robil ich kopii)
  */
-void load_notes( void )
+static void load_notes( void )
 {
     FILE	*fp;
     NOTE_DATA	*pnotelast;
@@ -3738,7 +3737,7 @@ void load_notes( void )
 /*
  * Lam 9.2.99
  */
-void load_hints( void )
+static void load_hints( void )
 {
     FILE *plik;
     int hint = 0;
@@ -3794,7 +3793,7 @@ void load_hints( void )
 /*
  * Lam 26.3.2000
  */
-void load_quits( void )
+static void load_quits( void )
 {
     FILE *plik;
     int quit = 0;
@@ -3851,7 +3850,7 @@ void load_quits( void )
 /*
  * Lam 13.12.2002
  */
-void load_offensive( void )
+static void load_offensive( void )
 {
     FILE *plik;
     int offensive = 0;
@@ -3907,7 +3906,7 @@ void load_offensive( void )
 /*
  * Lam 14.12.2002
  */
-void load_miodek( void )
+static void load_miodek( void )
 {
     FILE *plik;
     int miodek = 0;
@@ -3969,7 +3968,7 @@ void load_miodek( void )
 
 
 /* Lam */
-void load_powody( void )
+static void load_powody( void )
 {
     FILE *plik;
     char znak;
@@ -4146,7 +4145,7 @@ void dodaj_imie( IMIONA_DATA *im )
 }
 
 
-void load_imiona( void )
+static void load_imiona( void )
 {
     IMIONA_DATA *im;
     FILE *plik;
@@ -4313,7 +4312,7 @@ KOLES_DATA *znajdz_kolesia( int vnum )
  * Lam 22.3.99
  * Lam 15.5.2000: wielu kolesi z roznymi drogami
  */
-void load_tracks( void )
+static void load_tracks( void )
 {
     FILE *plik;
     KOLES_DATA *koles = NULL;
@@ -4393,7 +4392,7 @@ void load_tracks( void )
 }
 
 
-void load_vnums( void )
+static void load_vnums( void )
 {
     struct
     {
@@ -4539,7 +4538,7 @@ void load_vnums( void )
  * Malven, 11-12.2003: gruntowna przebudowa funkcji, nie zmienily sie tylko jej
  * nazwa i przeznaczenie
  */
-void load_clans( void )
+static void load_clans( void )
 {
     FILE      *fp;
     CLAN_DATA *clan;
@@ -5250,7 +5249,7 @@ void load_clans( void )
  * FALSE w przypadku bledu. A bledow w zasadzie nie widzi, o to niech sie
  * troszcza ludzie piszacy jebut.txt
  */
-bool fread_time( FILE *fp, int *godz, int *min )
+static bool fread_time( FILE *fp, int *godz, int *min )
 {
     int c;
     int tymczas;
@@ -5308,7 +5307,7 @@ bool fread_time( FILE *fp, int *godz, int *min )
 }
 
 
-void load_down_time( void )
+static void load_down_time( void )
 {
     FILE *fp;
     int   godz, min;
@@ -5401,7 +5400,7 @@ void load_down_time( void )
 /*
  * Load up the ban file
  */
-void load_ban( void )
+static void load_ban( void )
 {
     BAN_DATA  *pban;
     FILE      *fp;
@@ -5452,7 +5451,7 @@ void load_ban( void )
 /*
  * Cadaver 16.12.2001: ladowanie schematow barw
  */
-void load_schematy( void )
+static void load_schematy( void )
 {
     SCHEMAT_DATA *pschematlast;
     FILE *fp;
@@ -5501,7 +5500,7 @@ void load_schematy( void )
 }
 
 
-void load_lsc( void )
+static void load_lsc( void )
 {
     FILE *fp;
 
@@ -5577,7 +5576,7 @@ void load_lsc( void )
  * Has to be done after all rooms are read in.
  * Check for bad or suspicious reverse exits.
  */
-void fix_exits( void )
+static void fix_exits( void )
 {
     EXIT_DATA *pexit;
     EXIT_DATA *pexit_rev;
@@ -6046,7 +6045,7 @@ void area_update( void )
  * blednie zglaszana sytuacja, kiedy to mob nie ma widzenia w ciemnosci, ale
  * jednak stoi w towarzystwie stacjonarnego moba ze swiatlem.
  */
-void sprawdz_ociemniale_moby( void )
+static void sprawdz_ociemniale_moby( void )
 {
     CHAR_DATA *mob;
 
@@ -6072,7 +6071,7 @@ void sprawdz_ociemniale_moby( void )
 /*
  * Reset one area.
  */
-void reset_area( AREA_DATA *pArea )
+static void reset_area( AREA_DATA *pArea )
 {
     CHAR_DATA *mob = NULL;
     OBJ_DATA *obj = NULL;
@@ -8318,7 +8317,7 @@ void *alloc_perm( int sMem )
 
 /* Lam 23.8.1998, przepisane 6.1.2008 na wyrownaj( ), zeby pozbyc sie
    colourconv( ) z do_areas( ) */
-char *nazwa_krainy( char *nazwa )
+static char *nazwa_krainy( char *nazwa )
 {
     static char nowa[ 128 ];
     char poziomy[ 12 ];
@@ -8479,112 +8478,6 @@ void real_areas( CHAR_DATA *ch, char *argument, WHO_DESCRIPTOR_DATA *d )
 	STH( d, wyjbuf );
     }
 
-    return;
-}
-
-
-void znajdz_kraine( char *arg, struct zapamietana_kraina *zk )
-{
-    AREA_DATA *kr;
-
-    zk->kraina = NULL;
-
-    for ( kr = area_first; kr; kr = kr->next )
-	if ( !strcmp( kr->file_name, arg ) ) /* limbo.are != LIMBO.ARE */
-	{
-	    zk->kraina = kr;
-	    return;
-	}
-
-    return;
-}
-
-
-void zapamietaj_kraine( struct zapamietana_kraina *zk )
-{
-    MOB_INDEX_DATA *mob, *tmob;
-    OBJ_INDEX_DATA *prz, *tprz;
-    ROOM_INDEX_DATA *pom, *tpom;
-    RESET_DATA *tres;
-    int i;
-
-    for ( i = 0; i < MAX_KEY_HASH; i++ )
-    {
-	while ( mob_index_hash[ i ]
-	     && mob_index_hash[ i ]->index_area == zk->kraina )
-	{
-	    tmob = mob_index_hash[ i ];
-	    mob_index_hash[ i ] = tmob->next;
-	    tmob->next = zk->moby;
-	    zk->moby = tmob;
-	}
-
-	for ( mob = mob_index_hash[ i ]; mob && mob->next; mob = mob->next )
-	{
-	    if ( mob->next->index_area == zk->kraina )
-	    {
-		tmob = mob->next;
-		mob->next = tmob->next;
-		tmob->next = zk->moby;
-		zk->moby = tmob;
-	    }
-	}
-
-	while ( obj_index_hash[ i ]
-	     && obj_index_hash[ i ]->area == zk->kraina )
-	{
-	    tprz = obj_index_hash[ i ];
-	    obj_index_hash[ i ] = tprz->next;
-	    tprz->next = zk->przedmioty;
-	    zk->przedmioty = tprz;
-	}
-
-	for ( prz = obj_index_hash[ i ]; prz && prz->next; prz = prz->next )
-	{
-	    if ( prz->next->area == zk->kraina )
-	    {
-		tprz = prz->next;
-		prz->next = tprz->next;
-		tprz->next = zk->przedmioty;
-		zk->przedmioty = tprz;
-	    }
-	}
-
-	while ( room_index_hash[ i ]
-	     && room_index_hash[ i ]->area == zk->kraina )
-	{
-	    tpom = room_index_hash[ i ];
-	    room_index_hash[ i ] = tpom->next;
-	    tpom->next = zk->pomieszczenia;
-	    zk->pomieszczenia = tpom;
-	}
-
-	for ( pom = room_index_hash[ i ]; pom && pom->next; pom = pom->next )
-	{
-	    if ( pom->next->area == zk->kraina )
-	    {
-		tpom = pom->next;
-		pom->next = tpom->next;
-		tpom->next = zk->pomieszczenia;
-		zk->pomieszczenia = tpom;
-	    }
-	}
-
-	while ( zk->kraina->reset_first )
-	{
-	    tres = zk->kraina->reset_first;
-	    zk->kraina->reset_first = tres->next;
-	    tres->next = zk->resety;
-	    zk->resety = tres;
-	}
-    }
-
-    return;
-}
-
-
-void przywroc_kraine( struct zapamietana_kraina *zk )
-{
     return;
 }
 

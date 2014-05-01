@@ -36,6 +36,7 @@
 #include "act_info.h"
 #include "act_move.h"
 #include "fight.h"
+#include "db.h"
 
 
 static void	pc_breathe		args( ( CHAR_DATA *ch ) );

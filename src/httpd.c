@@ -33,6 +33,7 @@
 
 #include "merc.h"
 #include "act_info.h"
+#include "db.h"
 
 
 DECLARE_HTML_FUN( html_index );

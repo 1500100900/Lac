@@ -3584,109 +3584,9 @@ extern  const   struct  html_page_type  html_page_table [ ];
 extern  const   struct  struckdrunk     drunk           [ ];
 extern	const	int			przelicznik_zysku[ 112 ];
 extern	const	int			przelicznik_wydatkow[ 112 ];
-
 extern	char *	const			lac_nowosci;
 
-/*
- * Global variables. (db.c)
- */
-extern		MOB_INDEX_DATA    *	mob_index_hash	[ MAX_KEY_HASH ];
-extern		OBJ_INDEX_DATA    *	obj_index_hash	[ MAX_KEY_HASH ];
-extern		ROOM_INDEX_DATA   *	room_index_hash	[ MAX_KEY_HASH ];
 
-extern		ZONE_DATA	  *	zone_first;
-extern		AREA_DATA	  *	area_first;
-extern		AREA_DATA	  *	area_czysciec; /* Lam */
-extern          HELP_DATA         *     help_first;
-extern          SHOP_DATA         *     shop_first;
-extern		HEALER_DATA	  *	healer_first;
-
-extern		SCHEMAT_DATA	  *	schemat_list;
-extern          CHAR_DATA         *     char_list;
-extern          DESCRIPTOR_DATA   *     descriptor_list;
-extern          NOTE_DATA         *     note_list;
-extern		CLAN_DATA	  *	clan_list;
-extern          OBJ_DATA          *     object_list;
-extern		MTRIG_DATA	  *	mtrig_list;
-extern		AIROBJ_DATA	  *	airobj_list;
-extern		AIRCHAR_DATA	  *	airchar_list;
-extern		RRAND_DATA	  *	rrand_list;
-extern		SORTED_SKILL_DATA *	sorted_skill_list;
-
-extern          AFFECT_DATA       *     affect_free;
-extern          CHAR_DATA         *     first_free_char;
-extern		CHAR_DATA	  *	last_free_char;
-extern          DESCRIPTOR_DATA   *     descriptor_free;
-extern          EXTRA_DESCR_DATA  *     extra_descr_free;
-extern          NOTE_DATA         *     note_free;
-extern		CLAN_DATA	  *	clan_free;
-extern		CLAN_MEMBER_DATA  *	clan_member_free;
-extern		CLAN_REL_DATA	  *	clan_rel_free;
-extern          OBJ_DATA          *     obj_free;
-extern          PC_DATA           *     pcdata_free;
-extern          FIGHT_DATA        *     fight_free;
-extern		ZWOD_DATA         *	zwod_free;
-extern		int			top_fight;
-extern		int			top_clan;
-extern		int			top_clan_member;
-extern		int			top_clan_rel;
-extern		int			top_mprog;
-extern		int			top_stosmp;
-extern		int			top_zmienna;
-extern		int			top_imiona;
-
-extern          time_t                  current_time;
-extern          bool                    fLogAll;
-extern          FILE *                  fpReserve;
-extern          FILE *                  fpBugReserve;
-extern          KILL_DATA               kill_table      [ ];
-extern		char			bug_buf		[ ];
-extern		char			log_buf		[ ];
-extern		char			posdead_buf	[ ];
-extern		long			mud_age;
-/* ponizsze trzymaja czas Midgaardu */
-extern          TIME_INFO_DATA          time_info;
-extern          WEATHER_DATA            weather_info;
-extern          time_t                  down_time;
-extern          time_t                  warning1;
-extern          time_t                  warning2;
-extern          bool                    Reboot;
-
-extern		AUCTION_DATA *		auction;
-extern		char *			help_greeting;
-extern		char *			help_namehelp;
-
-extern		bool			imud_down; /* Lam */
-extern		char			lsc_init_str	[ MAX_INPUT_LENGTH ];
-extern		char			lsc_delimiter;
-extern		char			lsc_clear_str	[ MAX_INPUT_LENGTH ];
-extern unsigned	int			lsc_init_str_len;
-
-extern struct	stats_type		max_play;
-extern		int			max_play_all_time;
-extern		char			max_play_all_time_time [ 200 ];
-extern struct 	stats_type		max_desc;
-extern		int			max_desc_all_time;
-extern		char			max_desc_all_time_time [ 200 ];
-
-extern	char *				hint_table[ MAX_HINT ];
-extern	char *				quit_table[ MAX_QUIT ];
-extern	char *				offensive_table[ MAX_OFFENSIVE ];
-extern	struct miodek_data		miodek_table[ MAX_OFFENSIVE ];
-/*extern  char *			maskowanie_table[ MAX_MASKOWANIE ];
-extern	int				maskowanie_count; */
-extern	int				quit_count;
-extern	struct pose_data		pose_table[ MAX_CLASS ][ MAX_POSE ];
-extern	int				pose_count[ MAX_CLASS ];
-extern	int				skill_count[ MAX_CLASS ];
-extern	int				multi_count[ MAX_CLASS ];
-extern	int				ilosc_czesci_ciala[ MAX_RACE ];
-extern	struct	powody_data		powody[ MAX_POWODY ];
-extern	IMIONA_DATA *			imiona[ MAX_DLUG_IMIENIA + 1 ][ 64 ];
-extern	bool				ODPLUSKWIACZ;
-extern	bool				PRZERABIACZ;
-extern  char				HTTPD_log[ MIL ];
-extern  FILE *				httpdlog;
 struct progi_type
 {
     char *name;
@@ -3702,6 +3602,16 @@ extern	bool	wizlock;
 extern	unsigned const char echo_on_str[ ];
 extern	unsigned const char echo_off_str[ ];
 extern	unsigned const char keepalive_str[ ];
+extern	time_t			current_time;
+extern	FILE			*fpReserve;
+extern	FILE			*fpBugReserve;
+extern	DESCRIPTOR_DATA		*descriptor_list;
+extern	struct stats_type	max_play;
+extern	struct stats_type	max_desc;
+extern	int			max_play_all_time;
+extern	char			max_play_all_time_time [ 200 ];
+extern	int			max_desc_all_time;
+extern	char			max_desc_all_time_time [ 200 ];
 
 /* handler.c */
 extern	TIMER_DATA	*timer_list;
@@ -3712,10 +3622,14 @@ extern	struct bit_field_data exit_info_flags[ ];
 extern	struct bit_field_data mob_act_flags[ ];
 extern	struct bit_field_data room_flags_table[ ];
 extern	struct choice_field_data apply_values[ ];
+extern	AIROBJ_DATA *airobj_list;
+extern	AIRCHAR_DATA *airchar_list;
 
 /* mob_prog.c */
 extern bool descr_prog_in_progress;
 extern char descr_prog_buffer[ 2 * MSL ];
+extern MTRIG_DATA *mtrig_list;
+extern RRAND_DATA *rrand_list;
 
 /* ssm.c */
 extern unsigned int MAX_STRING;
@@ -3731,8 +3645,6 @@ extern int pulse_point_max;
  */
 DECLARE_DO_FUN( do_alias	);		/* Lam */
 DECLARE_DO_FUN( do_answer       );
-DECLARE_DO_FUN( do_areas        );
-DECLARE_DO_FUN( do_astat        );		/* Lam */
 DECLARE_DO_FUN( do_blank        );
 DECLARE_DO_FUN( do_brief        );
 DECLARE_DO_FUN( do_burry	);		/* Lam */
@@ -3744,10 +3656,8 @@ DECLARE_DO_FUN( do_hunt		);		/* z Wurma */
 DECLARE_DO_FUN( do_immcmd	);		/* Lam */
 DECLARE_DO_FUN( do_imud		);		/* Lam */
 DECLARE_DO_FUN( do_love         );              /* Qwert */
-DECLARE_DO_FUN( do_memory       );
 DECLARE_DO_FUN( do_nchat        );              /* Lam */
 DECLARE_DO_FUN( do_postaw	);		/* Thelonius, nowa: Lam */
-DECLARE_DO_FUN( do_przeladuj	);		/* Lam */
 DECLARE_DO_FUN( do_realias	);		/* Lam */
 DECLARE_DO_FUN( do_unalias	);		/* Lam */
 
@@ -3871,51 +3781,17 @@ void	write_clans     ( void );
 void	zapisz_urny     ( void );
 
 
-/* db.c, ssm.c */
+/* ssm.c */
 bool	load_area_file	args( ( FILE *fp, CHAR_DATA *ch ) );
-void    real_areas      args( ( CHAR_DATA *ch, char *argument,
-				WHO_DESCRIPTOR_DATA *d ) );
-void    boot_db         args( ( bool edytor ) );
-void    area_update     args( ( void ) );
-CD *    new_character   args( ( bool player ) ) __attribute__( ( warn_unused_result ) );
 SHOP_DATA *new_shop	args( ( void ) ) __attribute__( ( warn_unused_result ) );
 HEALER_DATA *new_healer	args( ( void ) ) __attribute__( ( warn_unused_result ) );
-ALIAS_DATA * new_alias  args( ( void ) ) __attribute__( ( warn_unused_result ) );
-void    del_alias	args( ( CHAR_DATA *ch, ALIAS_DATA * alias ) );
-REFUSE_DATA *new_refuse args( ( void ) ) __attribute__( ( warn_unused_result ) );
-void    del_refuse	args( ( CHAR_DATA *ch, REFUSE_DATA *refuse ) );
-TLD   * new_tell	args( ( void ) ) __attribute__( ( warn_unused_result ) );
-void    del_tell	args( ( CHAR_DATA *ch, TELL_DATA *tell ) );
-MPQUEST_DATA *new_mpquest args( ( void ) ) __attribute__( ( warn_unused_result ) );
-void    del_mpquest	args( ( CHAR_DATA *ch, MPQUEST_DATA *mpquest ) );
-MPQUEST_DATA *find_mpquest args( ( CHAR_DATA *ch, int vnum ) );
-AD *    new_affect      args( ( void ) ) __attribute__( ( warn_unused_result ) );
-OD *    new_object      args( ( void ) ) __attribute__( ( warn_unused_result ) );
 ED *    new_extra_descr args( ( void ) ) __attribute__( ( warn_unused_result ) );
 void    del_extra_descr	args( ( EXTRA_DESCR_DATA *ed ) );
-MPROG_DATA *new_mprog	args( ( void ) ) __attribute__( ( warn_unused_result ) );
 void    del_mprog	args( ( MPROG_DATA *prog ) );
-CD *    create_mobile   args( ( MOB_INDEX_DATA *pMobIndex ) ) __attribute__( ( warn_unused_result ) );
-OD *    create_object   args( ( OBJ_INDEX_DATA *pObjIndex, int level ) ) __attribute__( ( warn_unused_result ) );
-void	dod_zwod	args( ( ZWOD_DATA **lista, CHAR_DATA *cel ) );
-void	wywal_zwod	args( ( ZWOD_DATA **lista, CHAR_DATA *cel ) );
 void    clear_char      args( ( CHAR_DATA *ch ) );
-void    free_char       args( ( CHAR_DATA *ch, bool sprawdz ) );
-char *  get_extra_descr args( ( const char *name, EXTRA_DESCR_DATA *ed ) );
-MIDT *  get_mob_index   args( ( int vnum ) );
-OID *   get_obj_index   args( ( int vnum ) );
-RID *   get_room_index  args( ( int vnum ) );
-char    fread_letter    args( ( FILE *fp ) );
-int     fread_number    args( ( FILE *fp, int *status ) );
 char *  real_fread_string args( ( FILE *fp, int *status, const char *plik,
 				int linia, const char *funkcja ) ) __attribute__( ( warn_unused_result ) );
 char *  fread_string_eol args( ( FILE *fp, int *status ) ) __attribute__( ( warn_unused_result ) );
-void    fread_to_eol    args( ( FILE *fp ) );
-char *  fread_word      args( ( FILE *fp, int *status, bool czy_wielo ) );
-void	real_fread_vector args( ( int *flag, unsigned int size, FILE *fp, int *status ) );
-void *  alloc_mem       args( ( int sMem ) ) __attribute__( ( warn_unused_result ) );
-void *  alloc_perm      args( ( int sMem ) ) __attribute__( ( warn_unused_result ) );
-void    free_mem        args( ( void *pMem, int sMem ) );
 char *  real_str_dup    args( ( const char *str, const char *plik, int linia,
 				const char *funkcja ) ) __attribute__( ( warn_unused_result ) );
 void    real_free_string args( ( char *pstr, const char *plik, int linia,
@@ -3930,10 +3806,6 @@ void    real_free_string args( ( char *pstr, const char *plik, int linia,
 # define fread_string( str, status ) real_fread_string( str, status, "?", 0, "?" )
 # define free_string( s ) { real_free_string( s, "?", 0, "?" ); s = NULL; }
 #endif
-void    append_file     args( ( CHAR_DATA *ch, char *file, char *str ) );
-void    real_bug        args( ( const char *str, int param, const char *plik,
-				int linia, const char *funkcja, bool zrzut,
-				bool zrob_core ) );
 /* dzieki temu widac, ktora funkcja wywoluje bug( )
    cbug jak czysta wersja bug - nie pokazuje zrzutu stosu wywolan
    dbug robi core, ale nie przerywa gry */
@@ -3946,26 +3818,17 @@ void    real_bug        args( ( const char *str, int param, const char *plik,
 # define cbug( s, p ) real_bug( s, p, "?", 0, "?", FALSE, FALSE )
 # define dbug( s, p ) real_bug( s, p, "?", 0, "?", TRUE, TRUE )
 #endif
-void	lac_perror	args( ( const char *str ) );
-void    log_string      args( ( const char *str ) );
-void    log_string_ch   args( ( CHAR_DATA *ch, const char *str ) );
-void    tail_chain      args( ( void ) );
 char *	mprog_type_to_name	args( ( int type, int gdzie ) );
-KOLES_DATA *	znajdz_kolesia	args( ( int vnum ) );
 OID *	new_obj_index	args( ( int vnum, AREA_DATA *area ) ) __attribute__( ( warn_unused_result ) );
 MIDT *	new_mob_index	args( ( int vnum, AREA_DATA *area ) ) __attribute__( ( warn_unused_result ) );
 RID *	new_room	args( ( int vnum, AREA_DATA *area ) ) __attribute__( ( warn_unused_result ) );
 void	del_room	args( ( ROOM_INDEX_DATA *pRoomIndexData ) );
-EXIT_DATA *new_exit	args( ( void ) ) __attribute__( ( warn_unused_result ) );
-void	del_exit	args( ( EXIT_DATA *ex ) );
 RESET_DATA *new_reset	args( ( void ) ) __attribute__( ( warn_unused_result ) );
 void	del_reset	args( ( RESET_DATA *reset ) );
-ZONE_DATA *znajdz_strefe args( ( char *nazwa ) );
 ZONE_DATA *znajdz_strefe_skrot args( ( char *nazwa ) );
 ZONE_DATA *znajdz_strefe_po_stolicy args( ( char *nazwa ) );
 ZONE_DATA *znajdz_strefe_po_vnumie args( ( int vnum ) );
 ZONE_LIST *dodaj_strefe args( ( ZONE_LIST *strefy, ZONE_DATA *strefa ) );
-bool    strefa_nalezy args( ( ZONE_DATA *strefa, ZONE_LIST *lista ) );
 int	ssm_max_free_entry	args( ( void ) );
 int	ssm_num_free_entries	args( ( void ) );
 void	init_string_space	args( ( void ) );
@@ -3974,10 +3837,6 @@ void	boot_done		args( ( void ) );
 void	zrzut_kwasow_lancuchow	args( ( void ) );
 void	oznacz_wszystko		args( ( void ) );
 #endif
-IMIONA_DATA *nowe_imie		args( ( void ) );
-void	dodaj_imie		args( ( IMIONA_DATA *im ) );
-void	zwolnij_imie		args( ( IMIONA_DATA *im ) );
-void	zapisz_imiona		args( ( void ) );
 
 
 /* gry.c */
@@ -4189,6 +4048,7 @@ void	hunt_victim	args( ( CHAR_DATA *ch ) );
 #define INTERP_MPFORCE	101
 #define INTERP_MPAT	102
 #define CMD_NOTLISTED	b05
+
 /* interp.c */
 bool    interpret       args( ( CHAR_DATA *ch, char *argument, int zastos ) );
 bool    is_number       args( ( char *arg ) );
@@ -4197,6 +4057,7 @@ int     number_argument args( ( char *argument, char *arg ) );
 char *  one_argument    args( ( char *argument, char *arg_first ) );
 char *  one_argument2   args( ( char *argument, char *arg_first ) );
 const CMD_TYPE *znajdz_polecenie args( ( char *argument, int poziom ) );
+extern          bool                    fLogAll;
 
 /* lanclicz.c */
 void	init_rng	args( ( void ) );

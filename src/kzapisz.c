@@ -37,6 +37,7 @@
 
 #include "merc.h"
 #include "special.h"
+#include "db.h"
 
 
 char	*rozpisz_flagi	args( ( int flagi, bool czy_bez_b00 ) );

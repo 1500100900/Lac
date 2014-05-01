@@ -42,6 +42,7 @@
 #include "act_move.h"
 #include "fight.h"
 #include "um_ras.h"
+#include "db.h"
 
 
 extern bool murder_char; /* Lam, update.c */

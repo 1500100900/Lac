@@ -42,6 +42,7 @@
 #include "act_obj.h"
 #include "act_move.h"
 #include "fight.h"
+#include "db.h"
 
 
 CZAR( spell_aura_pokoju )

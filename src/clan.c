@@ -40,6 +40,7 @@
 #include "act_info.h"
 #include "act_comm.h"
 #include <errno.h>
+#include "db.h"
 
 
 bool	check_clan_name		args( ( CHAR_DATA *ch, char *arg ) );

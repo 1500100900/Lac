@@ -35,6 +35,7 @@
 #include "necro.h"
 #include "qmagic.h"
 #include "magic.h"
+#include "db.h"
 
 
 /*
