@@ -38,6 +38,7 @@
 #include "act_comm.h"
 #include "act_obj.h"
 #include "act_move.h"
+#include "screen.h"
 
 
 #if defined( BLEDOMAT )

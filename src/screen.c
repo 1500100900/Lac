@@ -32,10 +32,12 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include "merc.h"
+#include "screen.h"
 
-char		*kolor_literki		args( ( char literka ) );
-char		literka_koloru		args( ( char *kolor ) );
-SCHEMAT_DATA	*schemat_lookup		args( ( const char *arg ) );
+static char		*kolor_literki	args( ( char literka ) );
+static char		literka_koloru	args( ( char *kolor ) );
+static char		kolor_gracza	args( ( CHAR_DATA *ch, const char *nazwa ) );
+static SCHEMAT_DATA	*schemat_lookup	args( ( const char *arg ) );
 
 #if defined( MSDOS )
 # include <conio.h>
@@ -180,7 +182,8 @@ static struct
     { NULL,			'-'	}
 };
 
-char *kolor_literki( char literka )
+
+static char *kolor_literki( char literka )
 {
     int i;
 
@@ -269,7 +272,8 @@ static struct
     { NULL,		0,	'-',	'-'	}
 };
 
-char kolor_gracza( CHAR_DATA *ch, const char *nazwa )
+
+static char kolor_gracza( CHAR_DATA *ch, const char *nazwa )
 {
     int i;
     char kol = '-';
@@ -324,7 +328,7 @@ char kolor_gracza_c( CHAR_DATA *ch, const char kod )
 }
 
 
-SCHEMAT_DATA *schemat_lookup( const char *arg )
+static SCHEMAT_DATA *schemat_lookup( const char *arg )
 {
     SCHEMAT_DATA *schemat;
 

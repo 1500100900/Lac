@@ -36,6 +36,7 @@
 #include "act_info.h"
 #include "act_comm.h"
 #include <limits.h>
+#include "screen.h"
 
 #include <errno.h>
 #if defined( MAM_CRYPT_H ) && !defined( NOCRYPT )

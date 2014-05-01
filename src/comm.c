@@ -47,6 +47,7 @@
 #include "merc.h"
 #include "act_wiz.h"
 #include "act_info.h"
+#include "screen.h"
 
 
 #if defined( WIN32 )

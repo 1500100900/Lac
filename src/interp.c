@@ -41,6 +41,7 @@
 #include "act_move.h"
 #include "skr.h"
 #include "fight.h"
+#include "screen.h"
 
 
 void	do_many			args( ( CHAR_DATA *ch, char *argument ) );

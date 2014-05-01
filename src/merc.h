@@ -3733,13 +3733,10 @@ DECLARE_DO_FUN( do_alias	);		/* Lam */
 DECLARE_DO_FUN( do_answer       );
 DECLARE_DO_FUN( do_areas        );
 DECLARE_DO_FUN( do_astat        );		/* Lam */
-DECLARE_DO_FUN( do_barwy	);		/* Lam */
 DECLARE_DO_FUN( do_blank        );
 DECLARE_DO_FUN( do_brief        );
 DECLARE_DO_FUN( do_burry	);		/* Lam */
 DECLARE_DO_FUN( do_clan         );		/* Lam */
-DECLARE_DO_FUN( do_clear	);		/* Lam */
-DECLARE_DO_FUN( do_colour       );      /* Colour Command By Lope */
 DECLARE_DO_FUN( do_delet	);		/* Lam */
 DECLARE_DO_FUN( do_delete	);		/* Lam */
 DECLARE_DO_FUN( do_fee          );
@@ -3750,10 +3747,8 @@ DECLARE_DO_FUN( do_immcmd	);		/* Lam */
 DECLARE_DO_FUN( do_imud		);		/* Lam */
 DECLARE_DO_FUN( do_love         );              /* Qwert */
 DECLARE_DO_FUN( do_memory       );
-DECLARE_DO_FUN( do_miw		);		/* Lam */
 DECLARE_DO_FUN( do_nchat        );              /* Lam */
 DECLARE_DO_FUN( do_nietoperz	);		/* Lam */
-DECLARE_DO_FUN( do_podswietlaj	);		/* Vigud */
 DECLARE_DO_FUN( do_postaw	);		/* Thelonius, nowa: Lam */
 DECLARE_DO_FUN( do_przeladuj	);		/* Lam */
 DECLARE_DO_FUN( do_realias	);		/* Lam */
@@ -4424,13 +4419,6 @@ void	save_area	args( ( AREA_DATA *area, bool save_dir ) );
 char *	fix_string	args( ( const char *txt, bool enter, bool formatuj ) );
 char *rozpisz_flagi_v_fun args( ( int *flagi, int ilebitow, bool czy_bez_b00 ) );
 extern	char *	const	wearloc_str [ ];
-
-/* screen.c */
-void	upper_window	args( ( CHAR_DATA *ch ) );
-void	lower_window	args( ( CHAR_DATA *ch ) );
-char	kolor_gracza	args( ( CHAR_DATA *ch, const char *nazwa ) );
-char	kolor_gracza_c	args( ( CHAR_DATA *ch, const char kod ) );
-SCHEMAT_DATA * lookup_schemat args( ( const char *arg ) );
 
 
 #undef	TLD
