@@ -42,6 +42,7 @@
 #include "skr.h"
 #include "fight.h"
 #include "screen.h"
+#include "um_ras.h"
 
 
 void	do_many			args( ( CHAR_DATA *ch, char *argument ) );

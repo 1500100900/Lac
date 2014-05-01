@@ -38,19 +38,18 @@
 #include "fight.h"
 
 
-void	pc_breathe		args( ( CHAR_DATA *ch ) );
-void	pc_screech		args( ( CHAR_DATA *ch ) );
-void	pc_spit			args( ( CHAR_DATA *ch ) );
-void	pc_lightning		args( ( CHAR_DATA *ch ) );
-void	pc_blindness		args( ( CHAR_DATA *ch ) );
-bool    check_race_special	args( ( CHAR_DATA *ch ) );
+static void	pc_breathe		args( ( CHAR_DATA *ch ) );
+static void	pc_screech		args( ( CHAR_DATA *ch ) );
+static void	pc_spit			args( ( CHAR_DATA *ch ) );
+static void	pc_lightning		args( ( CHAR_DATA *ch ) );
+static void	pc_blindness		args( ( CHAR_DATA *ch ) );
 
 /* This code is for PC's who polymorph into dragons.
  * Yeah I know this is specialized code, but this is fun.  :)
  * Breathe on friend and enemy alike.
  * -Kahn
  */
-void pc_breathe( CHAR_DATA *ch )
+static void pc_breathe( CHAR_DATA *ch )
 {
     ROOM_INDEX_DATA *room = ch->in_room;
     CHAR_DATA *victim;
@@ -93,7 +92,7 @@ void pc_breathe( CHAR_DATA *ch )
  * Scream into the ears of enemy and friend alike.
  * -Kahn
  */
-void pc_screech( CHAR_DATA *ch )
+static void pc_screech( CHAR_DATA *ch )
 {
     ROOM_INDEX_DATA *room = ch->in_room;
     CHAR_DATA *victim;
@@ -133,7 +132,7 @@ void pc_screech( CHAR_DATA *ch )
 }
 
 
-void pc_spit( CHAR_DATA *ch )
+static void pc_spit( CHAR_DATA *ch )
 {
     ROOM_INDEX_DATA *room = ch->in_room;
     CHAR_DATA *victim;
@@ -173,7 +172,7 @@ void pc_spit( CHAR_DATA *ch )
 }
 
 
-void pc_lightning( CHAR_DATA *ch )
+static void pc_lightning( CHAR_DATA *ch )
 {
     ROOM_INDEX_DATA *room = ch->in_room;
     CHAR_DATA *victim;
@@ -216,7 +215,7 @@ void pc_lightning( CHAR_DATA *ch )
 }
 
 
-void pc_blindness( CHAR_DATA *ch )
+static void pc_blindness( CHAR_DATA *ch )
 {
     CHAR_DATA *victim;
     CHAR_DATA *victim_next;

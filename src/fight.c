@@ -41,6 +41,7 @@
 #include "act_obj.h"
 #include "act_move.h"
 #include "fight.h"
+#include "um_ras.h"
 
 
 extern bool murder_char; /* Lam, update.c */
@@ -70,7 +71,6 @@ static bool	czy_w_grze		args( ( CHAR_DATA *ch, const char *imie ) );
 
 static FUNKCJA_CZASOWA( finish_doom );
 
-bool    check_race_special	args( ( CHAR_DATA *ch ) );
 
 /*
  * Do zapisywania przebiegu zabojstw/morderstw w kronice, zapamietuje ostatnio

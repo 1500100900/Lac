@@ -3739,8 +3739,6 @@ DECLARE_DO_FUN( do_burry	);		/* Lam */
 DECLARE_DO_FUN( do_clan         );		/* Lam */
 DECLARE_DO_FUN( do_delet	);		/* Lam */
 DECLARE_DO_FUN( do_delete	);		/* Lam */
-DECLARE_DO_FUN( do_fee          );
-DECLARE_DO_FUN( do_feed         );
 DECLARE_DO_FUN( do_graj		);		/* Lam */
 DECLARE_DO_FUN( do_hunt		);		/* z Wurma */
 DECLARE_DO_FUN( do_immcmd	);		/* Lam */
@@ -3748,12 +3746,9 @@ DECLARE_DO_FUN( do_imud		);		/* Lam */
 DECLARE_DO_FUN( do_love         );              /* Qwert */
 DECLARE_DO_FUN( do_memory       );
 DECLARE_DO_FUN( do_nchat        );              /* Lam */
-DECLARE_DO_FUN( do_nietoperz	);		/* Lam */
 DECLARE_DO_FUN( do_postaw	);		/* Thelonius, nowa: Lam */
 DECLARE_DO_FUN( do_przeladuj	);		/* Lam */
 DECLARE_DO_FUN( do_realias	);		/* Lam */
-DECLARE_DO_FUN( do_stake        );
-DECLARE_DO_FUN( do_taranuj	);		/* Lam */
 DECLARE_DO_FUN( do_unalias	);		/* Lam */
 
 
