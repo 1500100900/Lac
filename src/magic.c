@@ -43,6 +43,7 @@
 #include "db.h"
 #include "comm.h"
 #include "update.h"
+#include "mp_wyzw.h"
 
 
 static void stworz_jedzenie		args( ( CHAR_DATA *ch, int level, int vnum ) );

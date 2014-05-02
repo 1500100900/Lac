@@ -36,6 +36,7 @@
 #include <stdarg.h> /* va_list */
 #include "db.h"
 #include "comm.h"
+#include "mp_wyzw.h"
 
 
 /* to konieczne niestety, zabezpieczenie podpatrzone w Smaugu */
@@ -54,32 +55,32 @@ char descr_prog_buffer[ 2 * MSL ];
 /*
  * Local function prototypes
  */
-bool	mprog_do_ifchck		args( ( char* ifchck, CHAR_DATA* mob,
-				       CHAR_DATA* actor, OBJ_DATA* obj,
-				       CHAR_DATA* rndm, CHAR_DATA* vict,
-				       OBJ_DATA* v_obj ) );
-char	*mprog_process_if	args( ( char* ifchck, char* com_list,
-				       CHAR_DATA* mob, CHAR_DATA* actor,
-				       OBJ_DATA* obj, CHAR_DATA* rndm,
-				       CHAR_DATA* vict, OBJ_DATA* v_obj ) );
-char	*mprog_process_while	args( ( char* ifchck, char* com_list,
-				       CHAR_DATA* mob, CHAR_DATA* actor,
-				       OBJ_DATA* obj, CHAR_DATA* rndm,
-				       CHAR_DATA* vict, OBJ_DATA* v_obj ) );
-bool	mprog_translate		args( ( char *ch, char* t, CHAR_DATA* mob,
-				       CHAR_DATA* actor, OBJ_DATA* obj,
-				       CHAR_DATA* rndm, CHAR_DATA* vict,
-				       OBJ_DATA* v_obj ) );
-void	mprog_driver		args( ( char* com_list, CHAR_DATA* mob,
-				       CHAR_DATA* actor, OBJ_DATA* obj,
-				       CHAR_DATA* vict, OBJ_DATA* v_obj,
-				       MPROG_DATA *mprogram, int gdzie ) );
-CHAR_DATA *room_supermob	args( ( ROOM_INDEX_DATA *room ) );
-CHAR_DATA *exit_supermob	args( ( ROOM_INDEX_DATA *room, int door ) );
-CHAR_DATA *obj_supermob		args( ( OBJ_DATA *obj, ROOM_INDEX_DATA *room ) );
-void	dismiss_supermob	args( ( CHAR_DATA *supermob ) );
-void	oprog_sacr_trigger	args( ( CHAR_DATA *ch, OBJ_DATA *obj ) );
-void	oprog_donate_trigger	args( ( CHAR_DATA *ch, OBJ_DATA *obj ) );
+static bool	mprog_do_ifchck		args( ( char* ifchck, CHAR_DATA* mob,
+						CHAR_DATA* actor, OBJ_DATA* obj,
+						CHAR_DATA* rndm, CHAR_DATA* vict,
+						OBJ_DATA* v_obj ) );
+static char	*mprog_process_if	args( ( char* ifchck, char* com_list,
+						CHAR_DATA* mob, CHAR_DATA* actor,
+						OBJ_DATA* obj, CHAR_DATA* rndm,
+						CHAR_DATA* vict, OBJ_DATA* v_obj ) );
+static char	*mprog_process_while	args( ( char* ifchck, char* com_list,
+						CHAR_DATA* mob, CHAR_DATA* actor,
+						OBJ_DATA* obj, CHAR_DATA* rndm,
+						CHAR_DATA* vict, OBJ_DATA* v_obj ) );
+static void	mprog_driver		args( ( char* com_list, CHAR_DATA* mob,
+						CHAR_DATA* actor, OBJ_DATA* obj,
+						CHAR_DATA* vict, OBJ_DATA* v_obj,
+						MPROG_DATA *mprogram, int gdzie ) );
+static CHAR_DATA *room_supermob	args( ( ROOM_INDEX_DATA *room ) );
+static CHAR_DATA *exit_supermob	args( ( ROOM_INDEX_DATA *room, int door ) );
+static CHAR_DATA *obj_supermob		args( ( OBJ_DATA *obj, ROOM_INDEX_DATA *room ) );
+static void	dismiss_supermob	args( ( CHAR_DATA *supermob ) );
+static void	oprog_sacr_trigger	args( ( CHAR_DATA *ch, OBJ_DATA *obj ) );
+static void	oprog_donate_trigger	args( ( CHAR_DATA *ch, OBJ_DATA *obj ) );
+static void	mprog_percent_check	args( ( CHAR_DATA *mob, CHAR_DATA* actor,
+						OBJ_DATA* object, CHAR_DATA *vict,
+						OBJ_DATA *v_obj, int type,
+						MPROG_DATA *program, int gdzie ) );
 
 /***************************************************************************
  * Local function code and brief comments.
@@ -120,8 +121,8 @@ char *mprog_next_command( char *clist, char *cmnd )
  * Teraz instrukcja warunkowa jest obslugiwana wylacznie przez
  * oblicz_wyrazenie( ) i dziedziczy cala skladnie wyrazen MobC.
  */
-bool mprog_do_ifchck( char *ifchck, CHAR_DATA *mob, CHAR_DATA *actor,
-		     OBJ_DATA *obj, CHAR_DATA *rndm, CHAR_DATA *vict,
+static bool mprog_do_ifchck( char *ifchck, CHAR_DATA *mob, CHAR_DATA *actor,
+		      OBJ_DATA *obj, CHAR_DATA *rndm, CHAR_DATA *vict,
 		     OBJ_DATA *v_obj )
 {
     int zwrot, wynik, typw;
@@ -155,7 +156,7 @@ bool mprog_do_ifchck( char *ifchck, CHAR_DATA *mob, CHAR_DATA *actor,
  * in theory, but it is 'guaranteed' to work on syntactically correct
  * MOBprograms, so if the mud crashes here, check the mob carefully!
  */
-char *mprog_process_if( char *ifchck, char *com_list, CHAR_DATA *mob,
+static char *mprog_process_if( char *ifchck, char *com_list, CHAR_DATA *mob,
 		       CHAR_DATA *actor, OBJ_DATA *obj, CHAR_DATA *rndm,
 		       CHAR_DATA *vict, OBJ_DATA *v_obj ) /* bool nif? */
 {
@@ -417,7 +418,7 @@ char *mprog_process_if( char *ifchck, char *com_list, CHAR_DATA *mob,
 /*
  * Lam 5.12.2003
  */
-char *mprog_process_while( char *ifchck, char *com_list, CHAR_DATA *mob,
+static char *mprog_process_while( char *ifchck, char *com_list, CHAR_DATA *mob,
 		       CHAR_DATA *actor, OBJ_DATA *obj, CHAR_DATA *rndm,
 		       CHAR_DATA *vict, OBJ_DATA *v_obj )
 {
@@ -610,7 +611,7 @@ char *mprog_process_while( char *ifchck, char *com_list, CHAR_DATA *mob,
  * the command list and figuring out what to do. However, like all
  * complex procedures, everything is farmed out to the other guys.
  */
-void mprog_driver( char *com_list, CHAR_DATA *mob, CHAR_DATA *actor,
+static void mprog_driver( char *com_list, CHAR_DATA *mob, CHAR_DATA *actor,
 		   OBJ_DATA *obj, CHAR_DATA *vict, OBJ_DATA *v_obj,
 		   MPROG_DATA *mprogram, int gdzie )
 {
@@ -893,7 +894,7 @@ void mprog_wordlist_check( char *arg, CHAR_DATA *mob, CHAR_DATA *actor,
 /*
  * Lam: 11.7.98: lepsze przystosowanie do r/eprogow
  */
-void mprog_percent_check( CHAR_DATA *mob, CHAR_DATA *actor, OBJ_DATA *obj,
+static void mprog_percent_check( CHAR_DATA *mob, CHAR_DATA *actor, OBJ_DATA *obj,
 			 CHAR_DATA *vict, OBJ_DATA *v_obj, int type, MPROG_DATA *program, int gdzie )
 {
     MPROG_DATA * mprg;
@@ -1326,7 +1327,7 @@ void mprog_aggr_attack_trigger( CHAR_DATA *mob, CHAR_DATA *ch )
  * Lam: room_supermob
  * Wzorowane oczywiscie na Smaugu. To dobry wzor. Naturalnie ja to robie lepiej :)
  */
-CHAR_DATA *room_supermob( ROOM_INDEX_DATA *room )
+static CHAR_DATA *room_supermob( ROOM_INDEX_DATA *room )
 {
     CHAR_DATA  *supermob;
     char	buf[ MIL ];
@@ -1363,7 +1364,7 @@ CHAR_DATA *room_supermob( ROOM_INDEX_DATA *room )
 /*
  * Lam: exit_supermob. Przydaloby sie wiecej sprawdzania bledow
  */
-CHAR_DATA *exit_supermob( ROOM_INDEX_DATA *room, int door )
+static CHAR_DATA *exit_supermob( ROOM_INDEX_DATA *room, int door )
 {
     CHAR_DATA  *supermob;
     EXIT_DATA  *exit = room->exit[door];
@@ -1406,7 +1407,7 @@ CHAR_DATA *exit_supermob( ROOM_INDEX_DATA *room, int door )
 /*
  * Lam: obj_supermob
  */
-CHAR_DATA *obj_supermob( OBJ_DATA *obj, ROOM_INDEX_DATA *room )
+static CHAR_DATA *obj_supermob( OBJ_DATA *obj, ROOM_INDEX_DATA *room )
 {
     CHAR_DATA  *supermob;
     char	buf[ MIL ];
@@ -1440,7 +1441,7 @@ CHAR_DATA *obj_supermob( OBJ_DATA *obj, ROOM_INDEX_DATA *room )
 }
 
 
-void dismiss_supermob( CHAR_DATA *supermob )
+static void dismiss_supermob( CHAR_DATA *supermob )
 {
     if ( !supermob )
     {
@@ -2187,7 +2188,7 @@ void oprog_putin_gold_trigger( CHAR_DATA *ch, int amount, OBJ_DATA *container )
 }
 
 
-void oprog_sacr_trigger( CHAR_DATA *ch, OBJ_DATA *obj )
+static void oprog_sacr_trigger( CHAR_DATA *ch, OBJ_DATA *obj )
 {
     CHAR_DATA *supermob;
 
@@ -2203,7 +2204,7 @@ void oprog_sacr_trigger( CHAR_DATA *ch, OBJ_DATA *obj )
 }
 
 
-void oprog_donate_trigger( CHAR_DATA *ch, OBJ_DATA *obj )
+static void oprog_donate_trigger( CHAR_DATA *ch, OBJ_DATA *obj )
 {
     CHAR_DATA *supermob;
 

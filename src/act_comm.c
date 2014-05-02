@@ -44,6 +44,7 @@
 #include "clan.h"
 #include "update.h"
 #include "save.h"
+#include "mp_wyzw.h"
 
 
 #if defined( BLEDOMAT )

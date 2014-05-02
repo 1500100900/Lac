@@ -33,6 +33,8 @@
 
 #include "merc.h"
 #include "db.h"
+#include "mp_wyzw.h"
+
 
 /*
  * Uzywane wylacznie lokalnie.

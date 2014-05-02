@@ -49,6 +49,7 @@
 #include "clan.h"
 #include "socjalne.h"
 #include "hunt.h"
+#include "mp_wyzw.h"
 
 
 void	do_many			args( ( CHAR_DATA *ch, char *argument ) );

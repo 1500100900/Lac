@@ -41,6 +41,7 @@
 #include "db.h"
 #include "comm.h"
 #include "hunt.h"
+#include "mp_wyzw.h"
 
 
 CHAR_DATA	*get_char_prog		args( ( CHAR_DATA *ch, char *argument,

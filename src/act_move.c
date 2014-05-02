@@ -40,6 +40,7 @@
 #include "comm.h"
 #include "hunt.h"
 #include "update.h"
+#include "mp_wyzw.h"
 
 
 const   int     movement_loss   [ SECT_MAX ]    =
