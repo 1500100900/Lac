@@ -43,6 +43,7 @@
 #include "comm.h"
 #include "clan.h"
 #include "hunt.h"
+#include "update.h"
 
 
 /*
@@ -55,30 +56,30 @@ bool	murder_char;
 /*
  * Local functions.
  */
-int     hit_gain		args( ( CHAR_DATA *ch ) );
-int     mana_gain		args( ( CHAR_DATA *ch ) );
-int     move_gain		args( ( CHAR_DATA *ch ) );
-void    mobile_update		args( ( void ) );
-void    weather_update		args( ( AREA_DATA *area ) );
-void    char_update		args( ( void ) );
-void    obj_update		args( ( void ) );
-void	room_update		args( ( void ) );
-void    aggr_update		args( ( void ) );
-void    murders_update		args( ( void ) );
-void	lv_hlp			args( ( CHAR_DATA *ch ) );
-void	pijanstwo		args( ( CHAR_DATA *ch ) );
-void	wzbudzenie_strachu	args( ( CHAR_DATA *ch ) );
-void	plynne_odradzanie	args( ( void ) );
-void	rrand_update		args( ( void ) );
-void	mtrig_update		args( ( void ) );
-void	licz_graczy2		args( ( int *play, int *desc ) );
-void	stats_update		args( ( void ) );
-void	time_update		args( ( void ) );
-void	list_update		args( ( void ) );
-void	podpowiadaj		args( ( void ) );
-void	airobj_update		args( ( void ) );
-void	airchar_update		args( ( void ) );
-void	sentinel_update		args( ( void ) );
+static void	auction_update		args( ( void ) );
+static int	hit_gain		args( ( CHAR_DATA *ch ) );
+static int	mana_gain		args( ( CHAR_DATA *ch ) );
+static int	move_gain		args( ( CHAR_DATA *ch ) );
+static void	mobile_update		args( ( void ) );
+static void	weather_update		args( ( AREA_DATA *area ) );
+static void	char_update		args( ( void ) );
+static void	obj_update		args( ( void ) );
+static void	room_update		args( ( void ) );
+static void	aggr_update		args( ( void ) );
+static void	murders_update		args( ( void ) );
+static void	pijanstwo		args( ( CHAR_DATA *ch ) );
+static void	wzbudzenie_strachu	args( ( CHAR_DATA *ch ) );
+static void	plynne_odradzanie	args( ( void ) );
+static void	rrand_update		args( ( void ) );
+static void	mtrig_update		args( ( void ) );
+static void	licz_graczy2		args( ( int *play, int *desc ) );
+static void	stats_update		args( ( void ) );
+static void	time_update		args( ( void ) );
+static void	list_update		args( ( void ) );
+static void	podpowiadaj		args( ( void ) );
+static void	airobj_update		args( ( void ) );
+static void	airchar_update		args( ( void ) );
+static void	sentinel_update		args( ( void ) );
 
 /*
  * Advancement stuff.
@@ -338,7 +339,7 @@ void uzyj( CHAR_DATA *ch, int sn, const char *co )
 /*
  * Regeneration stuff.
  */
-int hit_gain( CHAR_DATA *ch )
+static int hit_gain( CHAR_DATA *ch )
 {
     int gain = 0;
     int racehpgainextra = race_table[ ch->race ].hp_gain;
@@ -422,7 +423,7 @@ int hit_gain( CHAR_DATA *ch )
 }
 
 
-int mana_gain( CHAR_DATA *ch )
+static int mana_gain( CHAR_DATA *ch )
 {
     int gain = 0;
     int racemanaextra = race_table[ ch->race ].mana_gain;
@@ -507,7 +508,7 @@ int mana_gain( CHAR_DATA *ch )
 }
 
 
-int move_gain( CHAR_DATA *ch )
+static int move_gain( CHAR_DATA *ch )
 {
     int gain, racemoveextra;
 
@@ -638,7 +639,7 @@ void gain_condition( CHAR_DATA *ch, int iCond, int value )
 /*
  * Lam 2.5.98: moja wizja bycia pijanym :)
  */
-void pijanstwo( CHAR_DATA *ch )
+static void pijanstwo( CHAR_DATA *ch )
 {
     char *to_char = NULL;
     char *to_room = NULL;
@@ -716,7 +717,7 @@ void pijanstwo( CHAR_DATA *ch )
 /*
  * Ulryk 20.10.2002: wzbudzenie strachu
  */
-void wzbudzenie_strachu( CHAR_DATA *ch )
+static void wzbudzenie_strachu( CHAR_DATA *ch )
 {
     if ( IS_AFFECTED( ch, AFF_GROZA )
       && ( !IS_SET( ch->in_room->room_flags, ROOM_SAFE ) ) )
@@ -803,7 +804,7 @@ void wzbudzenie_strachu( CHAR_DATA *ch )
 /*
  * Mob autonomous action.
  */
-void mobile_update( void )
+static void mobile_update( void )
 {
     CHAR_DATA *ch;
     EXIT_DATA *pexit;
@@ -1287,7 +1288,7 @@ void weather_update( AREA_DATA *area )
  *
  * Z calego Laca, wlasnie ta funkcja zajmuje okolo 2/3 czasu procesora.
  */
-void plynne_odradzanie( void )
+static void plynne_odradzanie( void )
 {
     CHAR_DATA *ch, *ch_nast;
     ROOM_INDEX_DATA *in_room;
@@ -1561,7 +1562,7 @@ void plynne_odradzanie( void )
  * Update all chars, including mobs.
  * This function is performance sensitive.
  */
-void char_update( void )
+static void char_update( void )
 {
     CHAR_DATA *ch;
     CHAR_DATA *ch_save;
@@ -1895,7 +1896,7 @@ void char_update( void )
  * Update all objs.
  * This function is performance sensitive.
  */
-void obj_update( void )
+static void obj_update( void )
 {
     OBJ_DATA *obj;
     OBJ_DATA *obj_next;
@@ -2007,7 +2008,7 @@ void obj_update( void )
  *
  * Spadanie wplywow dopisal Ulryk.
  */
-void room_update( void )
+static void room_update( void )
 {
     ROOM_INDEX_DATA *r;
     AFFECT_DATA     *paf;
@@ -2050,7 +2051,7 @@ void room_update( void )
 }
 
 
-void rrand_update( void )
+static void rrand_update( void )
 {
     RRAND_DATA *prrand;
 
@@ -2071,7 +2072,7 @@ void rrand_update( void )
  *
  * -Kahn
  */
-void aggr_update( void )
+static void aggr_update( void )
 {
     CHAR_DATA *ch;
     CHAR_DATA *mch;
@@ -2225,7 +2226,7 @@ void aggr_update( void )
  * Dzielo Ulryka
  * Lam dodal zmienna murder_char, bo bardzo zajmowalo procesor
  */
-void murders_update( void )
+static void murders_update( void )
 {
     CHAR_DATA *ch;
 
@@ -2282,7 +2283,7 @@ void mtrig_update( void )
 }
 
 
-void licz_graczy2( int *play, int *desc )
+static void licz_graczy2( int *play, int *desc )
 {
     DESCRIPTOR_DATA *d;
     int ldesc = 0;
@@ -2302,7 +2303,7 @@ void licz_graczy2( int *play, int *desc )
 }
 
 
-void stats_update( void )
+static void stats_update( void )
 {
     static int bufor;
     int i;
@@ -2331,7 +2332,7 @@ void stats_update( void )
 
 
 /* Update the check on time for autoshutdown */
-void time_update( void )
+static void time_update( void )
 {
     FILE            *fp;
     char             buf [ MAX_STRING_LENGTH ];
@@ -2433,7 +2434,7 @@ void time_update( void )
  * Remove deleted AFFECT_DATA from chars and objects.
  * Remove deleted CHAR_DATA and OBJ_DATA from char_list and object_list.
  */
-void list_update( void )
+static void list_update( void )
 {
     CHAR_DATA *ch;
     CHAR_DATA *ch_next;
@@ -2647,7 +2648,7 @@ void ban_update( void )
 
 
 /* aukcja */
-void auction_update( void )
+static void auction_update( void )
 {
     int tax, pay;
     char buf[ MAX_STRING_LENGTH ];
@@ -2770,7 +2771,7 @@ void auction_update( void )
 /*
  * Lam 11.2.99
  */
-void podpowiadaj( void )
+static void podpowiadaj( void )
 {
     DESCRIPTOR_DATA *desc;
 
@@ -2817,7 +2818,7 @@ void podpowiadaj( void )
  * unosic na wodzie, a nawet wyplywac na powierzchnie (!), tonac po wlozeniu
  * kilku kilogramow i nie wyplywajac, jesli nawet pusta, ale otwarta)
  */
-void airobj_update( void )
+static void airobj_update( void )
 {
     AIROBJ_DATA *airobj = airobj_list;
     OBJ_DATA *obj;
@@ -2880,7 +2881,7 @@ void airobj_update( void )
  * Alandar 12.11.2003: Lamowe airobj_update po gruntownych przerobkach
  * Lam 27.9.2005: Alandar naobiecywal, ale w koncu ja robie opadanie pod wode
  */
-void airchar_update( void )
+static void airchar_update( void )
 {
     AIRCHAR_DATA *airchar = airchar_list;
     CHAR_DATA *chr, *tchr, *dchr = NULL;
@@ -3201,7 +3202,7 @@ void airchar_update( void )
 /*
  * Lam 9.1.2003, 16.1.2003
  */
-void sentinel_update( void )
+static void sentinel_update( void )
 {
     CHAR_DATA *ch, *ch_next;
     ROOM_INDEX_DATA *prev_room;

@@ -45,9 +45,8 @@
 #include "db.h"
 #include "comm.h"
 #include "clan.h"
+#include "update.h"
 
-
-extern bool murder_char; /* Lam, update.c */
 
 /*
  * Local functions.

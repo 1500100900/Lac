@@ -3615,11 +3615,6 @@ extern RRAND_DATA *rrand_list;
 /* ssm.c */
 extern unsigned int MAX_STRING;
 
-/* update.c */
-extern int pulse_point;
-extern int pulse_point_max;
-
-
 /*
  * Command functions.
  * Defined in act_*.c (mostly).
@@ -4158,19 +4153,6 @@ CD *	nowa_postac	args( ( DESCRIPTOR_DATA *d, char *name ) ) __attribute__( ( war
 int	fread_obj	args( ( void *parametr, FILE *fp, int use ) );
 void	fwrite_obj	args( ( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp,
 				int iNest, bool own ) );
-
-/* update.c */
-void    advance_level   args( ( CHAR_DATA *ch ) );
-void    demote_level    args( ( CHAR_DATA *ch ) );
-void    gain_exp        args( ( CHAR_DATA *ch, int gain ) );
-/* cwiczenie umiejetnosci do 100% */
-void	uzyj		args( ( CHAR_DATA *ch, int sn, const char *co ) );
-void    gain_condition  args( ( CHAR_DATA *ch, int iCond, int value ) );
-void	update_handler_before args( ( void ) );
-void    update_handler  args( ( void ) );
-void    ban_update      args( ( void ) );
-void	auction_update	args( ( void ) );
-void	komunikaty_ustroju args( ( CHAR_DATA *ch ) );
 
 /* kzapisz.c */
 void	save_area	args( ( AREA_DATA *area, bool save_dir ) );

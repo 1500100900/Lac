@@ -37,6 +37,7 @@
 #include "fight.h"
 #include "db.h"
 #include "comm.h"
+#include "update.h"
 #if !defined( NO_WMEMSET )
 # include <wchar.h>
 #endif

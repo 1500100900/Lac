@@ -39,6 +39,7 @@
 #include "fight.h"
 #include "db.h"
 #include "comm.h"
+#include "update.h"
 
 
 KOMENDA( do_rozblysk )

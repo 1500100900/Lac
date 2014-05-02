@@ -38,6 +38,7 @@
 #include "fight.h"
 #include "db.h"
 #include "comm.h"
+#include "update.h"
 
 
 static void	pc_breathe		args( ( CHAR_DATA *ch ) );

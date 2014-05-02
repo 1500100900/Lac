@@ -52,6 +52,7 @@
 #include "db.h"
 #include "gry.h"
 #include "comm.h"
+#include "update.h"
 
 
 #if !defined( WIN32 )
@@ -7964,7 +7965,6 @@ KOMENDA( do_oaff )
  * na niesmiertelnych. Mozna zabierac doswiadczenie i w konsekwencji obnizac
  * poziom.
  */
-void lv_hlp( CHAR_DATA *ch ); /* update.c */
 KOMENDA( do_exp )
 {
     CHAR_DATA *vict;

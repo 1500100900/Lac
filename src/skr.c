@@ -46,6 +46,7 @@
 #include "fight.h"
 #include "db.h"
 #include "comm.h"
+#include "update.h"
 
 
 #define BAD_DOOR		  -1

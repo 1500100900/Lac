@@ -40,6 +40,7 @@
 #include "gry.h"
 #include "comm.h"
 #include "clan.h"
+#include "update.h"
 
 
 #if !defined( ultrix ) && !defined( apollo ) && !defined( __minix ) && !defined( PLAN9 )
