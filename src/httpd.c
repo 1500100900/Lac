@@ -36,6 +36,7 @@
 #include "db.h"
 #include "comm.h"
 #include "clan.h"
+#include "httpd.h"
 
 
 DECLARE_HTML_FUN( html_index );
@@ -51,16 +52,16 @@ DECLARE_HTML_FUN( html_clans );
 #endif
 DECLARE_HTML_FUN( html_404 );
 
-char	*http2lac	args( ( char *arg ) );
-void	get_help_topic	args( ( char *arg, char *topic ) );
-int	zrob_odnosnik	args( ( char *arg, char *link ) );
-bool	html_header	args( ( WHO_DESCRIPTOR_DATA *d, const char *tytul ) );
-bool	html_foot	args( ( WHO_DESCRIPTOR_DATA *d ) );
-bool	html_time	args( ( WHO_DESCRIPTOR_DATA *d ) );
-bool	html_weather	args( ( WHO_DESCRIPTOR_DATA *d ) );
+static char	*http2lac	args( ( char *arg ) );
+static void	get_help_topic	args( ( char *arg, char *topic ) );
+static int	zrob_odnosnik	args( ( char *arg, char *link ) );
+static bool	html_header	args( ( WHO_DESCRIPTOR_DATA *d, const char *tytul ) );
+static bool	html_foot	args( ( WHO_DESCRIPTOR_DATA *d ) );
+static bool	html_time	args( ( WHO_DESCRIPTOR_DATA *d ) );
+static bool	html_weather	args( ( WHO_DESCRIPTOR_DATA *d ) );
 
 
-const   struct    html_page_type       html_page_table      [ ] =
+static const   struct    html_page_type       html_page_table      [ ] =
 {
     {
 	"/kto",		"kto gra",	"Zobacz list\352 aktualnie graj\261cych",	html_who
@@ -105,13 +106,13 @@ const   struct    html_page_type       html_page_table      [ ] =
     }
 };
 
-char *  const   html_day_name        [] =
+static char *  const   html_day_name        [] =
 {
     "ksi\352\277yca", "byka", "k\263amstwa", "gromu", "wolno\266ci",
     "wielkich bog\363w", "s\263o\361ca"
 };
 
-char *  const   html_month_name      [] =
+static char *  const   html_month_name      [] =
 {
     "zimy", "wilka", "lodowego olbrzyma", "dawnej pot\352gi",
     "wielkiej walki", "wiosny", "przyrody", "b\263aho\266ci", "smoka",
@@ -132,7 +133,7 @@ HTML_FUN *szukaj_strony( char *arg )
 }
 
 
-char *http2lac( char *arg )
+static char *http2lac( char *arg )
 {
     char *p = arg;
     char  buf[ MSL ];
@@ -304,7 +305,7 @@ void http_log( WHO_DESCRIPTOR_DATA *d )
 }
 
 
-void get_help_topic( char *arg, char *topic )
+static void get_help_topic( char *arg, char *topic )
 {
     char *p = arg;
 
@@ -379,7 +380,7 @@ bool get_who_data( char *arg, WHO_DESCRIPTOR_DATA *d )
 }
 
 
-int zrob_odnosnik( char *arg, char *link )
+static int zrob_odnosnik( char *arg, char *link )
 {
     char buf[ MAX_STRING_LENGTH ];
     char buf1[ MAX_STRING_LENGTH ];
@@ -532,7 +533,7 @@ char *lac2html( char *buf, bool mysql )
 }
 
 
-bool html_header( WHO_DESCRIPTOR_DATA *d, const char *tytul )
+static bool html_header( WHO_DESCRIPTOR_DATA *d, const char *tytul )
 {
     char  buf[ MAX_STRING_LENGTH ];
     int   day;
@@ -579,7 +580,7 @@ a:hover   { color: #e01818; text-decoration: none }\n\
 }
 
 
-bool html_foot( WHO_DESCRIPTOR_DATA *d )
+static bool html_foot( WHO_DESCRIPTOR_DATA *d )
 {
     char buf[ MAX_STRING_LENGTH ];
     char buf2[ MAX_INPUT_LENGTH ];
@@ -607,7 +608,7 @@ bool html_foot( WHO_DESCRIPTOR_DATA *d )
 }
 
 
-bool html_time( WHO_DESCRIPTOR_DATA *d )
+static bool html_time( WHO_DESCRIPTOR_DATA *d )
 {
     char buf[ MAX_STRING_LENGTH ];
     int  day;
@@ -627,7 +628,7 @@ bool html_time( WHO_DESCRIPTOR_DATA *d )
 }
 
 
-bool html_weather( WHO_DESCRIPTOR_DATA *d )
+static bool html_weather( WHO_DESCRIPTOR_DATA *d )
 {
 	   char         buf     [ MAX_STRING_LENGTH ];
     static char * const sky_look[ 4 ] =

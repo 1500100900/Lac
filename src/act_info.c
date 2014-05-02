@@ -42,6 +42,7 @@
 #include "comm.h"
 #include "clan.h"
 #include "update.h"
+#include "httpd.h"
 
 
 static int	format_list_to_char	args( ( char *buf1, int wielkosc_buf1,

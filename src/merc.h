@@ -3580,7 +3580,6 @@ extern	const	struct	material_type	material_table	[ MAX_MATERIAL ];
 /* extern	struct  koles_type      koles_table     [ MAX_TRACK ]; */
 extern  const   struct  race_type       race_table      [ MAX_RACE ];
 extern		struct	czesc_ciala	czesci_ciala	[ ];
-extern  const   struct  html_page_type  html_page_table [ ];
 extern  const   struct  struckdrunk     drunk           [ ];
 extern	const	int			przelicznik_zysku[ 112 ];
 extern	const	int			przelicznik_wydatkow[ 112 ];
@@ -3931,13 +3930,6 @@ bool	czy_mozna_kopac		args( ( int sector_type, CHAR_DATA *ch ) );
 int     skill_lookup_ang	args( ( const char *name ) );
 int     skill_lookup_pl		args( ( const char *name ) );
 bool    saves_spell		args( ( int level, CHAR_DATA *victim ) );
-
-
-/* httpd.c */
-HTML_FUN *szukaj_strony		args( ( char *arg ) );
-void	http_log		args( ( WHO_DESCRIPTOR_DATA *d ) );
-bool	get_who_data		args( ( char *arg, WHO_DESCRIPTOR_DATA *d ) );
-char	*lac2html		args( ( char *buf, bool mysql ) );
 
 /* trzeci parametr interpret( ) */
 #define INTERP_NORMAL	  0

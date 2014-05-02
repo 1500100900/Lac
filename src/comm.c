@@ -51,6 +51,7 @@
 #include "db.h"
 #include "comm.h"
 #include "update.h"
+#include "httpd.h"
 
 
 #if defined( WIN32 )
