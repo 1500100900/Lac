@@ -44,6 +44,7 @@
 #include "clan.h"
 #include "hunt.h"
 #include "update.h"
+#include "save.h"
 
 
 /*

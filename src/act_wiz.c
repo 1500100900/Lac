@@ -53,6 +53,7 @@
 #include "gry.h"
 #include "comm.h"
 #include "update.h"
+#include "save.h"
 
 
 #if !defined( WIN32 )

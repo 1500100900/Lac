@@ -43,6 +43,7 @@
 #include "comm.h"
 #include "clan.h"
 #include "update.h"
+#include "save.h"
 
 
 #if defined( BLEDOMAT )

@@ -44,6 +44,7 @@
 #include "comm.h"
 #include "clan.h"
 #include "httpd.h"
+#include "save.h"
 
 
 static bool	check_clan_name		args( ( CHAR_DATA *ch, char *arg ) );

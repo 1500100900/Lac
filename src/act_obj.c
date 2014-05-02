@@ -41,6 +41,7 @@
 #include "db.h"
 #include "comm.h"
 #include "update.h"
+#include "save.h"
 
 
 static CHAR_DATA	*find_przechowalnia	args( ( CHAR_DATA *ch, bool komunikat ) );

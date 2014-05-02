@@ -38,6 +38,7 @@
 #include "db.h"
 #include "comm.h"
 #include "clan.h"
+#include "save.h"
 #if defined( sun )
 #include <memory.h>
 #endif
@@ -47,12 +48,12 @@ int	system			args( ( const char *string ) );
 #endif
 
 
-void	rozbierz		args( ( CHAR_DATA *ch ) );
-void	ubierz			args( ( CHAR_DATA *ch ) );
-void	tnij_monety		args( ( OBJ_DATA *lista ) );
-void	wytnij_naziemne		args( ( OBJ_DATA *lista ) );
-void	zabierz_um_bwwu		args( ( CHAR_DATA *ch ) );
-void	recover			args( ( FILE *fp, long fpos ) );
+static void	rozbierz		args( ( CHAR_DATA *ch ) );
+static void	ubierz			args( ( CHAR_DATA *ch ) );
+static void	tnij_monety		args( ( OBJ_DATA *lista ) );
+static void	wytnij_naziemne		args( ( OBJ_DATA *lista ) );
+static void	zabierz_um_bwwu		args( ( CHAR_DATA *ch ) );
+static void	recover			args( ( FILE *fp, long fpos ) );
 
 /*
  * Wersja formatu plikow - zmieniac przy kazdej zmianie powodujacej niemoznosc
@@ -105,7 +106,7 @@ void	konwersja_opcji args( ( CHAR_DATA *ch ) );
  * Lam: rozebranie gracza przed zapisem postaci
  * Pomysl jest sciagniety ze Smauga, wykonanie tez wzorowane
  */
-void rozbierz( CHAR_DATA *ch )
+static void rozbierz( CHAR_DATA *ch )
 {
     OBJ_DATA *obj;
     int gdzie;
@@ -131,7 +132,7 @@ void rozbierz( CHAR_DATA *ch )
 }
 
 
-void ubierz( CHAR_DATA *ch )
+static void ubierz( CHAR_DATA *ch )
 {
     int gdzie;
 
@@ -820,7 +821,7 @@ CHAR_DATA *nowa_postac( DESCRIPTOR_DATA *d, char *name )
 }
 
 
-void tnij_monety( OBJ_DATA *lista )
+static void tnij_monety( OBJ_DATA *lista )
 {
     OBJ_DATA *obj, *obj_next;
 
@@ -850,7 +851,7 @@ void tnij_monety( OBJ_DATA *lista )
  * nie zniknac z inwentarza, ale raz, ze takich praktycznie nie ma, a dwa, ze
  * zapewne maja wtedy zmienione takze inne wlasciwosci.
  */
-void wytnij_naziemne( OBJ_DATA *lista )
+static void wytnij_naziemne( OBJ_DATA *lista )
 {
     OBJ_DATA *obj, *obj_next;
 
@@ -882,7 +883,7 @@ void wytnij_naziemne( OBJ_DATA *lista )
  * Tym sposobem zostawiam umiejki dostepne danej profesji, ale odbieram te
  * z ksiag z innych gildii. Jakos to zniosa.
  */
-void zabierz_um_bwwu( CHAR_DATA *ch )
+static void zabierz_um_bwwu( CHAR_DATA *ch )
 {
     int poziomy[ MAX_CLASS ];
     int i, sn;
@@ -2246,7 +2247,7 @@ int fread_char( CHAR_DATA *ch, FILE *fp )
  * Lam: dodalem obsluge przechowalni i klanow. Nie jestem pewien, czy to w ogole
  * dziala, na szczescie nigdy nie jest uzywane ;)
  */
-void recover( FILE *fp, long fpos )
+static void recover( FILE *fp, long fpos )
 {
     char buf[ MAX_STRING_LENGTH ];
 

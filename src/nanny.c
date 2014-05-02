@@ -41,6 +41,7 @@
 #include "clan.h"
 #include "comm.h"
 #include <errno.h>
+#include "save.h"
 #if defined( MAM_CRYPT_H ) && !defined( NOCRYPT )
 # include <crypt.h>
 #endif

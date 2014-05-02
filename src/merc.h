@@ -4138,13 +4138,6 @@ void	nanny		args( ( DESCRIPTOR_DATA *d, char *argument ) );
 #define FREAD_OBJ_DB	0
 #define FREAD_OBJ_VNUM	1
 #define FREAD_OBJ_BLAD	2
-char *  initial		args( ( const char *str ) );
-void	save_char_obj	args( ( CHAR_DATA *ch ) );
-int	load_char_obj	args( ( DESCRIPTOR_DATA *d, char *name ) );
-CD *	nowa_postac	args( ( DESCRIPTOR_DATA *d, char *name ) ) __attribute__( ( warn_unused_result ) );
-int	fread_obj	args( ( void *parametr, FILE *fp, int use ) );
-void	fwrite_obj	args( ( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp,
-				int iNest, bool own ) );
 
 /* kzapisz.c */
 void	save_area	args( ( AREA_DATA *area, bool save_dir ) );

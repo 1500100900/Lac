@@ -52,6 +52,7 @@
 #include "comm.h"
 #include "update.h"
 #include "httpd.h"
+#include "save.h"
 
 
 #if defined( WIN32 )
