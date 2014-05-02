@@ -54,6 +54,7 @@
 #include "comm.h"
 #include "update.h"
 #include "save.h"
+#include "kzapisz.h"
 
 
 #if !defined( WIN32 )

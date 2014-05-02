@@ -53,6 +53,7 @@
 #include "update.h"
 #include "httpd.h"
 #include "save.h"
+#include "kzapisz.h"
 
 
 #if defined( WIN32 )

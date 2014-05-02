@@ -39,6 +39,7 @@
 #include "comm.h"
 #include "clan.h"
 #include "save.h"
+#include "kzapisz.h"
 #if defined( sun )
 #include <memory.h>
 #endif

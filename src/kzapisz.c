@@ -40,19 +40,21 @@
 #include "db.h"
 #include "gry.h"
 #include "comm.h"
+#include "kzapisz.h"
 
 
-char	*rozpisz_flagi	args( ( int flagi, bool czy_bez_b00 ) );
-void	save_mobprogs	args( ( FILE *fp, void *vo, int gdzie ) );
-void	save_mobiles	args( ( FILE *fp, AREA_DATA *pArea ) );
-void	save_objects	args( ( FILE *fp, AREA_DATA *pArea ) );
-void	save_helps	args( ( FILE *fp, AREA_DATA *pArea ) );
-int	drzwi		args( ( int locks ) );
-void	save_rooms	args( ( FILE *fp, AREA_DATA *pArea ) );
-void	save_resets	args( ( FILE *fp, AREA_DATA *pArea ) );
+static char	*rozpisz_flagi	args( ( int flagi, bool czy_bez_b00 ) );
+static void	save_mobprogs	args( ( FILE *fp, void *vo, int gdzie ) );
+static void	save_mobiles	args( ( FILE *fp, AREA_DATA *pArea ) );
+static void	save_objects	args( ( FILE *fp, AREA_DATA *pArea ) );
+static void	save_helps	args( ( FILE *fp, AREA_DATA *pArea ) );
+static int	drzwi		args( ( int locks ) );
+static void	save_rooms	args( ( FILE *fp, AREA_DATA *pArea ) );
+static void	save_resets	args( ( FILE *fp, AREA_DATA *pArea ) );
+static char *	fix_string	args( ( const char *txt, bool enter, bool formatuj ) );
 
 
-char *	const	wearloc_str	[ ]	=
+static char *	const	wearloc_str	[ ]	=
 {
     "`swiat`lo", "lewy palec", "prawy palec", "g`orna szyja", "dolna szyja",
     "cia`lo", "g`lowa", "nogi", "stopy", "d`lonie", "ramiona", "tarcza",
@@ -60,7 +62,7 @@ char *	const	wearloc_str	[ ]	=
     "bro`n", "trzymane", "druga bro`n", "twarz", "MAX_WEAR!"
 };
 
-char nazwa[ MIL ];
+static char nazwa[ MIL ];
 
 
 /*
@@ -72,7 +74,7 @@ char nazwa[ MIL ];
  * Lam 11.6.2005: formatuj - docelowo zawijacz wierszy i przerzucacz samotnych
  * literek, chwilowo wykrywacz przy lac -k -o
  */
-char *fix_string( const char *str, bool enter, bool formatuj )
+static char *fix_string( const char *str, bool enter, bool formatuj )
 {
     static char strfix[ MAX_STRING_LENGTH * 2 ];
     int i;
@@ -138,7 +140,7 @@ char *fix_string( const char *str, bool enter, bool formatuj )
 }
 
 
-char *rozpisz_flagi( int flagi, bool czy_bez_b00 )
+static char *rozpisz_flagi( int flagi, bool czy_bez_b00 )
 {
     /* zdecydowalem sie na te 2 tablice ze wzgledu na duza szybkosc takiego
        rozwiazania. Wielokrotne przesuwanie bitow i sprintf( )owanie byloby duzo
@@ -197,7 +199,7 @@ char *rozpisz_flagi_v_fun( int *flagi, int ilebitow, bool czy_bez_b00 )
 }
 
 
-void save_mobprogs( FILE *fp, void *vo, int gdzie )
+static void save_mobprogs( FILE *fp, void *vo, int gdzie )
 {
     MOB_INDEX_DATA *mob = (MOB_INDEX_DATA *) vo;
     ROOM_INDEX_DATA *room = (ROOM_INDEX_DATA *) vo;
@@ -242,7 +244,7 @@ void save_mobprogs( FILE *fp, void *vo, int gdzie )
  * Lam 8.7.98 - pierwsze proby zapisywania krain
  *    22.8.98 - zrobiony konwerter do eksportu do formatu Laca 1.4
  */
-void save_mobiles( FILE *fp, AREA_DATA *pArea )
+static void save_mobiles( FILE *fp, AREA_DATA *pArea )
 {
     MOB_INDEX_DATA *pMobIndex;
 
@@ -323,7 +325,7 @@ void save_mobiles( FILE *fp, AREA_DATA *pArea )
 }
 
 
-void save_objects( FILE *fp, AREA_DATA *pArea )
+static void save_objects( FILE *fp, AREA_DATA *pArea )
 {
     OBJ_INDEX_DATA *pObjIndex;
     AFFECT_DATA *pAf;
@@ -474,7 +476,7 @@ void save_objects( FILE *fp, AREA_DATA *pArea )
 }
 
 
-void save_helps( FILE *fp, AREA_DATA *pArea )
+static void save_helps( FILE *fp, AREA_DATA *pArea )
 {
     HELP_DATA *pHelp;
     bool found = FALSE;
@@ -504,7 +506,7 @@ void save_helps( FILE *fp, AREA_DATA *pArea )
 
 
 /* sciagnalem wlasna funkcje z db.c i odwrocilem dzialanie */
-int drzwi( int locks )
+static int drzwi( int locks )
 {
 	int info = 0;
 	if ( locks )
@@ -531,7 +533,7 @@ int drzwi( int locks )
 }
 
 
-void save_rooms( FILE *fp, AREA_DATA *pArea )
+static void save_rooms( FILE *fp, AREA_DATA *pArea )
 {
     ROOM_INDEX_DATA *pRoomIndex;
     EXTRA_DESCR_DATA *pEd;
@@ -608,7 +610,7 @@ void save_rooms( FILE *fp, AREA_DATA *pArea )
  * Lam 23.7.98: komentarze
  * Lam 15.1.00: komentarze po polsku, bo jest lpl
  */
-void save_resets( FILE *fp, AREA_DATA *pArea )
+static void save_resets( FILE *fp, AREA_DATA *pArea )
 {
     char *	const	door_reset_str	[ ]	=
     {
