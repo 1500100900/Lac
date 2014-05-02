@@ -42,53 +42,54 @@
 #include "comm.h"
 #include "hunt.h"
 #include "mp_wyzw.h"
+#include "mp_pol.h"
 
 
-CHAR_DATA	*get_char_prog		args( ( CHAR_DATA *ch, char *argument,
+static CHAR_DATA	*get_char_prog	args( ( CHAR_DATA *ch, char *argument,
 						CHAR_DATA *actor, OBJ_DATA *obj,
 						CHAR_DATA *rndm, CHAR_DATA *vict,
 						OBJ_DATA *v_obj ) );
-CHAR_DATA	*get_char_room_prog 	args( ( CHAR_DATA *ch, char *argument,
+static CHAR_DATA	*get_char_room_prog args( ( CHAR_DATA *ch, char *argument,
 						CHAR_DATA *actor, OBJ_DATA *obj,
 						CHAR_DATA *rndm, CHAR_DATA *vict,
 						OBJ_DATA *v_obj ) );
-OBJ_DATA	*get_obj_prog		args( ( CHAR_DATA *ch, char *argument,
+static OBJ_DATA	*get_obj_prog		args( ( CHAR_DATA *ch, char *argument,
 						CHAR_DATA *actor, OBJ_DATA *obj,
 						CHAR_DATA *rndm, CHAR_DATA *vict,
 						OBJ_DATA *v_obj ) );
-OBJ_DATA	*get_obj_here_prog 	args( ( CHAR_DATA *ch, char *argument,
+static OBJ_DATA	*get_obj_here_prog 	args( ( CHAR_DATA *ch, char *argument,
 						CHAR_DATA *actor, OBJ_DATA *obj,
 						CHAR_DATA *rndm, CHAR_DATA *vict,
 						OBJ_DATA *v_obj ) );
-ROOM_INDEX_DATA	*find_location_prog	args( ( CHAR_DATA *ch, char *argument,
+static ROOM_INDEX_DATA	*find_location_prog args( ( CHAR_DATA *ch, char *argument,
 						CHAR_DATA *actor, OBJ_DATA *obj,
 						CHAR_DATA *rndm, CHAR_DATA *vict,
 						OBJ_DATA *v_obj ) );
-char		*mp_tr_pl		args( ( CHAR_DATA *mob, char znak,
+static char	*mp_tr_pl		args( ( CHAR_DATA *mob, char znak,
 						bool widzi ) );
-char		*mp_tr_pl_obj		args( ( OBJ_DATA *obj, char znak,
+static char	*mp_tr_pl_obj		args( ( OBJ_DATA *obj, char znak,
 						bool widzi ) );
-bool		mprog_translate_one	args( ( char *ch, char *t, CHAR_DATA *obser,
+static bool	mprog_translate_one	args( ( char *ch, char *t, CHAR_DATA *obser,
 						CHAR_DATA *mob,	CHAR_DATA *actor,
 						OBJ_DATA *obj, CHAR_DATA *rndm,
 						CHAR_DATA *vict, OBJ_DATA *v_obj ) );
-void		mprog_translate		args( ( char *from, char *to,
+static void	mprog_translate		args( ( char *from, char *to,
 						CHAR_DATA *obser, CHAR_DATA *mob,
 						CHAR_DATA *actor, OBJ_DATA *obj,
 						CHAR_DATA *rndm, CHAR_DATA *vict,
 						OBJ_DATA *v_obj ) );
-char		*return_field		args( ( CHAR_DATA *ch, char *arg ) );
-int		mprog_licz		args( ( char *str, char *t, CHAR_DATA *mob,
+static char	*return_field		args( ( CHAR_DATA *ch, char *arg ) );
+static int	mprog_licz		args( ( char *str, char *t, CHAR_DATA *mob,
 						CHAR_DATA *actor, OBJ_DATA *obj,
 						CHAR_DATA *rndm, CHAR_DATA *vict,
 						OBJ_DATA *v_obj ) );
-void		mprog_przelicz		args( ( char *buf, CHAR_DATA *mob,
+static void	mprog_przelicz		args( ( char *buf, CHAR_DATA *mob,
 						CHAR_DATA *actor, OBJ_DATA *obj,
 						CHAR_DATA *rndm, CHAR_DATA *vict,
 						OBJ_DATA *v_obj ) );
-int		interpretuj_zmysl	args( ( CHAR_DATA *ch,
+static int	interpretuj_zmysl	args( ( CHAR_DATA *ch,
 						const char *argument ) );
-bool		czy_wyswietlic		args( ( CHAR_DATA *komu, int zmysly,
+static bool	czy_wyswietlic		args( ( CHAR_DATA *komu, int zmysly,
 						CHAR_DATA *ch, CHAR_DATA *actor,
 						OBJ_DATA *obj, CHAR_DATA *rndm,
 						CHAR_DATA *vict, OBJ_DATA *v_obj ) );
@@ -202,7 +203,7 @@ const struct prog_cmd_type prog_cmd_table[ ] =
  * w przypadku blednego $* przyjmuje $i, co moze powodowac zupelnie
  * niespodziewane dla autora dzialanie proga (oczywiscie tylko niepoprawnego)
  */
-CHAR_DATA *get_char_prog( CHAR_DATA *ch, char *argument,
+static CHAR_DATA *get_char_prog( CHAR_DATA *ch, char *argument,
 		CHAR_DATA *actor, OBJ_DATA *obj, CHAR_DATA *rndm,
 		CHAR_DATA *vict, OBJ_DATA *v_obj )
 {
@@ -245,7 +246,7 @@ CHAR_DATA *get_char_prog( CHAR_DATA *ch, char *argument,
 /*
  * Lam 31.12.2003
  */
-CHAR_DATA *get_char_room_prog( CHAR_DATA *ch, char *argument,
+static CHAR_DATA *get_char_room_prog( CHAR_DATA *ch, char *argument,
 		CHAR_DATA *actor, OBJ_DATA *obj, CHAR_DATA *rndm,
 		CHAR_DATA *vict, OBJ_DATA *v_obj )
 {
@@ -279,7 +280,7 @@ CHAR_DATA *get_char_room_prog( CHAR_DATA *ch, char *argument,
  * blad bedzie sygnalizowany dwukrotnie (tu, ze bledny $* i potem
  * w mppoleceniu, ze nie znalazl przedmiotu)
  */
-OBJ_DATA *get_obj_prog( CHAR_DATA *ch, char *argument,
+static OBJ_DATA *get_obj_prog( CHAR_DATA *ch, char *argument,
 		CHAR_DATA *actor, OBJ_DATA *obj, CHAR_DATA *rndm,
 		CHAR_DATA *vict, OBJ_DATA *v_obj )
 {
@@ -318,7 +319,7 @@ OBJ_DATA *get_obj_prog( CHAR_DATA *ch, char *argument,
 /*
  * Lam 31.12.2003
  */
-OBJ_DATA *get_obj_here_prog( CHAR_DATA *ch, char *argument,
+static OBJ_DATA *get_obj_here_prog( CHAR_DATA *ch, char *argument,
 		CHAR_DATA *actor, OBJ_DATA *obj, CHAR_DATA *rndm,
 		CHAR_DATA *vict, OBJ_DATA *v_obj )
 {
@@ -343,7 +344,7 @@ OBJ_DATA *get_obj_here_prog( CHAR_DATA *ch, char *argument,
 /*
  * Lam 1.1.2003
  */
-ROOM_INDEX_DATA *find_location_prog( CHAR_DATA *ch, char *argument,
+static ROOM_INDEX_DATA *find_location_prog( CHAR_DATA *ch, char *argument,
 		CHAR_DATA *actor, OBJ_DATA *obj, CHAR_DATA *rndm,
 		CHAR_DATA *vict, OBJ_DATA *v_obj )
 {
@@ -365,7 +366,7 @@ ROOM_INDEX_DATA *find_location_prog( CHAR_DATA *ch, char *argument,
 /*
  * Lam 13.6.98: jest to polski dodatek do mprog_translate
  */
-char *mp_tr_pl( CHAR_DATA *mob, char znak, bool widzi )
+static char *mp_tr_pl( CHAR_DATA *mob, char znak, bool widzi )
 {
     switch ( znak )
     {
@@ -385,7 +386,7 @@ char *mp_tr_pl( CHAR_DATA *mob, char znak, bool widzi )
 /*
  * wersja dla przedmiotow
  */
-char *mp_tr_pl_obj( OBJ_DATA *obj, char znak, bool widzi )
+static char *mp_tr_pl_obj( OBJ_DATA *obj, char znak, bool widzi )
 {
     switch ( znak )
     {
@@ -455,7 +456,7 @@ if ( przedmiot )						\
  *
  * zwraca TRUE jesli pobrala dodatkowa litere (np. $ND)
  */
-bool mprog_translate_one( char *ch, char *t, CHAR_DATA *obser, CHAR_DATA *mob,
+static bool mprog_translate_one( char *ch, char *t, CHAR_DATA *obser, CHAR_DATA *mob,
 		CHAR_DATA *actor, OBJ_DATA *obj, CHAR_DATA *rndm,
 		CHAR_DATA *vict, OBJ_DATA *v_obj )
 {
@@ -564,7 +565,7 @@ bool mprog_translate_one( char *ch, char *t, CHAR_DATA *obser, CHAR_DATA *mob,
 }
 
 
-void mprog_translate( char *from, char *to, CHAR_DATA *obser, CHAR_DATA *mob,
+static void mprog_translate( char *from, char *to, CHAR_DATA *obser, CHAR_DATA *mob,
 		CHAR_DATA *actor, OBJ_DATA *obj, CHAR_DATA *rndm,
 		CHAR_DATA *vict, OBJ_DATA *v_obj )
 {
@@ -596,7 +597,7 @@ void mprog_translate( char *from, char *to, CHAR_DATA *obser, CHAR_DATA *mob,
  * Lam 17.7.99
  * Lam 27.10.99: dodana obsluga zmiennych
  */
-char *return_field( CHAR_DATA *ch, char *arg )
+static char *return_field( CHAR_DATA *ch, char *arg )
 {
     struct
     {
@@ -676,7 +677,7 @@ char *return_field( CHAR_DATA *ch, char *arg )
  * Lam    6.99 - %l, %{}, %<>, %[]
  * Lam 17.7.99 - %()
  */
-int mprog_licz( char *str, char *t, CHAR_DATA *mob, CHAR_DATA *actor,
+static int mprog_licz( char *str, char *t, CHAR_DATA *mob, CHAR_DATA *actor,
 			OBJ_DATA *obj, CHAR_DATA *rndm, CHAR_DATA *vict,
 			OBJ_DATA *v_obj )
 {
@@ -837,7 +838,7 @@ int mprog_licz( char *str, char *t, CHAR_DATA *mob, CHAR_DATA *actor,
 /*
  * Wydzielone z mprog_process_cmnd 5.1.2003
  */
-void mprog_przelicz( char *buf, CHAR_DATA *mob, CHAR_DATA *actor,
+static void mprog_przelicz( char *buf, CHAR_DATA *mob, CHAR_DATA *actor,
 			OBJ_DATA *obj, CHAR_DATA *rndm, CHAR_DATA *vict,
 			OBJ_DATA *v_obj )
 {
@@ -1052,7 +1053,7 @@ struct
 };
 
 
-int interpretuj_zmysl( CHAR_DATA *ch, const char *argument )
+static int interpretuj_zmysl( CHAR_DATA *ch, const char *argument )
 {
     int i;
 
@@ -1115,7 +1116,7 @@ int interpretuj_zmysly( CHAR_DATA *ch, const char *argument )
 /*
  * Pierwotnie skopiowane z super_act( ).
  */
-bool czy_wyswietlic( CHAR_DATA *komu, int zmysly, CHAR_DATA *ch,
+static bool czy_wyswietlic( CHAR_DATA *komu, int zmysly, CHAR_DATA *ch,
 		CHAR_DATA *actor, OBJ_DATA *obj, CHAR_DATA *rndm,
 		CHAR_DATA *vict, OBJ_DATA *v_obj )
 {

@@ -37,6 +37,7 @@
 #include "db.h"
 #include "comm.h"
 #include "mp_wyzw.h"
+#include "mp_pol.h"
 
 
 /* to konieczne niestety, zabezpieczenie podpatrzone w Smaugu */

@@ -3604,10 +3604,6 @@ extern	struct choice_field_data apply_values[ ];
 extern	AIROBJ_DATA *airobj_list;
 extern	AIRCHAR_DATA *airchar_list;
 
-/* mob_prog.c */
-extern MTRIG_DATA *mtrig_list;
-extern RRAND_DATA *rrand_list;
-
 /* ssm.c */
 extern unsigned int MAX_STRING;
 
@@ -3970,12 +3966,6 @@ char *  capitalize      args( ( const char *str ) );
 char *  zwielkoliteruj  args( ( const char *str ) );
 void	zjedz_entery_z_konca args( ( char **lancuch ) );
 
-/* mob_pol.c */
-void	mprog_process_cmnd	args( ( char* cmnd, CHAR_DATA* mob,
-				       CHAR_DATA* actor, OBJ_DATA* obj,
-				       CHAR_DATA* rndm, CHAR_DATA* vict,
-				       OBJ_DATA* v_obj ) );
-
 /* MobC: mob_c.c, mob_var.c */
 /* typy zmiennych */
 #define TZ_CALK		0 /* calkowita */
@@ -4023,7 +4013,6 @@ void mv_aobj( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
 			OBJ_DATA *obj, CHAR_DATA *rndm,
 			CHAR_DATA *vict, OBJ_DATA *v_obj );
 TYP_ZMIENNEJ *znajdz_zmienna_moba( CHAR_DATA *mob, char *nazwa );
-int interpretuj_zmysly args( ( CHAR_DATA *ch, const char *argument ) );
 
 /* nanny.c */
 int	check_parse_name args( ( char *name, bool newname ) );
