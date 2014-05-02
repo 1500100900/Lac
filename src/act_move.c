@@ -38,6 +38,7 @@
 #include "fight.h"
 #include "db.h"
 #include "comm.h"
+#include "hunt.h"
 
 
 const   int     movement_loss   [ SECT_MAX ]    =

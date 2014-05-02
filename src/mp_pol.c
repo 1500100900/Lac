@@ -40,6 +40,7 @@
 #include "fight.h"
 #include "db.h"
 #include "comm.h"
+#include "hunt.h"
 
 
 CHAR_DATA	*get_char_prog		args( ( CHAR_DATA *ch, char *argument,

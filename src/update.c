@@ -42,6 +42,7 @@
 #include "db.h"
 #include "comm.h"
 #include "clan.h"
+#include "hunt.h"
 
 
 /*

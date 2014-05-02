@@ -39,6 +39,7 @@
 #include "fight.h"
 #include "db.h"
 #include "comm.h"
+#include "hunt.h"
 
 
 static bool	dragon		args( ( CHAR_DATA *ch, int sn ) );

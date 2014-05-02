@@ -3631,7 +3631,6 @@ DECLARE_DO_FUN( do_brief        );
 DECLARE_DO_FUN( do_burry	);		/* Lam */
 DECLARE_DO_FUN( do_delet	);		/* Lam */
 DECLARE_DO_FUN( do_delete	);		/* Lam */
-DECLARE_DO_FUN( do_hunt		);		/* z Wurma */
 DECLARE_DO_FUN( do_immcmd	);		/* Lam */
 DECLARE_DO_FUN( do_imud		);		/* Lam */
 DECLARE_DO_FUN( do_love         );              /* Qwert */
@@ -3944,13 +3943,6 @@ HTML_FUN *szukaj_strony		args( ( char *arg ) );
 void	http_log		args( ( WHO_DESCRIPTOR_DATA *d ) );
 bool	get_who_data		args( ( char *arg, WHO_DESCRIPTOR_DATA *d ) );
 char	*lac2html		args( ( char *buf, bool mysql ) );
-
-/* hunt.c */
-int	find_path	args( ( ROOM_INDEX_DATA *from, ROOM_INDEX_DATA *to,
-				int max_depth, bool same_area,
-				bool through_doors ) );
-void    auto_hunt       args( ( CHAR_DATA *ch ) );
-void	hunt_victim	args( ( CHAR_DATA *ch ) );
 
 /* trzeci parametr interpret( ) */
 #define INTERP_NORMAL	  0
