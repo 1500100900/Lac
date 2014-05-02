@@ -47,6 +47,7 @@
 #include "gry.h"
 #include "comm.h"
 #include "clan.h"
+#include "socjalne.h"
 
 
 void	do_many			args( ( CHAR_DATA *ch, char *argument ) );

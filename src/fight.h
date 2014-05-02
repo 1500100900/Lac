@@ -12,7 +12,6 @@ DECLARE_DO_FUN(	do_pojedynek	); /* Lam */
 DECLARE_DO_FUN(	do_rescue	);
 DECLARE_DO_FUN(	do_sla		);
 DECLARE_DO_FUN(	do_slay		);
-DECLARE_DO_FUN(	do_socials	);
 
 void	check_killer		args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
 bool	czy_grupa_wrogow	args( ( CHAR_DATA *ch, CHAR_DATA *gch ) );

@@ -4167,9 +4167,6 @@ int	fread_obj	args( ( void *parametr, FILE *fp, int use ) );
 void	fwrite_obj	args( ( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp,
 				int iNest, bool own ) );
 
-/* socjalne.c */
-bool	check_social	args( ( CHAR_DATA *ch, char *command,
-				char *argument ) );
 /* update.c */
 void    advance_level   args( ( CHAR_DATA *ch ) );
 void    demote_level    args( ( CHAR_DATA *ch ) );

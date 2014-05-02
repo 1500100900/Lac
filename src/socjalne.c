@@ -34,6 +34,7 @@
 #include "fight.h"
 #include "db.h"
 #include "comm.h"
+#include "socjalne.h"
 
 
 typedef void SOC_FUN	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
