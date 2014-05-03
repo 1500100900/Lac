@@ -3971,47 +3971,6 @@ void	zjedz_entery_z_konca args( ( char **lancuch ) );
 #define TZ_POST		2 /* postac */
 #define TZ_PRZE		3 /* przedmiot */
 
-TYP_ZMIENNEJ *nowa_zmienna( char *nazwa, int typ, int wartosc, void *wsk ) __attribute__( ( warn_unused_result ) );
-void usun_zmienna( TYP_ZMIENNEJ *zm );
-void usun_z_listy( TYP_ZMIENNEJ **lista, TYP_ZMIENNEJ *zm, CHAR_DATA *mob );
-TYP_ZMIENNEJ *znajdz_zmienna( TYP_ZMIENNEJ *lista, char *nazwa );
-void zmien_zmienna( TYP_ZMIENNEJ **lista, char *nazwa, int typ, int wartosc,
-		void *wsk, CHAR_DATA *mob );
-bool czy_nazwa_zmiennej( char *nazwa );
-bool czy_liczba( char *nazwa );
-bool czy_zdatny_operator_int( char *op );
-bool czy_zdatny_operator_str( char *op );
-char *nastepny_skladnik( char *wyrazenie, char *skladnik );
-bool oblicz_wyrazenie( CHAR_DATA *mob, char *wyrazenie, CHAR_DATA *actor,
-			OBJ_DATA *obj, CHAR_DATA *rndm,
-			CHAR_DATA *vict, OBJ_DATA *v_obj, int *zwr_typ,
-			int *zwr_wart, char *zwr_txt, void **zwr_wsk );
-void mv_int( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
-			OBJ_DATA *obj, CHAR_DATA *rndm,
-			CHAR_DATA *vict, OBJ_DATA *v_obj );
-void mv_aint( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
-			OBJ_DATA *obj, CHAR_DATA *rndm,
-			CHAR_DATA *vict, OBJ_DATA *v_obj );
-void mv_str( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
-			OBJ_DATA *obj, CHAR_DATA *rndm,
-			CHAR_DATA *vict, OBJ_DATA *v_obj );
-void mv_astr( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
-			OBJ_DATA *obj, CHAR_DATA *rndm,
-			CHAR_DATA *vict, OBJ_DATA *v_obj );
-void mv_chr( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
-			OBJ_DATA *obj, CHAR_DATA *rndm,
-			CHAR_DATA *vict, OBJ_DATA *v_obj );
-void mv_achr( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
-			OBJ_DATA *obj, CHAR_DATA *rndm,
-			CHAR_DATA *vict, OBJ_DATA *v_obj );
-void mv_obj( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
-			OBJ_DATA *obj, CHAR_DATA *rndm,
-			CHAR_DATA *vict, OBJ_DATA *v_obj );
-void mv_aobj( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
-			OBJ_DATA *obj, CHAR_DATA *rndm,
-			CHAR_DATA *vict, OBJ_DATA *v_obj );
-TYP_ZMIENNEJ *znajdz_zmienna_moba( CHAR_DATA *mob, char *nazwa );
-
 /* nanny.c */
 int	check_parse_name args( ( char *name, bool newname ) );
 bool	czy_zdatny_plik	args( ( char *name ) );

@@ -46,6 +46,7 @@
 #include "update.h"
 #include "save.h"
 #include "mp_pol.h"
+#include "mp_wyr.h"
 
 
 /*

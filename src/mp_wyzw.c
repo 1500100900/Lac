@@ -39,6 +39,7 @@
 #include "mp_wyzw.h"
 #include "mp_pol.h"
 #include "mp_wczyt.h"
+#include "mp_wyr.h"
 
 
 /* to konieczne niestety, zabezpieczenie podpatrzone w Smaugu */

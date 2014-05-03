@@ -43,6 +43,7 @@
 #include "hunt.h"
 #include "mp_wyzw.h"
 #include "mp_pol.h"
+#include "mp_wyr.h"
 
 
 static CHAR_DATA	*get_char_prog	args( ( CHAR_DATA *ch, char *argument,

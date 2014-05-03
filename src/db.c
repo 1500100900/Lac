@@ -44,6 +44,7 @@
 #include "httpd.h"
 #include "save.h"
 #include "mp_wczyt.h"
+#include "mp_wyr.h"
 
 
 #if !defined( ultrix ) && !defined( apollo ) && !defined( __minix ) && !defined( PLAN9 )

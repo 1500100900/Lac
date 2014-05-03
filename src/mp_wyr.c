@@ -37,45 +37,52 @@
 #include "db.h"
 #include "comm.h"
 #include "mp_wyzw.h"
+#include "mp_wyr.h"
 
 
-void	usun_zm_zwod		args( ( TYP_ZMIENNEJ **lista, TYP_ZMIENNEJ *zm,
-					CHAR_DATA *mob ) );
-STOSMP *nowy_kawalek_stosmp	args( ( void ) );
-void	wywal_kawalek_stosmp	args( ( STOSMP *kawalek ) );
-void	na_stosmp		args( ( STOSMP **stos, STOSMP *kawalek ) );
-void	na_koniec_stosmp	args( ( STOSMP **glowa_stos, STOSMP *kawalek ) );
-STOSMP	*ze_stosmp		args( ( STOSMP **stos ) );
-int	znajdz_dzialanie	args( ( char *op ) );
-bool	uruchom_funkcje		args( ( CHAR_DATA *mob, char *nazwa, char *txt1,
-					int *wart1, int *typ1, void **wsk1,
-					char *txt2, int *wart2, int *typ2,
-					void **wsk2, CHAR_DATA *actor,
-					OBJ_DATA *obj, CHAR_DATA *rndm,
-					CHAR_DATA *vict, OBJ_DATA *v_obj ) );
-void	wykrec			args( ( STOSMP **stoswej, STOSMP **stoswyj ) );
-void	pomin_stosmp		args( ( STOSMP **stos ) );
-STOSMP	*licz_stosmp		args( ( STOSMP **stos, CHAR_DATA *mob,
-					CHAR_DATA *actor, OBJ_DATA *obj,
-					CHAR_DATA *rndm, CHAR_DATA *vict,
-					OBJ_DATA *v_obj ) );
-void	wymiec_smieci		args( ( STOSMP **s1, STOSMP **s2 ) );
-void	int_aint		args( ( CHAR_DATA *ch, char *argument,
-					CHAR_DATA *actor, OBJ_DATA *obj,
-					CHAR_DATA *rndm, CHAR_DATA *vict,
-					OBJ_DATA *v_obj, bool do_krainy ) );
-void	str_astr		args( ( CHAR_DATA *ch, char *argument,
-					CHAR_DATA *actor, OBJ_DATA *obj,
-					CHAR_DATA *rndm, CHAR_DATA *vict,
-					OBJ_DATA *v_obj, bool do_krainy ) );
-void	chr_achr		args( ( CHAR_DATA *ch, char *argument,
-					CHAR_DATA *actor, OBJ_DATA *obj,
-					CHAR_DATA *rndm, CHAR_DATA *vict,
-					OBJ_DATA *v_obj, bool do_krainy ) );
-void	obj_aobj		args( ( CHAR_DATA *ch, char *argument,
-					CHAR_DATA *actor, OBJ_DATA *obj,
-					CHAR_DATA *rndm, CHAR_DATA *vict,
-					OBJ_DATA *v_obj, bool do_krainy ) );
+static void	usun_zm_zwod		args( ( TYP_ZMIENNEJ **lista, TYP_ZMIENNEJ *zm,
+						CHAR_DATA *mob ) );
+static STOSMP *nowy_kawalek_stosmp	args( ( void ) );
+static void	wywal_kawalek_stosmp	args( ( STOSMP *kawalek ) );
+static void	na_stosmp		args( ( STOSMP **stos, STOSMP *kawalek ) );
+static STOSMP	*ze_stosmp		args( ( STOSMP **stos ) );
+static int	znajdz_dzialanie	args( ( char *op ) );
+static bool	uruchom_funkcje		args( ( CHAR_DATA *mob, char *nazwa, char *txt1,
+						int *wart1, int *typ1, void **wsk1,
+						char *txt2, int *wart2, int *typ2,
+						void **wsk2, CHAR_DATA *actor,
+						OBJ_DATA *obj, CHAR_DATA *rndm,
+						CHAR_DATA *vict, OBJ_DATA *v_obj ) );
+static void	wykrec			args( ( STOSMP **stoswej, STOSMP **stoswyj ) );
+static void	pomin_stosmp		args( ( STOSMP **stos ) );
+static STOSMP	*licz_stosmp		args( ( STOSMP **stos, CHAR_DATA *mob,
+						CHAR_DATA *actor, OBJ_DATA *obj,
+						CHAR_DATA *rndm, CHAR_DATA *vict,
+						OBJ_DATA *v_obj ) );
+static void	wymiec_smieci		args( ( STOSMP **s1, STOSMP **s2 ) );
+static void	int_aint		args( ( CHAR_DATA *ch, char *argument,
+						CHAR_DATA *actor, OBJ_DATA *obj,
+						CHAR_DATA *rndm, CHAR_DATA *vict,
+						OBJ_DATA *v_obj, bool do_krainy ) );
+static void	str_astr		args( ( CHAR_DATA *ch, char *argument,
+						CHAR_DATA *actor, OBJ_DATA *obj,
+						CHAR_DATA *rndm, CHAR_DATA *vict,
+						OBJ_DATA *v_obj, bool do_krainy ) );
+static void	chr_achr		args( ( CHAR_DATA *ch, char *argument,
+						CHAR_DATA *actor, OBJ_DATA *obj,
+						CHAR_DATA *rndm, CHAR_DATA *vict,
+						OBJ_DATA *v_obj, bool do_krainy ) );
+static void	obj_aobj		args( ( CHAR_DATA *ch, char *argument,
+						CHAR_DATA *actor, OBJ_DATA *obj,
+						CHAR_DATA *rndm, CHAR_DATA *vict,
+						OBJ_DATA *v_obj, bool do_krainy ) );
+static void	usun_zmienna( TYP_ZMIENNEJ *zm );
+static TYP_ZMIENNEJ *nowa_zmienna( char *nazwa, int typ, int wartosc, void *wsk ) __attribute__( ( warn_unused_result ) );
+static bool	czy_nazwa_zmiennej( char *nazwa );
+static bool	czy_liczba( char *nazwa );
+static bool	czy_zdatny_operator_int( char *op );
+static bool	czy_zdatny_operator_str( char *op );
+static char	*nastepny_skladnik( char *wyrazenie, char *skladnik );
 
 #define ILOSC_DZIALAN 14
 
@@ -97,7 +104,7 @@ void	obj_aobj		args( ( CHAR_DATA *ch, char *argument,
 
 /* w oblicz_wyrazenie na s1 pamietany jest numer dzialania z prio w ->typ,
    a przy przenoszeniu do s2 wrzucany jest typ z tabelki */
-struct
+static struct
 {
     char znaczek[ 3 ];
     int prio;
@@ -126,7 +133,7 @@ TYP_ZMIENNEJ *wolne_zmienne; /* lista usunietych zmiennych */
 /*
  * Tworzy zmienna o zadanych wartosciach
  */
-TYP_ZMIENNEJ *nowa_zmienna( char *nazwa, int typ, int wartosc, void *wsk )
+static TYP_ZMIENNEJ *nowa_zmienna( char *nazwa, int typ, int wartosc, void *wsk )
 {
     char buf[ MIL ];
     TYP_ZMIENNEJ *zm;
@@ -159,7 +166,7 @@ TYP_ZMIENNEJ *nowa_zmienna( char *nazwa, int typ, int wartosc, void *wsk )
  * Wpisuje zmienna na liste odzyskowa; jesli zmienna jest lancuchem, zwalnia po
  * nim pamiec
  */
-void usun_zmienna( TYP_ZMIENNEJ *zm )
+static void usun_zmienna( TYP_ZMIENNEJ *zm )
 {
     char *lanc;
 
@@ -192,7 +199,7 @@ void usun_zmienna( TYP_ZMIENNEJ *zm )
  * Zabieranie zwod postaci, ktora byla zmienna na liscie, tylko jesli zm to
  * ostatnia zmienna - mozna uzywac po usunieciu zm lub przed zmiana
  */
-void usun_zm_zwod( TYP_ZMIENNEJ **lista, TYP_ZMIENNEJ *zm, CHAR_DATA *mob )
+static void usun_zm_zwod( TYP_ZMIENNEJ **lista, TYP_ZMIENNEJ *zm, CHAR_DATA *mob )
 {
     TYP_ZMIENNEJ *pzl;
     CHAR_DATA *ch;
@@ -352,9 +359,9 @@ void zmien_zmienna( TYP_ZMIENNEJ **lista, char *nazwa, int typ,
 /*
  * Stos dla oblicz_wyrazenie. top_stosmp w db.c, ale liste zostawiam sobie tu
  */
-STOSMP *stos_wolnych;
+static STOSMP *stos_wolnych;
 
-STOSMP *nowy_kawalek_stosmp( void )
+static STOSMP *nowy_kawalek_stosmp( void )
 {
     STOSMP *kawalek;
 
@@ -378,7 +385,7 @@ STOSMP *nowy_kawalek_stosmp( void )
 }
 
 
-void wywal_kawalek_stosmp( STOSMP *kawalek )
+static void wywal_kawalek_stosmp( STOSMP *kawalek )
 {
     kawalek->nast = stos_wolnych;
     stos_wolnych = kawalek;
@@ -387,7 +394,7 @@ void wywal_kawalek_stosmp( STOSMP *kawalek )
 }
 
 
-void na_stosmp( STOSMP **stos, STOSMP *kawalek )
+static void na_stosmp( STOSMP **stos, STOSMP *kawalek )
 {
     kawalek->nast = *stos;
     *stos = kawalek;
@@ -396,17 +403,7 @@ void na_stosmp( STOSMP **stos, STOSMP *kawalek )
 }
 
 
-void na_koniec_stosmp( STOSMP **glowa_stos, STOSMP *kawalek )
-{
-    kawalek->nast = NULL;
-    ( *glowa_stos )->nast = kawalek;
-    *glowa_stos = kawalek;
-
-    return;
-}
-
-
-STOSMP *ze_stosmp( STOSMP **stos )
+static STOSMP *ze_stosmp( STOSMP **stos )
 {
     STOSMP *kawalek;
 
@@ -421,7 +418,7 @@ STOSMP *ze_stosmp( STOSMP **stos )
 /*
  * Sprawdza, czy lancuch moze byc nazwa zmiennej
  */
-bool czy_nazwa_zmiennej( char *nazwa )
+static bool czy_nazwa_zmiennej( char *nazwa )
 {
     if ( *nazwa == '!' ) /* moze byc zanegowana */
 	nazwa++;
@@ -436,7 +433,7 @@ bool czy_nazwa_zmiennej( char *nazwa )
 /*
  * Sprawdza, czy lancuch jest liczba
  */
-bool czy_liczba( char *nazwa )
+static bool czy_liczba( char *nazwa )
 {
     if ( isalpha( (unsigned char) *nazwa ) )
 	return FALSE;
@@ -460,7 +457,7 @@ bool czy_liczba( char *nazwa )
 /*
  * Sprawdza, czy dany zestaw znakow nadaje sie tuz po nazwie zmiennej
  */
-bool czy_zdatny_operator_int( char *op )
+static bool czy_zdatny_operator_int( char *op )
 {
     const char *ops[ 7 ] = { "=", "-=", "+=", "*=", "/=", "&=", "|=" };
     int i;
@@ -473,7 +470,7 @@ bool czy_zdatny_operator_int( char *op )
 }
 
 
-bool czy_zdatny_operator_str( char *op )
+static bool czy_zdatny_operator_str( char *op )
 {
     const char *ops[ 2 ] = { "=", "+=" };
     int i;
@@ -490,7 +487,7 @@ bool czy_zdatny_operator_str( char *op )
  * Szuka dzialania. Sprawdza, czy dany zestaw znaczkow nadaje sie wewnatrz
  * wyrazenia. Zwraca pozycje dzialania w tablicy albo -1.
  */
-int znajdz_dzialanie( char *op )
+static int znajdz_dzialanie( char *op )
 {
     int i;
 
@@ -507,7 +504,7 @@ int znajdz_dzialanie( char *op )
  * Parametry takie same jak w one_argument
  */
 #define POMIN while ( *c && strchr( sep2, *c ) ) c++;
-char *nastepny_skladnik( char *wyrazenie, char *skladnik )
+static char *nastepny_skladnik( char *wyrazenie, char *skladnik )
 {
     const char *sep1 = "+-*/=|&!<>"; /* dzialania, uwaga na ! */
     const char *sep2 = " \t\n\r"; /* separatory */
@@ -640,7 +637,7 @@ char *nastepny_skladnik( char *wyrazenie, char *skladnik )
  * Zwraca informacje, czy wystapil blad (oblicz_wyrazenie powinno od razu
  * wyskoczyc i zwrocic zero. progbug lokalnie, bo tu wiecej wiadomo)
  */
-bool uruchom_funkcje( CHAR_DATA *mob, char *nazwa,
+static bool uruchom_funkcje( CHAR_DATA *mob, char *nazwa,
 		char *txt1, int *wart1, int *typ1, void **wsk1,
 		char *txt2, int *wart2, int *typ2, void **wsk2,
 		CHAR_DATA *actor, OBJ_DATA *obj, CHAR_DATA *rndm,
@@ -1335,7 +1332,7 @@ bool uruchom_funkcje( CHAR_DATA *mob, char *nazwa,
  * skoro najdluzsze wyrazenie we wszystkich progach Laca robi stos dlugosci 17,
  * a przecietnie nie wychodzi ponad 5 elementow.
  */
-void wykrec( STOSMP **stoswej, STOSMP **stoswyj )
+static void wykrec( STOSMP **stoswej, STOSMP **stoswyj )
 {
     STOSMP *kawalek = ze_stosmp( stoswej );
 
@@ -1357,7 +1354,7 @@ void wykrec( STOSMP **stoswej, STOSMP **stoswyj )
 /*
  * Pomijanie prawej strony && i || w miare potrzeb.
  */
-void pomin_stosmp( STOSMP **stos )
+static void pomin_stosmp( STOSMP **stos )
 {
     STOSMP *kawalek = ze_stosmp( stos );
 
@@ -1376,7 +1373,7 @@ void pomin_stosmp( STOSMP **stos )
 /*
  * Sporo argumentow jak na funkcje rekurencyjna, ale nie szkodzi
  */
-STOSMP *licz_stosmp( STOSMP **stos, CHAR_DATA *mob, CHAR_DATA *actor,
+static STOSMP *licz_stosmp( STOSMP **stos, CHAR_DATA *mob, CHAR_DATA *actor,
 			OBJ_DATA *obj, CHAR_DATA *rndm, CHAR_DATA *vict,
 			OBJ_DATA *v_obj )
 {
@@ -1587,7 +1584,7 @@ STOSMP *licz_stosmp( STOSMP **stos, CHAR_DATA *mob, CHAR_DATA *actor,
 }
 
 
-void wymiec_smieci( STOSMP **s1, STOSMP **s2 )
+static void wymiec_smieci( STOSMP **s1, STOSMP **s2 )
 {
     if ( s1 && *s1 )
 	while ( *s1 )
@@ -1940,7 +1937,7 @@ TYP_ZMIENNEJ *znajdz_zmienna_moba( CHAR_DATA *mob, char *nazwa )
 }
 
 
-void int_aint( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
+static void int_aint( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
 		OBJ_DATA *obj, CHAR_DATA *rndm, CHAR_DATA *vict,
 		OBJ_DATA *v_obj, bool do_krainy )
 {
@@ -2038,7 +2035,7 @@ void mv_aint( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
 }
 
 
-void str_astr( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
+static void str_astr( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
 		OBJ_DATA *obj, CHAR_DATA *rndm, CHAR_DATA *vict,
 		OBJ_DATA *v_obj, bool do_krainy )
 {
@@ -2139,7 +2136,7 @@ void mv_astr( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
 }
 
 
-void chr_achr( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
+static void chr_achr( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
 		OBJ_DATA *obj, CHAR_DATA *rndm, CHAR_DATA *vict,
 		OBJ_DATA *v_obj, bool do_krainy )
 {
@@ -2261,7 +2258,7 @@ void mv_achr( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
 
 
 /* 2.10.2004 */
-void obj_aobj( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
+static void obj_aobj( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
 		OBJ_DATA *obj, CHAR_DATA *rndm, CHAR_DATA *vict,
 		OBJ_DATA *v_obj, bool do_krainy )
 {
