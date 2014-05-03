@@ -536,7 +536,6 @@ int                     nAllocPerm;
 int                     sAllocPerm;
 
 
-
 /*
  * Semi-locals.
  */
@@ -557,22 +556,24 @@ unsigned int		lsc_init_str_len;
 /*
  * Local booting procedures.
  */
-static bool    load_area		args( ( FILE *fp ) );
-static void    load_class		args( ( FILE *fp, int cla ) );	/* Lam */
-static bool    load_helps		args( ( FILE *fp ) );
-static bool    load_mobiles		args( ( FILE *fp ) );
-static bool    load_objects		args( ( FILE *fp ) );
-static bool    load_resets		args( ( FILE *fp ) );
-static bool    load_rooms		args( ( FILE *fp ) );
-static bool    load_shops		args( ( FILE *fp ) );
-static bool    load_healers		args( ( FILE *fp ) );
-static bool    load_specials		args( ( FILE *fp ) );
-static void    load_schematy		args( ( void ) );
-static void    load_notes		args( ( void ) );
+static void	clear_char	args( ( CHAR_DATA *ch ) );
+static bool	load_area		args( ( FILE *fp ) );
+static bool	load_area_file		args( ( FILE *fp, CHAR_DATA *ch ) );
+static void	load_class		args( ( FILE *fp, int cla ) );	/* Lam */
+static bool	load_helps		args( ( FILE *fp ) );
+static bool	load_mobiles		args( ( FILE *fp ) );
+static bool	load_objects		args( ( FILE *fp ) );
+static bool	load_resets		args( ( FILE *fp ) );
+static bool	load_rooms		args( ( FILE *fp ) );
+static bool	load_shops		args( ( FILE *fp ) );
+static bool	load_healers		args( ( FILE *fp ) );
+static bool	load_specials		args( ( FILE *fp ) );
+static void	load_schematy		args( ( void ) );
+static void	load_notes		args( ( void ) );
 static void	load_clans		args( ( void ) );
-static void    load_ban        	args( ( void ) );
-static void    load_down_time  	args( ( void ) );
-static void    fix_exits       	args( ( void ) );
+static void	load_ban		args( ( void ) );
+static void	load_down_time		args( ( void ) );
+static void	fix_exits		args( ( void ) );
 static void	load_hints		args( ( void ) );	/* Lam */
 static void	load_offensive		args( ( void ) );	/* Lam */
 static void	load_miodek		args( ( void ) );	/* Lam */
@@ -587,10 +588,26 @@ static void	load_zones		args( ( void ) );	/* Lam */
 static void	load_lsc		args( ( void ) );	/* Lam */
 static void	sprawdz_strefy		args( ( void ) );	/* Lam */
 static void	sprawdz_ociemniale_moby	args( ( void ) );
-static void    reset_area      	args( ( AREA_DATA *pArea ) );
+static void	reset_area		args( ( AREA_DATA *pArea ) );
 static int	szukaj_wersji_krainy	args( ( char *arg ) );
 static bool	fread_time		args( ( FILE *fp, int *godz, int *min ) );
 static char	*nazwa_krainy		args( ( char *nazwa ) );
+
+static OBJ_INDEX_DATA	*new_obj_index args( ( int vnum,
+					      AREA_DATA *area ) ) __attribute__( ( warn_unused_result ) );
+static MOB_INDEX_DATA	*new_mob_index args( ( int vnum,
+					      AREA_DATA *area ) ) __attribute__( ( warn_unused_result ) );
+static ROOM_INDEX_DATA	*new_room args( ( int vnum,
+					  AREA_DATA *area ) ) __attribute__( ( warn_unused_result ) );
+static RESET_DATA	*new_reset	args( ( void ) ) __attribute__( ( warn_unused_result ) );
+static ZONE_LIST	*dodaj_strefe	args( ( ZONE_LIST *strefy, ZONE_DATA *strefa ) );
+static EXTRA_DESCR_DATA	*new_extra_descr args( ( void ) ) __attribute__( ( warn_unused_result ) );
+static SHOP_DATA	*new_shop	args( ( void ) ) __attribute__( ( warn_unused_result ) );
+static HEALER_DATA	*new_healer	args( ( void ) ) __attribute__( ( warn_unused_result ) );
+static ZONE_DATA	*znajdz_strefe_skrot args( ( char *nazwa ) );
+static ZONE_DATA	*znajdz_strefe_po_stolicy args( ( char *nazwa ) );
+static ZONE_DATA	*znajdz_strefe_po_vnumie args( ( int vnum ) );
+
 
 void	czytaj_ciala		args( ( void ) );	/* Lam - handler.c */
 
@@ -1278,7 +1295,7 @@ static int szukaj_wersji_krainy( char *arg )
 }
 
 
-bool load_area_file( FILE *fp, CHAR_DATA *ch )
+static bool load_area_file( FILE *fp, CHAR_DATA *ch )
 {
     int stat;
     bool wyjscie;
@@ -2968,44 +2985,6 @@ ROOM_INDEX_DATA *new_room( int vnum, AREA_DATA *area )
 }
 
 
-/*
- * Nie zwalnia niczego, nie wrzuca na liste odzyskowa. To wyciek pamieci.
- * Strata to kilkadziesiat bajtow tylko podczas uruchamiania edytora krain.
- */
-void del_room( ROOM_INDEX_DATA *pRoomIndex )
-{
-    ZONE_LIST       *lista;
-    ROOM_INDEX_DATA *pp;
-/*    int door; */
-    int iHash;
-
-/* FIXME: zwalnianie wyjsc
-    for ( door = 0; door <= 9; door++ )
-	pRoomIndex->exit[ door ]		= NULL;
-*/
-
-    top_room--;
-    pRoomIndex->area->numofrooms--;
-    for ( lista = pRoomIndex->area->strefy; lista; lista = lista->next )
-	lista->zone->ile_pomieszczen--;
-
-    iHash			= pRoomIndex->vnum % MAX_KEY_HASH;
-    if ( room_index_hash[ iHash ] == pRoomIndex )
-    {
-	room_index_hash[ iHash ] = room_index_hash[ iHash ]->next;
-    }
-    else
-	for ( pp = room_index_hash[ iHash ]; pp && pp->next; pp = pp->next )
-	    if ( pp->next == pRoomIndex )
-	    {
-		pp->next = pRoomIndex->next;
-		break;
-	    }
-
-    return;
-}
-
-
 EXIT_DATA *new_exit( )
 {
     EXIT_DATA *ex;
@@ -3077,21 +3056,6 @@ RESET_DATA *new_reset( )
     res->next = NULL;
 
     return res;
-}
-
-
-void del_reset( RESET_DATA *reset )
-{
-    reset->command = 0;
-    reset->arg1 = 0;
-    reset->arg2 = 0;
-    reset->arg3 = 0;
-    free_string( reset->string );
-    reset->string = str_dup( "" );
-    reset->next = reset_free;
-    reset_free = reset;
-
-    return;
 }
 
 
@@ -6881,7 +6845,7 @@ CHAR_DATA *new_character( bool player )
 }
 
 
-SHOP_DATA *new_shop( void )
+static SHOP_DATA *new_shop( void )
 {
     ++top_shop;
 
@@ -6889,7 +6853,7 @@ SHOP_DATA *new_shop( void )
 }
 
 
-HEALER_DATA *new_healer( void )
+static HEALER_DATA *new_healer( void )
 {
     ++top_healer;
 
@@ -7210,7 +7174,7 @@ OBJ_DATA *new_object( )
 }
 
 
-EXTRA_DESCR_DATA *new_extra_descr( )
+static EXTRA_DESCR_DATA *new_extra_descr( )
 {
     EXTRA_DESCR_DATA *ed;
 
@@ -7224,27 +7188,6 @@ EXTRA_DESCR_DATA *new_extra_descr( )
     extra_descr_free = extra_descr_free->next;
 
     return ed;
-}
-
-
-void del_extra_descr( EXTRA_DESCR_DATA *ed )
-{
-    if ( !ed )
-    {
-	bug( "del_extra_descr: NULL ed!", 0 );
-	return;
-    }
-
-    if ( ed->keyword )
-	free_string( ed->keyword );
-    if ( ed->description )
-	free_string( ed->description );
-    ed->deleted = TRUE;
-
-    ed->next = extra_descr_free;
-    extra_descr_free = ed;
-
-    return;
 }
 
 
@@ -7262,26 +7205,6 @@ MPROG_DATA *new_mprog( )
     mprog_free = mprog_free->next;
 
     return prog;
-}
-
-
-void del_mprog( MPROG_DATA *prog )
-{
-    if ( !prog )
-    {
-	bug( "del_mprog: NULL prog!", 0 );
-	return;
-    }
-
-    if ( prog->arglist )
-	free_string( prog->arglist );
-    if ( prog->comlist )
-	free_string( prog->comlist );
-
-    prog->next = mprog_free;
-    mprog_free = prog;
-
-    return;
 }
 
 
@@ -7580,7 +7503,7 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
 /*
  * Clear a new character.
  */
-void clear_char( CHAR_DATA *ch )
+static void clear_char( CHAR_DATA *ch )
 {
     static CHAR_DATA ch_zero;
 

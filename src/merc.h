@@ -3631,13 +3631,6 @@ DECLARE_DO_FUN( do_nchat        );              /* Lam */
 #define ZM_DYLEMAT	0
 
 /* ssm.c */
-bool	load_area_file	args( ( FILE *fp, CHAR_DATA *ch ) );
-SHOP_DATA *new_shop	args( ( void ) ) __attribute__( ( warn_unused_result ) );
-HEALER_DATA *new_healer	args( ( void ) ) __attribute__( ( warn_unused_result ) );
-ED *    new_extra_descr args( ( void ) ) __attribute__( ( warn_unused_result ) );
-void    del_extra_descr	args( ( EXTRA_DESCR_DATA *ed ) );
-void    del_mprog	args( ( MPROG_DATA *prog ) );
-void    clear_char      args( ( CHAR_DATA *ch ) );
 char *  real_fread_string args( ( FILE *fp, int *status, const char *plik,
 				int linia, const char *funkcja ) ) __attribute__( ( warn_unused_result ) );
 char *  fread_string_eol args( ( FILE *fp, int *status ) ) __attribute__( ( warn_unused_result ) );
@@ -3667,16 +3660,6 @@ void    real_free_string args( ( char *pstr, const char *plik, int linia,
 # define cbug( s, p ) real_bug( s, p, "?", 0, "?", FALSE, FALSE )
 # define dbug( s, p ) real_bug( s, p, "?", 0, "?", TRUE, TRUE )
 #endif
-OID *	new_obj_index	args( ( int vnum, AREA_DATA *area ) ) __attribute__( ( warn_unused_result ) );
-MIDT *	new_mob_index	args( ( int vnum, AREA_DATA *area ) ) __attribute__( ( warn_unused_result ) );
-RID *	new_room	args( ( int vnum, AREA_DATA *area ) ) __attribute__( ( warn_unused_result ) );
-void	del_room	args( ( ROOM_INDEX_DATA *pRoomIndexData ) );
-RESET_DATA *new_reset	args( ( void ) ) __attribute__( ( warn_unused_result ) );
-void	del_reset	args( ( RESET_DATA *reset ) );
-ZONE_DATA *znajdz_strefe_skrot args( ( char *nazwa ) );
-ZONE_DATA *znajdz_strefe_po_stolicy args( ( char *nazwa ) );
-ZONE_DATA *znajdz_strefe_po_vnumie args( ( int vnum ) );
-ZONE_LIST *dodaj_strefe args( ( ZONE_LIST *strefy, ZONE_DATA *strefa ) );
 int	ssm_max_free_entry	args( ( void ) );
 int	ssm_num_free_entries	args( ( void ) );
 void	init_string_space	args( ( void ) );
