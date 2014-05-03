@@ -3590,7 +3590,6 @@ struct progi_type
     char *name;
     int   trig;
 };
-extern struct progi_type progi[ 4 ][ 26 ];
 
 /* handler.c */
 extern	TIMER_DATA	*timer_list;
@@ -3724,7 +3723,6 @@ void    real_free_string args( ( char *pstr, const char *plik, int linia,
 # define cbug( s, p ) real_bug( s, p, "?", 0, "?", FALSE, FALSE )
 # define dbug( s, p ) real_bug( s, p, "?", 0, "?", TRUE, TRUE )
 #endif
-char *	mprog_type_to_name	args( ( int type, int gdzie ) );
 OID *	new_obj_index	args( ( int vnum, AREA_DATA *area ) ) __attribute__( ( warn_unused_result ) );
 MIDT *	new_mob_index	args( ( int vnum, AREA_DATA *area ) ) __attribute__( ( warn_unused_result ) );
 RID *	new_room	args( ( int vnum, AREA_DATA *area ) ) __attribute__( ( warn_unused_result ) );

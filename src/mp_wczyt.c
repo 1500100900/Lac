@@ -40,13 +40,11 @@
 /*
  * Uzywane wylacznie lokalnie.
  */
-void	interpretuj_proga	args( ( MPROG_DATA *prog ) );
-void	arg_do_proga		args( ( MPROG_DATA *prog ) );
-int	mprog_name_to_type	args( ( char *name, int gdzie ) );
-MPROG_DATA *mprog_file_read	args( ( char *f, MPROG_DATA *mprg,
-					void *param, int gdzie ) );
-bool	load_mobprogs		args( ( FILE *fp ) );
-bool	mprog_read_programs	args( ( FILE *fp, void *param, int gdzie ) );
+static void	interpretuj_proga	args( ( MPROG_DATA *prog ) );
+static void	arg_do_proga		args( ( MPROG_DATA *prog ) );
+static int	mprog_name_to_type	args( ( char *name, int gdzie ) );
+static MPROG_DATA *mprog_file_read	args( ( char *f, MPROG_DATA *mprg,
+						void *param, int gdzie ) );
 
 
 struct progi_type progi[ 4 ][ 26 ] =
@@ -141,7 +139,7 @@ struct progi_type progi[ 4 ][ 26 ] =
  * Lam 10-14.7.98: jeszcze inna tablica, eprogi...
  * Lam 16.7.98: oprogi
  */
-int mprog_name_to_type( char *name, int gdzie )
+static int mprog_name_to_type( char *name, int gdzie )
 {
     int pzl;
 
@@ -166,7 +164,7 @@ char *mprog_type_to_name( int type, int gdzie )
 
 
 /* This routine reads in scripts of MOBprograms from a file */
-MPROG_DATA *mprog_file_read( char *f, MPROG_DATA *mprg,
+static MPROG_DATA *mprog_file_read( char *f, MPROG_DATA *mprg,
 			    void *param, int gdzie )
 {
     MOB_INDEX_DATA	*pMobIndex	= (MOB_INDEX_DATA *) param;
@@ -544,7 +542,7 @@ bool mprog_read_programs( FILE *fp, void *param, int gdzie )
  * szybkie. To, ze mozna je przyspieszyc tysiac razy nie zmienia faktu, ze sa
  * rzeczy bardziej warte optymalizacji, przynajmniej na razie :)
  */
-void interpretuj_proga( MPROG_DATA *prog )
+static void interpretuj_proga( MPROG_DATA *prog )
 {
     char linia[ MSL ]; /* na wypadek przepelnienia */
     char pol[ MIL ];
@@ -699,7 +697,7 @@ void interpretuj_proga( MPROG_DATA *prog )
 }
 
 
-void arg_do_proga( MPROG_DATA *prog )
+static void arg_do_proga( MPROG_DATA *prog )
 {
     char typ[ MIL ];
     char nazwa[ MIL ];

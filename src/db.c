@@ -43,6 +43,7 @@
 #include "update.h"
 #include "httpd.h"
 #include "save.h"
+#include "mp_wczyt.h"
 
 
 #if !defined( ultrix ) && !defined( apollo ) && !defined( __minix ) && !defined( PLAN9 )
@@ -465,17 +466,6 @@ int		ROOM_VNUM_PURGATORY_A;
 int		ROOM_VNUM_POZA_SWIATEM;
 /* int		ROOM_VNUM_PUNKT; */
 
-
-
-/*
- * mp_wczyt.c
- */
-int 		mprog_name_to_type	args ( ( char* name, int gdzie ) );
-MPROG_DATA	*mprog_file_read 	args ( ( char* f, MPROG_DATA* mprg,
-						void *param, int gdzie ) );
-bool		load_mobprogs           args ( ( FILE* fp ) );
-bool   		mprog_read_programs     args ( ( FILE* fp, void *param,
-						int gdzie ) );
 
 /*
  * Locals.

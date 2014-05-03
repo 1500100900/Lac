@@ -56,6 +56,7 @@
 #include "save.h"
 #include "kzapisz.h"
 #include "mp_wyzw.h"
+#include "mp_wczyt.h"
 
 
 #if !defined( WIN32 )
