@@ -44,6 +44,7 @@
 #include "save.h"
 #include "mp_wyzw.h"
 #include "const.h"
+#include "lanclicz.h"
 
 
 static CHAR_DATA	*find_przechowalnia	args( ( CHAR_DATA *ch, bool komunikat ) );

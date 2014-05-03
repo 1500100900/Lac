@@ -40,6 +40,7 @@
 #include "mp_pol.h"
 #include "mp_wczyt.h"
 #include "mp_wyr.h"
+#include "lanclicz.h"
 
 
 /* to konieczne niestety, zabezpieczenie podpatrzone w Smaugu */

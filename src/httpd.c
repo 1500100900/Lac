@@ -39,6 +39,7 @@
 #include "httpd.h"
 #include "interp.h"
 #include "const.h"
+#include "lanclicz.h"
 
 
 DECLARE_HTML_FUN( html_index );

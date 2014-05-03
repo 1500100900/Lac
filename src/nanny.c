@@ -44,6 +44,7 @@
 #include <errno.h>
 #include "save.h"
 #include "const.h"
+#include "lanclicz.h"
 #if defined( MAM_CRYPT_H ) && !defined( NOCRYPT )
 # include <crypt.h>
 #endif

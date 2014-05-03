@@ -35,6 +35,7 @@
 #include "screen.h"
 #include "db.h"
 #include "comm.h"
+#include "lanclicz.h"
 
 
 static char		*kolor_literki	args( ( char literka ) );

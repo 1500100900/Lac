@@ -46,6 +46,7 @@
 #include "mp_wczyt.h"
 #include "mp_wyr.h"
 #include "const.h"
+#include "lanclicz.h"
 
 
 #if !defined( ultrix ) && !defined( apollo ) && !defined( __minix ) && !defined( PLAN9 )

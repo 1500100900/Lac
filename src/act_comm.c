@@ -48,6 +48,7 @@
 #include "interp.h"
 #include "nanny.h"
 #include "const.h"
+#include "lanclicz.h"
 
 
 #if defined( BLEDOMAT )

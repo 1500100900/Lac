@@ -3687,7 +3687,7 @@ void	oznacz_wszystko		args( ( void ) );
 #endif
 
 
-/* handler.c, niektore przeniesione do lanclicz.c */
+/* handler.c */
 TID   * new_timer	args( ( void ) ) __attribute__( ( warn_unused_result ) );
 void	del_timer	args( ( TIMER_DATA *timer ) );
 TID   * find_timer	args( ( CHAR_DATA *ch, TIMER_FUN *fun ) );
@@ -3701,33 +3701,9 @@ ACD   * find_airchar	args( ( CHAR_DATA *chr ) );
 void	check_airchar	args( ( CHAR_DATA *chr ) );
 void	del_airchar	args( ( AIRCHAR_DATA *airchar ) );
 
-int	liczba		args( ( int l ) );
-char  * itopl		args( ( unsigned int l, int plec ) );
-char  * slowny_ciezar	args( ( int ciezar ) );
-int	strlen_pl	args( ( const char *txt ) );
-int	strlen_pl_kol	args( ( const char *txt ) );
-int	strlen_pl_kol_miel args( ( const char *txt ) );
-int	znajdz_adres_pl_kol args( ( const char *txt, int literka ) );
-char  * wyrownaj	args( ( const char *text, int dlug ) );
-char  * formatuj_liczbe args( ( int arg ) );
-bool	czy_ze		args( ( const char *slowo ) );
-bool	czy_we		args( ( const char *slowo ) );
-bool	czy_wszystko	args( ( char *arg ) );
-bool	czy_wszyscy	args( ( char *arg ) );
-bool	czy_monety	args( ( char *arg ) );
-bool	czy_do_wszystkich args( ( char *arg ) );
 bool    ma_w_multi      args( ( CHAR_DATA *ch, int sn ) );
 void	wypelnij_poziomy args( ( CHAR_DATA *ch, int *poziomy ) );
 bool	moze_uzyc	args( ( CHAR_DATA *ch, int sn ) );
-void	odkoloruj	args( ( const char *arg, char *bufor ) );
-int	ile_kolorow	args( ( const char *arg ) );
-bool	czy_bluzg1	args( ( const char *arg ) );
-bool	czy_bluzg	args( ( const char *arg ) );
-struct miodek_data *znajdz_miodka args( ( const char *arg ) );
-bool	miodek		args( ( CHAR_DATA *ch, char *arg ) );
-bool    miodek_opisowy  args( ( CHAR_DATA *ch, char *arg ) );
-char *	przemiel_opis	args( ( CHAR_DATA *ch, char *opis ) );
-int	drzwi_d		args( ( char *slowo ) );
 
 int     get_trust       args( ( CHAR_DATA *ch ) );
 int	skill_get_trust	args( ( CHAR_DATA *ch ) );
@@ -3743,8 +3719,6 @@ int     get_damroll     args( ( CHAR_DATA *ch, int wpn ) );
 int     can_carry_n     args( ( CHAR_DATA *ch ) );
 int     can_carry_w     args( ( CHAR_DATA *ch ) );
 
-bool    is_name         args( ( const char *str, char *namelist ) );
-bool    is_name2        args( ( const char *str, const char *namelist ) );
 void    affect_to_char  args( ( CHAR_DATA *ch, AFFECT_DATA *paf ) );
 void    affect_remove   args( ( CHAR_DATA *ch, AFFECT_DATA *paf, bool checks ) );
 void    affect_strip    args( ( CHAR_DATA *ch, int sn ) );
@@ -3850,9 +3824,6 @@ void	zmien_wlasciciela_wszedzie args( ( CHAR_DATA *victim, char *new_name ) );
 void	zmien_imie_postaci	args( ( CHAR_DATA *victim, char *new_name ) );
 void	zapisz_ustawienia	args( ( void ) );
 void	czytaj_ustawienia	args( ( void ) );
-bool	czy_mail		args( ( char *arg ) );
-int	zetnij			args( ( int limit, int tempo, int x ) );
-char   *zlota_moneta		args( ( int ile, bool fMianownik, bool fIle ) );
 #define ZLOTO_M( ile )		( zlota_moneta( ile, TRUE, TRUE ) )
 #define ZLOTO_B( ile )		( zlota_moneta( ile, FALSE, TRUE ) )
 bool	czy_zajete_imie		args( ( char *imie ) );
@@ -3876,32 +3847,6 @@ bool    saves_spell		args( ( int level, CHAR_DATA *victim ) );
 #define INTERP_MPFORCE	101
 #define INTERP_MPAT	102
 #define CMD_NOTLISTED	b05
-
-/* lanclicz.c */
-void	init_rng	args( ( void ) );
-int     number_fuzzy    args( ( int number ) );
-int     number_range    args( ( int from, int to ) );
-int     number_percent  args( ( void ) );
-int     number_door     args( ( void ) );
-int     number_bits     args( ( int width ) );
-int     dice            args( ( int number, int size ) );
-int     interpolate     args( ( int level, int value_00, int value_32 ) );
-int	zlicz_bity	args( ( unsigned int liczba ) );
-void    smash_tilde     args( ( char *str ) );
-bool	alf_wczes	args( ( const char *astr, const char *bstr ) );
-bool    str_cmp         args( ( const char *astr, const char *bstr ) );
-bool    str_prefix      args( ( const char *astr, const char *bstr ) );
-bool    str_infix       args( ( const char *astr, const char *bstr ) );
-bool    str_suffix      args( ( const char *astr, const char *bstr ) );
-char *	str_str		args( ( char *bstr, const char *astr ) );
-char *  capitalize      args( ( const char *str ) );
-char *  zwielkoliteruj  args( ( const char *str ) );
-void	zjedz_entery_z_konca args( ( char **lancuch ) );
-bool    is_number       args( ( char *arg ) );
-bool    is_ipaddr       args( ( char *arg ) );
-int     number_argument args( ( char *argument, char *arg ) );
-char *  one_argument    args( ( const char *argument, char *arg_first ) );
-char *  one_argument2   args( ( char *argument, char *arg_first ) );
 
 /* MobC: mob_c.c, mob_var.c */
 /* typy zmiennych */

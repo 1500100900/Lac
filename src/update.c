@@ -48,6 +48,7 @@
 #include "mp_wyzw.h"
 #include "mp_pol.h"
 #include "const.h"
+#include "lanclicz.h"
 
 
 /*

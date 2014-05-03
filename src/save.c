@@ -41,6 +41,7 @@
 #include "save.h"
 #include "kzapisz.h"
 #include "const.h"
+#include "lanclicz.h"
 #if defined( sun )
 #include <memory.h>
 #endif

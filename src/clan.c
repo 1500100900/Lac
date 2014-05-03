@@ -46,6 +46,7 @@
 #include "httpd.h"
 #include "save.h"
 #include "const.h"
+#include "lanclicz.h"
 
 
 static bool	check_clan_name		args( ( CHAR_DATA *ch, char *arg ) );

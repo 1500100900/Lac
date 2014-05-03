@@ -42,6 +42,7 @@
 #include "update.h"
 #include "mp_wyzw.h"
 #include "const.h"
+#include "lanclicz.h"
 
 
 const   int     movement_loss   [ SECT_MAX ]    =

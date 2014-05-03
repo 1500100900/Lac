@@ -36,186 +36,17 @@
 #include "act_move.h"
 #include "db.h"
 #include "comm.h"
+#include "lanclicz.h"
 
 
-unsigned int number_well	args( ( void ) );
-void	init_well		( void );
-int	number_mm		args( ( void ) );
-void	init_mm			( void );
+static unsigned int	number_well		args( ( void ) );
+static void		init_well		args( ( void ) );
 
-
-/*
- * Stick a little fuzz on a number.
- */
-int number_fuzzy( int number )
-{
-    switch ( number_bits( 2 ) )
-    {
-	case 0:  number -= 1; break;
-	case 3:  number += 1; break;
-    }
-
-    return UMAX( 1, number );
-}
-
-
-#if defined( USE_Mitchell_Moore )
-
-void init_rng( void )
-{
-    init_mm( );
-    return;
-}
-
-
-/*
- * Generate a random number.
- */
-int number_range( int from, int to )
-{
-    int power;
-    int number;
-
-    if ( ( to = to - from + 1 ) <= 1 )
-	return from;
-
-    for ( power = 2; power < to; power <<= 1 )
-	;
-
-    while ( ( number = number_mm( ) & ( power - 1 ) ) >= to )
-	;
-
-    return from + number;
-}
-
-
-/*
- * Generate a percentile roll.
- */
-int number_percent( void )
-{
-    int percent;
-
-    while ( ( percent = number_mm( ) & ( 128-1 ) ) > 99 )
-	;
-
-    return 1 + percent;
-}
-
-
-/*
- * Generate a random door.
- */
-int number_door( void )
-{
-    int door;
-
-/*  while ( ( door = number_mm( ) & ( 8-1 ) ) > 5 ) */
-    while ( ( door = number_mm( ) & ( 15 ) ) > 9 )
-	;
-
-    return door;
-}
-
-
-int number_bits( int width )
-{
-    return number_mm( ) & ( ( 1 << width ) - 1 );
-}
-
-#else
 
 void init_rng( void )
 {
     init_well( );
     return;
-}
-
-
-int number_range( register int from, register int to )
-{
-    if ( ( to = to - from + 1 ) <= 1 )
-	return from;
-
-    return number_well( ) % to + from;
-}
-
-
-int number_percent( void )
-{
-    return 1 + number_well( ) % 100;
-}
-
-
-int number_door( void )
-{
-    return number_well( ) % MAX_DIR;
-}
-
-
-int number_bits( int width )
-{
-    return number_well( ) & ( ( 1 << width ) - 1 );
-}
-
-#endif
-
-
-/*
- * I've gotten too many bad reports on OS-supplied random number generators.
- * This is the Mitchell-Moore algorithm from Knuth Volume II.
- * Best to leave the constants alone unless you've read Knuth.
- * -- Furey
- */
-static  int     rgiState[ 2 + 55 ];
-
-void init_mm( void )
-{
-    int *piState;
-    int  iState;
-
-    piState     = &rgiState[ 2 ];
-
-    piState[ -2 ] = 55 - 55;
-    piState[ -1 ] = 55 - 24;
-
-    piState[ 0 ]  = ( (int) current_time ) & ( ( 1 << 30 ) - 1 );
-    piState[ 1 ]  = 1;
-
-    for ( iState = 2; iState < 55; iState++ )
-    {
-	piState[ iState ] = ( piState[ iState - 1 ] + piState[ iState - 2 ] )
-			& ( ( 1 << 30 ) - 1 );
-    }
-
-    return;
-}
-
-
-int number_mm( void )
-{
-    int *piState;
-    int  iState1;
-    int  iState2;
-    int  iRand;
-
-    piState		= &rgiState[ 2 ];
-    iState1		= piState[ -2 ];
-    iState2		= piState[ -1 ];
-    iRand		= ( piState[ iState1 ] + piState[ iState2 ] )
-			& ( ( 1 << 30 ) - 1 );
-    piState[ iState1 ]	= iRand;
-
-    if ( ++iState1 == 55 )
-	iState1 = 0;
-
-    if ( ++iState2 == 55 )
-	iState2 = 0;
-
-    piState[ -2 ]	= iState1;
-    piState[ -1 ]	= iState2;
-
-    return iRand >> 6;
 }
 
 
@@ -246,7 +77,7 @@ int number_mm( void )
 
 static unsigned int STATE[R];
 
-void init_well( void )
+static void init_well( void )
 {
     unsigned int j;
     srand( current_time );
@@ -257,7 +88,7 @@ void init_well( void )
 }
 
 
-unsigned int number_well( void )
+static unsigned int number_well( void )
 {
     static unsigned int state_i;
     register unsigned int z0, z1, z2;
@@ -271,6 +102,48 @@ unsigned int number_well( void )
     state_i = ( state_i + 15 ) & 0x0FU;
   
     return STATE[ state_i ];
+}
+
+
+int number_range( register int from, register int to )
+{
+    if ( ( to = to - from + 1 ) <= 1 )
+	return from;
+
+    return number_well( ) % to + from;
+}
+
+
+int number_percent( void )
+{
+    return 1 + number_well( ) % 100;
+}
+
+
+int number_door( void )
+{
+    return number_well( ) % MAX_DIR;
+}
+
+
+int number_bits( int width )
+{
+    return number_well( ) & ( ( 1 << width ) - 1 );
+}
+
+
+/*
+ * Stick a little fuzz on a number.
+ */
+int number_fuzzy( int number )
+{
+    switch ( number_bits( 2 ) )
+    {
+	case 0:  number -= 1; break;
+	case 3:  number += 1; break;
+    }
+
+    return UMAX( 1, number );
 }
 
 
@@ -538,29 +411,6 @@ bool str_suffix( const char *astr, const char *bstr )
 	return FALSE;
 
     return TRUE;
-}
-
-
-/*
- * Zastepuje strstr, obslugujac polskie znaczki
- * Lam 22.3.99
- * kolejnosc parametrow taka jak w strstr(), odwrotna od str_* powyzej
- */
-char *str_str( char *bstr, const char *astr )
-{
-    int sstr2;
-    int ichar;
-
-    if ( !astr[ 0 ] )
-	return bstr;
-
-    sstr2 = strlen( bstr );
-
-    for ( ichar = 0; ichar <= sstr2; ichar++ )
-	if ( !str_prefix( astr, bstr + ichar ) )
-	    return bstr + ichar;
-
-    return NULL;
 }
 
 

@@ -51,6 +51,7 @@
 #include "hunt.h"
 #include "mp_wyzw.h"
 #include "interp.h"
+#include "lanclicz.h"
 
 
 static void	do_many			args( ( CHAR_DATA *ch, char *argument ) );

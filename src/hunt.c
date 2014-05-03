@@ -39,6 +39,7 @@
 #include "comm.h"
 #include "update.h"
 #include "const.h"
+#include "lanclicz.h"
 #if !defined( NO_WMEMSET )
 # include <wchar.h>
 #endif

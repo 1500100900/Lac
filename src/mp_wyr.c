@@ -40,6 +40,7 @@
 #include "mp_wyr.h"
 #include "nanny.h"
 #include "const.h"
+#include "lanclicz.h"
 
 
 static void	usun_zm_zwod		args( ( TYP_ZMIENNEJ **lista, TYP_ZMIENNEJ *zm,

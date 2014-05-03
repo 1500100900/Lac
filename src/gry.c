@@ -38,6 +38,7 @@
 #include "gry.h"
 #include "comm.h"
 #include "const.h"
+#include "lanclicz.h"
 
 
 DECLARE_GAME_FUN(	gra_czarna_czerwona	);

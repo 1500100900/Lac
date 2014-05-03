@@ -37,6 +37,7 @@
 #include "socjalne.h"
 #include "mp_wyzw.h"
 #include "const.h"
+#include "lanclicz.h"
 
 
 typedef void SOC_FUN	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );

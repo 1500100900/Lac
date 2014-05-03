@@ -40,6 +40,7 @@
 #include "comm.h"
 #include "update.h"
 #include "const.h"
+#include "lanclicz.h"
 
 
 static void	pc_breathe		args( ( CHAR_DATA *ch ) );

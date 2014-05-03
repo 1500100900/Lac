@@ -48,6 +48,7 @@
 #include "comm.h"
 #include "update.h"
 #include "const.h"
+#include "lanclicz.h"
 
 
 #define BAD_DOOR		  -1
