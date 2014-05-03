@@ -55,6 +55,7 @@
 #include "save.h"
 #include "kzapisz.h"
 #include "interp.h"
+#include "nanny.h"
 
 
 #if defined( WIN32 )

@@ -40,6 +40,7 @@
 #include "db.h"
 #include "clan.h"
 #include "comm.h"
+#include "nanny.h"
 #include <errno.h>
 #include "save.h"
 #if defined( MAM_CRYPT_H ) && !defined( NOCRYPT )
@@ -50,16 +51,15 @@
 char *	crypt		args( ( const char *key, const char *salt ) );
 #endif
 
-bool	poprawne_haslo		args( ( CHAR_DATA *ch, char *arg ) );
-void	bledne_haslo		args( ( DESCRIPTOR_DATA *d ) );
-void	komunikat_blokady_imienia args( ( CHAR_DATA *ch, int powod ) );
-bool	czy_lsc			args( ( DESCRIPTOR_DATA *d, char *argument ) );
-void	nanny			args( ( DESCRIPTOR_DATA *d, char *argument ) );
+static bool	poprawne_haslo		args( ( CHAR_DATA *ch, char *arg ) );
+static void	bledne_haslo		args( ( DESCRIPTOR_DATA *d ) );
+static void	komunikat_blokady_imienia args( ( CHAR_DATA *ch, int powod ) );
+static bool	czy_lsc			args( ( DESCRIPTOR_DATA *d, char *argument ) );
 
 /*
  * Lam 28.2.98: sprawdzanie, czy haslo jest wystarczajaco trudne
  */
-bool poprawne_haslo( CHAR_DATA *ch, char *arg )
+static bool poprawne_haslo( CHAR_DATA *ch, char *arg )
 {
     /* haslo jak imie */
     if ( !str_cmp( ch->name, arg ) )
@@ -75,7 +75,7 @@ bool poprawne_haslo( CHAR_DATA *ch, char *arg )
 }
 
 
-void bledne_haslo( DESCRIPTOR_DATA *d )
+static void bledne_haslo( DESCRIPTOR_DATA *d )
 {
     send_to_char( "Has`lo si`e nie zgadza, podejrzewam pr`ob`e w`lamania!\n\r\n\r"
 	"Je`sli nie jeste`s w`lamywaczem, sprawd`x, czy:\n\r"
@@ -209,7 +209,7 @@ int check_parse_name( char *name, bool newname )
 /*
  * To bierze powod zwrocony przez check_parse_name( )!
  */
-void komunikat_blokady_imienia( CHAR_DATA *ch, int powod )
+static void komunikat_blokady_imienia( CHAR_DATA *ch, int powod )
 {
     switch ( powod )
     {
@@ -238,7 +238,7 @@ void komunikat_blokady_imienia( CHAR_DATA *ch, int powod )
 /*
  * sprawdza, czy zamiast imienia rlacd wyslal Lac Secret Code
  */
-bool czy_lsc( DESCRIPTOR_DATA *d, char *argument )
+static bool czy_lsc( DESCRIPTOR_DATA *d, char *argument )
 {
     /* LSC nie skonfigurowany */
     if ( !lsc_init_str_len )

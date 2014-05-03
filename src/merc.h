@@ -3959,13 +3959,6 @@ char *  one_argument2   args( ( char *argument, char *arg_first ) );
 #define TZ_POST		2 /* postac */
 #define TZ_PRZE		3 /* przedmiot */
 
-/* nanny.c */
-int	check_parse_name args( ( char *name, bool newname ) );
-bool	czy_zdatny_plik	args( ( char *name ) );
-char *	lac_sha1_crypt	args( ( const char *haslo, const char *salt ) );
-bool	poprawne_haslo	args( ( CHAR_DATA *ch, char *arg ) );
-void	nanny		args( ( DESCRIPTOR_DATA *d, char *argument ) );
-
 /* save.c */
 #define FREAD_OBJ_DB	0
 #define FREAD_OBJ_VNUM	1

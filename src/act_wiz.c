@@ -58,6 +58,7 @@
 #include "mp_wyzw.h"
 #include "mp_wczyt.h"
 #include "interp.h"
+#include "nanny.h"
 
 
 #if !defined( WIN32 )

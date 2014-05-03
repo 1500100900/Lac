@@ -38,6 +38,7 @@
 #include "comm.h"
 #include "mp_wyzw.h"
 #include "mp_wyr.h"
+#include "nanny.h"
 
 
 static void	usun_zm_zwod		args( ( TYP_ZMIENNEJ **lista, TYP_ZMIENNEJ *zm,
