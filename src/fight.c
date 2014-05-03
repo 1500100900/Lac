@@ -50,6 +50,7 @@
 #include "mp_wyzw.h"
 #include "interp.h"
 #include "nanny.h"
+#include "const.h"
 
 
 /*
@@ -3286,10 +3287,10 @@ void death_cry( CHAR_DATA *ch, int dt, int pozycja )
 
     if ( ktora >= 0 )
     {
-	OBJ_DATA *obj;
-	char     *name;
-	char      buf[ MAX_STRING_LENGTH ];
-	int       vnum;
+	OBJ_DATA	*obj;
+	const char	*name;
+	char		buf[ MAX_STRING_LENGTH ];
+	int		vnum;
 
 	vnum		= czesci_ciala[ ktora ].vnum;
 

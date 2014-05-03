@@ -43,6 +43,7 @@
 #include "update.h"
 #include "save.h"
 #include "mp_wyzw.h"
+#include "const.h"
 
 
 static CHAR_DATA	*find_przechowalnia	args( ( CHAR_DATA *ch, bool komunikat ) );

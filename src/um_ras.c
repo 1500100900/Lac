@@ -39,6 +39,7 @@
 #include "db.h"
 #include "comm.h"
 #include "update.h"
+#include "const.h"
 
 
 static void	pc_breathe		args( ( CHAR_DATA *ch ) );

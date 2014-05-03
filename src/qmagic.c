@@ -45,6 +45,7 @@
 #include "db.h"
 #include "comm.h"
 #include "mp_wyzw.h"
+#include "const.h"
 
 
 CZAR( spell_aura_pokoju )

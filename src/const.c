@@ -36,12 +36,13 @@
 #include "qmagic.h"
 #include "magic.h"
 #include "db.h"
+#include "const.h"
 
 
 /*
  * Nowosci w Lacu. Teraz przeniesione tutaj do uzycia w do_nowosci i html_news
  */
-char * const lac_nowosci =
+const char * const lac_nowosci =
 "{YMog`ace ci`e zainteresowa`c aktualne nowo`sci w kodzie Laca:{x\n\r"
 " {R*{x \"wyce`n\" w przechowalni pokazuje koszt przechowania przedmiotu\n\r"
 " {R*{x nowe opcje \"ruch\", \"autowciel\" i \"czaspp\"\n\r"
@@ -60,7 +61,7 @@ char * const lac_nowosci =
  * uwaga: colourconv( ) wymaga znajomosci najdluzszej dlugosci kodu koloru,
  * w razie mieszania z kolorami html, uaktualnic kod tam
  */
-const char *tablica_kolorow[ 4 ][ MAX_COLOUR ] =
+const char * const tablica_kolorow[ 4 ][ MAX_COLOUR ] =
 {
     {
 	/* kody kolorow po {, nie uzywaj "-" */
@@ -118,7 +119,7 @@ const char *tablica_kolorow[ 4 ][ MAX_COLOUR ] =
  * Nalezy napisac kod konwertujacy takie tablice (ktore trzeba przeszukiwac) na
  * tablice typu: tablica[ o ] = 'ó'.
  */
-const char *polska_tablica[ 5 ][ 18 ] =
+const char * const polska_tablica[ 5 ][ 18 ] =
 {
     {
 	/* Odpowiedniki angielskie */
@@ -154,7 +155,7 @@ const char *polska_tablica[ 5 ][ 18 ] =
 
 
 /* nazwy dni, koniecznie 7 */
-const char *day_name[ ] =
+const char * const day_name[ ] =
 {
     "ksi`e`zyca", "byka", "k`lamstwa", "gromu", "wolno`sci",
     "wielkich bog`ow", "s`lo`nca"
@@ -162,7 +163,7 @@ const char *day_name[ ] =
 
 
 /* nazwy miesiecy, koniecznie 17 */
-const char *month_name[ ] =
+const char * const month_name[ ] =
 {
     /* zima */ "zimy", "wilka", "lodowego olbrzyma",
     /* przedwiosnie */ "dawnej pot`egi", "wielkiej walki",
@@ -281,7 +282,7 @@ const	struct	class_type	class_table	[ MAX_CLASS ]	=
 /*
  * Titles.
  */
-char *const  title_table [ MAX_CLASS ] /* [ MAX_LEVEL + 1 ] */ [ 2 ] =
+const char * const title_table[ MAX_CLASS ] /* [ MAX_LEVEL + 1 ] */ [ 2 ] =
 {
 	{ "mag",			"czarodziejka"		},
 	{ "kleryk",			"kleryczka"		},
@@ -2628,7 +2629,7 @@ const	struct	liq_type	liq_table_pl	[ LIQ_MAX ]	=
 };
 
 
-const	char	*typy_podloza	[ ]    =
+const char * const typy_podloza[ ] =
 {
     "pomieszczenie",    "miasto",    "pole",    "las",
     "wzg`orza",    "g`ory",    "p`lytka_woda",    "g`l`eboka_woda",
@@ -6226,7 +6227,7 @@ const	char	*typy_podloza	[ ]    =
 /*
  * Domyslne nazwy stopni klanowych - Malven
  */
-const char * clan_lev_name_mm[ 10 ] =	/* meski mianownik */
+const char * const clan_lev_name_mm[ 10 ] =	/* meski mianownik */
 {
     "kandydat",		"nowicjusz",		"giermek",
     "rycerz",		"kap`lan",		"bohater",
@@ -6235,7 +6236,7 @@ const char * clan_lev_name_mm[ 10 ] =	/* meski mianownik */
 };
 
 
-const char * clan_lev_name_zm[ 10 ] =	/* zenski mianownik */
+const char * const clan_lev_name_zm[ 10 ] =	/* zenski mianownik */
 {
     "kandydatka",	"nowicjuszka",		"s`lu`zebna",
     "dama",		"kap`lanka",		"bohaterka",
@@ -6244,7 +6245,7 @@ const char * clan_lev_name_zm[ 10 ] =	/* zenski mianownik */
 };
 
 
-const char * clan_lev_name_md[ 10 ] =	/* meski dopelniacz */
+const char * const clan_lev_name_md[ 10 ] =	/* meski dopelniacz */
 {
     "kandydata",	"nowicjusza",		"giermka",
     "rycerza",		"kap`lana",		"bohatera",
@@ -6253,7 +6254,7 @@ const char * clan_lev_name_md[ 10 ] =	/* meski dopelniacz */
 };
 
 
-const char * clan_lev_name_zd[ 10 ] =	/* zenski dopelniacz */
+const char * const clan_lev_name_zd[ 10 ] =	/* zenski dopelniacz */
 {
     "kandydatki",	"nowicjuszki",		"s`lu`zebnej",
     "damy",		"kap`lanki",		"bohaterki",
@@ -6262,7 +6263,7 @@ const char * clan_lev_name_zd[ 10 ] =	/* zenski dopelniacz */
 };
 
 
-const char * clan_lev_name_mn[ 10 ] =	/* meski narzednik */
+const char * const clan_lev_name_mn[ 10 ] =	/* meski narzednik */
 {
     "kandydatem",	"nowicjuszem",		"giermkiem",
     "rycerzem",		"kap`lanem",		"bohaterem",
@@ -6271,7 +6272,7 @@ const char * clan_lev_name_mn[ 10 ] =	/* meski narzednik */
 };
 
 
-const char * clan_lev_name_zn[ 10 ] =	/* zenski narzednik */
+const char * const clan_lev_name_zn[ 10 ] =	/* zenski narzednik */
 {
     "kandydatk`a",	"nowicjuszk`a",		"s`lu`zebn`a",
     "dam`a",		"kap`lank`a",		"bohaterk`a",
@@ -6283,7 +6284,7 @@ const char * clan_lev_name_zn[ 10 ] =	/* zenski narzednik */
 /*
  * Nazwy stanow klanow - Malven
  */
-const char * clan_stat_name[ 5 ] =
+const char * const clan_stat_name[ 5 ] =
 {
     "uszkodzony", "usuni`ety", "zawieszony", "nowy", "aktywny"
 };

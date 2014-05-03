@@ -47,6 +47,7 @@
 #include "mp_wyzw.h"
 #include "interp.h"
 #include "nanny.h"
+#include "const.h"
 
 
 #if defined( BLEDOMAT )

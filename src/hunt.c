@@ -38,6 +38,7 @@
 #include "db.h"
 #include "comm.h"
 #include "update.h"
+#include "const.h"
 #if !defined( NO_WMEMSET )
 # include <wchar.h>
 #endif

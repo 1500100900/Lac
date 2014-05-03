@@ -36,6 +36,7 @@
 #include "comm.h"
 #include "socjalne.h"
 #include "mp_wyzw.h"
+#include "const.h"
 
 
 typedef void SOC_FUN	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );

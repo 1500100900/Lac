@@ -40,6 +40,7 @@
 #include "db.h"
 #include "comm.h"
 #include "hunt.h"
+#include "const.h"
 
 
 static bool	dragon		args( ( CHAR_DATA *ch, int sn ) );

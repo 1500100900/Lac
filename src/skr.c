@@ -47,6 +47,7 @@
 #include "db.h"
 #include "comm.h"
 #include "update.h"
+#include "const.h"
 
 
 #define BAD_DOOR		  -1

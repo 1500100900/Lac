@@ -1478,7 +1478,7 @@ bool is_name( const char *str, char *namelist )
 }
 
 
-bool is_name2( const char *str, char *namelist )
+bool is_name2( const char *str, const char *namelist )
 {
     char name[ MAX_INPUT_LENGTH ];
 
@@ -1620,7 +1620,7 @@ int number_argument( char *argument, char *arg )
  * Pick off one argument from a string and return the rest.
  * Understands quotes.
  */
-char *one_argument( char *argument, char *arg_first )
+char *one_argument( const char *argument, char *arg_first )
 {
     char cEnd;
 
@@ -1648,7 +1648,7 @@ char *one_argument( char *argument, char *arg_first )
     while ( isspace( (unsigned char) *argument ) )
 	argument++;
 
-    return argument;
+    return (char *) argument;
 }
 
 

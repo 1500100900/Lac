@@ -227,7 +227,7 @@ extern "C" {
 #  define DECLARE_WEAR_OFF_FUN( fun )	WEAR_OFF_FUN fun; SPADANIE( fun ) { return; }
 # else
 #  define DECLARE_SPELL_FUN( fun )	SPELL_FUN fun
-#  define DECLARE_WEAR_OFF_FUN( fun )	WEAR_OFF_FUN fun /* Lam */
+#  define DECLARE_WEAR_OFF_FUN( fun )	const WEAR_OFF_FUN fun /* Lam */
 # endif
 # define DECLARE_GAME_FUN( fun )	GAME_FUN  fun
 # define DECLARE_CLAN_FUN( fun )	CLAN_FUN  fun   /* Malven */
@@ -1256,24 +1256,23 @@ struct stats_type
 /* Lam 10.1.2003 */
 struct holiday_type
 {
-    int		month;		/* miesiac, 1-17 */
-    int		day;		/* dzien w miesiacu, 1-35 */
-    char	*name;		/* nazwa swieta */
-    char	*message;	/* komunikat wysylany graczom o polnocy */
+    const int			month;	/* miesiac, 1-17 */
+    const int			day;	/* dzien w miesiacu, 1-35 */
+    const char *	const	name;	/* nazwa swieta */
+    const char *	const	message;/* komunikat wysylany graczom o polnocy */
 };
 
 struct material_type
 {
-    char	*name;
-    char	*dopelniacz;
-    int		 minlevel;
-    int		 maxlevel;
-    int		 ac; /* ( ac / 8 ) * value[ 0 ] */
-    int		 value; /* jw. * cost */
-    int		 weight; /* jw. * weight */
-    bool	 vampburn; /* czy pali wampiry */
-/*  int		 forms; */
-/* bity - jakich form nie moze miec */
+    const char *	const	name;
+    const char *	const	dopelniacz;
+    const int			minlevel;
+    const int			maxlevel;
+    const int			ac; /* ( ac / 8 ) * value[ 0 ] */
+    const int			value; /* jw. * cost */
+    const int			weight; /* jw. * weight */
+    const bool			vampburn; /* czy pali wampiry */
+/*  const int			forms; */ /* bity - jakich form nie moze miec */
 };
 
 #define		FORMA_KOLCZUGA	b00
@@ -1284,10 +1283,10 @@ struct material_type
  */
 struct object_type
 {
-    char *name;
-    char *name_pl;
-    char *value[ 6 ];
-    bool  spell[ 6 ];
+    const	char *	const	name;
+    const	char *	const	name_pl;
+    const	char *	const	value[ 6 ];
+    const	bool		spell[ 6 ];
 };
 
 /*
@@ -1295,14 +1294,14 @@ struct object_type
  */
 struct dir_type
 {
-    char *name;
-    char *skrot;
-    char *skrotd;
-    char *krotki;
-    char *biernik;
-    char *z_dopelniacz;
-    int   odwrotny;
-    char *na_krew;
+    const	char *	const	name;
+		char *	const	skrot;
+    const	char *	const	skrotd;
+    const	char *	const	krotki;
+    const	char *	const	biernik;
+    const	char *	const	z_dopelniacz;
+    const	int		odwrotny;
+    const	char *	const	na_krew;
 };
 
 
@@ -1327,39 +1326,39 @@ struct game_type
  */
 struct race_type
 {
-    char *              who_name;
-    char *		dopelniacz;
-    char *		celownik;
-    char *		biernik;
-    char *		narzednik;
-    char *		miejscownik;
-    char *		wolacz;
-    char *              name;/* polska bez polskich znakow */
-    char *              ang; /* angielska nazwa - zeby wiedzial, jaka rasa */
-    int                 race_abilities;
-    int			oddychanie;
-    int			poruszanie;
-    int                 size;
-    int			weight;
-    int                 str_mod;
-    int                 int_mod;
-    int                 wis_mod;
-    int                 dex_mod;
-    int                 con_mod;
-    int                 hp_gain;
-    int                 mana_gain;
-    int                 move_gain;
-    int                 thirst_mod;
-    int                 hunger_mod;
-    char *              dmg_message;
-    int			rodzaj;
-    char *		hate;
-    char *		kom_wejscia; /* Lam */
-    char *		kom_wyjscia; /* Lam */
-    int			wearlocs; /* Lam */
-    int			food;	/* Alandar */
-    int			parts; /* Lam */
-    int *		zr; /* Lam: zapamietana rasa */
+    const	char *	const	who_name;
+    const	char *	const	dopelniacz;
+    const	char *	const	celownik;
+    const	char *	const	biernik;
+    const	char *	const	narzednik;
+    const	char *	const	miejscownik;
+    const	char *	const	wolacz;
+    const	char *	const	name;/* polska bez polskich znakow */
+    const	char *	const	ang; /* angielska nazwa - zeby wiedzial, jaka rasa */
+    const	int		race_abilities;
+    const	int		oddychanie;
+    const	int		poruszanie;
+    const	int		size;
+    const	int		weight;
+    const	int		str_mod;
+    const	int		int_mod;
+    const	int		wis_mod;
+    const	int		dex_mod;
+    const	int		con_mod;
+    const	int		hp_gain;
+    const	int		mana_gain;
+    const	int		move_gain;
+    const	int		thirst_mod;
+    const	int		hunger_mod;
+    const	char *	const	dmg_message;
+    const	int		rodzaj;
+    const	char *	const	hate;
+    const	char *	const	kom_wejscia; /* Lam */
+    const	char *	const	kom_wyjscia; /* Lam */
+    const	int		wearlocs; /* Lam */
+    const	int		food;	/* Alandar */
+    const	int		parts; /* Lam */
+		int *	const	zr; /* Lam: zapamietana rasa */
 };
 
 
@@ -1475,9 +1474,9 @@ struct html_page_type
  */
 struct struckdrunk
 {
-    int                 min_drunk_level;
-    int                 number_of_rep;
-    char               *replacement[ 11 ];
+    const int			min_drunk_level;
+    const int			number_of_rep;
+    const char	*	const	replacement[ 11 ];
 };
 
 
@@ -1581,35 +1580,35 @@ struct who_descriptor_data
  */
 struct str_app_type
 {
-    int                 todam;
-    int                 carry;
-    int                 wield;
-    int                 uwalnianie;
+    const int		todam;
+    const int		carry;
+    const int		wield;
+    const int		uwalnianie;
 };
 
 struct int_app_type
 {
-    int                 learn;
-    int			mana;
+    const int		learn;
+    const int		mana;
 };
 
 struct wis_app_type
 {
-    int                 practice;
-    int                 opc;
+    const int		practice;
+    const int		opc;
 };
 
 struct dex_app_type
 {
-    int			defensive;
-    int			tohit;
+    const int		defensive;
+    const int		tohit;
 };
 
 struct con_app_type
 {
-    int                 hitp;
-    double              wyparowanie;
-    int                 shock;
+    const int		hitp;
+    const double	wyparowanie;
+    const int		shock;
 };
 
 
@@ -1673,20 +1672,20 @@ struct healer_data
  */
 struct class_type
 {
-    char        who_name      [ MIL ];  /* Three-letter name for 'who'	*/
-    char	pl_name       [ MIL ];  /* Wersja polska do "kto"	*/
-    char	long_name     [ MIL ];  /* Wersja do "kimjest"		*/
-    char	ang           [ MIL ];	/* Stara nazwa angielska	*/
-    int         attr_prime;             /* Prime attribute		*/
-    int        *weapon;                 /* First weapon			*/
-    int         skill_adept;            /* Maximum skill level		*/
-    int         thac0_00;               /* Thac0 for level  0		*/
-    int         thac0_47;               /* Thac0 for level 47		*/
-    int         hp_min;                 /* Min hp gained on leveling	*/
-    int         hp_max;                 /* Max hp gained on leveling	*/
-    double	bonus;			/* Doswiadczenie		*/
-    bool        fMana;                  /* Class gains mana on level	*/
-    char       *races;			/* Rasy mogace nim byc		*/
+    const char	who_name[ MIL ];	/* Three-letter name for 'who'	*/
+    const char	pl_name[ MIL ];		/* Wersja polska do "kto"	*/
+    const char	long_name[ MIL ];	/* Wersja do "kimjest"		*/
+    const char	ang[ MIL ];		/* Stara nazwa angielska	*/
+    const int	attr_prime;		/* Prime attribute		*/
+    const int	*weapon;		/* First weapon			*/
+    const int	skill_adept;		/* Maximum skill level		*/
+    const int	thac0_00;		/* Thac0 for level  0		*/
+    const int	thac0_47;		/* Thac0 for level 47		*/
+    const int	hp_min;			/* Min hp gained on leveling	*/
+    const int	hp_max;			/* Max hp gained on leveling	*/
+    const double bonus;			/* Doswiadczenie		*/
+    const bool	fMana;			/* Class gains mana on level	*/
+    const char	*races;			/* Rasy mogace nim byc		*/
 };
 
 
@@ -1805,18 +1804,6 @@ struct alias_data
 #define CLAN_POKOJ_DEKLARACJA	1	/* zlozona deklaracja pokoju */
 #define CLAN_POKOJ_ODRZUCONY	2	/* odrzucona deklaracja pokoju */
 #define CLAN_POKOJ_MAX		2
-
-/*
- * Malven: klanowe zmienne globalne w const.c
- */
-extern const char * clan_lev_name_mm[ 10 ];
-extern const char * clan_lev_name_zm[ 10 ];
-extern const char * clan_lev_name_md[ 10 ];
-extern const char * clan_lev_name_zd[ 10 ];
-extern const char * clan_lev_name_mn[ 10 ];
-extern const char * clan_lev_name_zn[ 10 ];
-extern const char * clan_stat_name[ 5 ];
-extern const int    max_clan_level_members[ 10 ];
 
 /*
  * Malven: stosunki miedzyklanowe
@@ -2388,11 +2375,11 @@ struct stosmp
  */
 struct liq_type
 {
-    char	       *liq_name;
-    char               *liq_biernik;
-    char               *liq_narzednik;
-    char               *liq_color;
-    int                 liq_affect [ 3 ];
+    const char *	const	liq_name;
+    const char *	const	liq_biernik;
+    const char *	const	liq_narzednik;
+    const char *	const	liq_color;
+    const int			liq_affect[ 3 ];
 };
 
 /*
@@ -2788,26 +2775,26 @@ struct deathtrap_data
  */
 struct skill_type
 {
-    char *	pl_name;
-    char *	short_name;
-    char *      old_name;		   /* Name of skill               */
-    int         skill_level [ MAX_CLASS ]; /* Level needed by class       */
-    char *	needed;                    /* Lam: wymagana umiejetnosc   */
-    int		multi_level [ MAX_CLASS ]; /* Lam: poziom dla multi-profesji */
-    SPELL_FUN * spell_fun;                 /* Spell pointer (for spells)  */
-    int         target;                    /* Legal targets               */
-    int         minimum_position;          /* Position for caster / user  */
-    int *       pgsn;                      /* Pointer to associated gsn   */
-    int         min_mana;                  /* Minimum mana used           */
-    int         beats;                     /* Waiting time after use      */
-    int		to_practice;		   /* Lam: ile mozna to cwiczyc   */
-    int		to_use;			   /* Lam: ile trzeba uzyc do nauki */
-    int 	rodzaj;			   /* Lam: do komunikatow przy walce */
-    char *      noun_damage;               /* Damage message              */
-    char *      msg_off;                   /* Wear off message            */
-    char *      msg_off_others;		   /* Lam 20.11.2000 na wzor EOS  */
-    WEAR_OFF_FUN *wear_off_fun;		   /* Lam 1.4.2006		  */
-    int         flags;                     /* Ulryk 24.09.2003            */
+	  char *	pl_name;
+    const char *	short_name;
+    const char *	old_name;			/* Name of skill               */
+	  int		skill_level[ MAX_CLASS ];	/* Level needed by class       */
+    const char *	needed;				/* Lam: wymagana umiejetnosc   */
+	  int		multi_level[ MAX_CLASS ];	/* Lam: poziom dla multi-profesji */
+	  SPELL_FUN *	spell_fun;			/* Spell pointer (for spells)  */
+    const int		target;				/* Legal targets               */
+    const int		minimum_position;		/* Position for caster / user  */
+	  int *		pgsn;				/* Pointer to associated gsn   */
+    const int		min_mana;			/* Minimum mana used           */
+    const int		beats;				/* Waiting time after use      */
+    const int		to_practice;			/* Lam: ile mozna to cwiczyc   */
+    const int		to_use;				/* Lam: ile trzeba uzyc do nauki */
+    const int		rodzaj;				/* Lam: do komunikatow przy walce */
+    const char *	noun_damage;			/* Damage message              */
+    const char *	msg_off;			/* Wear off message            */
+    const char *	msg_off_others;			/* Lam 20.11.2000 na wzor EOS  */
+    const WEAR_OFF_FUN	*wear_off_fun;			/* Lam 1.4.2006		  */
+    const int		flags;				/* Ulryk 24.09.2003            */
 };
 
 
@@ -3548,42 +3535,6 @@ struct pose_data
     char *to_room;
 };
 
-
-/*
- * Global constants. (const.c)
- */
-extern	const	char *			tablica_kolorow[ 4 ][ MAX_COLOUR ];
-extern	const	char *			polska_tablica[ 5 ][ 18 ];
-
-extern	const	char *			day_name	[ ];
-extern	const	char *			month_name	[ ];
-extern	const	struct holiday_type	holiday_table	[ ];
-
-extern  const   struct  str_app_type    str_app         [ 31 ];
-extern  const   struct  int_app_type    int_app         [ 31 ];
-extern  const   struct  wis_app_type    wis_app         [ 31 ];
-extern  const   struct  dex_app_type    dex_app         [ 31 ];
-extern  const   struct  con_app_type    con_app         [ 31 ];
-
-extern  const   struct  class_type      class_table     [ MAX_CLASS   ];
-extern	const	int			dir_order	[ MAX_DIR ];
-extern	const	struct	dir_type	kierunki	[ MAX_DIR ];
-extern	const	struct	object_type	typy_przedmiotow[ ITEM_MAX    ];
-extern  const   struct  liq_type        liq_table_pl    [ LIQ_MAX     ];
-extern  const	char			*typy_podloza	[ ];
-extern		struct	skill_type	skill_table	[ MAX_SKILL   ];
-extern  char *  const                   title_table     [ MAX_CLASS   ]
-							[ 2 ];
-extern	const	struct	material_type	material_table	[ MAX_MATERIAL ];
-/* extern	struct  koles_type      koles_table     [ MAX_TRACK ]; */
-extern  const   struct  race_type       race_table      [ MAX_RACE ];
-extern		struct	czesc_ciala	czesci_ciala	[ ];
-extern  const   struct  struckdrunk     drunk           [ ];
-extern	const	int			przelicznik_zysku[ 112 ];
-extern	const	int			przelicznik_wydatkow[ 112 ];
-extern	char *	const			lac_nowosci;
-
-
 struct progi_type
 {
     char *name;
@@ -3793,7 +3744,7 @@ int     can_carry_n     args( ( CHAR_DATA *ch ) );
 int     can_carry_w     args( ( CHAR_DATA *ch ) );
 
 bool    is_name         args( ( const char *str, char *namelist ) );
-bool    is_name2        args( ( const char *str, char *namelist ) );
+bool    is_name2        args( ( const char *str, const char *namelist ) );
 void    affect_to_char  args( ( CHAR_DATA *ch, AFFECT_DATA *paf ) );
 void    affect_remove   args( ( CHAR_DATA *ch, AFFECT_DATA *paf, bool checks ) );
 void    affect_strip    args( ( CHAR_DATA *ch, int sn ) );
@@ -3949,7 +3900,7 @@ void	zjedz_entery_z_konca args( ( char **lancuch ) );
 bool    is_number       args( ( char *arg ) );
 bool    is_ipaddr       args( ( char *arg ) );
 int     number_argument args( ( char *argument, char *arg ) );
-char *  one_argument    args( ( char *argument, char *arg_first ) );
+char *  one_argument    args( ( const char *argument, char *arg_first ) );
 char *  one_argument2   args( ( char *argument, char *arg_first ) );
 
 /* MobC: mob_c.c, mob_var.c */

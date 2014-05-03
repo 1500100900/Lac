@@ -40,6 +40,7 @@
 #include "clan.h"
 #include "save.h"
 #include "kzapisz.h"
+#include "const.h"
 #if defined( sun )
 #include <memory.h>
 #endif

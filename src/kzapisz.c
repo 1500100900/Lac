@@ -42,6 +42,7 @@
 #include "comm.h"
 #include "kzapisz.h"
 #include "mp_wczyt.h"
+#include "const.h"
 
 
 static char	*rozpisz_flagi	args( ( int flagi, bool czy_bez_b00 ) );

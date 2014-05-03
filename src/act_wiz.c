@@ -59,6 +59,7 @@
 #include "mp_wczyt.h"
 #include "interp.h"
 #include "nanny.h"
+#include "const.h"
 
 
 #if !defined( WIN32 )
@@ -1790,7 +1791,7 @@ KOMENDA( do_rstat )
 }
 
 
-char *item_type_name_pl( OBJ_DATA *obj )
+const char *item_type_name_pl( OBJ_DATA *obj )
 {
     OBJ_DATA *in_obj;
     char buf[ MSL ];

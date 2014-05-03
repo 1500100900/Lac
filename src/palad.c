@@ -40,6 +40,7 @@
 #include "db.h"
 #include "comm.h"
 #include "update.h"
+#include "const.h"
 
 
 KOMENDA( do_rozblysk )

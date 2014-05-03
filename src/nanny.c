@@ -43,6 +43,7 @@
 #include "nanny.h"
 #include <errno.h>
 #include "save.h"
+#include "const.h"
 #if defined( MAM_CRYPT_H ) && !defined( NOCRYPT )
 # include <crypt.h>
 #endif

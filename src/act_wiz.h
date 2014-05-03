@@ -104,7 +104,7 @@ extern		BAN_DATA	*ban_list;
 
 char		*ascdata		args( ( const struct tm *timeptr ) );
 ROOM_INDEX_DATA	*find_location		args( ( CHAR_DATA *ch, char *arg ) );
-char		*item_type_name_pl	args( ( OBJ_DATA *obj ) );
+const char	*item_type_name_pl	args( ( OBJ_DATA *obj ) );
 void		konwersja_bumi		args( ( CHAR_DATA *ch ) );
 const char	*krotko_bezczynnosc	args( ( int idle ) );
 REFUSE_DATA	*refuse_lookup		args( ( CHAR_DATA *ch, char *arg ) );
