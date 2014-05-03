@@ -45,6 +45,7 @@
 #include "httpd.h"
 #include "save.h"
 #include "mp_wyzw.h"
+#include "interp.h"
 
 
 static int	format_list_to_char	args( ( char *buf1, int wielkosc_buf1,

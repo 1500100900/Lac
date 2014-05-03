@@ -50,19 +50,19 @@
 #include "socjalne.h"
 #include "hunt.h"
 #include "mp_wyzw.h"
+#include "interp.h"
 
 
-void	do_many			args( ( CHAR_DATA *ch, char *argument ) );
-void	zastepstwo		args( ( CHAR_DATA *ch, int numer ) );
-char	*ity_argument		args( ( const char *argument, int ktory ) );
-char	*po_itym_arg		args( ( const char *argument, int ktory ) );
-void	sprawdz_parametry	args( ( const char *alias, int *parametry ) );
-void	nowe_instrukcje		args( ( CHAR_DATA *ch ) );
-
-
+static void	do_many			args( ( CHAR_DATA *ch, char *argument ) );
+static void	zastepstwo		args( ( CHAR_DATA *ch, int numer ) );
+static char	*ity_argument		args( ( const char *argument, int ktory ) );
+static char	*po_itym_arg		args( ( const char *argument, int ktory ) );
+static void	sprawdz_parametry	args( ( const char *alias, int *parametry ) );
+static void	nowe_instrukcje		args( ( CHAR_DATA *ch ) );
+static ALIAS_DATA *alias_lookup		args( ( CHAR_DATA * ch, char *arg ) );
 
 /* To w wiekszosci dzielo Albiego, jeden z najstarszych fragmentow kodu */
-void do_many( CHAR_DATA *ch, char *argument )
+static void do_many( CHAR_DATA *ch, char *argument )
 {
     CHAR_DATA *rch;
     char buffer[ MAX_INPUT_LENGTH ];
@@ -567,7 +567,7 @@ void nuda( CHAR_DATA *ch )
 */
 
 
-void zastepstwo( CHAR_DATA *ch, int numer )
+static void zastepstwo( CHAR_DATA *ch, int numer )
 {
     const char * const komunikaty[ 16 ] =
     {
@@ -605,7 +605,7 @@ void zastepstwo( CHAR_DATA *ch, int numer )
  * slowo. Zajmuje nowa pamiec dla znalezionego slowa, wiec po uzyciu trzeba
  * zwolnic pamiec!
  */
-char *ity_argument( const char *argument, int ktory )
+static char *ity_argument( const char *argument, int ktory )
 {
     char granica, *wynik = NULL, *tymczas = NULL;
     int i = 1;
@@ -667,7 +667,7 @@ char *ity_argument( const char *argument, int ktory )
  * argument. Rozumie cudzyslowy i apostrofy ('"' i '''), wiec wyrazy w nich
  * zawarte traktowane sa jako jedno slowo.
  */
-char *po_itym_arg( const char *argument, int ktory )
+static char *po_itym_arg( const char *argument, int ktory )
 {
     char granica;
     int i = 1;
@@ -720,7 +720,7 @@ char *po_itym_arg( const char *argument, int ktory )
  * w zaleznosci od tego, czy parametr wystapil czy nie, na miejscu 0 ma numer
  * najwyzszego.
  */
-void sprawdz_parametry( const char *alias, int *parametry )
+static void sprawdz_parametry( const char *alias, int *parametry )
 {
     int i;
 
@@ -762,7 +762,7 @@ const CMD_TYPE *znajdz_polecenie( char *argument, int poziom )
 /*
  * Zeby nie powtarzac w 3 miejscach
  */
-void nowe_instrukcje( CHAR_DATA *ch )
+static void nowe_instrukcje( CHAR_DATA *ch )
 {
     if ( !ch || !ch->desc )
 	return;
@@ -1382,7 +1382,7 @@ bool interpret( CHAR_DATA *ch, char *argument, int zastos )
 }
 
 
-ALIAS_DATA *alias_lookup( CHAR_DATA *ch, char *arg )
+static ALIAS_DATA *alias_lookup( CHAR_DATA *ch, char *arg )
 {
     ALIAS_DATA *alias;
 

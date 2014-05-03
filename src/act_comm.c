@@ -45,6 +45,7 @@
 #include "update.h"
 #include "save.h"
 #include "mp_wyzw.h"
+#include "interp.h"
 
 
 #if defined( BLEDOMAT )

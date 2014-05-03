@@ -3566,7 +3566,6 @@ extern  const   struct  dex_app_type    dex_app         [ 31 ];
 extern  const   struct  con_app_type    con_app         [ 31 ];
 
 extern  const   struct  class_type      class_table     [ MAX_CLASS   ];
-extern  const   struct  cmd_type        cmd_table       [ ];
 extern	const	int			dir_order	[ MAX_DIR ];
 extern	const	struct	dir_type	kierunki	[ MAX_DIR ];
 extern	const	struct	object_type	typy_przedmiotow[ ITEM_MAX    ];
@@ -3610,7 +3609,6 @@ extern unsigned int MAX_STRING;
  * Command functions.
  * Defined in act_*.c (mostly).
  */
-DECLARE_DO_FUN( do_alias	);		/* Lam */
 DECLARE_DO_FUN( do_answer       );
 DECLARE_DO_FUN( do_blank        );
 DECLARE_DO_FUN( do_brief        );
@@ -3621,8 +3619,6 @@ DECLARE_DO_FUN( do_immcmd	);		/* Lam */
 DECLARE_DO_FUN( do_imud		);		/* Lam */
 DECLARE_DO_FUN( do_love         );              /* Qwert */
 DECLARE_DO_FUN( do_nchat        );              /* Lam */
-DECLARE_DO_FUN( do_realias	);		/* Lam */
-DECLARE_DO_FUN( do_unalias	);		/* Lam */
 
 
 /*
@@ -3682,9 +3678,6 @@ DECLARE_DO_FUN( do_unalias	);		/* Lam */
 #define ZM_W_WID_OBJ1	b15
 #define ZM_W_WID_OBJ2	b16
 #define ZM_DYLEMAT	0
-
-/* alias.c - Lam */
-ALIAS_DATA * alias_lookup args( ( CHAR_DATA * ch, char *arg ) );
 
 /* ssm.c */
 bool	load_area_file	args( ( FILE *fp, CHAR_DATA *ch ) );
@@ -3933,16 +3926,6 @@ bool    saves_spell		args( ( int level, CHAR_DATA *victim ) );
 #define INTERP_MPAT	102
 #define CMD_NOTLISTED	b05
 
-/* interp.c */
-bool    interpret       args( ( CHAR_DATA *ch, char *argument, int zastos ) );
-bool    is_number       args( ( char *arg ) );
-bool    is_ipaddr       args( ( char *arg ) );
-int     number_argument args( ( char *argument, char *arg ) );
-char *  one_argument    args( ( char *argument, char *arg_first ) );
-char *  one_argument2   args( ( char *argument, char *arg_first ) );
-const CMD_TYPE *znajdz_polecenie args( ( char *argument, int poziom ) );
-extern          bool                    fLogAll;
-
 /* lanclicz.c */
 void	init_rng	args( ( void ) );
 int     number_fuzzy    args( ( int number ) );
@@ -3963,6 +3946,11 @@ char *	str_str		args( ( char *bstr, const char *astr ) );
 char *  capitalize      args( ( const char *str ) );
 char *  zwielkoliteruj  args( ( const char *str ) );
 void	zjedz_entery_z_konca args( ( char **lancuch ) );
+bool    is_number       args( ( char *arg ) );
+bool    is_ipaddr       args( ( char *arg ) );
+int     number_argument args( ( char *argument, char *arg ) );
+char *  one_argument    args( ( char *argument, char *arg_first ) );
+char *  one_argument2   args( ( char *argument, char *arg_first ) );
 
 /* MobC: mob_c.c, mob_var.c */
 /* typy zmiennych */

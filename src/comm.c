@@ -54,6 +54,7 @@
 #include "httpd.h"
 #include "save.h"
 #include "kzapisz.h"
+#include "interp.h"
 
 
 #if defined( WIN32 )

@@ -37,6 +37,7 @@
 #include "comm.h"
 #include "clan.h"
 #include "httpd.h"
+#include "interp.h"
 
 
 DECLARE_HTML_FUN( html_index );
