@@ -3541,9 +3541,6 @@ struct progi_type
     int   trig;
 };
 
-/* ssm.c */
-extern unsigned int MAX_STRING;
-
 /*
  * Command functions.
  * Defined in act_*.c (mostly).
@@ -3617,45 +3614,6 @@ DECLARE_DO_FUN( do_nchat        );              /* Lam */
 #define ZM_W_WID_OBJ1	b15
 #define ZM_W_WID_OBJ2	b16
 #define ZM_DYLEMAT	0
-
-/* ssm.c */
-char *  real_fread_string args( ( FILE *fp, int *status, const char *plik,
-				int linia, const char *funkcja ) ) __attribute__( ( warn_unused_result ) );
-char *  fread_string_eol args( ( FILE *fp, int *status ) ) __attribute__( ( warn_unused_result ) );
-char *  real_str_dup    args( ( const char *str, const char *plik, int linia,
-				const char *funkcja ) ) __attribute__( ( warn_unused_result ) );
-void    real_free_string args( ( char *pstr, const char *plik, int linia,
-				const char *funkcja ) );
-/* dzieki temu widac, ktora funkcja wywoluje str_dup( )/free_string( ) */
-#ifdef DOPALANY_BUG
-# define str_dup( s ) real_str_dup( s, __FILE__, __LINE__, __FUNCTION__ )
-# define fread_string( str, status ) real_fread_string( str, status, __FILE__, __LINE__, __FUNCTION__ )
-# define free_string( s ) { real_free_string( s, __FILE__, __LINE__, __FUNCTION__ ); s = NULL; }
-#else
-# define str_dup( s ) real_str_dup( s, "?", 0, "?" )
-# define fread_string( str, status ) real_fread_string( str, status, "?", 0, "?" )
-# define free_string( s ) { real_free_string( s, "?", 0, "?" ); s = NULL; }
-#endif
-/* dzieki temu widac, ktora funkcja wywoluje bug( )
-   cbug jak czysta wersja bug - nie pokazuje zrzutu stosu wywolan
-   dbug robi core, ale nie przerywa gry */
-#ifdef DOPALANY_BUG
-# define bug( s, p ) real_bug( s, p, __FILE__, __LINE__, __FUNCTION__, TRUE, FALSE )
-# define cbug( s, p ) real_bug( s, p, __FILE__, __LINE__, __FUNCTION__, FALSE, FALSE )
-# define dbug( s, p ) real_bug( s, p, __FILE__, __LINE__, __FUNCTION__, TRUE, TRUE )
-#else
-# define bug( s, p ) real_bug( s, p, "?", 0, "?", TRUE, FALSE )
-# define cbug( s, p ) real_bug( s, p, "?", 0, "?", FALSE, FALSE )
-# define dbug( s, p ) real_bug( s, p, "?", 0, "?", TRUE, TRUE )
-#endif
-int	ssm_max_free_entry	args( ( void ) );
-int	ssm_num_free_entries	args( ( void ) );
-void	init_string_space	args( ( void ) );
-void	boot_done		args( ( void ) );
-#if defined( DEBUG_SSM )
-void	zrzut_kwasow_lancuchow	args( ( void ) );
-void	oznacz_wszystko		args( ( void ) );
-#endif
 
 #define ZLOTO_M( ile )		( zlota_moneta( ile, TRUE, TRUE ) )
 #define ZLOTO_B( ile )		( zlota_moneta( ile, FALSE, TRUE ) )

@@ -44,6 +44,7 @@
 #include "const.h"
 #include "lanclicz.h"
 #include "handler.h"
+#include "ssm.h"
 
 
 const   int     movement_loss   [ SECT_MAX ]    =

@@ -53,6 +53,7 @@
 #include "interp.h"
 #include "lanclicz.h"
 #include "handler.h"
+#include "ssm.h"
 
 
 static void	do_many			args( ( CHAR_DATA *ch, char *argument ) );

@@ -58,6 +58,20 @@ ZONE_DATA	*znajdz_strefe	args( ( char *nazwa ) );
 void		zwolnij_imie	args( ( IMIONA_DATA *im ) );
 
 
+/* dzieki temu widac, ktora funkcja wywoluje bug( )
+   cbug jak czysta wersja bug - nie pokazuje zrzutu stosu wywolan
+   dbug robi core, ale nie przerywa gry */
+#ifdef DOPALANY_BUG
+# define bug( s, p ) real_bug( s, p, __FILE__, __LINE__, __FUNCTION__, TRUE, FALSE )
+# define cbug( s, p ) real_bug( s, p, __FILE__, __LINE__, __FUNCTION__, FALSE, FALSE )
+# define dbug( s, p ) real_bug( s, p, __FILE__, __LINE__, __FUNCTION__, TRUE, TRUE )
+#else
+# define bug( s, p ) real_bug( s, p, "?", 0, "?", TRUE, FALSE )
+# define cbug( s, p ) real_bug( s, p, "?", 0, "?", FALSE, FALSE )
+# define dbug( s, p ) real_bug( s, p, "?", 0, "?", TRUE, TRUE )
+#endif
+
+
 extern AFFECT_DATA		*affect_free;
 extern AREA_DATA		*area_czysciec; /* Lam */
 extern AREA_DATA		*area_first;

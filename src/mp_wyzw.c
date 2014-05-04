@@ -42,6 +42,7 @@
 #include "mp_wyr.h"
 #include "lanclicz.h"
 #include "handler.h"
+#include "ssm.h"
 
 
 /* to konieczne niestety, zabezpieczenie podpatrzone w Smaugu */

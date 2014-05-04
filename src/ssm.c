@@ -48,6 +48,7 @@
 #include "act_wiz.h"
 #include "db.h"
 #include "comm.h"
+#include "ssm.h"
 
 
 #if !defined( ultrix ) && !defined( apollo ) && !defined( __minix ) && !defined( PLAN9 )
@@ -105,19 +106,6 @@ TempHash **temp_string_hash;
 #define TH_CHR_AND 63
 #define TH_ADDR( len, chr ) ( ( len << 6 ) + chr )
 
-/* These are the original Merc vars in db.c */
-char         str_empty[ 1 ];
-char        *string_space;
-char        *top_string;
-long         nAllocString;
-long         sAllocString;
-long         nOverFlowString;
-long         sOverFlowString;
-
-bool         Full;
-
-volatile bool operacja; /* Lam 2.12.2000: semafor */
-
 #define ZALOZ_BLOKADE_NA_STERTE { if ( operacja ) while ( operacja ) ; \
 	operacja = TRUE; }
 #define ZDEJMIJ_BLOKADE_ZE_STERTY { operacja = FALSE; }
@@ -127,18 +115,29 @@ volatile bool operacja; /* Lam 2.12.2000: semafor */
 #define ZDEJMIJ_BLOKADE_ZE_STERTY { char bufek[ MIL ]; sprintf( bufek, "poczatek %s", __FUNCTION__ ); if ( !fBootDb ) ssm_check_string_space( bufek ); operacja = FALSE; }
 */
 
-void          temp_hash_add( char * );
-char         *temp_hash_find( const char * );
+/* To allocate more memory increase SSM_MEM_SIZE in merc.h. */
+unsigned int	MAX_STRING = SSM_MEM_SIZE * 1024;
+int		HEADER_SIZE;
+long		nAllocString;
+long		sAllocString;
+long		nOverFlowString;
+long		sOverFlowString;
+char		str_empty[ 1 ];
+bool		Full;
+
+static char		*string_space;
+static char		*top_string;
+static volatile bool	operacja; /* Lam 2.12.2000: semafor */
+
+static void	temp_hash_add( char * );
+static char	*temp_hash_find( const char * );
 
 /*
  * ssm_buf_head points to start of shared space,
  * ssm_buf_free points to next free block
  */
-BufEntry *ssm_buf_head, *ssm_buf_free;
+static BufEntry *ssm_buf_head, *ssm_buf_free;
 
-/* To allocate more memory increase SSM_MEM_SIZE in merc.h. */
-unsigned int MAX_STRING = SSM_MEM_SIZE * 1024;
-int HEADER_SIZE;
 
 /*
  * Lam 21.10.2003: Zamiast tworzyc 85 kawalkow po 64 KiB, tworze jeden, ktory
@@ -884,7 +883,7 @@ char *fread_string_eol( FILE *fp, int *status )
 
 
 /* Lookup the string in the boot-time hash table. */
-char *temp_hash_find( const char *str )
+static char *temp_hash_find( const char *str )
 {
     TempHash *ptr;
     int       len;
@@ -916,7 +915,7 @@ char *temp_hash_find( const char *str )
  * String is still in the linked list structure but
  * reference is kept here for quick lookup at boot time;
  */
-void temp_hash_add( char *str )
+static void temp_hash_add( char *str )
 {
     TempHash *add;
     int      len;
@@ -979,12 +978,6 @@ void boot_done( void )
 
 
 #if defined( DEBUG_SSM )
-
-extern OBJ_INDEX_DATA *obj_index_hash[ MAX_KEY_HASH ];
-extern ROOM_INDEX_DATA *room_index_hash[ MAX_KEY_HASH ];
-extern AREA_DATA *area_first;
-extern KOLES_DATA *lista_kolesi;
-extern ZONE_DATA *zone_first;
 
 
 /*

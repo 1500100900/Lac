@@ -48,6 +48,7 @@
 #include "const.h"
 #include "lanclicz.h"
 #include "handler.h"
+#include "ssm.h"
 
 
 static CHAR_DATA	*get_char_prog	args( ( CHAR_DATA *ch, char *argument,

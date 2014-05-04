@@ -50,6 +50,7 @@
 #include "const.h"
 #include "lanclicz.h"
 #include "handler.h"
+#include "ssm.h"
 
 
 #define BAD_DOOR		  -1

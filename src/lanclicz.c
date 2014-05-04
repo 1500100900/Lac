@@ -38,6 +38,7 @@
 #include "comm.h"
 #include "lanclicz.h"
 #include "handler.h"
+#include "ssm.h"
 
 
 static unsigned int	number_well		args( ( void ) );

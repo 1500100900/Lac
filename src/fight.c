@@ -53,6 +53,7 @@
 #include "const.h"
 #include "lanclicz.h"
 #include "handler.h"
+#include "ssm.h"
 
 
 /*

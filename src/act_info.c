@@ -49,6 +49,7 @@
 #include "const.h"
 #include "lanclicz.h"
 #include "handler.h"
+#include "ssm.h"
 
 
 static int	format_list_to_char	args( ( char *buf1, int wielkosc_buf1,

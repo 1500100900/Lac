@@ -36,6 +36,7 @@
 #include "mp_wyzw.h"
 #include "mp_pol.h"
 #include "lanclicz.h"
+#include "ssm.h"
 
 
 /*
