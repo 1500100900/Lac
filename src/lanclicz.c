@@ -37,6 +37,7 @@
 #include "db.h"
 #include "comm.h"
 #include "lanclicz.h"
+#include "handler.h"
 
 
 static unsigned int	number_well		args( ( void ) );

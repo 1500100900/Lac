@@ -41,6 +41,7 @@
 #include "mp_wczyt.h"
 #include "mp_wyr.h"
 #include "lanclicz.h"
+#include "handler.h"
 
 
 /* to konieczne niestety, zabezpieczenie podpatrzone w Smaugu */

@@ -42,6 +42,7 @@
 #include "kzapisz.h"
 #include "const.h"
 #include "lanclicz.h"
+#include "handler.h"
 #if defined( sun )
 #include <memory.h>
 #endif

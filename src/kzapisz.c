@@ -44,6 +44,7 @@
 #include "mp_wczyt.h"
 #include "const.h"
 #include "lanclicz.h"
+#include "handler.h"
 
 
 static char	*rozpisz_flagi	args( ( int flagi, bool czy_bez_b00 ) );

@@ -52,6 +52,7 @@
 #include "mp_wyzw.h"
 #include "interp.h"
 #include "lanclicz.h"
+#include "handler.h"
 
 
 static void	do_many			args( ( CHAR_DATA *ch, char *argument ) );

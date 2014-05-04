@@ -47,6 +47,7 @@
 #include "interp.h"
 #include "const.h"
 #include "lanclicz.h"
+#include "handler.h"
 
 
 static CHAR_DATA	*get_char_prog	args( ( CHAR_DATA *ch, char *argument,

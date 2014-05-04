@@ -41,6 +41,7 @@
 #include "update.h"
 #include "const.h"
 #include "lanclicz.h"
+#include "handler.h"
 
 
 static void	pc_breathe		args( ( CHAR_DATA *ch ) );

@@ -47,6 +47,7 @@
 #include "mp_wyr.h"
 #include "const.h"
 #include "lanclicz.h"
+#include "handler.h"
 
 
 #if !defined( ultrix ) && !defined( apollo ) && !defined( __minix ) && !defined( PLAN9 )
@@ -607,9 +608,6 @@ static HEALER_DATA	*new_healer	args( ( void ) ) __attribute__( ( warn_unused_res
 static ZONE_DATA	*znajdz_strefe_skrot args( ( char *nazwa ) );
 static ZONE_DATA	*znajdz_strefe_po_stolicy args( ( char *nazwa ) );
 static ZONE_DATA	*znajdz_strefe_po_vnumie args( ( int vnum ) );
-
-
-void	czytaj_ciala		args( ( void ) );	/* Lam - handler.c */
 
 
 /*
@@ -8455,7 +8453,6 @@ KOMENDA( do_przeladuj )
 
 
 /* Lam: pozmienialem na ch_printf */
-extern int top_timer; /* handler.c */
 extern int HEADER_SIZE; /* ssm.c */
 KOMENDA( do_memory )
 {

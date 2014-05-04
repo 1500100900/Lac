@@ -41,6 +41,7 @@
 #include "nanny.h"
 #include "const.h"
 #include "lanclicz.h"
+#include "handler.h"
 
 
 static void	usun_zm_zwod		args( ( TYP_ZMIENNEJ **lista, TYP_ZMIENNEJ *zm,

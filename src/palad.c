@@ -42,6 +42,7 @@
 #include "update.h"
 #include "const.h"
 #include "lanclicz.h"
+#include "handler.h"
 
 
 KOMENDA( do_rozblysk )

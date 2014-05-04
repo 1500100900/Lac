@@ -49,6 +49,7 @@
 #include "nanny.h"
 #include "const.h"
 #include "lanclicz.h"
+#include "handler.h"
 
 
 #if defined( BLEDOMAT )

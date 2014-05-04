@@ -42,6 +42,7 @@
 #include "hunt.h"
 #include "const.h"
 #include "lanclicz.h"
+#include "handler.h"
 
 
 static bool	dragon		args( ( CHAR_DATA *ch, int sn ) );

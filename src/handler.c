@@ -49,6 +49,7 @@
 #include "mp_wyr.h"
 #include "const.h"
 #include "lanclicz.h"
+#include "handler.h"
 
 
 /*
@@ -59,27 +60,32 @@ bool	wzmocnienie_affect_join;
 /*
  * Local functions.
  */
-void	affect_modify		args( ( CHAR_DATA *ch, AFFECT_DATA *paf,
-				      bool fAdd, bool check_wield ) );
-FUNKCJA_CZASOWA( przyzwyczajenie_oczu );
-void	komunikat_parzenia	args( ( CHAR_DATA *ch, OBJ_DATA *obj ) );
-CHAR_DATA *real_get_char_room	args( ( CHAR_DATA *ch, char *argument, int *count ) );
-CHAR_DATA *real_get_char_room2	args( ( CHAR_DATA *ch, char *argument, int *count ) );
-OBJ_DATA *real_get_obj_here	args( ( CHAR_DATA *ch, char *argument, int *count ) );
-char	*choice_field_to_name	args( ( struct choice_field_data *values, int value,
-				bool trusted ) );
-bool	choice_field_avail	args( ( struct choice_field_data *values, int value ) );
-char	*bit_field_to_name	args( ( struct bit_field_data *values, int value,
-				bool trusted ) );
-bool	bit_field_avail		args( ( struct bit_field_data *values, int value ) );
-char	*bitvector_field_to_name args( ( struct bitvector_field_data *values,
-				int *value, bool trusted, bool dla_ludzi ) );
-bool	bitvector_field_avail	args( ( struct bitvector_field_data *values,
-				int *value, int size ) );
-void	zapisz_ciala		args( ( void ) );
-void	czytaj_ciala		args( ( void ) );
-void	wywal_smieci_z_listy	args( ( OBJ_DATA *lista, int *klucze,
+static void	affect_modify		args( ( CHAR_DATA *ch, AFFECT_DATA *paf,
+						bool fAdd, bool check_wield ) );
+static void	komunikat_parzenia	args( ( CHAR_DATA *ch, OBJ_DATA *obj ) );
+static CHAR_DATA *real_get_char_room	args( ( CHAR_DATA *ch, char *argument, int *count ) );
+static CHAR_DATA *real_get_char_room2	args( ( CHAR_DATA *ch, char *argument, int *count ) );
+static OBJ_DATA *real_get_obj_here	args( ( CHAR_DATA *ch, char *argument, int *count ) );
+static const char *choice_field_to_name args( ( struct choice_field_data *values,
+					  int value, bool trusted ) );
+static bool	choice_field_avail	args( ( struct choice_field_data *values, int value ) );
+static char	*bit_field_to_name	args( ( struct bit_field_data *values, int value,
+						bool trusted ) );
+static bool	bit_field_avail		args( ( struct bit_field_data *values, int value ) );
+static char	*bitvector_field_to_name args( ( struct bitvector_field_data *values,
+						  int *value, bool trusted, bool dla_ludzi ) );
+static bool	bitvector_field_avail	args( ( struct bitvector_field_data *values,
+						int *value, int size ) );
+static void	zapisz_ciala		args( ( void ) );
+static void	wywal_smieci_z_listy	args( ( OBJ_DATA *lista, int *klucze,
 					int *drogowskazy ) );
+static AIROBJ_DATA *find_airobj		args( ( OBJ_DATA *obj ) );
+static int	licz_graczy		args( ( void ) );
+static int	licz_polaczenia		args( ( void ) );
+static void	zmien_wlasciciela	args( ( OBJ_DATA *obj, char *stare_imie, char *imie ) );
+
+static FUNKCJA_CZASOWA( przyzwyczajenie_oczu );
+
 
 /*
  * Lam 24.8.98: funkcje czasowe
@@ -221,7 +227,7 @@ AIROBJ_DATA *new_airobj( OBJ_DATA *obj )
 }
 
 
-AIROBJ_DATA *find_airobj( OBJ_DATA *obj )
+static AIROBJ_DATA *find_airobj( OBJ_DATA *obj )
 {
     AIROBJ_DATA *airobj;
 
@@ -825,7 +831,7 @@ int can_carry_w( CHAR_DATA *ch )
 /*
  * Apply or remove an affect to a character.
  */
-void affect_modify( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd, bool check_wield )
+static void affect_modify( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd, bool check_wield )
 {
     OBJ_DATA *wield;
     OBJ_DATA *wield2;
@@ -1477,7 +1483,7 @@ void char_from_room( CHAR_DATA *ch )
 }
 
 
-FUNKCJA_CZASOWA( przyzwyczajenie_oczu )
+static FUNKCJA_CZASOWA( przyzwyczajenie_oczu )
 {
     bool czy_ciemnia;
 
@@ -2100,7 +2106,7 @@ bool can_equip_index_at( OBJ_INDEX_DATA *obj, int at )
 #define DLA_POMIESZCZENIA( t ) \
     act( ZM_WZROK | ZM_WID_CHAR | ZM_WID_OBJ1, t, ch, obj, NULL, TO_ROOM );
 
-void komunikat_parzenia( CHAR_DATA *ch, OBJ_DATA *obj )
+static void komunikat_parzenia( CHAR_DATA *ch, OBJ_DATA *obj )
 {
     act( ZM_PRZYT | ZM_W_WID_OBJ1, "Co`s ci`e parzy, ale udaje ci si`e tego pozby`c.", ch, obj, NULL, TO_CHAR );
     if ( obj->wear_loc == WEAR_HOLD
@@ -3292,7 +3298,7 @@ void extract_char( CHAR_DATA *ch, bool fPull )
 }
 
 
-CHAR_DATA *real_get_char_room( CHAR_DATA *ch, char *argument, int *count )
+static CHAR_DATA *real_get_char_room( CHAR_DATA *ch, char *argument, int *count )
 {
     CHAR_DATA *rch;
     char       arg[ MAX_INPUT_LENGTH ];
@@ -3313,7 +3319,7 @@ CHAR_DATA *real_get_char_room( CHAR_DATA *ch, char *argument, int *count )
 }
 
 
-CHAR_DATA *real_get_char_room2( CHAR_DATA *ch, char *argument, int *count )
+static CHAR_DATA *real_get_char_room2( CHAR_DATA *ch, char *argument, int *count )
 {
     CHAR_DATA *rch;
     char       arg[ MAX_INPUT_LENGTH ];
@@ -3697,25 +3703,6 @@ CHAR_DATA *get_mob_world_vnum( CHAR_DATA *ch, char *argument )
 
 
 /*
- * Find some object with a given index data.
- * Used by area-reset 'P' command.
- */
-OBJ_DATA *get_obj_type( OBJ_INDEX_DATA *pObjIndex )
-{
-    OBJ_DATA *obj;
-
-    for ( obj = object_list; obj; obj = obj->next )
-	if ( !obj->deleted
-	  && obj->pIndexData == pObjIndex )
-	{
-	    return obj;
-	}
-
-    return NULL;
-}
-
-
-/*
  * Find an obj in a list.
  */
 OBJ_DATA *get_obj_list( CHAR_DATA *ch, char *argument, OBJ_DATA *list )
@@ -3814,7 +3801,7 @@ OBJ_DATA *get_obj_wear( CHAR_DATA *ch, char *argument )
 }
 
 
-OBJ_DATA *real_get_obj_here( CHAR_DATA *ch, char *argument, int *count )
+static OBJ_DATA *real_get_obj_here( CHAR_DATA *ch, char *argument, int *count )
 {
     OBJ_DATA *obj;
     char      arg[ MAX_INPUT_LENGTH ];
@@ -4635,8 +4622,8 @@ bool can_drop_obj( CHAR_DATA *ch, OBJ_DATA *obj )
  *
  * Na poczatek ogolne funkcje dla wszystkich rodzajow funkcji.
  */
-char *choice_field_to_name( struct choice_field_data *values, int value,
-				bool trusted )
+static const char *choice_field_to_name( struct choice_field_data *values,
+					  int value, bool trusted )
 {
     int i;
 
@@ -4651,7 +4638,7 @@ char *choice_field_to_name( struct choice_field_data *values, int value,
 }
 
 
-bool choice_field_avail( struct choice_field_data *values, int value )
+static bool choice_field_avail( struct choice_field_data *values, int value )
 {
     int i;
 
@@ -4663,7 +4650,7 @@ bool choice_field_avail( struct choice_field_data *values, int value )
 }
 
 
-char *bit_field_to_name( struct bit_field_data *values, int value,
+static char *bit_field_to_name( struct bit_field_data *values, int value,
 				bool trusted )
 {
     static char buf[ 1024 ];
@@ -4683,7 +4670,7 @@ char *bit_field_to_name( struct bit_field_data *values, int value,
 }
 
 
-bool bit_field_avail( struct bit_field_data *values, int value )
+static bool bit_field_avail( struct bit_field_data *values, int value )
 {
     int i;
 
@@ -4697,7 +4684,7 @@ bool bit_field_avail( struct bit_field_data *values, int value )
 }
 
 
-char *bitvector_field_to_name( struct bitvector_field_data *values,
+static char *bitvector_field_to_name( struct bitvector_field_data *values,
 				int *value, bool trusted, bool dla_ludzi )
 {
     static char buf[ 1024 ];
@@ -4736,7 +4723,7 @@ char *bitvector_field_to_name( struct bitvector_field_data *values,
 }
 
 
-bool bitvector_field_avail( struct bitvector_field_data *values,
+static bool bitvector_field_avail( struct bitvector_field_data *values,
 				int *value, int size )
 {
     int lokalna[ 16 ]; /* zeby nie uzywac malloc */
@@ -4759,7 +4746,7 @@ bool bitvector_field_avail( struct bitvector_field_data *values,
 }
 
 
-struct choice_field_data apply_values[ ] =
+static struct choice_field_data apply_values[ ] =
 {
     { APPLY_NONE,		"nic",				FALSE,	FALSE },
     { APPLY_STR,		"si`l`e",			TRUE,	FALSE },
@@ -4792,7 +4779,7 @@ struct choice_field_data apply_values[ ] =
 };
 
 
-char *affect_loc_name_pl_b( int location )
+const char *affect_loc_name_pl_b( int location )
 {
     return choice_field_to_name( apply_values, location, FALSE );
 }
@@ -4804,7 +4791,7 @@ bool affect_loc_avail( int location )
 }
 
 
-struct bitvector_field_data affect_bit_values[ ] =
+static struct bitvector_field_data affect_bit_values[ ] =
 {
     { AFF_BLIND,		"o`slepienie",		TRUE,	FALSE,
       "`slepy" },
@@ -4936,7 +4923,7 @@ bool affect_bit_avail( int *vector )
 }
 
 
-struct bitvector_field_data extra_bit_values[ ] =
+static struct bitvector_field_data extra_bit_values[ ] =
 {
     { ITEM_GLOW,		"b`lyszczy",		TRUE,	FALSE,
       "dodaje napis \"(b`lyszczy)\", bez znaczenia" },
@@ -5068,7 +5055,7 @@ char *wear_flag_name_pl( int wear )
 }
 
 
-struct bit_field_data mob_act_flags[ ] =
+static struct bit_field_data mob_act_flags[ ] =
 {
     { ACT_IS_NPC,		"mob",			TRUE,	FALSE,
       "" },
@@ -5161,7 +5148,7 @@ bool act_flag_avail( int act )
 }
 
 
-struct bit_field_data room_flags_table[ ] =
+static struct bit_field_data room_flags_table[ ] =
 {
     { ROOM_DARK,		"ciemny",		TRUE,	FALSE,
       "trzeba widzie`c w ciemno`sci albo mie`c latarni`e" },
@@ -5212,7 +5199,7 @@ char *room_flag_name_pl( int room )
 }
 
 
-struct bit_field_data exit_info_flags[ ] =
+static struct bit_field_data exit_info_flags[ ] =
 {
     { EX_ISDOOR,		"drzwi",		TRUE,	FALSE,
       "" },
@@ -5303,7 +5290,7 @@ bool is_authorized( CHAR_DATA *ch, char *skllnm )
  * Lam 19-20.3.98: funkcja zapisuje zawartosc czyscca, wczesniej usuwajac
  * z niego wszystko, co nie jest cialem postaci gracza.
  */
-void zapisz_ciala( void )
+static void zapisz_ciala( void )
 {
     ROOM_INDEX_DATA *room = get_room_index( ROOM_VNUM_GRAVEYARD_A );
     OBJ_DATA *obj, *next_obj;
@@ -5646,7 +5633,7 @@ int zloto_w_pojemnikach( OBJ_DATA *lista )
  * Lam 28.4.2006: szukanie takze w pojemnikach (zauwazyl Civril), informacja
  * dla graczy, ktorzy nie czytali ?wyjdz/?zapisz.
  */
-void wywal_smieci_z_listy( OBJ_DATA *lista, int *klucze, int *drogowskazy )
+static void wywal_smieci_z_listy( OBJ_DATA *lista, int *klucze, int *drogowskazy )
 {
     OBJ_DATA *obj, *obj_next;
 
@@ -5722,7 +5709,7 @@ void wywal_smieci( CHAR_DATA *ch )
  * Lam 11.3.98
  * Lam 10.4.2004: ukrywanie niesmiertelnych z BN > 102 (bo rekord mozna miec na 102)
  */
-int licz_graczy( void )
+static int licz_graczy( void )
 {
     DESCRIPTOR_DATA *desc;
     CHAR_DATA *ch;
@@ -5748,7 +5735,7 @@ int licz_graczy( void )
 /*
  * Lam 11.3.98
  */
-int licz_polaczenia( void )
+static int licz_polaczenia( void )
 {
     DESCRIPTOR_DATA *desc;
     CHAR_DATA *ch;
@@ -5948,7 +5935,7 @@ void sprawdz_wampira( CHAR_DATA *ch )
 }
 
 
-void zmien_wlasciciela( OBJ_DATA *obj, char *stare_imie, char *imie )
+static void zmien_wlasciciela( OBJ_DATA *obj, char *stare_imie, char *imie )
 {
     OBJ_DATA *p;
 
