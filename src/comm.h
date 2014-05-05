@@ -1,3 +1,44 @@
+/* stale d->welcome_state */
+#define WELCOME_DONE	0
+#define WELCOME_PENDING	1
+#define WELCOME_BAN	2
+
+/*
+ * ZMYSLY, z braku komentarzy wprowadzam w dokladnie takiej formie, jaka
+ * zaproponowalem kwartal temu :(
+ * opis w doc/zmysly.txt
+ * Lam 9.3.2006
+ */
+#define ZM_WZROK	b00
+#define ZM_SLUCH	b01
+#define ZM_WECH		b02
+#define ZM_DOTYK	b03
+#define ZM_ZAWSZE	b04
+#define ZM_PRZYT	( ZM_WZROK | ZM_SLUCH | ZM_WECH | ZM_DOTYK )
+#define ZM_WID_CHAR	b05
+#define ZM_WID_VICT	b06
+#define ZM_WID_OBJ1	b07
+#define ZM_WID_OBJ2	b08
+#define ZM_W_WZROK	b09
+#define ZM_W_SLUCH	b10
+#define ZM_W_WECH	b11
+#define ZM_W_DOTYK	b12
+#define ZM_W_PRZYT	( ZM_W_WZROK | ZM_W_SLUCH | ZM_W_WECH | ZM_W_DOTYK )
+#define ZM_W_WID_CHAR	b13
+#define ZM_W_WID_VICT	b14
+#define ZM_W_WID_OBJ1	b15
+#define ZM_W_WID_OBJ2	b16
+#define ZM_DYLEMAT	0
+
+
+/* Ulryk 08.02.2004 */
+struct stats_type
+{
+    int         day [ MAX_DAYS ];   /* najwiecej graczy w ciagu ostatnich dni */
+    int         total;              /* najwiecej graczy od startu */
+};
+
+
 DECLARE_DO_FUN(	do_imctl	); /* Lam */
 
 bool	check_ban		args( ( char *host, char *ip, char *user, int type ) );
@@ -50,3 +91,11 @@ extern bool			merc_down;
 extern char			str_boot_time[ ];
 extern bool			TylkoKonwersja;
 extern bool			wizlock;
+
+/* Lam: uzywac ponizszych, dzieki czemu bedzie mozna zmieniac super_act
+	do woli, nie zmieniajac niczego innego w kodzie, a jedynie makra */
+#define act( z, f, ch, a1, a2, t )    super_act( 0, z, f, ch, a1, a2, t, FALSE )
+#define act_pp( z, f, ch, a1, a2, t ) super_act( 0, z, f, ch, a1, a2, t, TRUE )
+#define STC( t, ch )	send_to_char( t, ch )
+#define ASTC( t, ch )	super_act( 0, ZM_ZAWSZE, t, ch, NULL, NULL, TO_CHAR, TRUE )
+#define STH( d, t )	write_to_who_buffer( d, t, 0 )

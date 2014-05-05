@@ -51,3 +51,6 @@ int	znajdz_adres_pl_kol	args( ( const char *txt, int literka ) );
 char	*zwielkoliteruj		args( ( const char *str ) );
 
 struct miodek_data	*znajdz_miodka	args( ( const char *arg ) );
+
+#define ZLOTO_M( ile )		( zlota_moneta( ile, TRUE, TRUE ) )
+#define ZLOTO_B( ile )		( zlota_moneta( ile, FALSE, TRUE ) )

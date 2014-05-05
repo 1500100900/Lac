@@ -1,3 +1,185 @@
+#define AREA_NOT_LISTED b00
+#define AREA_NO_TELEPORT b01
+
+typedef struct	sorted_skill_data	SORTED_SKILL_DATA;
+
+/*
+ * Lam 6.11.2000
+ */
+struct pose_data
+{
+    char *to_char;
+    char *to_room;
+};
+
+/* Lam 26.10.2004 */
+struct sorted_skill_data
+{
+    SORTED_SKILL_DATA *next;
+    int sn;
+};
+
+/*
+ * Zapamietywanie wiadomosci wyslanych do gracza po jego odejsciu od klawiatury
+ */
+struct tell_data
+{
+    TELL_DATA  *next;
+    char       *tell;
+};
+
+/*
+ * Zadania mobprogowe
+ */
+struct mpquest_data
+{
+    MPQUEST_DATA *next;
+    int		  vnum;
+    int		  stage;
+    int		  data[ 5 ];
+    char	 *title;
+    char	 *descr;
+};
+
+/*
+ * Help table types.
+ */
+struct help_data
+{
+    HELP_DATA *         next;
+    AREA_DATA *		area;
+    int                 level;
+    char *              keyword;
+    char *              text;
+};
+
+/*
+ * Pojedyncza notka.
+ * Lam 8.4.98: dodana mozliwosc glosowania
+ * Lam 28.8.98: kategorie
+ */
+struct note_data
+{
+    NOTE_DATA * next;
+    char *      sender;
+    char *      date;
+    char *      to_list;
+    char *      subject;
+    char *      text;
+    char *	yes;	/* glosujacy za "tak" */
+    char *	no;	/* glosujacy za "nie" */
+    char *	abst;	/* wstrzymujacy sie   */
+    int		yesnum, nonum, abstnum; /* liczniki */
+    int		vote;	/* czy glosowanie? */
+    int		cat;	/* kategoria */
+    time_t      date_stamp;
+};
+
+/*
+ * Lam (5.5.97?): aliasy
+ */
+struct alias_data
+{
+    ALIAS_DATA *	next;
+    char *		name;
+    char *		todo;
+};
+
+/*
+ * An affect.
+ */
+struct affect_data
+{
+    AFFECT_DATA *       next;
+    CHAR_DATA *		caster; /* Lam */
+    int                 type;
+    int                 duration;
+    int                 location;
+    int                 modifier;
+    int                 bitvector[ AFF_FLAGS_SIZE ];
+    int			level; /* Lam */
+    bool                deleted;
+};
+
+/*
+ * A kill structure (indexed by level).
+ */
+struct kill_data
+{
+    int                 number;
+    int                 killed;
+};
+
+struct schemat_data
+{
+    SCHEMAT_DATA      * next;         /* nastepny schemat na liscie */
+    char	      * nazwa;        /* nazwa schematu */
+    char	      * schemat;      /* sam schemat */
+};
+
+/* Lam 17.10.2006: zablokowane imiona */
+struct imiona_data
+{
+    IMIONA_DATA	*nast;
+    char	*imie;
+    char	*blokujacy;
+    int		powod;
+    time_t	kiedy;
+};
+
+struct powody_data
+{
+    char	*skrot;
+    char	*nazwa;
+    char	*tytul;
+    char	*objasnienie;
+};
+
+struct auction_data
+{
+    OBJ_DATA	*item;
+    CHAR_DATA	*seller;
+    CHAR_DATA	*buyer;
+    int		bet;
+    int		going;
+    int		pulse;
+    int		starting;
+    int         zastaw;
+};
+
+struct zwod_data
+{
+    ZWOD_DATA *		next;
+    CHAR_DATA *		ch;
+};
+
+struct fight_data
+{
+    CHAR_DATA *vch;
+    FIGHT_DATA *next;
+};
+
+struct miodek_data
+{
+    char	*slowo;
+    char	*zastepstwo;
+};
+
+/*
+ * Smiertelne pulapki, ktore mozna umieszczac w pomieszczeniach.
+ * Lam 22.5.99
+ * Zauwaz, ze moze byc tylko jedna pulapka w pomieszczeniu.
+ */
+struct deathtrap_data
+{
+    int			trap_type;
+    char *		trap_string;
+};
+
+
+#define LISTA_IMION( imie ) ( &imiona[ strlen_pl( imie ) ][ UPPER( *( imie ) ) & 63 ] )
+
+
 DECLARE_DO_FUN(	do_areas	);
 DECLARE_DO_FUN(	do_astat	); /* Lam */
 DECLARE_DO_FUN(	do_memory	);
@@ -78,10 +260,6 @@ extern AREA_DATA		*area_first;
 extern AUCTION_DATA		*auction;
 extern char			bug_buf[ ];
 extern CHAR_DATA		*char_list;
-extern CLAN_DATA		*clan_free;
-extern CLAN_DATA		*clan_list;
-extern CLAN_MEMBER_DATA		*clan_member_free;
-extern CLAN_REL_DATA		*clan_rel_free;
 extern char			*daPrompt;
 extern time_t			down_time;
 extern bool			fBootDb;

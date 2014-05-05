@@ -1,3 +1,15 @@
+typedef	struct	stosmp			STOSMP;
+
+/* fragment stosu dla oblicz_wyrazenie */
+struct stosmp
+{
+    STOSMP *nast;
+    int typ; /* ujemny - typ, >= 0 - priorytet */
+    int wart;
+    void *wsk;
+    char txt[ MIL + 4 ]; /* prowizorka, takie trzymaja sie najdluzej ;) */
+};
+
 void mv_achr( CHAR_DATA *ch, char *argument, CHAR_DATA *actor,
 			OBJ_DATA *obj, CHAR_DATA *rndm,
 			CHAR_DATA *vict, OBJ_DATA *v_obj );

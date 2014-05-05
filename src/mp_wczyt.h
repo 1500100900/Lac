@@ -1,3 +1,9 @@
+struct progi_type
+{
+    char *name;
+    int   trig;
+};
+
 bool		load_mobprogs		args ( ( FILE* fp ) );
 bool   		mprog_read_programs	args ( ( FILE* fp, void *param,
 						int gdzie ) );

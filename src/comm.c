@@ -60,6 +60,7 @@
 #include "lanclicz.h"
 #include "handler.h"
 #include "ssm.h"
+#include "clan.h"
 
 
 #if defined( WIN32 )
@@ -180,6 +181,20 @@ struct Library *SocketBase;
 #define	TELQUAL_SEND	1
 #define	TELQUAL_IS	0
 #endif
+
+/* stale d->telnet_state */
+#define TELNET_NORM	0
+#define TELNET_IAC	1
+#define TELNET_SB	2
+#define TELNET_TTYPE0	3
+#define TELNET_TTYPE	4
+#define TELNET_NAWS1	5
+#define TELNET_NAWS2	6
+#define TELNET_NAWS3	7
+#define TELNET_NAWS4	8
+#define TELNET_IGNTOSE	9
+#define TELNET_IGNTOSE2	10
+#define TELNET_DWDW	11 /* DO/WILL/DONT/WONT */
 
 #if defined( WIN32 )
 int	gettimeofday	args( ( struct timeval *tp, void *tzp ) );

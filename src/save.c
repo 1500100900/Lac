@@ -52,6 +52,26 @@
 int	system			args( ( const char *string ) );
 #endif
 
+#define MAND            3344556 /* Magic # for manditory field           */
+#define SPECIFIED       3344557 /* Key was used already.                 */
+#define DEFLT           3344558 /* Use default from fread_char_obj       */
+
+#define FREAD_OBJ_DB	0
+#define FREAD_OBJ_VNUM	1
+#define FREAD_OBJ_BLAD	2
+
+/*
+ * Player character key data struct
+ * Stuff for new error trapping of corrupt pfiles.
+ */
+struct key_data
+{
+    char        key[ 13 ];      /* Increase if you make a key > 12 chars */
+    int         string;         /* TRUE for string, FALSE for int        */
+    int         deflint;        /* Default value                         */
+    void *	deflptr;	/* Default pointer                       */
+    void *      ptrs[ 7 ];      /* Increase if you have > 6 parms/line   */
+};
 
 static void	rozbierz		args( ( CHAR_DATA *ch ) );
 static void	ubierz			args( ( CHAR_DATA *ch ) );

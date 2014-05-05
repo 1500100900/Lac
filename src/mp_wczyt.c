@@ -32,6 +32,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include "merc.h"
+#include "mp_wczyt.h"
 #include "db.h"
 #include "mp_wyzw.h"
 #include "mp_pol.h"

@@ -227,14 +227,13 @@ extern "C" {
 #  define DECLARE_WEAR_OFF_FUN( fun )	WEAR_OFF_FUN fun; SPADANIE( fun ) { return; }
 # else
 #  define DECLARE_SPELL_FUN( fun )	SPELL_FUN fun
-#  define DECLARE_WEAR_OFF_FUN( fun )	const WEAR_OFF_FUN fun /* Lam */
+#  define DECLARE_WEAR_OFF_FUN( fun )	WEAR_OFF_FUN fun /* Lam */
 # endif
 # define DECLARE_GAME_FUN( fun )	GAME_FUN  fun
 # define DECLARE_CLAN_FUN( fun )	CLAN_FUN  fun   /* Malven */
 # define DECLARE_PROG_FUN( fun )	PROG_FUN  fun	/* Lam */
 # define DECLARE_HTML_FUN( fun )	HTML_FUN  fun
 #endif
-
 
 /*
  * Short scalar types.
@@ -342,7 +341,6 @@ typedef int	bool;
 #define ESC '\033'
 #define ESCS "\033"
 
-
 /*
  * Ok here we define strdup so it can no longer be confused
  * with str_dup.  Suggested by erwin@pip.dknet.dk - Kahn.
@@ -356,7 +354,6 @@ typedef int	bool;
 # undef perror
 # define perror PERROR_TO_CIENIZNA__TOCAJ_LAC_PERROR
 #endif
-
 
 
 /***************************************************************************
@@ -454,7 +451,6 @@ typedef int	bool;
 #define MAX_AFF_FLAG		53 /* zawsze uaktualnic! */
 #define AFF_FLAGS_SIZE   ( MAX_AFF_FLAG / BITS_PER_INT + 1 )
 
-
 /*
  * Alandar: jak kumulowane sa wplywy
  */
@@ -464,7 +460,6 @@ typedef int	bool;
 #define ENH_MOD		3	/* czas malejaco, a modyfikator liniowo */
 #define ENH_MAX		4	/* Lam: odswiezanie - dobijanie do maksimum */
 
-
 /*
  * Sex.
  * Used in #MOBILES.
@@ -472,8 +467,6 @@ typedef int	bool;
 #define SEX_NEUTRAL	0
 #define SEX_MALE	1
 #define SEX_FEMALE	2
-
-
 
 /*
  * Item types.
@@ -582,7 +575,6 @@ wersji Envy (dla zgodnosci krain) */
 #define ITEM_HOLD		b14
 #define ITEM_WEAR_FACE		b15
 
-
 /*
  * Apply types (for affects).
  * Used in #OBJECTS.
@@ -634,9 +626,6 @@ wersji Envy (dla zgodnosci krain) */
 #define CONT_CLOSED		b02
 #define CONT_LOCKED		b03
 
-
-
-
 /*
  * Room flags.
  * Used in #ROOMS.
@@ -665,7 +654,6 @@ wersji Envy (dla zgodnosci krain) */
 #define ROOM_NO_SUMMON		b20 /* Lam - bez czarow przywolujacych, ale
 					dziala / (powrot) */
 
-
 /*
  * Directions.
  * Used in #ROOMS.
@@ -683,7 +671,6 @@ wersji Envy (dla zgodnosci krain) */
 #define DIR_NORTHWEST		8
 #define DIR_SOUTHWEST		9
 #define MAX_DIR			10
-
 
 /*
  * Flagi wyjsc. Wyjscia sa zrobione zle, nalezy je poprawic. Ponizej numery
@@ -759,7 +746,6 @@ wersji Envy (dla zgodnosci krain) */
 #define MAX_WEAR                     20
 
 
-
 /***************************************************************************
  *                                                                         *
  *                   VALUES OF INTEREST TO AREA BUILDERS                   *
@@ -767,16 +753,12 @@ wersji Envy (dla zgodnosci krain) */
  *                                                                         *
  ***************************************************************************/
 
-
-
 /*
  * Conditions.
  */
 #define COND_DRUNK                    0
 #define COND_FULL                     1
 #define COND_THIRST                   2
-
-
 
 /*
  * Positions.
@@ -789,8 +771,6 @@ wersji Envy (dla zgodnosci krain) */
 #define POS_RESTING                   5
 #define POS_FIGHTING                  6
 #define POS_STANDING                  7
-
-
 
 /*
  * ACT bits for players.
@@ -833,6 +813,7 @@ wersji Envy (dla zgodnosci krain) */
 #define INF_LACSAKRA		b09
 
 #define CZY_OPCJA( ch, op )	( ch->pcdata && IS_SET( ch->pcdata->opcje, op ) )
+
 /*
  * Bity ch->pcdata->opcje. Zastepstwo ch->act w przypadku opcji.
  */
@@ -883,7 +864,6 @@ wersji Envy (dla zgodnosci krain) */
 #define TEMPFLAG_WYMUSZENIE	b09 /* wymuszenie zmiany imienia	*/
 #define TEMPFLAG_KMNKT_BWWU	b10 /* komunikat dla BWWU tracacych um. */
 
-
 /*
  * Channel bits.
  */
@@ -910,8 +890,6 @@ wersji Envy (dla zgodnosci krain) */
 #define WRONG_RACE		b00
 #define WRONG_CLASS		b01
 #define WRONG_PERSON		b02
-
-
 
 /*
  * Structure types.
@@ -949,7 +927,6 @@ typedef struct	restrykcje_data		RESTRYKCJE_DATA;
 typedef struct	room_index_data		ROOM_INDEX_DATA;
 typedef struct	schemat_data		SCHEMAT_DATA;
 typedef struct	shop_data		SHOP_DATA;
-typedef struct	sorted_skill_data	SORTED_SKILL_DATA;
 typedef struct	tell_data		TELL_DATA;
 typedef struct	timer_data		TIMER_DATA;
 typedef struct	time_info_data		TIME_INFO_DATA;
@@ -967,9 +944,6 @@ typedef struct	room_rand_prog_data	RRAND_DATA;
 typedef struct	mob_prog_act_list	MPROG_ACT_LIST;
 */
 typedef struct	typ_zmiennej		TYP_ZMIENNEJ;
-typedef	struct	stosmp			STOSMP;
-
-
 
 /*
  * Function types.
@@ -986,13 +960,11 @@ typedef void GAME_FUN                   args( ( CHAR_DATA *ch,
 						CHAR_DATA *croupier,
 						char *argument ) );
 typedef void TIMER_FUN			args( ( TIMER_DATA *timer ) );
-typedef void CLAN_FUN                   args( ( CHAR_DATA *ch,		/* Malven */
-					       char *argument ) );
 typedef void PROG_FUN		args( ( char* argument, CHAR_DATA* ch,
 				       CHAR_DATA* actor, OBJ_DATA* obj,
 				       CHAR_DATA* rndm, CHAR_DATA* vict,
 				       OBJ_DATA* v_obj ) );
-typedef void HTML_FUN		args( ( WHO_DESCRIPTOR_DATA *d ) );
+
 
 /* Lam */
 #define KOMENDA( nazwa )	 void nazwa( CHAR_DATA *ch, char *argument )
@@ -1009,51 +981,6 @@ typedef void HTML_FUN		args( ( WHO_DESCRIPTOR_DATA *d ) );
 				       CHAR_DATA* actor, OBJ_DATA* obj, \
 				       CHAR_DATA* rndm, CHAR_DATA* vict, \
 				       OBJ_DATA* v_obj )
-#define HTML( nazwa )		void nazwa( WHO_DESCRIPTOR_DATA *d )
-
-/*
- * Player character key data struct
- * Stuff for new error trapping of corrupt pfiles.
- */
-struct key_data
-{
-    char        key[ 13 ];      /* Increase if you make a key > 12 chars */
-    int         string;         /* TRUE for string, FALSE for int        */
-    int         deflint;        /* Default value                         */
-    void *	deflptr;	/* Default pointer                       */
-    void *      ptrs[ 7 ];      /* Increase if you have > 6 parms/line   */
-};
-
-#define MAND            3344556 /* Magic # for manditory field           */
-#define SPECIFIED       3344557 /* Key was used already.                 */
-#define DEFLT           3344558 /* Use default from fread_char_obj       */
-
-
-struct choice_field_data
-{
-	const int value;
-	const char * const name;
-	const bool available;
-	const bool auth_required;
-};
-
-struct bit_field_data
-{
-	const int bitv;
-	const char * const name;
-	const bool available;
-	const bool auth_required;
-	const char * const tooltip;
-};
-
-struct bitvector_field_data
-{
-	const unsigned int bitn;
-	const char * const name;
-	const bool available;
-	const bool auth_required;
-	const char * const tooltip;
-};
 
 
 struct bledomat_data
@@ -1068,85 +995,6 @@ struct bledomat_data
 	int literowki;
 	int pomysly;
 };
-
-
-/*
- * Lam 30.6.98: nowe banowanie
- */
-struct ban_data
-{
-    BAN_DATA *  next;
-    char *      host;
-    char *	user;
-    int		type;
-    char *	banned;
-};
-
-
-
-/*
- * Zapamietywanie wiadomosci wyslanych do gracza po jego odejsciu od klawiatury
- */
-struct tell_data
-{
-    TELL_DATA  *next;
-    char       *tell;
-};
-
-
-/*
- * Zadania mobprogowe
- */
-struct mpquest_data
-{
-    MPQUEST_DATA *next;
-    int		  vnum;
-    int		  stage;
-    int		  data[ 5 ];
-    char	 *title;
-    char	 *descr;
-};
-
-
-/*
- * Lam 24.8.98
- */
-struct timer_data
-{
-    TIMER_DATA	*next;
-    CHAR_DATA	*ch;
-    int		time;
-    bool	paused;	/* Alandar: do zatrzymywania odliczania timera */
-    TIMER_FUN	*fun;
-    union
-    {
-	int	i;
-	void *	p;
-    } arg[ 4 ];
-    /* 4 argumenty wystarcza, mozna tam umieszczac wszelkie typy danych */
-};
-
-/*
- * Lam 28.3.99
- */
-struct airobj_data
-{
-    AIROBJ_DATA	*next;
-    OBJ_DATA *obj;
-/*    int wysokosc; */
-};
-
-/*
- * Lam 28.3.99
- */
-struct airchar_data
-{
-    AIRCHAR_DATA *next;
-    CHAR_DATA *chr;
-    int wysokosc;
-    bool slaby_plywak;
-};
-
 
 /*
  * Time and weather stuff.
@@ -1199,7 +1047,6 @@ struct weather_data
 #define WIZ_NOWI	b16	/* zakladanie nowych postaci */
 #define WIZ_BUG		b17	/* zglaszanie bledow */
 
-
 /*
  * Connected state for a channel.
  */
@@ -1245,131 +1092,6 @@ struct weather_data
 /* adres email przy zakladaniu postaci */
 #define CON_GET_EMAIL			32
 #define CON_CONFIRM_EMAIL		33
-
-/* Ulryk 08.02.2004 */
-struct stats_type
-{
-    int         day [ MAX_DAYS ];   /* najwiecej graczy w ciagu ostatnich dni */
-    int         total;              /* najwiecej graczy od startu */
-};
-
-/* Lam 10.1.2003 */
-struct holiday_type
-{
-    const int			month;	/* miesiac, 1-17 */
-    const int			day;	/* dzien w miesiacu, 1-35 */
-    const char *	const	name;	/* nazwa swieta */
-    const char *	const	message;/* komunikat wysylany graczom o polnocy */
-};
-
-struct material_type
-{
-    const char *	const	name;
-    const char *	const	dopelniacz;
-    const int			minlevel;
-    const int			maxlevel;
-    const int			ac; /* ( ac / 8 ) * value[ 0 ] */
-    const int			value; /* jw. * cost */
-    const int			weight; /* jw. * weight */
-    const bool			vampburn; /* czy pali wampiry */
-/*  const int			forms; */ /* bity - jakich form nie moze miec */
-};
-
-#define		FORMA_KOLCZUGA	b00
-#define		FORMA_PLYTOWA	b01
-
-/*
- * Struktura dla typy_przedmiotow (const.c)
- */
-struct object_type
-{
-    const	char *	const	name;
-    const	char *	const	name_pl;
-    const	char *	const	value[ 6 ];
-    const	bool		spell[ 6 ];
-};
-
-/*
- * Struktura dla kierunki (const.c)
- */
-struct dir_type
-{
-    const	char *	const	name;
-		char *	const	skrot;
-    const	char *	const	skrotd;
-    const	char *	const	krotki;
-    const	char *	const	biernik;
-    const	char *	const	z_dopelniacz;
-    const	int		odwrotny;
-    const	char *	const	na_krew;
-};
-
-
-struct spec_type
-{
-    SPEC_FUN *fun;
-    char *name;
-};
-
-
-struct game_type
-{
-    GAME_FUN *fun;
-    char *name;
-    int bilans;
-    int grano;
-};
-
-
-/*
- * Race structures
- */
-struct race_type
-{
-    const	char *	const	who_name;
-    const	char *	const	dopelniacz;
-    const	char *	const	celownik;
-    const	char *	const	biernik;
-    const	char *	const	narzednik;
-    const	char *	const	miejscownik;
-    const	char *	const	wolacz;
-    const	char *	const	name;/* polska bez polskich znakow */
-    const	char *	const	ang; /* angielska nazwa - zeby wiedzial, jaka rasa */
-    const	int		race_abilities;
-    const	int		oddychanie;
-    const	int		poruszanie;
-    const	int		size;
-    const	int		weight;
-    const	int		str_mod;
-    const	int		int_mod;
-    const	int		wis_mod;
-    const	int		dex_mod;
-    const	int		con_mod;
-    const	int		hp_gain;
-    const	int		mana_gain;
-    const	int		move_gain;
-    const	int		thirst_mod;
-    const	int		hunger_mod;
-    const	char *	const	dmg_message;
-    const	int		rodzaj;
-    const	char *	const	hate;
-    const	char *	const	kom_wejscia; /* Lam */
-    const	char *	const	kom_wyjscia; /* Lam */
-    const	int		wearlocs; /* Lam */
-    const	int		food;	/* Alandar */
-    const	int		parts; /* Lam */
-		int *	const	zr; /* Lam: zapamietana rasa */
-};
-
-
-struct czesc_ciala
-{
-    int *wsk;
-    int vnum;
-    int masa; /* proporcja; <masa> razy ciezar rasy, podzielic przez 1024 */
-    bool rasa_w_opisie;
-    char *komunikat;
-};
 
 
 /* czesci ciala przedstawiciela danej rasy */
@@ -1457,29 +1179,6 @@ struct czesc_ciala
 /* zmiana koncepcji: bez LAD postac z samym POWIETRZE nie moglaby chodzic po
    dnie wody */
 
-
-/*
- * Ulryk: struktura wspomagajaca prace zintegrowanego serwera WWW
- */
-struct html_page_type
-{
-    char           *name;
-    char           *short_link;
-    char           *long_link;
-    HTML_FUN       *fun;
-};
-
-/*
- * Drunkeness communication structure.
- */
-struct struckdrunk
-{
-    const int			min_drunk_level;
-    const int			number_of_rep;
-    const char	*	const	replacement[ 11 ];
-};
-
-
 /*
  * Descriptor (channel) structure.
  *
@@ -1537,25 +1236,6 @@ struct descriptor_data
     char		kolor;
 };
 
-/* stale d->welcome_state */
-#define WELCOME_DONE	0
-#define WELCOME_PENDING	1
-#define WELCOME_BAN	2
-
-/* stale d->telnet_state */
-#define TELNET_NORM	0
-#define TELNET_IAC	1
-#define TELNET_SB	2
-#define TELNET_TTYPE0	3
-#define TELNET_TTYPE	4
-#define TELNET_NAWS1	5
-#define TELNET_NAWS2	6
-#define TELNET_NAWS3	7
-#define TELNET_NAWS4	8
-#define TELNET_IGNTOSE	9
-#define TELNET_IGNTOSE2	10
-#define TELNET_DWDW	11 /* DO/WILL/DONT/WONT */
-
 /*
  * Analogiczna struktura do polaczen z portem HTTP (pierwotnie tylko who)
  */
@@ -1576,44 +1256,6 @@ struct who_descriptor_data
 };
 
 /*
- * Attribute bonus structures.
- */
-struct str_app_type
-{
-    const int		todam;
-    const int		carry;
-    const int		wield;
-    const int		uwalnianie;
-};
-
-struct int_app_type
-{
-    const int		learn;
-    const int		mana;
-};
-
-struct wis_app_type
-{
-    const int		practice;
-    const int		opc;
-};
-
-struct dex_app_type
-{
-    const int		defensive;
-    const int		tohit;
-};
-
-struct con_app_type
-{
-    const int		hitp;
-    const double	wyparowanie;
-    const int		shock;
-};
-
-
-
-/*
  * TO types for act.
  */
 #define TO_ROOM             0
@@ -1621,22 +1263,6 @@ struct con_app_type
 #define TO_VICT             2
 #define TO_CHAR             3
 #define ACT_TELEP         b06
-
-
-
-/*
- * Help table types.
- */
-struct help_data
-{
-    HELP_DATA *         next;
-    AREA_DATA *		area;
-    int                 level;
-    char *              keyword;
-    char *              text;
-};
-
-
 
 /*
  * Shop types.
@@ -1655,7 +1281,6 @@ struct shop_data
     bool	quest_shop;		/* Lam 1.1.2004			*/
 };
 
-
 /*
  * Lam: Sprzedawcy czarow - sciagalem ze sklepow, ale tylko troche ;)
  */
@@ -1667,261 +1292,10 @@ struct healer_data
 };
 
 
-/*
- * Per-class stuff.
- */
-struct class_type
-{
-    const char	who_name[ MIL ];	/* Three-letter name for 'who'	*/
-    const char	pl_name[ MIL ];		/* Wersja polska do "kto"	*/
-    const char	long_name[ MIL ];	/* Wersja do "kimjest"		*/
-    const char	ang[ MIL ];		/* Stara nazwa angielska	*/
-    const int	attr_prime;		/* Prime attribute		*/
-    const int	*weapon;		/* First weapon			*/
-    const int	skill_adept;		/* Maximum skill level		*/
-    const int	thac0_00;		/* Thac0 for level  0		*/
-    const int	thac0_47;		/* Thac0 for level 47		*/
-    const int	hp_min;			/* Min hp gained on leveling	*/
-    const int	hp_max;			/* Max hp gained on leveling	*/
-    const double bonus;			/* Doswiadczenie		*/
-    const bool	fMana;			/* Class gains mana on level	*/
-    const char	*races;			/* Rasy mogace nim byc		*/
-};
-
-
-
-/*
- * Pojedyncza notka.
- * Lam 8.4.98: dodana mozliwosc glosowania
- * Lam 28.8.98: kategorie
- */
-struct note_data
-{
-    NOTE_DATA * next;
-    char *      sender;
-    char *      date;
-    char *      to_list;
-    char *      subject;
-    char *      text;
-    char *	yes;	/* glosujacy za "tak" */
-    char *	no;	/* glosujacy za "nie" */
-    char *	abst;	/* wstrzymujacy sie   */
-    int		yesnum, nonum, abstnum; /* liczniki */
-    int		vote;	/* czy glosowanie? */
-    int		cat;	/* kategoria */
-    time_t      date_stamp;
-};
-
 /* stale note_data->vote */
 #define VOTE_NO		0	/* nie da sie glosowac   */
 #define VOTE_OPEN	1	/* otwarte glosowanie    */
 #define VOTE_CLOSED	2	/* zakonczone glosowanie */
-
-
-/*
- * Lam (5.5.97?): aliasy
- */
-struct alias_data
-{
-    ALIAS_DATA *	next;
-    char *		name;
-    char *		todo;
-};
-
-
-/*
- * Malven: klany, na bazie klanow Lama
- */
-#define MAX_CLAN_NAME	    40
-#define MAX_CLAN_DOPELNIACZ 40
-#define MAX_PLAYER_NAME     12  /* Malven: 12 za check_parse_name( ) w nanny.c */
-
-#if defined( unix )
-# define MAX_CLAN_DIR   MAX_CLAN_NAME
-#else
-# define MAX_CLAN_DIR   8
-#endif
-
-/*
- * Stany klanow - Malven:
- * uszkodzony - brak jakiegos pliku lub niezbednego klucza w pliku dane.cln
- * usuniety - czlonkowie zostaja usunieci z klanu
- * zawieszony - przez SPK lub bogow, czlonkowie pozostaja w klanie ale wszystkie
- *		polecenia zablokowane
- * nowy - zanim zostanie zatwierdzony przez SPK, polecenia zablokowane
- * aktywny - zatwierdzony przez SPK
- * pomoc_usuwany - status pomocniczy wykorzystywany przy usuwaniu klanu, taka
- *		wartosc nie moze istniec w pliku
- */
-#define CLAN_STAT_USZKODZONY		0
-#define CLAN_STAT_USUNIETY		1
-#define CLAN_STAT_ZAWIESZONY		2
-#define CLAN_STAT_NOWY			3
-#define CLAN_STAT_AKTYWNY		4
-#define CLAN_STAT_POMOC_USUWANY		-1
-
-/*
- * Stale przynaleznosci do klanu (ch->pcdata->clan_level)
- */
-#define CLAN_NONE	 -1  /* bez klanu */
-#define CLAN_GUEST        0  /* kandydat do zapisania sie */
-#define CLAN_MEMBER       1  /* normalny czlonek klanu */
-#define CLAN_HERO         5  /* bohater klanu */
-#define CLAN_MASTER       7  /* mistrz klanu */
-
-/*
- * Flagi klanu (clan->flags)
- * clanroom nie ma flagi, tylko clan->room to pokazuje. Potem juz tymi bitami:
- */
-#define CLAN_FLAG_BEDROOM	b00  /* pomieszczenie do leczenia */
-#define CLAN_FLAG_HP		b01  /* pomieszczenie z zyciem */
-#define CLAN_FLAG_MANA		b02  /* pomieszczenie z mana */
-#define CLAN_FLAG_LIBRARY	b03  /* klan ma biblioteke */
-#define CLAN_FLAG_PIT		b04  /* klan posiada wlasna urne */
-
-/*
- * Malven: flagi polecen klanowych
- */
-#define CLAN_CMD_SPKONLY	b00  /* tylko dla SPK i bogow */
-#define CLAN_CMD_UKRYTE		b01  /* polecenie nie wyswietla sie na liscie polecen */
-#define CLAN_CMD_OOC		b02  /* moze byc wykonywane poza postacia */
-#define CLAN_CMD_NOIC		b03  /* nie moze byc wykonywane w postaci */
-#define CLAN_CMD_SPK		b04  /* SPK i bogowie moga wykonywac na specjalnych warunkach */
-
-/*
- * Flagi zapisu
- */
-#define CLAN_WRITE_ALL          b00 | b01 | b02 | b03 /* zapisanie wszystkiego */
-#define CLAN_WRITE_DANE		b00  /* podstawowe dane klanu */
-#define CLAN_WRITE_LISTA	b01  /* lista klanowiczow */
-#define CLAN_WRITE_STOSUNKI	b02  /* stosunki miedzyklanowe */
-#define CLAN_WRITE_SKRZYNIA	b03  /* skrzynia klanowa */
-
-/*
- * znaczenia zmiennej rel->pokoj
- */
-#define CLAN_POKOJ_BRAK		0	/* nie bylo deklaracji pokoju */
-#define CLAN_POKOJ_DEKLARACJA	1	/* zlozona deklaracja pokoju */
-#define CLAN_POKOJ_ODRZUCONY	2	/* odrzucona deklaracja pokoju */
-#define CLAN_POKOJ_MAX		2
-
-/*
- * Malven: stosunki miedzyklanowe
- */
-/*CLAN_REL_DATA * clan_rel_lookup( CLAN_DATA *clana, CLAN_DATA *clanb );*/
-
-typedef struct clan_rel_data  CLAN_REL_DATA;
-
-struct clan_rel_data
-{
-    CLAN_REL_DATA * next;	/* nastepny na liscie */
-    CLAN_DATA     * clan;	/* drugi klan */
-    bool war;
-    int             stosunek;	/* stosunek do drugiego klanu */
-    int             wpkill;	/* liczba zabojstw w trakcie tej wojny */
-    int             wpdead;     /* liczba zgonow w trakcie tej wojny */
-    int	            pkill;	/* liczba zabojstw w sumie */
-    int	            pdead;	/* liczba zgonow w sumie */
-};
-
-/*
- * Struktura listy klanowiczow
- */
-struct clan_member_data
-{
-    CLAN_MEMBER_DATA  * next;		/* nastepny klanowicz */
-    CHAR_DATA	      * ch;		/* jesli gra, to nam na niego wskaze */
-    char              * name;		/* imie */
-    short               level;		/* poziom klanowy */
-    int			zloto;		/* wplacone zloto */
-    int			punkty;		/* wplacone punkty klanowe */
-    time_t		seen;		/* kiedy ostatnio byl widziany */
-#if 0
-    int			skll;		/* umiejetnosci klanowe */
-    int			pkill;		/* tyle razy zabil dla klanu */
-    int			pdead;		/* tyle razy zginal za klan */
-#endif
-};
-
-/*
- * Struktura klanu
- */
-struct clan_data
-{
-    CLAN_DATA	      * next;         /* nastepny klan na liscie */
-    int			status;       /* stan klanu */
-    char	      * name;         /* pelna nazwa klanu */
-    char	      * dop;          /* dopelniacz nazwy */
-    char	      * dir;          /* katalog klanu */
-    char	      * info;         /* informacja o klanie */
-    char              * statut;       /* statut klanu */
-    char	      *	skrot;        /* skrot nazwy klanu */
-    char	      * data_zal;     /* data zalozenia klanu */
-    CLAN_MEMBER_DATA  * member_list;  /* lista czlonkow wraz ze stopniami */
-    CLAN_REL_DATA     * rel_list;     /* lista stosunkow z innymi klanami */
-    char	      * lev_name_mm[ 10 ]; /* nazwy stopni - meski mianownik */
-    char	      * lev_name_zm[ 10 ]; /* zenski mianownik */
-    char	      * lev_name_md[ 10 ]; /* meski dopelniacz */
-    char	      * lev_name_zd[ 10 ]; /* zenski dopelniacz */
-    char	      * lev_name_mn[ 10 ]; /* meski narzednik */
-    char	      * lev_name_zn[ 10 ]; /* zenski narzednik */
-    int			gold;         /* konto bankowe klanu */
-    int			punkty;       /* punkty klanowe */
-#if 0
-    char	      * area;	      /* kraina z twierdza klanowa */
-    int			room;         /* pomieszczenie klanowe */
-    int			flags;        /* flagi klanu i pomieszczenia */
-#endif
-    OBJ_DATA	      * urna;         /* urna klanowa */
-};
-
-/*
- * Struktura polecenia klanowego w tablicy
- */
-struct clan_cmd_type
-{
-    char * const	name;        /* nazwa polecenia */
-    CLAN_FUN *		clan_fun;    /* funkcja realizujaca polecenie */
-    int			clan_level;  /* min. stopien konieczny do wykonania */
-    int			clan_stat;   /* min. status klanu konieczny do wyk. */
-    int			flags;       /* flagi polecenia klanowego */
-};
-
-
-/*
- * An affect.
- */
-struct affect_data
-{
-    AFFECT_DATA *       next;
-    CHAR_DATA *		caster; /* Lam */
-    int                 type;
-    int                 duration;
-    int                 location;
-    int                 modifier;
-    int                 bitvector[ AFF_FLAGS_SIZE ];
-    int			level; /* Lam */
-    bool                deleted;
-};
-
-
-/*
- * A kill structure (indexed by level).
- */
-struct kill_data
-{
-    int                 number;
-    int                 killed;
-};
-
-
-struct schemat_data
-{
-    SCHEMAT_DATA      * next;         /* nastepny schemat na liscie */
-    char	      * nazwa;        /* nazwa schematu */
-    char	      * schemat;      /* sam schemat */
-};
-
 
 /*
  * Gimza: odmow
@@ -1952,42 +1326,6 @@ struct restrykcje_data
     char	* od;		/* od kiedy, od kogo itp... to, co dotychczas */
     time_t	  do_kiedy;	/* do kiedy */
 };
-
-/* Lam 17.10.2006: zablokowane imiona */
-struct imiona_data
-{
-    IMIONA_DATA	*nast;
-    char	*imie;
-    char	*blokujacy;
-    int		powod;
-    time_t	kiedy;
-};
-
-#define LISTA_IMION( imie ) ( &imiona[ strlen_pl( imie ) ][ UPPER( *( imie ) ) & 63 ] )
-#define OST_IMIE( imie ) ( &imiona_ost[ strlen_pl( imie ) ][ UPPER( *( imie ) ) & 63 ] )
-
-
-struct powody_data
-{
-    char	*skrot;
-    char	*nazwa;
-    char	*tytul;
-    char	*objasnienie;
-};
-
-
-struct auction_data
-{
-    OBJ_DATA	*item;
-    CHAR_DATA	*seller;
-    CHAR_DATA	*buyer;
-    int		bet;
-    int		going;
-    int		pulse;
-    int		starting;
-    int         zastaw;
-};
-
 
 /*
  * Prototype for a mob.
@@ -2028,14 +1366,6 @@ struct mob_index_data
     int			grupa;		/* Lam */
     int			mod_size;	/* Lam */
 };
-
-
-struct zwod_data
-{
-    ZWOD_DATA *		next;
-    CHAR_DATA *		ch;
-};
-
 
 /*
  * One character (PC or NPC).
@@ -2149,7 +1479,6 @@ struct char_data
     bool                deleted;
 };
 
-
 /*
  * Data which only PC's have.
  */
@@ -2230,48 +1559,6 @@ struct pc_data
     int			ost_end;	/* Tissarius */
     char	      * ostatnie[ MAX_OSTATNIE ];	/* Tissarius */
     bool                switched;
-};
-
-struct fight_data
-{
-    CHAR_DATA *vch;
-    FIGHT_DATA *next;
-};
-
-/*
-struct mob_prog_act_list
-{
-    MPROG_ACT_LIST * next;
-    char *           buf;
-    CHAR_DATA *      ch;
-    OBJ_DATA *       obj;
-    void *           vo;
-};
-*/
-
-struct mob_trig_prog_data /* Lam */
-{
-    MTRIG_DATA	*next;
-    CHAR_DATA	*ch;
-    CHAR_DATA	*actor;
-    CHAR_DATA	*vict;
-    char	arg[ MIL ];
-    int		time;
-};
-
-struct mob_prog_data
-{
-    MPROG_DATA *next;
-    int		type;
-    char *	arglist;
-    char *	comlist;
-    MPROG_DATA *parent; /* Lam 10.4.2002: do in_file_proga w kzapisz */
-};
-
-struct room_rand_prog_data /* Alandar 03.02.2004 */
-{
-    RRAND_DATA		*next;
-    ROOM_INDEX_DATA	*room;
 };
 
 
@@ -2358,66 +1645,19 @@ struct typ_zmiennej
     } wartosc;
 };
 
-
-/* fragment stosu dla oblicz_wyrazenie */
-struct stosmp
-{
-    STOSMP *nast;
-    int typ; /* ujemny - typ, >= 0 - priorytet */
-    int wart;
-    void *wsk;
-    char txt[ MIL + 4 ]; /* prowizorka, takie trzymaja sie najdluzej ;) */
-};
-
-
-/*
- * Liquids.
- */
-struct liq_type
-{
-    const char *	const	liq_name;
-    const char *	const	liq_biernik;
-    const char *	const	liq_narzednik;
-    const char *	const	liq_color;
-    const int			liq_affect[ 3 ];
-};
-
-/*
- * Alandar 22.11.2004: typy i wlasnosci jedzenia
- */
-#define	PAPU_DOWOLNE	( PAPU_WSZYSTKO | PAPU_MACZNE | PAPU_SLODKIE \
-			| PAPU_MIESNE | PAPU_RYBNE | PAPU_MLECZNE \
-			| PAPU_ROSLINNE )
-#define	PAPU_ZADNE	0
-#define	PAPU_WSZYSTKO	b00
-#define	PAPU_MACZNE	b01
-#define	PAPU_SLODKIE	b02
-#define	PAPU_MIESNE	b03
-#define	PAPU_RYBNE	b04
-#define	PAPU_MLECZNE	b05
-#define	PAPU_ROSLINNE	b06
-
 /*
  * Struktura informacji o drogach prowadzacych do roznych krain.
  */
-struct koles_type
-{
-    char	*nazwa;
-    char	*droga;
-};
-
 struct koles_data
 {
     KOLES_DATA		*nast;
     int			 vnum;
     int			 droga;
-    struct koles_type	 drogi[ MAX_TRACK ];
-};
-
-struct miodek_data
-{
-    char	*slowo;
-    char	*zastepstwo;
+    struct koles_type
+    {
+	char	*nazwa;
+	char	*droga;
+    } drogi[ MAX_TRACK ];
 };
 
 /*
@@ -2430,8 +1670,6 @@ struct extra_descr_data
     char             *description; /* What to see                      */
     bool              deleted;
 };
-
-
 
 /*
  * Prototype for an object.
@@ -2480,8 +1718,6 @@ struct obj_index_data
     bool		w_sklepie;		/* Lam 13.5.2005 */
 };
 
-
-
 /*
  * Przedmiot.
  */
@@ -2528,8 +1764,6 @@ struct obj_data
     bool                deleted;
 };
 
-
-
 /*
  * Exit data.
  */
@@ -2548,8 +1782,6 @@ struct exit_data
     MPROG_DATA *	mobprogs;	/* eprogs Lam */
     int			progtypes;
 };
-
-
 
 /*
  * Reset commands:
@@ -2576,7 +1808,6 @@ struct reset_data
     int                 arg3;
     char *		string;
 };
-
 
 /*
  * Lam 27.11.2000: wreszcie dlugo wyczekiwane strefy
@@ -2614,7 +1845,6 @@ struct zone_list
     ZONE_DATA *zone;
     ZONE_LIST *next;
 };
-
 
 /*
  * Area definition.
@@ -2661,10 +1891,6 @@ struct area_data
     bool		odnowiona;	/* Lam */
 };
 
-#define AREA_NOT_LISTED b00
-#define AREA_NO_TELEPORT b01
-
-
 /*
  * Room type.
  */
@@ -2699,19 +1925,6 @@ struct room_index_data
     int                 sector_type;
 };
 
-
-/*
- * Smiertelne pulapki, ktore mozna umieszczac w pomieszczeniach.
- * Lam 22.5.99
- * Zauwaz, ze moze byc tylko jedna pulapka w pomieszczeniu.
- */
-struct deathtrap_data
-{
-    int			trap_type;
-    char *		trap_string;
-};
-
-
 /*
  * Types of attacks.
  * Must be non-overlapping with spell/skill types,
@@ -2727,7 +1940,6 @@ struct deathtrap_data
 #define ZGON_SAMOBOJSTWO	   2
 #define ZGON_WYKRWAWIENIE	   3
 
-
 /*
  * Ulryk: flagi umiejetnosci i czarow
  */
@@ -2741,7 +1953,6 @@ struct deathtrap_data
 #define SKILL_DEF_VICT		 b06 /* Lam */
 #define SKILL_NO_COST		 b07 /* Lam */
 
-
 /*
  *  Target types.
  */
@@ -2750,7 +1961,6 @@ struct deathtrap_data
 #define TAR_CHAR_DEFENSIVE          2
 #define TAR_CHAR_SELF               3
 #define TAR_OBJ_INV                 4
-
 
 /*
  * Usage types.
@@ -2768,43 +1978,6 @@ struct deathtrap_data
 #define USAGE_SPECIAL		10 /* spec_*, specjalnosci mobow */
 #define USAGE_RECUR		11 /* rekurencja, czar jako dodatek drugiego */
 #define USAGE_GAME		12 /* wygrana w kole fortuny */
-
-
-/*
- * Czary/umiejetnosci. Spolszczone: Lam i Grzechu 10.9.98
- */
-struct skill_type
-{
-	  char *	pl_name;
-    const char *	short_name;
-    const char *	old_name;			/* Name of skill               */
-	  int		skill_level[ MAX_CLASS ];	/* Level needed by class       */
-    const char *	needed;				/* Lam: wymagana umiejetnosc   */
-	  int		multi_level[ MAX_CLASS ];	/* Lam: poziom dla multi-profesji */
-	  SPELL_FUN *	spell_fun;			/* Spell pointer (for spells)  */
-    const int		target;				/* Legal targets               */
-    const int		minimum_position;		/* Position for caster / user  */
-	  int *		pgsn;				/* Pointer to associated gsn   */
-    const int		min_mana;			/* Minimum mana used           */
-    const int		beats;				/* Waiting time after use      */
-    const int		to_practice;			/* Lam: ile mozna to cwiczyc   */
-    const int		to_use;				/* Lam: ile trzeba uzyc do nauki */
-    const int		rodzaj;				/* Lam: do komunikatow przy walce */
-    const char *	noun_damage;			/* Damage message              */
-    const char *	msg_off;			/* Wear off message            */
-    const char *	msg_off_others;			/* Lam 20.11.2000 na wzor EOS  */
-    const WEAR_OFF_FUN	*wear_off_fun;			/* Lam 1.4.2006		  */
-    const int		flags;				/* Ulryk 24.09.2003            */
-};
-
-
-/* Lam 26.10.2004 */
-struct sorted_skill_data
-{
-    SORTED_SKILL_DATA *next;
-    int sn;
-};
-
 
 /*
  * These are skill_lookup return values for common skills and spells.
@@ -2879,7 +2052,6 @@ extern  int     gsn_turn_undead;
 extern  int     gsn_rozpalanie_ognisk;           /* Ulryk */
 extern	int	gsn_blokada_mentalna;		 /* Ulryk */
 
-
 /*
  * Psionicist gsn's (by Thelonius).
  */
@@ -2887,7 +2059,6 @@ extern  int     gsn_chameleon;
 extern  int     gsn_domination;
 extern  int     gsn_heighten;
 extern  int     gsn_shadow;
-
 
 extern  int     gsn_stake;
 
@@ -2943,7 +2114,6 @@ extern	int	gsn_walka_na_oslep;
 /*
  * Qwert: mnich
  */
-
 extern  int     gsn_aura_pokoju;
 extern  int     gsn_duchowe_wsparcie;
 extern  int     gsn_bio_przyspieszenie;
@@ -3000,7 +2170,6 @@ extern	int	gsn_refresh;
 extern	int	gsn_shield;
 extern	int	gsn_teleport;
 
-
 /*
  * Lam 29.1.2004: zapamietane rasy
  */
@@ -3021,7 +2190,6 @@ extern	int	zr_smok;
 extern	int	zr_troll;
 extern	int	zr_wampir;
 extern	int	zr_waz;
-
 
 /*
  * Zamiast zdefiniowanych vnumow, sa czytane z pliku.
@@ -3095,7 +2263,6 @@ extern int	ROOM_VNUM_GRAVEYARD_A;
 extern int	ROOM_VNUM_PURGATORY_A;
 extern int	ROOM_VNUM_POZA_SWIATEM;
 /* extern int	ROOM_VNUM_PUNKT; - calkowicie niepotrzebne */
-
 
 /*
  * Utility macros.
@@ -3198,7 +2365,6 @@ extern int	ROOM_VNUM_POZA_SWIATEM;
 #define WYDATEK( poziom, mnoznik )	\
 			( ( przelicznik_wydatkow[ URANGE( 0, poziom, 111 ) ] \
 						* mnoznik ) >> 10 )
-
 
 /*
  * Character macros.
@@ -3466,8 +2632,6 @@ extern int	ROOM_VNUM_POZA_SWIATEM;
 #define CAN_WEAR( obj, part )   ( IS_SET( ( obj )->wear_flags, ( part ) ) )
 #define IS_OBJ_STAT( obj, stat )( IS_SET_V( ( obj )->extra_flags, ( stat ) ) )
 
-
-
 /*
  * Description macros.
  */
@@ -3506,118 +2670,6 @@ extern int	ROOM_VNUM_POZA_SWIATEM;
 				   ( ch )->wolacz       : "ktosiu" )
 
 
-/*
- * Structure for a command in the command lookup table.
- */
-struct cmd_type
-{
-    char * const	name;
-    char * const	old_name; /* Lam: Lac 1.4.-9 */
-    DO_FUN *		do_fun;
-    int			position;
-    int			level;
-    int			log;
-    int			restr; /* Lam */
-};
-
-struct prog_cmd_type
-{
-    char * const	name;
-    PROG_FUN *		fun;
-};
-
-/*
- * Lam 6.11.2000
- */
-struct pose_data
-{
-    char *to_char;
-    char *to_room;
-};
-
-struct progi_type
-{
-    char *name;
-    int   trig;
-};
-
-/*
- * Command functions.
- * Defined in act_*.c (mostly).
- */
-DECLARE_DO_FUN( do_answer       );
-DECLARE_DO_FUN( do_blank        );
-DECLARE_DO_FUN( do_brief        );
-DECLARE_DO_FUN( do_burry	);		/* Lam */
-DECLARE_DO_FUN( do_delet	);		/* Lam */
-DECLARE_DO_FUN( do_delete	);		/* Lam */
-DECLARE_DO_FUN( do_immcmd	);		/* Lam */
-DECLARE_DO_FUN( do_imud		);		/* Lam */
-DECLARE_DO_FUN( do_love         );              /* Qwert */
-DECLARE_DO_FUN( do_nchat        );              /* Lam */
-
-
-/*
- * Malven: klany
- */
-/*DECLARE_CLAN_FUN(	xxx			);*/
-
-
-/*
- * Our function prototypes.
- * One big lump ... this is every function in Merc.
- */
-#define CD      CHAR_DATA
-#define MIDT    MOB_INDEX_DATA
-#define OD      OBJ_DATA
-#define AD      AFFECT_DATA
-#define ED      EXTRA_DESCR_DATA
-#define OID     OBJ_INDEX_DATA
-#define RID     ROOM_INDEX_DATA
-#define TID	TIMER_DATA
-#define AOD	AIROBJ_DATA
-#define ACD	AIRCHAR_DATA
-#define TLD	TELL_DATA
-
-
-/* Lam: uzywac ponizszych, dzieki czemu bedzie mozna zmieniac super_act
-	do woli, nie zmieniajac niczego innego w kodzie, a jedynie makra */
-#define act( z, f, ch, a1, a2, t )    super_act( 0, z, f, ch, a1, a2, t, FALSE )
-#define act_pp( z, f, ch, a1, a2, t ) super_act( 0, z, f, ch, a1, a2, t, TRUE )
-#define STC( t, ch )	send_to_char( t, ch )
-#define ASTC( t, ch )	super_act( 0, ZM_ZAWSZE, t, ch, NULL, NULL, TO_CHAR, TRUE )
-#define STH( d, t )	write_to_who_buffer( d, t, 0 )
-
-/*
- * ZMYSLY, z braku komentarzy wprowadzam w dokladnie takiej formie, jaka
- * zaproponowalem kwartal temu :(
- * opis w doc/zmysly.txt
- * Lam 9.3.2006
- */
-#define ZM_WZROK	b00
-#define ZM_SLUCH	b01
-#define ZM_WECH		b02
-#define ZM_DOTYK	b03
-#define ZM_ZAWSZE	b04
-#define ZM_PRZYT	( ZM_WZROK | ZM_SLUCH | ZM_WECH | ZM_DOTYK )
-#define ZM_WID_CHAR	b05
-#define ZM_WID_VICT	b06
-#define ZM_WID_OBJ1	b07
-#define ZM_WID_OBJ2	b08
-#define ZM_W_WZROK	b09
-#define ZM_W_SLUCH	b10
-#define ZM_W_WECH	b11
-#define ZM_W_DOTYK	b12
-#define ZM_W_PRZYT	( ZM_W_WZROK | ZM_W_SLUCH | ZM_W_WECH | ZM_W_DOTYK )
-#define ZM_W_WID_CHAR	b13
-#define ZM_W_WID_VICT	b14
-#define ZM_W_WID_OBJ1	b15
-#define ZM_W_WID_OBJ2	b16
-#define ZM_DYLEMAT	0
-
-#define ZLOTO_M( ile )		( zlota_moneta( ile, TRUE, TRUE ) )
-#define ZLOTO_B( ile )		( zlota_moneta( ile, FALSE, TRUE ) )
-
 /* trzeci parametr interpret( ) */
 #define INTERP_NORMAL	  0
 #define INTERP_FORCE	  1
@@ -3636,23 +2688,7 @@ DECLARE_DO_FUN( do_nchat        );              /* Lam */
 #define TZ_POST		2 /* postac */
 #define TZ_PRZE		3 /* przedmiot */
 
-/* save.c */
-#define FREAD_OBJ_DB	0
-#define FREAD_OBJ_VNUM	1
-#define FREAD_OBJ_BLAD	2
 
-
-#undef	TLD
-#undef	AOD
-#undef	ACD
-#undef	TID
-#undef	CD
-#undef	MIDT
-#undef	OD
-#undef	OID
-#undef	RID
-#undef	ED
-#undef	AD
 #ifdef __cplusplus
 }
 #endif

@@ -42,6 +42,7 @@
 
 
 #include "merc.h"
+#include "act_wiz.h"
 #include "special.h"
 #include "act_info.h"
 #include "act_comm.h"
@@ -57,12 +58,14 @@
 #include "kzapisz.h"
 #include "mp_wyzw.h"
 #include "mp_wczyt.h"
+#include "mp_pol.h"
 #include "interp.h"
 #include "nanny.h"
 #include "const.h"
 #include "lanclicz.h"
 #include "handler.h"
 #include "ssm.h"
+#include "clan.h"
 
 
 #if !defined( WIN32 )

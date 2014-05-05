@@ -1,9 +1,16 @@
-extern char	spec_list[ MSL ];
+struct spec_type
+{
+    SPEC_FUN *fun;
+    char *name;
+};
 
+
+extern char	spec_list[ MSL ];
 extern SPEC_FUN	*spec_lookup	args( ( const char *name ) );
 extern char	*spec_name	args( ( SPEC_FUN *fun ) );
 extern void	build_spec_list	args( ( void ) );
 extern bool	papuguj		args( ( CHAR_DATA *ch, char *argument ) );
+
 
 /*
  * The following special functions are available for mobiles.

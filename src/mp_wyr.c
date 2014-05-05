@@ -43,6 +43,7 @@
 #include "lanclicz.h"
 #include "handler.h"
 #include "ssm.h"
+#include "clan.h"
 
 
 static void	usun_zm_zwod		args( ( TYP_ZMIENNEJ **lista, TYP_ZMIENNEJ *zm,

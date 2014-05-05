@@ -64,6 +64,12 @@ static bool	clan_authorized		args( ( CHAR_DATA *ch,
 static void	usun_z_klanu	args( ( CHAR_DATA *ch ) );
 static bool    is_any_clan_member2  args( ( CHAR_DATA *ch ) );
 
+CLAN_DATA		*clan_free;		/* Lam */
+CLAN_MEMBER_DATA	*clan_member_free;	/* Malven */
+CLAN_REL_DATA		*clan_rel_free;		/* Malven */
+CLAN_DATA		*clan_list;
+
+
 /*
  * Nowa struktura klanowa
  */

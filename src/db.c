@@ -45,6 +45,7 @@
 #include "save.h"
 #include "mp_wczyt.h"
 #include "mp_wyr.h"
+#include "mp_pol.h"
 #include "const.h"
 #include "lanclicz.h"
 #include "handler.h"
@@ -131,9 +132,6 @@ REFUSE_DATA		*refuse_free;		/* Gimza */
 TELL_DATA		*tell_free;		/* Lam */
 MPQUEST_DATA		*mpquest_free;		/* Lam */
 NOTE_DATA		*note_free;
-CLAN_DATA		*clan_free;		/* Lam */
-CLAN_MEMBER_DATA	*clan_member_free;	/* Malven */
-CLAN_REL_DATA		*clan_rel_free;		/* Malven */
 OBJ_DATA		*obj_free;
 FIGHT_DATA		*fight_free;		/* Ulryk */
 EXIT_DATA		*exit_free;		/* Lam */
@@ -149,7 +147,6 @@ char			log_buf			[ MAX_INPUT_LENGTH * 2 ];
 char			posdead_buf		[ MAX_STRING_LENGTH ];
 NOTE_DATA		*note_list;
 SCHEMAT_DATA		*schemat_list;
-CLAN_DATA		*clan_list;
 OBJ_DATA		*object_list;
 SORTED_SKILL_DATA	*sorted_skill_list;
 /* Lam 10.3.2003: mud_age, wiek muda, pamieta liczbe godzin od 1 dnia miesiaca
@@ -168,7 +165,6 @@ struct miodek_data	miodek_table[ MAX_MIODEK ]; /* Lam */
 /*char *		maskowanie_table[ MAX_MASKOWANIE ];
 int			maskowanie_count;*/
 int			quit_count;
-/* struct	koles_type	koles_table[ MAX_TRACK ]; zastapione */
 KOLES_DATA *		lista_kolesi;		/* Lam */
 struct pose_data	pose_table[ MAX_CLASS ][ MAX_POSE ];
 int			pose_count[ MAX_CLASS ];
@@ -177,7 +173,10 @@ int			multi_count[ MAX_CLASS ];
 int			ilosc_czesci_ciala[ MAX_RACE ];
 struct	powody_data	powody[ MAX_POWODY ];
 IMIONA_DATA *		imiona[ MAX_DLUG_IMIENIA + 1 ][ 64 ];
-IMIONA_DATA *		imiona_ost[ MAX_DLUG_IMIENIA + 1 ][ 64 ];
+
+static IMIONA_DATA *		imiona_ost[ MAX_DLUG_IMIENIA + 1 ][ 64 ];
+#define OST_IMIE( imie ) ( &imiona_ost[ strlen_pl( imie ) ][ UPPER( *( imie ) ) & 63 ] )
+
 FILE *			httpdlog;
 
 MOB_INDEX_DATA		*mob_index_hash[ MAX_KEY_HASH ];
@@ -518,8 +517,10 @@ int			top_trap; /* Lam */
 int			top_zmienna; /* Lam */
 int			top_zwod; /* Lam */
 
+
 #define                 MAX_PERM_BLOCK  131072
 #define                 MAX_MEM_LIST    16
+
 
 void *                  rgFreeList              [ MAX_MEM_LIST       ];
 const int               rgSizeList              [ MAX_MEM_LIST       ] =

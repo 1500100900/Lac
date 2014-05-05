@@ -1,3 +1,43 @@
+/*
+ * Lam 24.8.98
+ */
+struct timer_data
+{
+    TIMER_DATA	*next;
+    CHAR_DATA	*ch;
+    int		time;
+    bool	paused;	/* Alandar: do zatrzymywania odliczania timera */
+    TIMER_FUN	*fun;
+    union
+    {
+	int	i;
+	void *	p;
+    } arg[ 4 ];
+    /* 4 argumenty wystarcza, mozna tam umieszczac wszelkie typy danych */
+};
+
+/*
+ * Lam 28.3.99
+ */
+struct airobj_data
+{
+    AIROBJ_DATA	*next;
+    OBJ_DATA *obj;
+/*    int wysokosc; */
+};
+
+/*
+ * Lam 28.3.99
+ */
+struct airchar_data
+{
+    AIRCHAR_DATA *next;
+    CHAR_DATA *chr;
+    int wysokosc;
+    bool slaby_plywak;
+};
+
+
 bool	act_flag_avail		args( ( int act ) );
 char	*act_flag_name_pl	args( ( int act, CHAR_DATA *ch ) );
 bool	affect_bit_avail	args( ( int *vector ) );

@@ -38,6 +38,20 @@
 #include "db.h"
 #include "const.h"
 
+/*
+ * Alandar 22.11.2004: typy i wlasnosci jedzenia
+ */
+#define	PAPU_DOWOLNE	( PAPU_WSZYSTKO | PAPU_MACZNE | PAPU_SLODKIE \
+			| PAPU_MIESNE | PAPU_RYBNE | PAPU_MLECZNE \
+			| PAPU_ROSLINNE )
+#define	PAPU_ZADNE	0
+#define	PAPU_WSZYSTKO	b00
+#define	PAPU_MACZNE	b01
+#define	PAPU_SLODKIE	b02
+#define	PAPU_MIESNE	b03
+#define	PAPU_RYBNE	b04
+#define	PAPU_MLECZNE	b05
+#define	PAPU_ROSLINNE	b06
 
 /*
  * Nowosci w Lacu. Teraz przeniesione tutaj do uzycia w do_nowosci i html_news

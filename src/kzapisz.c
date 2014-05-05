@@ -42,6 +42,7 @@
 #include "comm.h"
 #include "kzapisz.h"
 #include "mp_wczyt.h"
+#include "mp_pol.h"
 #include "const.h"
 #include "lanclicz.h"
 #include "handler.h"

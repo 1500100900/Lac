@@ -42,6 +42,16 @@
 #include "handler.h"
 
 
+struct game_type
+{
+    GAME_FUN *fun;
+    char *name;
+    int bilans;
+    int grano;
+};
+
+
+
 DECLARE_GAME_FUN(	gra_czarna_czerwona	);
 DECLARE_GAME_FUN(	gra_kolo_fortuny	);
 DECLARE_GAME_FUN(	gra_marynarz		);

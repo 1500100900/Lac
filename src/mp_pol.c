@@ -51,6 +51,13 @@
 #include "ssm.h"
 
 
+struct prog_cmd_type
+{
+    char * const	name;
+    PROG_FUN *		fun;
+};
+
+
 static CHAR_DATA	*get_char_prog	args( ( CHAR_DATA *ch, char *argument,
 						CHAR_DATA *actor, OBJ_DATA *obj,
 						CHAR_DATA *rndm, CHAR_DATA *vict,

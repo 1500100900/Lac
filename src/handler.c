@@ -53,6 +53,32 @@
 #include "ssm.h"
 
 
+struct choice_field_data
+{
+	const int value;
+	const char * const name;
+	const bool available;
+	const bool auth_required;
+};
+
+struct bit_field_data
+{
+	const int bitv;
+	const char * const name;
+	const bool available;
+	const bool auth_required;
+	const char * const tooltip;
+};
+
+struct bitvector_field_data
+{
+	const unsigned int bitn;
+	const char * const name;
+	const bool available;
+	const bool auth_required;
+	const char * const tooltip;
+};
+
 /*
  * Globalna zmienna eksportowa.
  */

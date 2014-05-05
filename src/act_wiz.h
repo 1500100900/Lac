@@ -1,3 +1,15 @@
+/*
+ * Lam 30.6.98: nowe banowanie
+ */
+struct ban_data
+{
+    BAN_DATA	*next;
+    char	*host;
+    char	*user;
+    int		type;
+    char	*banned;
+};
+
 DECLARE_DO_FUN(	do_advance	);
 DECLARE_DO_FUN(	do_aexits	);	/* Lam */
 DECLARE_DO_FUN(	do_allow	);

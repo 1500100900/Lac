@@ -41,6 +41,18 @@
 #include "const.h"
 #include "lanclicz.h"
 
+#define HTML( nazwa )		void nazwa( WHO_DESCRIPTOR_DATA *d )
+
+/*
+ * Ulryk: struktura wspomagajaca prace zintegrowanego serwera WWW
+ */
+struct html_page_type
+{
+    char           *name;
+    char           *short_link;
+    char           *long_link;
+    HTML_FUN       *fun;
+};
 
 DECLARE_HTML_FUN( html_index );
 DECLARE_HTML_FUN( html_who   );
