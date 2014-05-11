@@ -134,7 +134,7 @@ static struct
 };
 
 
-TYP_ZMIENNEJ *wolne_zmienne; /* lista usunietych zmiennych */
+static TYP_ZMIENNEJ *wolne_zmienne; /* lista usunietych zmiennych */
 
 /*
  * Tworzy zmienna o zadanych wartosciach

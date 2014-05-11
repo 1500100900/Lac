@@ -117,9 +117,9 @@ static FUNKCJA_CZASOWA( przyzwyczajenie_oczu );
 /*
  * Lam 24.8.98: funkcje czasowe
  */
-TIMER_DATA	*timer_list;
-TIMER_DATA	*timer_free;
-int		top_timer;
+	TIMER_DATA	*timer_list;
+static	TIMER_DATA	*timer_free;
+	int		top_timer;
 
 
 TIMER_DATA *new_timer( void )
@@ -224,8 +224,8 @@ void timer_update( void )
 /*
  * Lam 28.3.99: teraz przedmioty zawieszone w powietrzu beda spadac
  */
-AIROBJ_DATA	*airobj_list;
-AIROBJ_DATA	*airobj_free;
+	AIROBJ_DATA	*airobj_list;
+static	AIROBJ_DATA	*airobj_free;
 
 
 AIROBJ_DATA *new_airobj( OBJ_DATA *obj )
@@ -305,8 +305,8 @@ void del_airobj( AIROBJ_DATA *airobj )
  * Alandar: postacie w powietrzu po spadnieciu latania beda spadac w dol
  * Lam 27.9.2005: rozszerzenie na opadanie pod wode az na dno
  */
-AIRCHAR_DATA	*airchar_list;
-AIRCHAR_DATA	*airchar_free;
+	AIRCHAR_DATA	*airchar_list;
+static	AIRCHAR_DATA	*airchar_free;
 
 AIRCHAR_DATA *new_airchar( CHAR_DATA *chr )
 {

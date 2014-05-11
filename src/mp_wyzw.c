@@ -722,7 +722,7 @@ static void mprog_driver( char *com_list, CHAR_DATA *mob, CHAR_DATA *actor,
  * Lam 15.1.2003: czesc porownujaca lancuchy przepisana, obsluguje polskie
  *		litery oraz kolory, powinna tez dzialac duzo szybciej.
  */
-void mprog_wordlist_check( char *arg, CHAR_DATA *mob, CHAR_DATA *actor,
+void mprog_wordlist_check( const char * const arg, CHAR_DATA *mob, CHAR_DATA *actor,
 			  OBJ_DATA *obj, CHAR_DATA *vict, OBJ_DATA *v_obj,
 			  int type, MPROG_DATA *program, int gdzie )
 {
@@ -1186,7 +1186,7 @@ void mprog_asleep_time_trigger( CHAR_DATA *mob )
 }
 
 
-void mprog_soc_trigger( char *txt, CHAR_DATA *mob, CHAR_DATA *actor )
+void mprog_soc_trigger( const char * const txt, CHAR_DATA *mob, CHAR_DATA *actor )
 {
     if ( IS_NPC( mob ) && ( mob->pIndexData->progtypes & M_SOC_PROG ) )
 	mprog_wordlist_check( txt, mob, actor, NULL, NULL, NULL, M_SOC_PROG,

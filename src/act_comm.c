@@ -98,14 +98,6 @@ static char	*makedrunk	args( ( char *string, CHAR_DATA *ch ) );
 static bool	zglos_do_bazy	args( ( CHAR_DATA *ch, int kategoria, char *argument ) );
 #endif
 
-#define ILOSC_KATEGORII 4
-const char kategorie_not[ ILOSC_KATEGORII ][ 40 ] =
-{
-    "Nowo`sci",
-    "Wszystko",
-    "Bzdety",
-    "Kawa`ly"
-};
 
 bool is_note_to( CHAR_DATA *ch, NOTE_DATA *pnote )
 {
@@ -2153,7 +2145,7 @@ KOMENDA( do_pose )
 }
 
 
-struct bledomat_data bledomat;
+static struct bledomat_data bledomat;
 
 #if defined( BLEDOMAT )
 #define BLAD_SKLADNI_BLEDOMATU { log_string( "Blad skladni " BLEDOMAT_FILE ". Bledomat wylaczony." ); fclose( fp ); return; }
@@ -4011,7 +4003,7 @@ static int priorytet( CHAR_DATA *ch, char c, bool *blad )
 
 
 /* Lam 14.12.2001: ograniczenie poziomu zaglebiania rzucania koscmi */
-int dice_level;
+static int dice_level;
 
 /* rekurencyjna funkcja obliczajaca wynik zapisanego na stosie przez funkcje
    onp wyrazenia */

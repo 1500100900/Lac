@@ -1321,7 +1321,7 @@ DECLARE_CLAN_FUN( clan_fun_wykop );	/* klan wykop <postac> */
 DECLARE_CLAN_FUN( clan_fun_zatwierdz ); /* klan zatwierdz <klan> */
 
 
-const  struct  clan_cmd_type  clan_cmd_table  [ ] =
+static const  struct clan_cmd_type clan_cmd_table[ ] =
 {
     { "do`l`acz",	clan_fun_dolacz,	-1,  0,			0 },
     { "informacje",	clan_fun_info,		-1,  0,			CLAN_CMD_OOC },

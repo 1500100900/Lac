@@ -99,7 +99,7 @@ struct TH
     char     *str;
 };
 
-TempHash **temp_string_hash;
+static TempHash **temp_string_hash;
 #define TH_LEN 256
 #define TH_LEN_AND 255
 #define TH_CHR 64 /* 2 ^ 6, stad 6 w TH_ADDR */

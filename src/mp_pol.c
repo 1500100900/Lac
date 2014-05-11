@@ -158,7 +158,7 @@ DECLARE_PROG_FUN( do_mpuntrap		);		/* Lam */
 DECLARE_PROG_FUN( do_mpquesttitle	);		/* Lam */
 DECLARE_PROG_FUN( do_mpquestdescr	);		/* Lam */
 
-const struct prog_cmd_type prog_cmd_table[ ] =
+static const struct prog_cmd_type prog_cmd_table[ ] =
 {
     { "mpasound",       do_mpasound		},
     { "mpat",           do_mpat			},
@@ -1032,10 +1032,10 @@ void mprog_process_cmnd( char *cmnd, CHAR_DATA *mob, CHAR_DATA *actor,
 #define MPZM_W_WID_P	b20
 
 
-struct
+static const struct
 {
-    char *nazwa;
-    int bit;
+    const char * const nazwa;
+    const int bit;
 } nazwy_mp_zmyslow[ ] =
 {
     { "WZROK",		MPZM_WZROK },

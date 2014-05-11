@@ -99,10 +99,10 @@ static void	recover			args( ( FILE *fp, long fpos ) );
 
 /* Lam: globalna, dzieki niej informacja przenosi sie z fread_char do
    load_char_obj */
-int save_ver = 0;
+static int save_ver = 0;
 
 /* zapisywanie ubioru postaci */
-OBJ_DATA *save_eq[ MAX_WEAR ];
+static OBJ_DATA *save_eq[ MAX_WEAR ];
 
 /*
  * Array of containers read for proper re-nesting of objects.

@@ -64,11 +64,11 @@
 
 
 #if defined( WIN32 )
-char version_str[] = "$VER: LACMud Windows 32 Bit Version";
+static const char * const version_str = "$VER: LACMud Windows 32 Bit Version";
 #endif
 
 #if defined( AmigaTCP )
-char version_str[] = "$VER: LACMud AmiTCP Version";
+static const char * const version_str = "$VER: LACMud AmiTCP Version";
 /*
  * You must rename or delete the sc:sys/types.h, so the
  * amitcp:netinclude/sys/types.h will be used instead.
@@ -85,11 +85,11 @@ char version_str[] = "$VER: LACMud AmiTCP Version";
 #endif
 
 #if defined( MSDOS )
-char version_str[] = "$VER: LACMud DOS Version";
+static const char * const version_str = "$VER: LACMud DOS Version";
 #endif
 
 #if !defined( WIN32 ) && !defined( AmigaTCP ) && !defined( MSDOS )
-char version_str[] = "$VER: LACMud *NIX";
+static const char * const version_str = "$VER: LACMud *NIX";
 #endif
 
 #if !defined( WIN32 )
@@ -229,29 +229,24 @@ const unsigned char echo_on_str[ ]	= { IAC, WONT, TELOPT_ECHO, '\0' };
 /* linuksowy telnet zawsze odpowiada na DO ECHO (chyba zgodnie z RFC), ale
    zmud nie chce sie powtarzac, wiec: */
 const unsigned char keepalive_str[ ]	= { IAC, WILL, TELOPT_ECHO, IAC, WONT, TELOPT_ECHO, '\0' };
-const unsigned char go_ahead_str[ ]	= { IAC, GA, '\0' };
-const unsigned char term_type_str[ ]	= { IAC, DO, TELOPT_TTYPE };
-const unsigned char get_ttype_str[ ]	= { IAC, SB, TELOPT_TTYPE, TELQUAL_SEND, IAC, SE };
-const unsigned char naws_str[ ]		= { IAC, DO, TELOPT_NAWS };
-const unsigned char binary_in[ ]	= { IAC, DO, TELOPT_BINARY };
-const unsigned char binary_out[ ]	= { IAC, WILL, TELOPT_BINARY };
+static const unsigned char term_type_str[ ]	= { IAC, DO, TELOPT_TTYPE };
+static const unsigned char get_ttype_str[ ]	= { IAC, SB, TELOPT_TTYPE, TELQUAL_SEND, IAC, SE };
+static const unsigned char naws_str[ ]		= { IAC, DO, TELOPT_NAWS };
+static const unsigned char binary_in[ ]	= { IAC, DO, TELOPT_BINARY };
 
 
-/*
- * Global variables.
- */
-DESCRIPTOR_DATA *   descriptor_free;    /* Free list for descriptors    */
-DESCRIPTOR_DATA *   descriptor_list;    /* All open descriptors         */
-WHO_DESCRIPTOR_DATA *who_descriptor_free;
-WHO_DESCRIPTOR_DATA *who_descriptor_list;
-DESCRIPTOR_DATA *   d_next;             /* Next descriptor in loop      */
-FILE *              fpReserve;          /* Reserved file handle         */
-FILE *              fpBugReserve;       /* osobny plik dla bledow       */
-bool                merc_down;          /* Shutdown                     */
-bool                wizlock;            /* Game is wizlocked            */
-int                 numlock = 0;        /* Game is numlocked at <level> */
-char                str_boot_time     [ MAX_INPUT_LENGTH ];
-time_t              current_time;       /* Time of this pulse           */
+static	DESCRIPTOR_DATA     *descriptor_free;    /* Free list for descriptors    */
+	DESCRIPTOR_DATA     *descriptor_list;    /* All open descriptors         */
+static	WHO_DESCRIPTOR_DATA *who_descriptor_free;
+static	WHO_DESCRIPTOR_DATA *who_descriptor_list;
+static	DESCRIPTOR_DATA     *d_next;             /* Next descriptor in loop      */
+	FILE                *fpReserve;          /* Reserved file handle         */
+	FILE                *fpBugReserve;       /* osobny plik dla bledow       */
+	bool                 merc_down;          /* Shutdown                     */
+	bool                 wizlock;            /* Game is wizlocked            */
+	int                  numlock = 0;        /* Game is numlocked at <level> */
+	char                 str_boot_time[ MAX_INPUT_LENGTH ];
+	time_t               current_time;       /* Time of this pulse           */
 
 #if defined ( MSDOS )
 # if !defined( NO_SOUND )
@@ -260,13 +255,13 @@ SAMPLE *            deathsound [ 4 ];
 # endif
 #else
 # if defined( IPV6 )
-struct sockaddr_in6 who_sa;
+static struct sockaddr_in6 who_sa;
 # else
-struct sockaddr_in who_sa;
+static struct sockaddr_in who_sa;
 # endif
-unsigned int       who_socket;
+static unsigned int       who_socket;
 
-unsigned int LAC_port; /* przeniesione z main( ) */
+static unsigned int LAC_port; /* przeniesione z main( ) */
 #endif /* defined ( MSDOS ) */
 
 
@@ -407,6 +402,7 @@ int comm_main( bool edytor, int argc, char **argv )
     gettimeofday( &now_time, NULL );
     current_time = (time_t) now_time.tv_sec;
     strcpy( str_boot_time, asctime_pl( localtime( &current_time ) ) );
+    (void) version_str;
 
 #if defined( AmigaTCP )
     SocketBase = (APTR) OpenLibrary( "bsdsocket.library", 4L );

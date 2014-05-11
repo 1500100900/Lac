@@ -28,7 +28,7 @@ bool	mprog_long_descr_trigger args( ( CHAR_DATA *mob, CHAR_DATA *ch,
 					char *buf ) );
 char *	mprog_next_command	args( ( char* clist, char *cmnd ) );
 void	mprog_random_trigger	args( ( CHAR_DATA* mob ) );
-void	mprog_soc_trigger	args( ( char *txt, CHAR_DATA *mob,
+void	mprog_soc_trigger	args( ( const char * const txt, CHAR_DATA *mob,
 					CHAR_DATA *actor ) );
 void	mprog_speech_trigger	args( ( CHAR_DATA *ch,	char *txt,
 					CHAR_DATA *vict ) );
@@ -37,7 +37,7 @@ void	mprog_spell_victim_trigger args( ( char *txt, CHAR_DATA *mob,
 void	mprog_time_trigger	args( ( CHAR_DATA *ch ) );
 void	mprog_water_trigger	args( ( CHAR_DATA *mob, CHAR_DATA *ch,
 					OBJ_DATA *obj ) );
-void	mprog_wordlist_check	args( ( char * arg, CHAR_DATA *mob,
+void	mprog_wordlist_check	args( ( const char * const arg, CHAR_DATA *mob,
 					CHAR_DATA* actor, OBJ_DATA* object,
 					CHAR_DATA* vict, OBJ_DATA* v_obj,
 					int type, MPROG_DATA *program,

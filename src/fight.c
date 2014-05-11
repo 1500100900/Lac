@@ -87,7 +87,7 @@ static FUNKCJA_CZASOWA( finish_doom );
  * uzyte polecenie "morduj". Taki jeden globalny bufor wystarczy w zupelnosci,
  * poniewaz morderstw i tak nie da sie zagniezdzac. --Lam
  */
-char ostatnie_morduj[ 2 * MIL ];
+static char ostatnie_morduj[ 2 * MIL ];
 
 
 /*
@@ -3731,7 +3731,7 @@ bool group_gain( CHAR_DATA *ch, CHAR_DATA *victim )
 
 
 /* Lam 19.11.2005 */
-const int przelicznik_doswiadczenia[ 101 ] =
+static const int przelicznik_doswiadczenia[ 101 ] =
 {
 	300,
 	300, 250, 200, 150, 140, 130, 125, 120, 115, 110,

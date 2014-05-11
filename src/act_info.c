@@ -68,7 +68,14 @@ static char	*zmien_nawiasy		args( ( char *arg ) );
 static void	przytnij_linie		args( ( char *linia, int szer ) );
 static void	zapisz_odmiane		args( ( CHAR_DATA *ch ) );
 static char	*asctime_pl_krotko	args( ( const struct tm *timeptr ) );
-
+static char	*format_obj_to_char	args( ( OBJ_DATA *obj, CHAR_DATA *ch,
+						bool fShort, bool krocej,
+						bool inwentarz ) );
+static void	show_char_to_char_0	args( ( CHAR_DATA *victim, CHAR_DATA *ch,
+					bool skanowanie, bool skrot ) );
+static void	show_char_to_char_1	args( ( CHAR_DATA *victim, CHAR_DATA *ch ) );
+static void	show_char_to_char	args( ( CHAR_DATA *list, CHAR_DATA *ch,
+						bool skrot ) );
 
 /*
  * Lam 14.11.1999
@@ -119,7 +126,7 @@ const int where_order[ ] =
  * Nazwy poszczegolnych miejsc zakladania rzeczy, kolejnosc wedlug wartosci
  * WEAR_*
  */
-const char *  const   where_name      [ ] =
+static const char * const where_name[ ] =
 {
     "{y<u`zywane jako `swiat`lo>{x   ",
     "{m<za`lo`zone na palec>{x      ",
@@ -147,7 +154,7 @@ const char *  const   where_name      [ ] =
 /*
  * Lam 2.5.98
  */
-const char *urojone_przedmioty[ 32 ] =
+static const char * const urojone_przedmioty[ 32 ] =
 {
 	"(b`lyszczy) co`s fajnego i kolorowego",
 	"co`s `zywego",
@@ -186,7 +193,7 @@ const char *urojone_przedmioty[ 32 ] =
 /*
  * Lam 3.5.98
  */
-const char *urojone_na_ziemi[ 32 ] =
+static const char * const urojone_na_ziemi[ 32 ] =
 {
 	"Le`zy tu co`s fajnego i kolorowego.",
 	"Jaki`s przedmiot usi`luje ci uciec.",
@@ -225,7 +232,7 @@ const char *urojone_na_ziemi[ 32 ] =
 /*
  * Lam 3.5.98
  */
-const char *urojone_moby[ 16 ] =
+static const char * const urojone_moby[ 16 ] =
 {
 	"Widzisz strasznego potwora! Uciekaj!\n\r",
 	"Stoi tutaj twoja mama.\n\r",
@@ -246,22 +253,8 @@ const char *urojone_moby[ 16 ] =
 };
 
 
-/*
- * Local functions.
- */
-char *  format_obj_to_char      args( ( OBJ_DATA *obj, CHAR_DATA *ch,
-					bool fShort, bool krocej,
-					bool inwentarz ) );
-void    show_char_to_char_0     args( ( CHAR_DATA *victim, CHAR_DATA *ch,
-					bool skanowanie, bool skrot ) );
-void    show_char_to_char_1     args( ( CHAR_DATA *victim, CHAR_DATA *ch ) );
-void    show_char_to_char       args( ( CHAR_DATA *list, CHAR_DATA *ch,
-					bool skrot ) );
-
-
-
-char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch,
-				bool fShort, bool krocej, bool inwentarz )
+static char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch,
+				  bool fShort, bool krocej, bool inwentarz )
 {
     static char buf [ MAX_STRING_LENGTH ];
     static char buf2[ MAX_STRING_LENGTH ];
@@ -569,8 +562,8 @@ void show_list_to_char( OBJ_DATA *list, CHAR_DATA *ch, bool fShort,
 }
 
 
-void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch, bool skanowanie,
-			  bool skrot )
+static void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch, bool skanowanie,
+				  bool skrot )
 {
     char buf[ MSL ];
     char samoimie[ MIL ]; /* imie moze miec 12 liter, tytul 60 - wejdzie */
@@ -815,7 +808,7 @@ void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch, bool skanowanie,
 }
 
 
-void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch )
+static void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch )
 {
     OBJ_DATA *obj;
     char      buf[ MAX_STRING_LENGTH ];
@@ -939,7 +932,7 @@ void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch )
 }
 
 
-void show_char_to_char( CHAR_DATA *list, CHAR_DATA *ch, bool skrot )
+static void show_char_to_char( CHAR_DATA *list, CHAR_DATA *ch, bool skrot )
 {
     CHAR_DATA *rch;
     bool widzi = FALSE;

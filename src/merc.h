@@ -2076,6 +2076,14 @@ extern int	gsn_uderzenie_o;
 extern int	gsn_upadek;
 
 /*
+ * Gimza: paladyn
+ */
+extern	int	gsn_aniol_stroz;
+extern	int	gsn_rozblysk;
+extern	int	gsn_zaglada;
+extern	int	gsn_swiety_msciciel;
+
+/*
  * Fuyara: skrytobojca
  */
 extern	int	gsn_anatomy;

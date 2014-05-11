@@ -72,21 +72,21 @@
 /*
  * Lam 21.11.2000: Wersje krain
  */
-struct
+static const struct
 {
-    char *nazwa;
-    bool plusy;		/* plusy w mianowniku oznaczajace obsluge deklinacji */
-    bool stare_flagi;	/* stare flagi i nieuzywane atrybuty w mobach */
-    bool oswietlenie;	/* oswietlenie pomieszczenia */
-    bool wielkosc;	/* wielkosc przedmiotow */
-    bool wolacz;	/* wolacze mobow */
-    bool pommiej;	/* miejscownik pomieszczenia do "gdzie" */
-    bool dodkp;		/* dodatnia klasa pancerza */
-    bool zbres;		/* bez zbednych liczb w #RESETS */
-    bool pozwo;		/* poziom w resecie 'O' */
-    bool entery;	/* zbedne entery w jednoliniowych opisach */
-    bool opisprz;	/* opis przedmiotu zamiast E, w miejscu action */
-    int  wartosci;	/* ilosc wartosci przedmiotow */
+    const char * const nazwa;
+    const bool plusy;		/* plusy w mianowniku oznaczajace obsluge deklinacji */
+    const bool stare_flagi;	/* stare flagi i nieuzywane atrybuty w mobach */
+    const bool oswietlenie;	/* oswietlenie pomieszczenia */
+    const bool wielkosc;	/* wielkosc przedmiotow */
+    const bool wolacz;		/* wolacze mobow */
+    const bool pommiej;		/* miejscownik pomieszczenia do "gdzie" */
+    const bool dodkp;		/* dodatnia klasa pancerza */
+    const bool zbres;		/* bez zbednych liczb w #RESETS */
+    const bool pozwo;		/* poziom w resecie 'O' */
+    const bool entery;		/* zbedne entery w jednoliniowych opisach */
+    const bool opisprz;		/* opis przedmiotu zamiast E, w miejscu action */
+    const int  wartosci;	/* ilosc wartosci przedmiotow */
 }
 wersje_krain[ ] =
 {
@@ -123,21 +123,21 @@ struct zapamietana_kraina
 AUCTION_DATA		*auction;
 
 HELP_DATA		*help_first;
-HELP_DATA		*help_last;
+static HELP_DATA	*help_last;
 
-MPROG_DATA		*mprog_free;
+static MPROG_DATA	*mprog_free;
 AFFECT_DATA		*affect_free;
-ALIAS_DATA		*alias_free;		/* Lam */
-REFUSE_DATA		*refuse_free;		/* Gimza */
-TELL_DATA		*tell_free;		/* Lam */
-MPQUEST_DATA		*mpquest_free;		/* Lam */
+static ALIAS_DATA	*alias_free;		/* Lam */
+static REFUSE_DATA	*refuse_free;		/* Gimza */
+static TELL_DATA	*tell_free;		/* Lam */
+static MPQUEST_DATA	*mpquest_free;		/* Lam */
 NOTE_DATA		*note_free;
 OBJ_DATA		*obj_free;
 FIGHT_DATA		*fight_free;		/* Ulryk */
-EXIT_DATA		*exit_free;		/* Lam */
-RESET_DATA		*reset_free;		/* Vigud */
+static EXIT_DATA	*exit_free;		/* Lam */
+static RESET_DATA	*reset_free;		/* Vigud */
 ZWOD_DATA		*zwod_free;		/* Lam */
-IMIONA_DATA		*imiona_wolne;		/* Lam */
+static IMIONA_DATA	*imiona_wolne;		/* Lam */
 
 CHAR_DATA		*char_list;
 char			*help_greeting;
@@ -165,7 +165,7 @@ struct miodek_data	miodek_table[ MAX_MIODEK ]; /* Lam */
 /*char *		maskowanie_table[ MAX_MASKOWANIE ];
 int			maskowanie_count;*/
 int			quit_count;
-KOLES_DATA *		lista_kolesi;		/* Lam */
+static KOLES_DATA *	lista_kolesi;		/* Lam */
 struct pose_data	pose_table[ MAX_CLASS ][ MAX_POSE ];
 int			pose_count[ MAX_CLASS ];
 int			skill_count[ MAX_CLASS ];
@@ -326,7 +326,6 @@ int     gsn_przeniesienie_umyslu;
 int     gsn_lodowa_tarcza;
 int     gsn_lodowy_kolec;
 int     gsn_dezorientacja;
-int     gsn_zniszczenie;
 int     gsn_przeklenstwo_natury;
 int     gsn_przyspieszenie;
 int     gsn_spowolnienie;
@@ -484,53 +483,53 @@ static	int			top_imiona;
 static	OBJ_INDEX_DATA		*obj_index_hash[ MAX_KEY_HASH ];
 
 AREA_DATA		*area_first;
-AREA_DATA		*area_last;
-AREA_DATA		*area_dla_helpow;
+static AREA_DATA	*area_last;
+static AREA_DATA	*area_dla_helpow;
 AREA_DATA		*area_czysciec; /* Lam */
 
 ZONE_DATA		*zone_first; /* Lam */
 
-int			top_alias; /* Lam */
-int                     top_affect;
-int                     top_area;
+static int		top_alias; /* Lam */
+static int		top_affect;
+static int		top_area;
 int			top_clan;
 int			top_clan_member;
 int			top_clan_rel;
-int                     top_ed;
-int                     top_exit;
+static int		top_ed;
+static int		top_exit;
 int			top_fight; /* Lam dla struktur Ulryka */
-int			top_healer; /* Lam */
-int                     top_help;
-int			top_mob; /* Lam */
+static int		top_healer; /* Lam */
+static int		top_help;
+static int		top_mob; /* Lam */
 int                     top_mob_index;
-int			top_mpquest; /* Lam */
+static int		top_mpquest; /* Lam */
 int                     top_obj_index;
-int			top_obj; /* Lam */
-int			top_pcdata; /* Lam */
-int			top_refuse;
-int                     top_reset;
-int                     top_room;
-int                     top_shop;
+static int		top_obj; /* Lam */
+static int		top_pcdata; /* Lam */
+static int		top_refuse;
+static int		top_reset;
+static int		top_room;
+static int		top_shop;
 int			top_stosmp; /* Lam */
-int			top_tell; /* Lam */
+static int		top_tell; /* Lam */
 int			top_trap; /* Lam */
 int			top_zmienna; /* Lam */
-int			top_zwod; /* Lam */
+static int		top_zwod; /* Lam */
 
 
 #define                 MAX_PERM_BLOCK  131072
 #define                 MAX_MEM_LIST    16
 
 
-void *                  rgFreeList              [ MAX_MEM_LIST       ];
-const int               rgSizeList              [ MAX_MEM_LIST       ] =
+static void             *rgFreeList             [ MAX_MEM_LIST       ];
+static const int        rgSizeList              [ MAX_MEM_LIST       ] =
 {
     4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768,
     65536, 131072-64
 };
 
-int                     nAllocPerm;
-int                     sAllocPerm;
+static int              nAllocPerm;
+static int              sAllocPerm;
 
 
 /*
@@ -540,8 +539,8 @@ bool			fBootDb;
 bool			ODPLUSKWIACZ;
 bool			PRZERABIACZ;
 char			HTTPD_log		[ MAX_INPUT_LENGTH ];
-FILE *			fpArea;
-char			strArea			[ MAX_INPUT_LENGTH ];
+static FILE *		fpArea;
+static char		strArea			[ MAX_INPUT_LENGTH ];
 
 char *			daPrompt;
 

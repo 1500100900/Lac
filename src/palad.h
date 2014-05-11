@@ -1,12 +1,3 @@
-/*
- * Gimza: paladyn
- */
-extern	int	gsn_aniol_stroz;
-extern	int	gsn_rozblysk;
-extern	int	gsn_zaglada;
-extern	int	gsn_swiety_msciciel;
-
-
 DECLARE_SPELL_FUN(	spell_aniol_stroz	);
 DECLARE_SPELL_FUN(	spell_boski_pyl		);
 DECLARE_SPELL_FUN(	spell_cud		);

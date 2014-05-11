@@ -3104,11 +3104,11 @@ SOCJALNE( soc_ziewaj )
 /*
  * tablica
  */
-struct {
-    char * const	name;
-    SOC_FUN *		fun;
-    int			typ;
-    char * const	opis;
+static const struct {
+    const char *	const	name;
+    SOC_FUN *		const	fun;
+    const int			typ;
+    const char *	const	opis;
 } social_table[ ] =
 {
     { "ballada",	soc_ballada,	SOC_USMIECH,
