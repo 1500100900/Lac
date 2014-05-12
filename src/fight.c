@@ -5878,9 +5878,11 @@ void pp_get( CHAR_DATA *ch, char *victim_name )
 }
 
 
+#if defined( __DMC__ ) || defined( PLAN9 )
 /* Vigud: funkcja zastepcza dla makra FIGHTING, wiecej informacji w merc.h przy
    definicji makra. */
 CHAR_DATA *fighting_func( CHAR_DATA *ch )
 {
     return ch->fighting ? ch->fighting->vch : NULL;
 }
+#endif

@@ -956,6 +956,7 @@ HTML( html_commands )
 }
 
 
+#if defined( KLANY )
 HTML( html_clans )
 {
     char buf[ MSL ];
@@ -1009,6 +1010,7 @@ HTML( html_clans )
 
     return;
 }
+#endif
 
 
 HTML( html_404 )

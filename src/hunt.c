@@ -41,6 +41,7 @@
 #include "const.h"
 #include "lanclicz.h"
 #include "handler.h"
+#include "hunt.h"
 #if !defined( NO_WMEMSET )
 # include <wchar.h>
 #endif

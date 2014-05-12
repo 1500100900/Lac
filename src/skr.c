@@ -51,6 +51,7 @@
 #include "lanclicz.h"
 #include "handler.h"
 #include "ssm.h"
+#include "skr.h"
 
 
 #define BAD_DOOR		  -1
