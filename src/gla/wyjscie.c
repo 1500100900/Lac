@@ -32,6 +32,11 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include "glaca.h"
+#include "../handler.h"
+#include "../const.h"
+#include "../db.h"
+#include "../ssm.h"
+#include "../lanclicz.h"
 
 struct dwyj_data dwyj;
 

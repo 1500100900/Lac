@@ -196,10 +196,14 @@ OBJ_DATA	*create_object	args( ( OBJ_INDEX_DATA *pObjIndex,
 					int level ) ) __attribute__( ( warn_unused_result ) );
 void		del_alias	args( ( CHAR_DATA *ch, ALIAS_DATA * alias ) );
 void		del_exit	args( ( EXIT_DATA *ex ) );
+void		del_extra_descr args( ( EXTRA_DESCR_DATA *ed ) );
 void		del_mpquest	args( ( CHAR_DATA *ch, MPQUEST_DATA *mpquest ) );
+void		del_mprog	args( ( MPROG_DATA *prog ) );
 void		del_refuse	args( ( CHAR_DATA *ch, REFUSE_DATA *refuse ) );
+void		del_reset	args( ( RESET_DATA *reset ) );
 void		del_tell	args( ( CHAR_DATA *ch, TELL_DATA *tell ) );
 void		dodaj_imie	args( ( IMIONA_DATA *im ) );
+ZONE_LIST	*dodaj_strefe	args( ( ZONE_LIST *strefy, ZONE_DATA *strefa ) );
 void		dod_zwod	args( ( ZWOD_DATA **lista, CHAR_DATA *cel ) );
 MPQUEST_DATA	*find_mpquest	args( ( CHAR_DATA *ch, int vnum ) );
 char		fread_letter	args( ( FILE *fp ) );
@@ -219,10 +223,20 @@ AFFECT_DATA	*new_affect	args( ( void ) ) __attribute__( ( warn_unused_result ) )
 ALIAS_DATA	*new_alias	args( ( void ) ) __attribute__( ( warn_unused_result ) );
 CHAR_DATA	*new_character	args( ( bool player ) ) __attribute__( ( warn_unused_result ) );
 EXIT_DATA	*new_exit	args( ( void ) ) __attribute__( ( warn_unused_result ) );
+EXTRA_DESCR_DATA *new_extra_descr args( ( void ) ) __attribute__( ( warn_unused_result ) );
+HEALER_DATA	*new_healer	args( ( void ) ) __attribute__( ( warn_unused_result ) );
+MOB_INDEX_DATA	*new_mob_index args( ( int vnum,
+					AREA_DATA *area ) ) __attribute__( ( warn_unused_result ) );
 MPQUEST_DATA	*new_mpquest	args( ( void ) ) __attribute__( ( warn_unused_result ) );
 MPROG_DATA	*new_mprog	args( ( void ) ) __attribute__( ( warn_unused_result ) );
+OBJ_INDEX_DATA	*new_obj_index args( ( int vnum,
+					AREA_DATA *area ) ) __attribute__( ( warn_unused_result ) );
 OBJ_DATA	*new_object	args( ( void ) ) __attribute__( ( warn_unused_result ) );
 REFUSE_DATA	*new_refuse	args( ( void ) ) __attribute__( ( warn_unused_result ) );
+RESET_DATA	*new_reset	args( ( void ) ) __attribute__( ( warn_unused_result ) );
+ROOM_INDEX_DATA	*new_room	args( ( int vnum,
+					AREA_DATA *area ) ) __attribute__( ( warn_unused_result ) );
+SHOP_DATA	*new_shop	args( ( void ) ) __attribute__( ( warn_unused_result ) );
 TELL_DATA	*new_tell	args( ( void ) ) __attribute__( ( warn_unused_result ) );
 IMIONA_DATA	*nowe_imie	args( ( void ) );
 void		real_areas	args( ( CHAR_DATA *ch, char *argument,
@@ -287,6 +301,7 @@ extern long			mud_age;
 extern int			multi_count[ MAX_CLASS ];
 extern NOTE_DATA		*note_free;
 extern NOTE_DATA		*note_list;
+extern OBJ_INDEX_DATA		*obj_index_hash[ MAX_KEY_HASH ];
 extern OBJ_DATA			*object_list;
 extern OBJ_DATA			*obj_free;
 extern bool			ODPLUSKWIACZ;

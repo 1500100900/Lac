@@ -30,6 +30,10 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include "glaca.h"
+#include "../db.h"
+#include "../ssm.h"
+#include "../mp_pol.h"
+#include "../mp_wczyt.h"
 
 struct dprog_data dprog;
 

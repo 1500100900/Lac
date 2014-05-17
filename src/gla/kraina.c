@@ -32,6 +32,9 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include "glaca.h"
+#include "../db.h"
+#include "../kzapisz.h"
+#include "../handler.h"
 
 struct dkra_data dkra;
 

@@ -32,6 +32,8 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include "glaca.h"
+#include "../lanclicz.h"
+#include "../ssm.h"
 #include <gdk/gdkkeysyms.h>
 
 struct dcom_data dcom;

@@ -42,16 +42,6 @@
 #include "handler.h"
 
 
-struct game_type
-{
-    GAME_FUN *fun;
-    char *name;
-    int bilans;
-    int grano;
-};
-
-
-
 DECLARE_GAME_FUN(	gra_czarna_czerwona	);
 DECLARE_GAME_FUN(	gra_kolo_fortuny	);
 DECLARE_GAME_FUN(	gra_marynarz		);
@@ -65,7 +55,7 @@ DECLARE_GAME_FUN(	gra_wojna_kart		);
 DECLARE_GAME_FUN(	gra_wojna_kosci		);
 DECLARE_GAME_FUN(	gra_zgadnij_karte	);
 
-static struct game_type game_table[ ] =
+struct game_type game_table[ ] =
 {
     { gra_czarna_czerwona,	"gra_czarna_czerwona",	0, 0	},
     { gra_kolo_fortuny,		"gra_ko`lo_fortuny",	0, 0	},

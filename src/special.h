@@ -5,11 +5,12 @@ struct spec_type
 };
 
 
-extern char	spec_list[ MSL ];
-extern SPEC_FUN	*spec_lookup	args( ( const char *name ) );
-extern char	*spec_name	args( ( SPEC_FUN *fun ) );
-extern void	build_spec_list	args( ( void ) );
-extern bool	papuguj		args( ( CHAR_DATA *ch, char *argument ) );
+extern char		spec_list[ MSL ];
+extern const struct spec_type spec_table[ ];
+extern SPEC_FUN		*spec_lookup	args( ( const char *name ) );
+extern char		*spec_name	args( ( SPEC_FUN *fun ) );
+extern void		build_spec_list	args( ( void ) );
+extern bool		papuguj		args( ( CHAR_DATA *ch, char *argument ) );
 
 
 /*

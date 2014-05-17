@@ -53,32 +53,6 @@
 #include "ssm.h"
 
 
-struct choice_field_data
-{
-	const int value;
-	const char * const name;
-	const bool available;
-	const bool auth_required;
-};
-
-struct bit_field_data
-{
-	const int bitv;
-	const char * const name;
-	const bool available;
-	const bool auth_required;
-	const char * const tooltip;
-};
-
-struct bitvector_field_data
-{
-	const unsigned int bitn;
-	const char * const name;
-	const bool available;
-	const bool auth_required;
-	const char * const tooltip;
-};
-
 /*
  * Globalna zmienna eksportowa.
  */
@@ -93,15 +67,15 @@ static void	komunikat_parzenia	args( ( CHAR_DATA *ch, OBJ_DATA *obj ) );
 static CHAR_DATA *real_get_char_room	args( ( CHAR_DATA *ch, char *argument, int *count ) );
 static CHAR_DATA *real_get_char_room2	args( ( CHAR_DATA *ch, char *argument, int *count ) );
 static OBJ_DATA *real_get_obj_here	args( ( CHAR_DATA *ch, char *argument, int *count ) );
-static const char *choice_field_to_name args( ( struct choice_field_data *values,
+static const char *choice_field_to_name args( ( const struct choice_field_data *values,
 					  int value, bool trusted ) );
-static bool	choice_field_avail	args( ( struct choice_field_data *values, int value ) );
-static char	*bit_field_to_name	args( ( struct bit_field_data *values, int value,
+static bool	choice_field_avail	args( ( const struct choice_field_data *values, int value ) );
+static char	*bit_field_to_name	args( ( const struct bit_field_data *values, int value,
 						bool trusted ) );
-static bool	bit_field_avail		args( ( struct bit_field_data *values, int value ) );
-static char	*bitvector_field_to_name args( ( struct bitvector_field_data *values,
+static bool	bit_field_avail		args( ( const struct bit_field_data *values, int value ) );
+static char	*bitvector_field_to_name args( ( const struct bitvector_field_data *values,
 						  int *value, bool trusted, bool dla_ludzi ) );
-static bool	bitvector_field_avail	args( ( struct bitvector_field_data *values,
+static bool	bitvector_field_avail	args( ( const struct bitvector_field_data *values,
 						int *value, int size ) );
 static void	zapisz_ciala		args( ( void ) );
 static void	wywal_smieci_z_listy	args( ( OBJ_DATA *lista, int *klucze,
@@ -4649,7 +4623,7 @@ bool can_drop_obj( CHAR_DATA *ch, OBJ_DATA *obj )
  *
  * Na poczatek ogolne funkcje dla wszystkich rodzajow funkcji.
  */
-static const char *choice_field_to_name( struct choice_field_data *values,
+static const char *choice_field_to_name( const struct choice_field_data *values,
 					  int value, bool trusted )
 {
     int i;
@@ -4665,7 +4639,7 @@ static const char *choice_field_to_name( struct choice_field_data *values,
 }
 
 
-static bool choice_field_avail( struct choice_field_data *values, int value )
+static bool choice_field_avail( const struct choice_field_data *values, int value )
 {
     int i;
 
@@ -4677,7 +4651,7 @@ static bool choice_field_avail( struct choice_field_data *values, int value )
 }
 
 
-static char *bit_field_to_name( struct bit_field_data *values, int value,
+static char *bit_field_to_name( const struct bit_field_data *values, int value,
 				bool trusted )
 {
     static char buf[ 1024 ];
@@ -4697,7 +4671,7 @@ static char *bit_field_to_name( struct bit_field_data *values, int value,
 }
 
 
-static bool bit_field_avail( struct bit_field_data *values, int value )
+static bool bit_field_avail( const struct bit_field_data *values, int value )
 {
     int i;
 
@@ -4711,7 +4685,7 @@ static bool bit_field_avail( struct bit_field_data *values, int value )
 }
 
 
-static char *bitvector_field_to_name( struct bitvector_field_data *values,
+static char *bitvector_field_to_name( const struct bitvector_field_data *values,
 				int *value, bool trusted, bool dla_ludzi )
 {
     static char buf[ 1024 ];
@@ -4750,7 +4724,7 @@ static char *bitvector_field_to_name( struct bitvector_field_data *values,
 }
 
 
-static bool bitvector_field_avail( struct bitvector_field_data *values,
+static bool bitvector_field_avail( const struct bitvector_field_data *values,
 				int *value, int size )
 {
     int lokalna[ 16 ]; /* zeby nie uzywac malloc */
@@ -4773,7 +4747,7 @@ static bool bitvector_field_avail( struct bitvector_field_data *values,
 }
 
 
-static struct choice_field_data apply_values[ ] =
+const struct choice_field_data apply_values[ ] =
 {
     { APPLY_NONE,		"nic",				FALSE,	FALSE },
     { APPLY_STR,		"si`l`e",			TRUE,	FALSE },
@@ -4818,7 +4792,7 @@ bool affect_loc_avail( int location )
 }
 
 
-static struct bitvector_field_data affect_bit_values[ ] =
+const struct bitvector_field_data affect_bit_values[ ] =
 {
     { AFF_BLIND,		"o`slepienie",		TRUE,	FALSE,
       "`slepy" },
@@ -4950,7 +4924,7 @@ bool affect_bit_avail( int *vector )
 }
 
 
-static struct bitvector_field_data extra_bit_values[ ] =
+const struct bitvector_field_data extra_bit_values[ ] =
 {
     { ITEM_GLOW,		"b`lyszczy",		TRUE,	FALSE,
       "dodaje napis \"(b`lyszczy)\", bez znaczenia" },
@@ -5082,7 +5056,7 @@ char *wear_flag_name_pl( int wear )
 }
 
 
-static struct bit_field_data mob_act_flags[ ] =
+const struct bit_field_data mob_act_flags[ ] =
 {
     { ACT_IS_NPC,		"mob",			TRUE,	FALSE,
       "" },
@@ -5175,7 +5149,7 @@ bool act_flag_avail( int act )
 }
 
 
-static struct bit_field_data room_flags_table[ ] =
+const struct bit_field_data room_flags_table[ ] =
 {
     { ROOM_DARK,		"ciemny",		TRUE,	FALSE,
       "trzeba widzie`c w ciemno`sci albo mie`c latarni`e" },
@@ -5226,7 +5200,7 @@ char *room_flag_name_pl( int room )
 }
 
 
-static struct bit_field_data exit_info_flags[ ] =
+const struct bit_field_data exit_info_flags[ ] =
 {
     { EX_ISDOOR,		"drzwi",		TRUE,	FALSE,
       "" },

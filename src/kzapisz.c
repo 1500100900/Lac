@@ -59,7 +59,7 @@ static void	save_resets	args( ( FILE *fp, AREA_DATA *pArea ) );
 static char *	fix_string	args( ( const char *txt, bool enter, bool formatuj ) );
 
 
-static char *	const	wearloc_str	[ ]	=
+const char *wearloc_str[ ] =
 {
     "`swiat`lo", "lewy palec", "prawy palec", "g`orna szyja", "dolna szyja",
     "cia`lo", "g`lowa", "nogi", "stopy", "d`lonie", "ramiona", "tarcza",

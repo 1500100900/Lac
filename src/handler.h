@@ -37,6 +37,32 @@ struct airchar_data
     bool slaby_plywak;
 };
 
+struct bitvector_field_data
+{
+	const unsigned int bitn;
+	const char * const name;
+	const bool available;
+	const bool auth_required;
+	const char * const tooltip;
+};
+
+struct bit_field_data
+{
+	const int bitv;
+	const char * const name;
+	const bool available;
+	const bool auth_required;
+	const char * const tooltip;
+};
+
+struct choice_field_data
+{
+	const int value;
+	const char * const name;
+	const bool available;
+	const bool auth_required;
+};
+
 
 bool	act_flag_avail		args( ( int act ) );
 char	*act_flag_name_pl	args( ( int act, CHAR_DATA *ch ) );
@@ -183,3 +209,9 @@ extern	AIROBJ_DATA	*airobj_list;
 extern	TIMER_DATA	*timer_list;
 extern	int		top_timer;
 extern	bool		wzmocnienie_affect_join;
+extern	const struct bitvector_field_data affect_bit_values[ ];
+extern	const struct bit_field_data mob_act_flags[ ];
+extern	const struct bit_field_data room_flags_table[ ];
+extern	const struct choice_field_data apply_values[ ];
+extern	const struct bitvector_field_data extra_bit_values[ ];
+extern	const struct bit_field_data exit_info_flags[ ];

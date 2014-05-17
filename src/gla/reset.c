@@ -30,6 +30,10 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include "glaca.h"
+#include "../db.h"
+#include "../kzapisz.h"
+#include "../lanclicz.h"
+#include "../const.h"
 
 struct dres_data dres;
 

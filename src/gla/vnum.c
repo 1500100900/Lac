@@ -32,6 +32,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include "glaca.h"
+#include "../db.h"
 
 struct dvnum_data dvnum;
 

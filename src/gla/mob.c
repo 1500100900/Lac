@@ -30,6 +30,12 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include "glaca.h"
+#include "../handler.h"
+#include "../special.h"
+#include "../gry.h"
+#include "../const.h"
+#include "../db.h"
+#include "../lanclicz.h"
 
 struct dmob_data dmob;
 

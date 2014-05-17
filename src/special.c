@@ -52,7 +52,7 @@ static char	*przeciagaj	args( ( char *argument ) );
 /*
  * Lam 4.2.2004: tablica zamiast stosu ifow w funkcjach ponizej
  */
-static struct spec_type spec_table[ ] =
+const struct spec_type spec_table[ ] =
 {
     { spec_breath_any,		"spec_breath_any" },
     { spec_breath_acid,		"spec_breath_acid" },
