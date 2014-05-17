@@ -43,6 +43,7 @@
 #include "lanclicz.h"
 #include "handler.h"
 #include "ssm.h"
+#include "const.h"
 
 
 /* to konieczne niestety, zabezpieczenie podpatrzone w Smaugu */

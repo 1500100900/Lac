@@ -54,6 +54,7 @@
 #include "lanclicz.h"
 #include "handler.h"
 #include "ssm.h"
+#include "const.h"
 
 
 static void	do_many			args( ( CHAR_DATA *ch, char *argument ) );
