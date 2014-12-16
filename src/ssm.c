@@ -115,7 +115,7 @@ static TempHash **temp_string_hash;
 #define ZDEJMIJ_BLOKADE_ZE_STERTY { char bufek[ MIL ]; sprintf( bufek, "poczatek %s", __FUNCTION__ ); if ( !fBootDb ) ssm_check_string_space( bufek ); operacja = FALSE; }
 */
 
-/* To allocate more memory increase SSM_MEM_SIZE in merc.h. */
+/* To allocate more memory increase SSM_MEM_SIZE in config.h. */
 unsigned int	MAX_STRING = SSM_MEM_SIZE * 1024;
 int		HEADER_SIZE;
 long		nAllocString;
