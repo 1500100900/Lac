@@ -50,6 +50,7 @@
 #include "lanclicz.h"
 #include "handler.h"
 #include "ssm.h"
+#include "globals.h"
 
 
 #if !defined( ultrix ) && !defined( apollo ) && !defined( __minix ) && !defined( PLAN9 )

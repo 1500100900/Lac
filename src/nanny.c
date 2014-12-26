@@ -50,6 +50,8 @@
 #if defined( MAM_CRYPT_H ) && !defined( NOCRYPT )
 # include <crypt.h>
 #endif
+#include "globals.h"
+
 
 #if defined( ultrix )
 char *	crypt		args( ( const char *key, const char *salt ) );

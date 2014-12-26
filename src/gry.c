@@ -40,6 +40,7 @@
 #include "const.h"
 #include "lanclicz.h"
 #include "handler.h"
+#include "globals.h"
 
 
 DECLARE_GAME_FUN(	gra_czarna_czerwona	);

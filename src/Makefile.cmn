@@ -5,10 +5,10 @@
 # Lam 24.5.2000: Liczba Makefiles zmniejszyla sie wraz z configure
 
 O_FILES = act_comm.o act_info.o act_move.o act_obj.o act_wiz.o \
-	  clan.o comm.o const.o db.o fight.o gry.o handler.o httpd.o hunt.o \
-	  interp.o kzapisz.o lanclicz.o magic.o mp_pol.o mp_wczyt.o mp_wyr.o \
-	  mp_wyzw.o nanny.o necro.o palad.o qmagic.o save.o screen.o skr.o \
-	  socjalne.o special.o ssm.o um_ras.o update.o
+	  clan.o comm.o const.o db.o fight.o gry.o globals.o handler.o \
+	  httpd.o hunt.o interp.o kzapisz.o lanclicz.o magic.o mp_pol.o \
+	  mp_wczyt.o mp_wyr.o mp_wyzw.o nanny.o necro.o palad.o qmagic.o \
+	  save.o screen.o skr.o socjalne.o special.o ssm.o um_ras.o update.o
 # GLACA_O_FILES = db.o const.o handler.o kzapisz.o lanclicz.o mp_wczyt.o ssm.o
 LAC_O_FILES = $(O_FILES) lac.o
 GLACA_O_FILES = $(O_FILES) gla/glaca.o gla/mapa.o gla/mob.o \

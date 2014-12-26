@@ -49,6 +49,7 @@
 #include "lanclicz.h"
 #include "handler.h"
 #include "ssm.h"
+#include "globals.h"
 
 
 struct prog_cmd_type

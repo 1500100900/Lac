@@ -39,6 +39,7 @@
 #include "const.h"
 #include "lanclicz.h"
 #include "handler.h"
+#include "globals.h"
 
 
 typedef void SOC_FUN	args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );

@@ -48,6 +48,7 @@
 #include "lanclicz.h"
 #include "handler.h"
 #include "ssm.h"
+#include "globals.h"
 
 
 static void stworz_jedzenie		args( ( CHAR_DATA *ch, int level, int vnum ) );

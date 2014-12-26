@@ -52,6 +52,7 @@
 #include "handler.h"
 #include "ssm.h"
 #include "skr.h"
+#include "globals.h"
 
 
 #define BAD_DOOR		  -1

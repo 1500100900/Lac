@@ -51,6 +51,7 @@
 #include "lanclicz.h"
 #include "handler.h"
 #include "ssm.h"
+#include "globals.h"
 
 
 #if defined( BLEDOMAT )

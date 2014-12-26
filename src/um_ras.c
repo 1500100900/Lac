@@ -44,6 +44,7 @@
 #include "handler.h"
 #include "ssm.h"
 #include "um_ras.h"
+#include "globals.h"
 
 
 static void	pc_breathe		args( ( CHAR_DATA *ch ) );

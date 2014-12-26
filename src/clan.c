@@ -49,6 +49,7 @@
 #include "lanclicz.h"
 #include "handler.h"
 #include "ssm.h"
+#include "globals.h"
 
 
 static bool	check_clan_name		args( ( CHAR_DATA *ch, char *arg ) );

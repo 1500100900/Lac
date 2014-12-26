@@ -61,6 +61,7 @@
 #include "handler.h"
 #include "ssm.h"
 #include "clan.h"
+#include "globals.h"
 
 
 #if defined( WIN32 )

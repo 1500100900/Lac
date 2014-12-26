@@ -47,6 +47,8 @@
 #if defined( sun )
 #include <memory.h>
 #endif
+#include "globals.h"
+
 
 #if defined( sun )
 int	system			args( ( const char *string ) );

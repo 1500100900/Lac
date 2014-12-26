@@ -45,6 +45,8 @@
 #if !defined( NO_WMEMSET )
 # include <wchar.h>
 #endif
+#include "globals.h"
+
 
 void	mam_cie		args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
 

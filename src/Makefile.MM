@@ -9,6 +9,7 @@ const.o: const.c merc.h config.h
 db.o: db.c merc.h config.h
 fight.o: fight.c merc.h config.h
 gry.o: gry.c merc.h config.h
+globals.o: globals.c merc.h config.h
 handler.o: handler.c merc.h config.h
 httpd.o: httpd.c merc.h config.h
 hunt.o: hunt.c merc.h config.h
