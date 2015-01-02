@@ -1185,7 +1185,7 @@ void game_loop_unix( int control )
 	    static char buf[ 16385 ];
 	    int przeczytane;
 
-	    przeczytane = read( imud_socket, buf, 16384 );
+	    przeczytane = read( imud_socket, buf, ( sizeof buf ) - 1 );
 	    if ( przeczytane < 1 )
 	    {
 		if ( przeczytane )
@@ -1273,7 +1273,7 @@ void game_loop_unix( int control )
 		int  koniec;
 
 		/* tutaj powinien byc odczyt zadania HTTP */
-		koniec = read( who_d->descriptor, &whobuf, MSL );
+		koniec = read( who_d->descriptor, &whobuf, ( sizeof whobuf ) - 1 );
 		if ( koniec < 1 )
 		{
 		    FD_CLR( who_d->descriptor, &in_set  );
@@ -1608,7 +1608,7 @@ void *welcome( void *vo )
 	zwrot = select( d->descriptor + 1, &pokij, NULL, NULL, &tv );
 	if ( zwrot )
 	{
-	    len = read( d->descriptor, fBuf, MSL - 2 );
+	    len = read( d->descriptor, fBuf, ( sizeof fBuf ) - 1 );
 	    CZY_BLAD_WELCOME( len < 0 );
 	    fBuf[ len ] = '\0';
 	    /*
@@ -1760,7 +1760,7 @@ void *welcome( void *vo )
 		    if ( ident_zwrot ) /* w ciagu 10 sekund nadeszly jakies dane */
 		    {
 			/* len uzywam drugi raz w funkcji */
-			len = read( plik, buf, MSL );
+			len = read( plik, buf, ( sizeof buf ) - 1 );
 			buf[ len ] = '\0';
 			/* Lam 24.3.2000: (blad) */
 			strcpy( name, "(b`l`ad odpowiedzi identd)" );
